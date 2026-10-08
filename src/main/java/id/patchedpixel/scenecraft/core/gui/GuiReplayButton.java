@@ -1,0 +1,21 @@
+package id.patchedpixel.scenecraft.core.gui;
+
+import id.patchedpixel.scenecraft.gui.GuiRenderer;
+import id.patchedpixel.scenecraft.gui.RenderInfo;
+import id.patchedpixel.scenecraft.gui.element.GuiButton;
+import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
+import net.minecraft.resources.Identifier;
+
+import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+
+public class GuiReplayButton extends GuiButton {
+    public static final Identifier ICON = identifier("scenecraft", "logo_button.png");
+
+    @Override
+    public void draw(GuiRenderer renderer, ReadableDimension size, RenderInfo renderInfo) {
+        super.draw(renderer, size, renderInfo);
+
+        renderer.bindTexture(ICON);
+        renderer.drawTexturedRect(3, 3, 0, 0, size.getWidth() - 6, size.getHeight() - 6, 1, 1, 1, 1);
+    }
+}

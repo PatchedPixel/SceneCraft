@@ -1,0 +1,211 @@
+scenecraft.title=SceneCraft
+
+#All of the chat messages
+scenecraft.chat.recordingstarted=Enregistrement en cours
+scenecraft.chat.recordingfailed=L'enregistrement n'a pas pu démarrer
+
+scenecraft.chat.savingthumb=Sauvegarde de la Vignette...
+scenecraft.chat.savedthumb=La miniature a été sauvegardée avec succès
+scenecraft.chat.failedthumb=L'enregistrement de la miniature a échoué
+
+scenecraft.chat.addedmarker=Marqueur d'Événement ajouté
+
+#Chat messages displayed in Replay Viewer
+scenecraft.chat.morekeyframes=Au moins 2 images clés de position et 2 images clés temporelles sont requises
+scenecraft.chat.pathstarted=Chemin de la caméra débuté
+scenecraft.chat.pathfinished=Chemin de la caméra complèté
+scenecraft.chat.pathinterrupted=Chemin de la caméra annulée
+
+#Common GUI-related strings
+scenecraft.gui.cancel=Annuler
+scenecraft.gui.back=Retour
+scenecraft.gui.load=Charger
+scenecraft.gui.save=Sauvegarder
+scenecraft.gui.rename=Renommer
+scenecraft.gui.remove=Supprimer
+scenecraft.gui.delete=Supprimer
+scenecraft.gui.recording=Enregistrement en cours
+scenecraft.gui.speed=Vitesse
+scenecraft.gui.pleasewait=Veuillez attendre
+scenecraft.gui.render=Rendre
+scenecraft.gui.iphidden=L'IP du serveur cachée
+scenecraft.gui.overwrite=Remplacer
+scenecraft.gui.saveas=Enregistrer sous ...
+scenecraft.gui.done=Terminé
+scenecraft.gui.close=Fermer
+scenecraft.gui.notagain=Ne pas montrer à nouveau
+
+scenecraft.gui.renderdonetitle=Vidéo rendue
+scenecraft.gui.openfolder=Ouvrir le dossier des vidéos
+scenecraft.gui.youtubeupload=Publier sur YouTube
+scenecraft.gui.renderdone1=Votre vidéo a été rendue avec succès.
+scenecraft.gui.renderdone2=Comment souhaiteriez-vous proceder ?
+scenecraft.gui.videotitle=Titre
+scenecraft.gui.videodescription=Description
+scenecraft.gui.videotags=Mot clés
+scenecraft.gui.videothumbnail=Miniature de la vidéo
+scenecraft.gui.videovisibility.private=Privé
+scenecraft.gui.videovisibility.unlisted=Non répertorié
+scenecraft.gui.videovisibility.public=Public
+scenecraft.gui.ytuploadprogress.auth=[1/4] Autorisation
+scenecraft.gui.ytuploadprogress.prepare_video=[2/4] Préparation de la vidéo: %%d%%%%
+scenecraft.gui.ytuploadprogress.upload=[3/4] Publication: %%d%%%%
+scenecraft.gui.ytuploadprogress.cleanup=[4/4] Nettoyage
+scenecraft.gui.ytuploadprogress.done=Complèté %s
+scenecraft.gui.titleempty=Le titre ne peut pas être vide
+scenecraft.gui.videothumbnailtoolarge=La taille de la miniature dépasse 2MB
+scenecraft.gui.videothumbnailformat=La vignette doit être sous le format JPEG ou PNG
+
+scenecraft.gui.hours=h
+scenecraft.gui.minutes=min
+scenecraft.gui.seconds=sec
+scenecraft.gui.milliseconds=ms
+
+scenecraft.gui.pitch=Hauteur
+
+scenecraft.gui.camera=Caméra
+scenecraft.gui.position=Position
+
+scenecraft.gui.unknownerror=Une erreur inconne est survenue
+
+scenecraft.gui.exit=Quitter le Replay
+
+scenecraft.gui.settings=Paramètres
+
+scenecraft.gui.keyframerepo.delete=Êtes-vous sûr que vous voulez supprimer ces images-clés ?
+scenecraft.gui.keyframerepo.overwrite=Êtes-vous sûr de vouloir remplacer ces images clés ?
+
+scenecraft.gui.restorereplay1=Il semble que Minecraft n'a pas quitté normalement.
+scenecraft.gui.restorereplay2=Le Replay "%1$s" n'a pas été sauvegardé correctement.
+scenecraft.gui.restorereplay3=Souhaitez-vous le récupérer ?
+
+scenecraft.gui.loadentitytracker=Chargement des positions des entités %%d%%%%
+
+#Only change these if it's neccessary
+scenecraft.gui.replayviewer=Visionneuse de Replay
+
+#Replay Viewer GUI
+scenecraft.gui.viewer.rename.name=Nom du Replay
+scenecraft.gui.viewer.replayfolder=Ouvrir le dossier des Replay...
+
+scenecraft.gui.viewer.delete.linea=Êtes-vous sûr de vouloir effacer ce Replay ?
+scenecraft.gui.viewer.delete.failed1=Votre OS ne nous autorise pas à effacer le Replay. Nous ne
+scenecraft.gui.viewer.delete.failed2=pouvons rien faire. Vous devez le faire vous même.
+scenecraft.gui.viewer.delete.lineb='%1$s' Va être perdu pour toujours ! (C'est très long !)
+
+#Cancel Replay GUI
+scenecraft.gui.cancelrender.title=Annuler le Rendu
+scenecraft.gui.cancelrender.message=Êtes-vous sûr de vouloir annuler le rendu en cours ?
+#Saving Replay GUI
+scenecraft.gui.replaysaving.title=Sauvegarde du Fichier de Replay...
+
+#Player Overview GUI
+scenecraft.gui.playeroverview.visible=Visible
+scenecraft.gui.playeroverview.hideall=Tout cacher
+scenecraft.gui.playeroverview.showall=Tout montrer
+scenecraft.gui.playeroverview.spectate=Devenir spectateur d'un joueur
+scenecraft.gui.playeroverview.remembersettings=Se souvenir des Joueurs Cachés
+scenecraft.gui.playeroverview.remembersettings.description=Enregistrer la Visibilité des Joueur dans le fichier du Replay
+
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=Options du SceneCraft
+
+scenecraft.gui.settings.notifications=Activer les Notifications
+scenecraft.gui.settings.recordserver=Enregistrer les Serveurs
+scenecraft.gui.settings.recordsingleplayer=Enregistrer le Solo
+scenecraft.gui.settings.indicator=Indicateur d'Enregistrement
+scenecraft.gui.settings.pathpreview=Afficher l'Aperçu du Tracé
+scenecraft.gui.settings.camera=Caméra
+scenecraft.gui.settings.showchat=Afficher le Chat
+
+#SceneCraft Keybindings
+scenecraft.input.lighting=Changer l'éclairage
+scenecraft.input.thumbnail=Enregistrer une Miniature
+scenecraft.input.playeroverview=Aperçu du Joueur
+scenecraft.input.clearkeyframes=Effacer les Images Clés
+scenecraft.input.synctimeline=Synchroniser la Chronologie
+scenecraft.input.keyframerepository=Ouvrir les Préréglages d'Images Clés
+scenecraft.input.rollclockwise=Tourner dans le sens horaire
+scenecraft.input.rollcounterclockwise=Tourner dans le sens antihoraire
+scenecraft.input.resettilt=Rétablir la Rotation de la Caméra
+scenecraft.input.playpause=Jouer/Mettre en Pause le Replay
+scenecraft.input.marker=Ajouter un Marqueur d'Événement
+scenecraft.input.pathpreview=Afficher l'Aperçu du Tracé
+scenecraft.input.settings=Paramètres de SceneCraft
+
+# CameraControllers
+scenecraft.camera.classic=Classique
+
+#Keyframe Presets GUI
+scenecraft.gui.keyframerepository.title=Liste de KeyFrame
+
+#Edit Keyframe GUI
+scenecraft.gui.editkeyframe.title.pos=Éditer la KeyFrame de positionnelle
+scenecraft.gui.editkeyframe.title.time=Éditer la KeyFrame temporelle
+scenecraft.gui.editkeyframe.title.marker=Éditer le marqueur d'événement
+scenecraft.gui.editkeyframe.title.spec=Éditer la KeyFrame du spectateur
+scenecraft.gui.editkeyframe.xpos=Position X
+scenecraft.gui.editkeyframe.ypos=Position Y
+scenecraft.gui.editkeyframe.zpos=Position Z
+scenecraft.gui.editkeyframe.timelineposition=Position sur la Timeline
+scenecraft.gui.editkeyframe.markername=Nom du marqueur d'événement
+scenecraft.gui.editkeyframe.timestamp=Index temporel
+
+scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Transparence :
+scenecraft.gui.editkeyframe.interpolator.linear.desc=Fait apparaitre des lignes droites entre les KeyFrames.
+
+scenecraft.gui.rendersettings.renderer=Methode de rendu
+
+scenecraft.gui.rendersettings.renderer.default=Rendu par défault
+scenecraft.gui.rendersettings.renderer.stereoscopic=Rendu stéréoscopique
+scenecraft.gui.rendersettings.renderer.equirectangular=Rendu equirectangulaire
+scenecraft.gui.rendersettings.renderer.ods=Rendu ODS
+
+scenecraft.gui.rendersettings.renderer.default.description=Rends une vidéo avec la résolution spécifiée. Option de rendu rapide.
+scenecraft.gui.rendersettings.renderer.stereoscopic.description=Rends une vidéo stéréoscopique 3D, utilisable par différentes technologies 3D. L'image destinée à un oeil fait la moitié de la largeur de la vidéo
+
+scenecraft.gui.rendersettings.advanced=Paramètres avancés
+
+scenecraft.gui.rendersettings.presets.mp4.potato=MP4 - Qualité de patate
+scenecraft.gui.rendersettings.presets.png=Séquence PNG
+
+scenecraft.gui.rendersettings.antialiasing.x2=2×
+scenecraft.gui.rendersettings.antialiasing.x4=4x
+scenecraft.gui.rendersettings.antialiasing.x8=8x
+
+#Render Queue GUI
+scenecraft.gui.renderqueue.title=Liste d'attente des rendus
+scenecraft.gui.renderqueue.add=Ajouter la configuration actuelle
+
+#Rendering GUI
+scenecraft.gui.rendering.title=Rendu de la vidéo en cours
+scenecraft.gui.rendering.pause=Mettre le rendu en pause
+scenecraft.gui.rendering.resume=Continuer le rendu
+scenecraft.gui.rendering.cancel=Annuler le rendu
+scenecraft.gui.rendering.cancel.callback=Êtes-vous sûr ?
+scenecraft.gui.rendering.preview=Afficher la prévisualisation (la performance pourrait en souffrir)
+scenecraft.gui.rendering.progress=Images rendues: %1$d / %2$d
+scenecraft.gui.rendering.timetaken=Temps du rendu
+scenecraft.gui.rendering.timeleft=Temps restant
+
+#Render Errors
+scenecraft.gui.rendering.error.message=Pour rendre une vidéo, vous devez avoir ffmpeg installé.
+
+#Ingame Menu
+scenecraft.gui.ingame.menu.pause=Mettre en pause la relecture
+scenecraft.gui.ingame.menu.unpause=Continuer la relecture
+scenecraft.gui.ingame.menu.renderpath=Afficher le passage de la caméra
+scenecraft.gui.ingame.menu.zoomin=Agrandir
+scenecraft.gui.ingame.menu.zoomout=Dézoomer
+
+#Errors
+scenecraft.error.negativetime3=Les parties invalides sont marquées en rouge.
+
+#SceneCraft Incompatibility Warning
+scenecraft.gui.modwarning.title=Incompatibilité détectée
+scenecraft.gui.modwarning.message3=Charger cette scène peut provoquer des erreurs ou un crash.
+scenecraft.gui.modwarning.name=Nom du mod :
+scenecraft.gui.modwarning.id=Identifiant du mod :
+scenecraft.gui.modwarning.missing=Mods manquants
+scenecraft.gui.modwarning.version.expected=Attendu
+scenecraft.gui.modwarning.version.found=Trouvé

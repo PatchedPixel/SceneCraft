@@ -1,0 +1,179 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.147'
+    id 'idea'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = mod_version
+group = mod_group_id
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+
+    exclude("src/generated/**/.cache")
+}
+
+repositories {
+    mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+neoForge {
+    version = project.neo_version
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            clientData()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            systemProperty 'neoforge.logging.markers', 'REGISTRIES'
+
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+    compileOnly(annotationProcessor("org.projectlombok:lombok:1.18.42"))
+
+    implementation(jarJar("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}"))
+    ["natives-windows", "natives-windows-arm64", "natives-linux", "natives-linux-arm64", "natives-macos", "natives-macos-arm64"].each { n ->
+        runtimeOnly(jarJar("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}:${n}"))
+    }
+
+    compileOnly("maven.modrinth:YL57xq9U:Ag5S66CF")
+
+    implementation(jarJar("com.googlecode.mp4parser:isoparser:1.1.22"))
+    implementation(jarJar("de.javagl:jgltf-model:2.0.4"))
+    implementation(jarJar("org.apache.commons:commons-exec:1.5.0"))
+
+    implementation(jarJar("com.google.apis:google-api-services-youtube:v3-rev20240916-2.0.0"))
+    implementation(jarJar("com.google.api-client:google-api-client:2.7.0"))
+    implementation(jarJar("com.google.oauth-client:google-oauth-client-jetty:1.36.0"))
+    implementation(jarJar("com.google.oauth-client:google-oauth-client-java6:1.36.0"))
+    implementation(jarJar("com.google.http-client:google-http-client-gson:1.45.0"))
+}
+
+def convertLang = tasks.register("convertLang") {
+    def modId = project.mod_id
+    def inDir = layout.projectDirectory.dir("src/main/lang")
+    def outDir = layout.buildDirectory.dir("generated/lang")
+    inputs.dir(inDir).optional()
+    outputs.dir(outDir)
+    doLast {
+        def out = outDir.get().dir("assets/${modId}/lang").asFile
+        out.deleteDir(); out.mkdirs()
+        def src = inDir.asFile
+        if (!src.exists()) return
+        src.eachFileMatch(~/[a-z]{2}_[A-Za-z]{2}\.lang/) { f ->
+            def map = new LinkedHashMap<String, String>()
+            f.eachLine("UTF-8") { line ->
+                if (line.trim().isEmpty() || line.trim().startsWith("#")) return
+                int i = line.indexOf('=')
+                if (i < 0) return
+                def key = line.substring(0, i)
+                def value = line.substring(i + 1)
+                if (key.startsWith("${modId}.input.")) {
+                    map.put(key, value)
+                    key = "key.${modId}." + key.substring("${modId}.input.".length())
+                }
+                if (key == "${modId}.title") map.put("key.category.${modId}.general", value)
+                map.put(key, value)
+            }
+            new File(out, f.name.toLowerCase().replace(".lang", ".json"))
+                    .setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(map)), "UTF-8")
+        }
+    }
+}
+sourceSets.main.resources.srcDir convertLang
+
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
