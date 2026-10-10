@@ -64,7 +64,7 @@ public class PNGWriter implements FrameConsumer<BitmapFrame> {
                     image.setRGBA(x, y, r, g, b, a | alphaMask);
                 }
             }
-            consumer.accept(image);
+            consumer.consume(image);
         }
     }
 

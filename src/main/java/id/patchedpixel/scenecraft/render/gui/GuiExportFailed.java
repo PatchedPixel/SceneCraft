@@ -19,7 +19,7 @@ import net.minecraft.ReportedException;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
 
 public class GuiExportFailed extends GuiScreen {
     public static GuiExportFailed tryToRecover(FFmpegWriter.FFmpegStartupException e, Consumer<RenderSettings> doRestart) {

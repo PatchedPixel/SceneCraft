@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Aufnahme gestartet
@@ -109,8 +109,8 @@ scenecraft.gui.playeroverview.spectate=Spieler zuschauen
 scenecraft.gui.playeroverview.remembersettings=Verstecke Spieler merken
 scenecraft.gui.playeroverview.remembersettings.description=Speichert Spieler Sichtbarkeit in der Replay Datei
 
-#SceneCraft Settings GUI
-scenecraft.gui.settings.title=SceneCraft Einstellungen
+#Replay Mod Settings GUI
+scenecraft.gui.settings.title=Replay Mod Einstellungen
 
 scenecraft.gui.settings.notifications=Benachrichtigungen einschalten
 scenecraft.gui.settings.recordserver=Server aufzeichnen
@@ -121,7 +121,7 @@ scenecraft.gui.settings.camera=Kamera
 scenecraft.gui.settings.showchat=Chat anzeigen
 scenecraft.gui.settings.interpolator=Standard Interpolator
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=Beleuchtung umschalten
 scenecraft.input.thumbnail=Vorschaubild aufnehmen
 scenecraft.input.playeroverview=Spielerübersicht
@@ -160,7 +160,7 @@ scenecraft.gui.editkeyframe.timestamp=Zeitindex
 
 scenecraft.gui.editkeyframe.interpolator=Interpolator
 scenecraft.gui.editkeyframe.interpolator.default.name=Standardinterpolator
-scenecraft.gui.editkeyframe.interpolator.default.desc=Benutzt den Standardinterpolator, der in den SceneCraft Einstellungen definiert wurde.
+scenecraft.gui.editkeyframe.interpolator.default.desc=Benutzt den Standardinterpolator, der in den Replay Mod Einstellungen definiert wurde.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull-Rom-Spline Interpolator
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=Berechnet einen Catmull Rom Spline mit veränderbarem Alpha Wert für präzise und weiche Kamerapfade.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alpha:
@@ -264,7 +264,7 @@ scenecraft.error.negativetime1=Einige deiner Zeit Keyframes haben eine falsche R
 scenecraft.error.negativetime2=In der Zeit zurückzugehen wird nicht unterstützt.
 scenecraft.error.negativetime3=Die fehlerhaften Teile sind rot markiert.
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=Inkompatibilität gefunden
 scenecraft.gui.modwarning.message1=Eine mögliche Inkompatibilität zwischen deiner aktuellen
 scenecraft.gui.modwarning.message2=Minecraft Version und diesem Replay wurde gefunden.

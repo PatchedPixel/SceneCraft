@@ -61,7 +61,7 @@ public class Pipeline<R extends Frame, P extends Frame> implements Runnable {
 
         Minecraft mc = MCVer.getMinecraft();
         while (!capturer.isDone() && !abort) {
-            if (mc.getWindow().shouldClose() || ((id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor) mc).getDelayedCrash() != null) {
+            if (mc.getWindow().shouldClose() || id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash() != null) {
                 processService.shutdown();
                 return;
             }

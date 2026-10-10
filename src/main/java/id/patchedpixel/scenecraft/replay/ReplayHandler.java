@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
 import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
@@ -54,9 +55,10 @@ import javax.annotation.Nullable;
 
 import static id.patchedpixel.scenecraft.core.utils.Utils.DEFAULT_MS_PER_TICK;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
-import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
+import static id.patchedpixel.scenecraft.replay.ReplayModReplay.LOGGER;
 
 public class ReplayHandler {
+
     public static final String PACKET_HANDLER_NAME = "ReplayModReplay_packetHandler";
 
     private static Minecraft mc = getMinecraft();
@@ -107,7 +109,7 @@ public class ReplayHandler {
         markers = replayFile.getMarkers().orElse(Collections.emptySet());
 
         fullReplaySender = new FullReplaySender(this, replayFile);
-        quickReplaySender = new QuickReplaySender(SceneCraftReplay.instance, replayFile);
+        quickReplaySender = new QuickReplaySender(ReplayModReplay.instance, replayFile);
 
         setup();
 
@@ -160,7 +162,7 @@ public class ReplayHandler {
         timer.setTickLength(DEFAULT_MS_PER_TICK);
         overlay.setVisible(false);
 
-        SceneCraftReplay.instance.forcefullyStopReplay();
+        ReplayModReplay.instance.forcefullyStopReplay();
 
         mc.gui.setScreen(null);
 
@@ -347,7 +349,7 @@ public class ReplayHandler {
         }
 
         if (e == cameraEntity) {
-            cameraEntity.setCameraController(SceneCraftReplay.instance.createCameraController(cameraEntity));
+            cameraEntity.setCameraController(ReplayModReplay.instance.createCameraController(cameraEntity));
         } else {
             cameraEntity.setCameraController(new SpectatorCameraController(cameraEntity));
         }
@@ -521,7 +523,10 @@ public class ReplayHandler {
     private void skipTeleportInterpolation(Entity entity) {
         InterpolationHandler i = entity.getInterpolation();
         if (i != null && i.hasActiveInterpolation()) {
-            entity.snapTo(Objects.requireNonNull(i.target()).position(), Objects.requireNonNull(i.target()).yRot(), Objects.requireNonNull(i.target()).xRot());
+            net.minecraft.core.PositionAndRotation target = i.target();
+            if (target != null) {
+                entity.snapTo(target.position(), target.yRot(), target.xRot());
+            }
             i.cancel();
         }
     }

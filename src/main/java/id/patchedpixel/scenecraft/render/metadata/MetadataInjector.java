@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
 
 public class MetadataInjector {
 

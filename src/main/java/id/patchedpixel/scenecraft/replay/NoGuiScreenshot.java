@@ -65,7 +65,7 @@ public class NoGuiScreenshot {
                             .createCommandEncoder()
                             .clearColorAndDepthTextures(mc.gameRenderer.mainRenderTarget().getColorTexture(), new org.joml.Vector4f(), mc.gameRenderer.mainRenderTarget().getDepthTexture(), 0);
 
-                    mc.gameRenderer.renderLevel(DeltaTracker.ONE);
+                    mc.gameRenderer.renderLevel();
 
                     popMatrix();
                 } catch (Throwable t) {

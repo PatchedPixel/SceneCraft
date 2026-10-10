@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=开始录制
@@ -94,7 +94,7 @@ scenecraft.gui.loadentitytracker=加载实体位置：%%d%%%%
 scenecraft.gui.loadquickmode=正在加载快速模式： %%d%%%%
 scenecraft.gui.noquickmode=快速模式仅在Minecraft %1$s 及更高版本中可用
 scenecraft.gui.minimalmode.unsupported=此功能不适用于您当前的Minecraft版本。
-scenecraft.gui.minimalmode.supportedversion=（您的SceneCraft版本仅支持 Minecraft %1$s ）
+scenecraft.gui.minimalmode.supportedversion=（您的Replay Mod版本仅支持 Minecraft %1$s ）
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=回放中心
@@ -131,7 +131,7 @@ scenecraft.gui.playeroverview.spectate=玩家列表
 scenecraft.gui.playeroverview.remembersettings=持续隐藏玩家
 scenecraft.gui.playeroverview.remembersettings.description=玩家将在录像文件被隐藏
 
-#SceneCraft Settings GUI
+#Replay Mod Settings GUI
 scenecraft.gui.settings.title=录像回放设置
 scenecraft.gui.settings.default=默认
 
@@ -150,7 +150,7 @@ scenecraft.gui.settings.fullbrightness.gamma=Gamma值
 scenecraft.gui.settings.fullbrightness.nightvision=夜视
 scenecraft.gui.settings.fullbrightness.both=同时使用
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=照明模式
 scenecraft.input.thumbnail=截取缩略图
 scenecraft.input.playeroverview=玩家列表
@@ -194,7 +194,7 @@ scenecraft.gui.editkeyframe.timestamp=时间系数
 
 scenecraft.gui.editkeyframe.interpolator=插值器
 scenecraft.gui.editkeyframe.interpolator.default.name=默认插值器
-scenecraft.gui.editkeyframe.interpolator.default.desc=在SceneCraft设置中使用默认的插值器。
+scenecraft.gui.editkeyframe.interpolator.default.desc=在Replay Mod设置中使用默认的插值器。
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull Rom样条曲线插值器
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=利用自定义的alpha值计算得到的Catmull Rom样条曲线，来精准校对并平滑镜头路径。
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alpha:
@@ -321,7 +321,7 @@ scenecraft.error.negativetime1=你的一些时间关键帧出了问题。
 scenecraft.error.negativetime2=不支持倒放。
 scenecraft.error.negativetime3=无效部分标记为红色。
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=不兼容检测
 scenecraft.gui.modwarning.message1=当前可能会发生不兼容
 scenecraft.gui.modwarning.message2=Minecraft版本和这个录像已经被检测。

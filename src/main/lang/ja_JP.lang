@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=録画を開始しました
@@ -108,8 +108,8 @@ scenecraft.gui.playeroverview.spectate=プレイヤーを監視する
 scenecraft.gui.playeroverview.remembersettings=非表示のプレイヤーを記憶
 scenecraft.gui.playeroverview.remembersettings.description=プレイヤーの表示状態をリプレイファイルに保存
 
-#SceneCraft Settings GUI
-scenecraft.gui.settings.title=SceneCraftの設定
+#Replay Mod Settings GUI
+scenecraft.gui.settings.title=Replay Modの設定
 
 scenecraft.gui.settings.notifications=通知を有効にする
 scenecraft.gui.settings.recordserver=サーバーでのプレイを録画
@@ -120,7 +120,7 @@ scenecraft.gui.settings.camera=カメラ
 scenecraft.gui.settings.showchat=チャットを表示
 scenecraft.gui.settings.interpolator=デフォルトのカメラ移動補完方式
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=暗視の切り替え
 scenecraft.input.thumbnail=サムネイルを撮影
 scenecraft.input.playeroverview=プレイヤーの一覧表示
@@ -260,7 +260,7 @@ scenecraft.error.negativetime1=順番がおかしいタイムキーフレーム�
 scenecraft.error.negativetime2=時間を後戻りすることはできません。
 scenecraft.error.negativetime3=無効な区間は赤く表示されます。
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=互換性エラーが検知されました
 scenecraft.gui.modwarning.message1=起こりうる互換性エラーが現在の
 scenecraft.gui.modwarning.message2=Minecraftのバージョンとこのリプレイの間で検知されました。

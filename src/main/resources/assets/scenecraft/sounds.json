@@ -2,7 +2,7 @@
   "render_success": {
     "sounds": [
       {
-        "name": "replaymod:render_success"
+        "name": "scenecraft:render_success"
       }
     ]
   }

@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 import static id.patchedpixel.scenecraft.core.utils.Utils.DEFAULT_MS_PER_TICK;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.getPacketTypeRegistry;
-import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
+import static id.patchedpixel.scenecraft.replay.ReplayModReplay.LOGGER;
 
 /**
  * Sends only chunk updates and entity position updates but tries to do so as quickly as possible.
@@ -38,7 +38,7 @@ import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
 public class QuickReplaySender extends ChannelHandlerAdapter implements ReplaySender {
     private final Minecraft mc = getMinecraft();
 
-    private final SceneCraftReplay mod;
+    private final ReplayModReplay mod;
     private final RandomAccessReplay replay;
     private final EventHandler eventHandler = new EventHandler();
     private Channel channel;
@@ -55,7 +55,7 @@ public class QuickReplaySender extends ChannelHandlerAdapter implements ReplaySe
 
     private ListenableFuture<Void> initPromise;
 
-    public QuickReplaySender(SceneCraftReplay mod, ReplayFile replayFile) {
+    public QuickReplaySender(ReplayModReplay mod, ReplayFile replayFile) {
         this.mod = mod;
         this.replay = new RandomAccessReplay(replayFile, getPacketTypeRegistry(State.PLAY)) {
             private byte[] buf = new byte[0];

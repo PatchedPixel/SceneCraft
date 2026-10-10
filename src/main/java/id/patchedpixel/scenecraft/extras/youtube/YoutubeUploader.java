@@ -208,7 +208,7 @@ public class YoutubeUploader {
         try (InputStream inputStream = new BufferedInputStream(new FileInputStream(processedFile))) {
             InputStreamContent content = new InputStreamContent("video/*", inputStream);
             content.setLength(processedFile.length());
-            YouTube.Videos.Insert videoInsert = youTube.videos().insert("snippet,statistics,status", video, content);
+            YouTube.Videos.Insert videoInsert = youTube.videos().insert(java.util.List.of("snippet", "statistics", "status"), video, content);
             final MediaHttpUploader uploader = videoInsert.getMediaHttpUploader();
             progress = () -> {
                 try {

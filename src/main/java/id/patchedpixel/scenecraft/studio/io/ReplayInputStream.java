@@ -163,7 +163,6 @@ public class ReplayInputStream extends InputStream {
                 default:
                     break;
             }
-            buf.resetReaderIndex();
 
             // The packet was decoded with the registry of the phase it was recorded in. Switch to the registry
             // of the next phase for the packets that follow.

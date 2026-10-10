@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.render.gui;
 import id.patchedpixel.scenecraft.core.SettingsRegistry;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.SceneCraftRender;
+import id.patchedpixel.scenecraft.render.ReplayModRender;
 import id.patchedpixel.scenecraft.render.Setting;
 import id.patchedpixel.scenecraft.gui.container.GuiPanel;
 import id.patchedpixel.scenecraft.gui.container.GuiScreen;
@@ -17,7 +17,7 @@ import id.patchedpixel.scenecraft.gui.layout.VerticalLayout;
 import java.io.File;
 
 public class GuiRenderingDone extends GuiScreen {
-    public final SceneCraftRender mod;
+    public final ReplayModRender mod;
     public final File videoFile;
     public final int videoFrames;
     public final RenderSettings settings;
@@ -70,7 +70,7 @@ public class GuiRenderingDone extends GuiScreen {
         setBackground(Background.DIRT);
     }
 
-    public GuiRenderingDone(SceneCraftRender mod, File videoFile, int videoFrames, RenderSettings settings) {
+    public GuiRenderingDone(ReplayModRender mod, File videoFile, int videoFrames, RenderSettings settings) {
         this.mod = mod;
         this.videoFile = videoFile;
         this.videoFrames = videoFrames;

@@ -22,9 +22,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SceneCraftRender extends EventRegistrations implements Module {
+public class ReplayModRender extends EventRegistrations implements Module {
     { instance = this; }
-    public static SceneCraftRender instance;
+    public static ReplayModRender instance;
 
     private SceneCraft core;
 
@@ -33,7 +33,7 @@ public class SceneCraftRender extends EventRegistrations implements Module {
     private ReplayFile replayFile;
     private final List<RenderJob> renderQueue = new ArrayList<>();
 
-    public SceneCraftRender(SceneCraft core) {
+    public ReplayModRender(SceneCraft core) {
         this.core = core;
 
         core.getSettingsRegistry().register(Setting.class);

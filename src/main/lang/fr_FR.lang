@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Enregistrement en cours
@@ -107,8 +107,8 @@ scenecraft.gui.playeroverview.spectate=Devenir spectateur d'un joueur
 scenecraft.gui.playeroverview.remembersettings=Se souvenir des Joueurs Cachés
 scenecraft.gui.playeroverview.remembersettings.description=Enregistrer la Visibilité des Joueur dans le fichier du Replay
 
-#SceneCraft Settings GUI
-scenecraft.gui.settings.title=Options du SceneCraft
+#Replay Mod Settings GUI
+scenecraft.gui.settings.title=Options du Replay Mod
 
 scenecraft.gui.settings.notifications=Activer les Notifications
 scenecraft.gui.settings.recordserver=Enregistrer les Serveurs
@@ -118,7 +118,7 @@ scenecraft.gui.settings.pathpreview=Afficher l'Aperçu du Tracé
 scenecraft.gui.settings.camera=Caméra
 scenecraft.gui.settings.showchat=Afficher le Chat
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=Changer l'éclairage
 scenecraft.input.thumbnail=Enregistrer une Miniature
 scenecraft.input.playeroverview=Aperçu du Joueur
@@ -131,7 +131,7 @@ scenecraft.input.resettilt=Rétablir la Rotation de la Caméra
 scenecraft.input.playpause=Jouer/Mettre en Pause le Replay
 scenecraft.input.marker=Ajouter un Marqueur d'Événement
 scenecraft.input.pathpreview=Afficher l'Aperçu du Tracé
-scenecraft.input.settings=Paramètres de SceneCraft
+scenecraft.input.settings=Paramètres de Replay Mod
 
 # CameraControllers
 scenecraft.camera.classic=Classique
@@ -201,7 +201,7 @@ scenecraft.gui.ingame.menu.zoomout=Dézoomer
 #Errors
 scenecraft.error.negativetime3=Les parties invalides sont marquées en rouge.
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=Incompatibilité détectée
 scenecraft.gui.modwarning.message3=Charger cette scène peut provoquer des erreurs ou un crash.
 scenecraft.gui.modwarning.name=Nom du mod :

@@ -6,22 +6,30 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(value = SceneCraft.MOD_ID, dist = Dist.CLIENT)
 public class SceneCraftBackend {
     private final String version;
-    private final SceneCraft mod;
+    private SceneCraft mod;
 
     public SceneCraftBackend(IEventBus modBus, ModContainer container) {
         this.version = container.getModInfo().getVersion().toString();
-        this.mod = new SceneCraft(this);
 
-        modBus.addListener(RegisterKeyMappingsEvent.class, mod.getKeyBindingRegistry()::onRegisterKeyMappings);
+        // NOTE: the mod is constructed before the Minecraft instance exists (Main -> ClientModLoader.begin),
+        // so SceneCraft (which captures Minecraft.getInstance()) must NOT be created here.
+        // RegisterKeyMappingsEvent fires from the Options constructor, i.e. after Minecraft.instance is set.
+        modBus.addListener(RegisterKeyMappingsEvent.class, event -> {
+            this.mod = new SceneCraft(this);
+            this.mod.registerModuleKeyBindings();
+            this.mod.getKeyBindingRegistry().onRegisterKeyMappings(event);
+        });
         modBus.addListener(RegisterPayloadHandlersEvent.class, id.patchedpixel.scenecraft.record.SceneCraftRecording::registerPayloads);
-
-        mod.initModules();
+        modBus.addListener(FMLClientSetupEvent.class, event -> {
+            if (this.mod != null) this.mod.initModules();
+        });
     }
 
     public String getVersion() {

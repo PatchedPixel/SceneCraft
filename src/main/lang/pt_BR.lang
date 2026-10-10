@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Gravação Iniciada
@@ -92,7 +92,7 @@ scenecraft.gui.loadentitytracker=Carregando posições da entidade: %%d%%%%
 scenecraft.gui.loadquickmode=Carregando o Modo Rápido: %%d%%%%
 scenecraft.gui.noquickmode=O Modo Rápido está disponível apenas no Minecraft %1$s e acima
 scenecraft.gui.minimalmode.unsupported=Este recurso não está disponível para sua versão atual do Minecraft.
-scenecraft.gui.minimalmode.supportedversion=(apenas Minecraft %1$s é suportado pela sua versão do SceneCraft)
+scenecraft.gui.minimalmode.supportedversion=(apenas Minecraft %1$s é suportado pela sua versão do Replay Mod)
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=Visualizar Replay
@@ -128,8 +128,8 @@ scenecraft.gui.playeroverview.spectate=Jogador Espectador
 scenecraft.gui.playeroverview.remembersettings=Lembrar de jogadores ocultos
 scenecraft.gui.playeroverview.remembersettings.description=Salva a visibilidade do player no arquivo de Replay
 
-#SceneCraft Settings GUI
-scenecraft.gui.settings.title=Configurações do SceneCraft
+#Replay Mod Settings GUI
+scenecraft.gui.settings.title=Configurações do Replay Mod
 
 scenecraft.gui.settings.notifications=Habilitar Notificações
 scenecraft.gui.settings.recordserver=Gravar Server
@@ -141,7 +141,7 @@ scenecraft.gui.settings.showchat=Mostrar Chat
 scenecraft.gui.settings.interpolator=Interpolador padrão
 scenecraft.gui.settings.autostartrecording=Gravação automática
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=Alternar Iluminação
 scenecraft.input.thumbnail=Capturar miniatura
 scenecraft.input.playeroverview=Visão geral do jogador
@@ -180,7 +180,7 @@ scenecraft.gui.editkeyframe.timestamp=Índice de tempo
 
 scenecraft.gui.editkeyframe.interpolator=Interpolador
 scenecraft.gui.editkeyframe.interpolator.default.name=Padrão
-scenecraft.gui.editkeyframe.interpolator.default.desc=Usa o interpolador padrão definido nas configurações do SceneCraft.
+scenecraft.gui.editkeyframe.interpolator.default.desc=Usa o interpolador padrão definido nas configurações do Replay Mod.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull Rom Spline
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=Calcula um Catmull Rom Spline com valor alfa personalizável para precisão e suavidade do caminho da câmera.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alfa:
@@ -292,7 +292,7 @@ scenecraft.error.negativetime1=Alguns de seus KeyFrames de tempo estão fora de 
 scenecraft.error.negativetime2=Retroceder no tempo não é suportado.
 scenecraft.error.negativetime3=As partes inválidas estão marcadas em vermelho.
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=Incompatibilidade detectada
 scenecraft.gui.modwarning.message1=Uma possível incompatibilidade entre a sua atual
 scenecraft.gui.modwarning.message2=versão do Minecraft e este Replay foram detectados.

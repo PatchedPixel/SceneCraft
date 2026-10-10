@@ -126,7 +126,7 @@ scenecraft.gui.playeroverview.spectate=Pozorovať hráča
 scenecraft.gui.playeroverview.remembersettings=Zapamätať skrytých hráčov
 scenecraft.gui.playeroverview.remembersettings.description=Zapamätá skrytie hráčov po zatvorení
 
-#SceneCraft Settings GUI
+#Replay Mod Settings GUI
 scenecraft.gui.settings.title=Nastavenia Replay módu
 scenecraft.gui.settings.default=Predvolené
 
@@ -145,7 +145,7 @@ scenecraft.gui.settings.fullbrightness.gamma=Gama
 scenecraft.gui.settings.fullbrightness.nightvision=Nočné videnie
 scenecraft.gui.settings.fullbrightness.both=Obe
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=Prepnúť osvetlenie
 scenecraft.input.thumbnail=Zosnímať náhľad
 scenecraft.input.playeroverview=Prehľad hráča
@@ -308,7 +308,7 @@ scenecraft.error.negativetime1=niektoré vaše kľúčové snímky sú zle nača
 scenecraft.error.negativetime2=ísť späť v čase nie je podporované.
 scenecraft.error.negativetime3=Neplatné časti sú označené červenou.
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=Detekovaná nekompatibilita
 scenecraft.gui.modwarning.message1=Vaša verzia minecraftu je možno nekompatibilná
 scenecraft.gui.modwarning.message2=s touto nahrávkou.

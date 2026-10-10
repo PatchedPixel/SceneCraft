@@ -6,12 +6,12 @@ import id.patchedpixel.scenecraft.core.utils.Result;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.SceneCraftRender;
+import id.patchedpixel.scenecraft.render.ReplayModRender;
 import id.patchedpixel.scenecraft.render.FFmpegWriter;
 import id.patchedpixel.scenecraft.render.rendering.VideoRenderer;
 import id.patchedpixel.scenecraft.render.utils.RenderJob;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.ReplaySender;
 import id.patchedpixel.scenecraft.studio.pathing.path.Timeline;
 import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
@@ -52,7 +52,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
 
 public class GuiRenderQueue extends AbstractGuiPopup<GuiRenderQueue> implements KeyHandler {
     private final GuiLabel title = new GuiLabel().setI18nText("scenecraft.gui.renderqueue.title").setColor(Colors.BLACK);
@@ -106,7 +106,7 @@ public class GuiRenderQueue extends AbstractGuiPopup<GuiRenderQueue> implements 
         }).addElements(null, title, list, buttonPanel);
     }
 
-    private final SceneCraftRender mod = SceneCraftRender.instance;
+    private final ReplayModRender mod = ReplayModRender.instance;
     private final List<RenderJob> jobs = mod.getRenderQueue();
 
     public GuiRenderQueue(AbstractGuiScreen<?> container, ReplayHandler replayHandler, Supplier<Result<Timeline, String[]>> timelineSupplier) {
@@ -198,7 +198,7 @@ public class GuiRenderQueue extends AbstractGuiPopup<GuiRenderQueue> implements 
 
     public static void processMultipleReplays(
             AbstractGuiScreen<?> container,
-            SceneCraftReplay mod,
+            ReplayModReplay mod,
             Iterator<Pair<File, List<RenderJob>>> queue,
             Runnable done
     ) {

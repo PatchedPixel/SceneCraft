@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.extras.advancedscreenshots;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.render.RenderSettings;
 import id.patchedpixel.scenecraft.render.gui.GuiRenderSettings;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.gui.container.GuiContainer;
 import id.patchedpixel.scenecraft.gui.container.GuiPanel;
 import id.patchedpixel.scenecraft.gui.container.GuiScreen;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static id.patchedpixel.scenecraft.core.utils.Utils.error;
-import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
 
 public class GuiCreateScreenshot extends GuiRenderSettings implements Loadable {
     private final SceneCraft mod;
@@ -91,7 +91,7 @@ public class GuiCreateScreenshot extends GuiRenderSettings implements Loadable {
     @Override
     public void load() {
         // pause replay when opening this gui
-        SceneCraftReplay.instance.getReplayHandler().getReplaySender().setReplaySpeed(0);
+        ReplayModReplay.instance.getReplayHandler().getReplaySender().setReplaySpeed(0);
     }
 
     @Override

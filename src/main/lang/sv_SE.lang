@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Inspelningen har startats
@@ -92,7 +92,7 @@ scenecraft.gui.loadentitytracker=Läser in entitetspositioner: %%d %%%%
 scenecraft.gui.loadquickmode=Läser in snabbläge: %%d %%%%
 scenecraft.gui.noquickmode=Snabbläget är endast tillgängligt för Minecraft %1$s och senare
 scenecraft.gui.minimalmode.unsupported=Denna funktion är inte tillgänglig för din nuvarande Minecraft-version.
-scenecraft.gui.minimalmode.supportedversion=(endast Minecraft %1$s har stöd för din version av SceneCraft)
+scenecraft.gui.minimalmode.supportedversion=(endast Minecraft %1$s har stöd för din version av Replay Mod)
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=Reprisvisare
@@ -128,8 +128,8 @@ scenecraft.gui.playeroverview.spectate=Synliga spelare
 scenecraft.gui.playeroverview.remembersettings=Kom ihåg dolda spelare
 scenecraft.gui.playeroverview.remembersettings.description=Spara spelarnas synlighet i reprisfilen
 
-#SceneCraft Settings GUI
-scenecraft.gui.settings.title=Inställningar för SceneCraft
+#Replay Mod Settings GUI
+scenecraft.gui.settings.title=Inställningar för Replay Mod
 
 scenecraft.gui.settings.notifications=Visa notifikationer
 scenecraft.gui.settings.recordserver=Spela in på servrar
@@ -141,7 +141,7 @@ scenecraft.gui.settings.showchat=Visa chatt
 scenecraft.gui.settings.interpolator=Standard
 scenecraft.gui.settings.autostartrecording=Automatisk inspelning
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=Slå på/av ljus
 scenecraft.input.thumbnail=Skapa miniatyr
 scenecraft.input.playeroverview=Spelaröversikt
@@ -181,7 +181,7 @@ scenecraft.gui.editkeyframe.timestamp=Tidsindex
 
 scenecraft.gui.editkeyframe.interpolator=Övergång
 scenecraft.gui.editkeyframe.interpolator.default.name=Standardövergång
-scenecraft.gui.editkeyframe.interpolator.default.desc=Använder standardövergången som definieras i inställningarna för SceneCraft.
+scenecraft.gui.editkeyframe.interpolator.default.desc=Använder standardövergången som definieras i inställningarna för Replay Mod.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull rom spline
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=Beräknar en catmull rom spline med anpassat alfavärde för en exakt och mjuk kamerabana.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alfa:
@@ -294,7 +294,7 @@ scenecraft.error.negativetime1=En del av dina nyckelbilder för tid är i oordni
 scenecraft.error.negativetime2=Det finns inget stöd för att gå bakåt i tiden.
 scenecraft.error.negativetime3=De ogiltiga delarna är rödmarkerade.
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=Inkompatibilitet har upptäckts
 scenecraft.gui.modwarning.message1=En möjlig inkompatibilitet mellan din nuvarande
 scenecraft.gui.modwarning.message2=Minecraft-version och denna repris har upptäckts.

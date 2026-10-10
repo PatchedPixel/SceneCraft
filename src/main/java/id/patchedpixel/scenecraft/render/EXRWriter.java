@@ -63,11 +63,11 @@ public class EXRWriter implements FrameConsumer<BitmapFrame> {
         int numChannels = 4 + (depthFrame != null ? 1 : 0);
 
         stackPush();
-        EXRHeader header = EXRHeader.mallocStack(); InitEXRHeader(header);
-        EXRChannelInfo.Buffer channelInfos = EXRChannelInfo.mallocStack(numChannels);
+        EXRHeader header = EXRHeader.malloc(stackGet()); InitEXRHeader(header);
+        EXRChannelInfo.Buffer channelInfos = EXRChannelInfo.malloc(numChannels, stackGet());
         IntBuffer pixelTypes = stackMallocInt(numChannels);
         IntBuffer requestedPixelTypes = stackMallocInt(numChannels);
-        EXRImage image = EXRImage.mallocStack(); InitEXRImage(image);
+        EXRImage image = EXRImage.malloc(stackGet()); InitEXRImage(image);
         PointerBuffer imagePointers = stackMallocPointer(numChannels);
         FloatBuffer images = memAllocFloat(width * height * numChannels);
         PointerBuffer err = stackMallocPointer(1);

@@ -11,7 +11,7 @@ import id.patchedpixel.scenecraft.render.CameraPathExporter;
 import id.patchedpixel.scenecraft.render.EXRWriter;
 import id.patchedpixel.scenecraft.render.PNGWriter;
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.SceneCraftRender;
+import id.patchedpixel.scenecraft.render.ReplayModRender;
 import id.patchedpixel.scenecraft.render.FFmpegWriter;
 import id.patchedpixel.scenecraft.render.capturer.RenderInfo;
 import id.patchedpixel.scenecraft.render.events.ReplayRenderCallback;
@@ -60,7 +60,7 @@ import java.util.stream.Stream;
 import static com.google.common.collect.Iterables.getLast;
 import static id.patchedpixel.scenecraft.core.utils.Utils.DEFAULT_MS_PER_TICK;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
-import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public class VideoRenderer implements RenderInfo {
@@ -180,8 +180,8 @@ public class VideoRenderer implements RenderInfo {
 
         renderingPipeline.run();
 
-        if (((id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor) mc).getDelayedCrash() != null) {
-            throw new ReportedException(((id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor) mc).getDelayedCrash().get());
+        if (id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash() != null) {
+            throw new ReportedException(id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash().get());
         }
 
         if (settings.isInjectSphericalMetadata()) {
@@ -334,7 +334,7 @@ public class VideoRenderer implements RenderInfo {
 
         try {
             if (!hasFailed() && ffmpegWriter != null) {
-                new GuiRenderingDone(SceneCraftRender.instance, ffmpegWriter.getVideoFile(), totalFrames, settings).display();
+                new GuiRenderingDone(ReplayModRender.instance, ffmpegWriter.getVideoFile(), totalFrames, settings).display();
             }
         } catch (FFmpegWriter.FFmpegStartupException e) {
             setFailure(e);
@@ -368,7 +368,7 @@ public class VideoRenderer implements RenderInfo {
         }
         ((MinecraftMethodAccessor) mc).replayModExecuteTaskQueue();
 
-        ((id.patchedpixel.scenecraft.core.mixin.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
+        ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
     }
 
     private void tick() {
@@ -380,10 +380,10 @@ public class VideoRenderer implements RenderInfo {
     public boolean drawGui() {
         Window window = mc.getWindow();
         do {
-            if (window.shouldClose() || ((id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor) mc).getDelayedCrash() != null) {
+            if (window.shouldClose() || id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash() != null) {
                 return false;
             }
-            RenderSystem.pollEvents();
+            MCVer.pollEvents();
 
             pushMatrix();
             RenderSystem.getDevice()
@@ -412,17 +412,17 @@ public class VideoRenderer implements RenderInfo {
             windowRenderState.height = window.getHeight();
             windowRenderState.guiScale = window.getGuiScale();
             windowRenderState.appropriateLineWidth = window.getAppropriateLineWidth();
-            windowRenderState.isMinimized = window.isMinimized();
+            windowRenderState.isMinimized = window.isIconified();
 
             if (mc.gui.overlay() != null) {
                 Screen orgScreen = mc.gui.screen();
                 try {
-                    ((id.patchedpixel.scenecraft.core.mixin.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
+                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
                     mc.gui.overlay().extractRenderState(
                             drawContext,
                             mouseX, mouseY, 0);
                 } finally {
-                    ((id.patchedpixel.scenecraft.core.mixin.GuiAccessor) mc.gui).replaymod$setScreen(orgScreen);
+                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(orgScreen);
                 }
             } else {
                 gui.toMinecraft().tick();

@@ -7,7 +7,7 @@ import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.render.gui.GuiRenderQueue;
 import id.patchedpixel.scenecraft.render.gui.GuiRenderSettings;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.studio.pathing.PathingRegistry;
 import id.patchedpixel.scenecraft.studio.pathing.path.Path;
 import id.patchedpixel.scenecraft.studio.pathing.path.Timeline;
@@ -218,7 +218,7 @@ public class GuiKeyframeRepository extends GuiScreen implements Closeable, KeyHa
     public final GuiButton addToQueueButton = new GuiButton().onClick(new Runnable() {
         @Override
         public void run() {
-            ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
+            ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
             GuiRenderQueue queue = new GuiRenderQueue(GuiKeyframeRepository.this, replayHandler, null);
             queue.open();
 
@@ -325,12 +325,12 @@ public class GuiKeyframeRepository extends GuiScreen implements Closeable, KeyHa
     @Override
     public void display() {
         super.display();
-        SceneCraftReplay.instance.getReplayHandler().getOverlay().setVisible(false);
+        ReplayModReplay.instance.getReplayHandler().getOverlay().setVisible(false);
     }
 
     @Override
     public void close() {
-        SceneCraftReplay.instance.getReplayHandler().getOverlay().setVisible(true);
+        ReplayModReplay.instance.getReplayHandler().getOverlay().setVisible(true);
     }
 
     public SettableFuture<Timeline> getFuture() {

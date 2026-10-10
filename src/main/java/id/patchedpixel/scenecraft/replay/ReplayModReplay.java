@@ -32,9 +32,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-public class SceneCraftReplay implements Module {
+public class ReplayModReplay implements Module {
     { instance = this; }
-    public static SceneCraftReplay instance;
+    public static ReplayModReplay instance;
 
     private SceneCraft core;
     public KeyBindingRegistry.Binding keyPlayPause;
@@ -49,7 +49,7 @@ public class SceneCraftReplay implements Module {
         return replayHandler;
     }
 
-    public SceneCraftReplay(SceneCraft core) {
+    public ReplayModReplay(SceneCraft core) {
         this.core = core;
 
         core.getSettingsRegistry().register(Setting.class);
@@ -95,7 +95,9 @@ public class SceneCraftReplay implements Module {
                                 Graphics graphics = bgrImage.getGraphics();
                                 graphics.drawImage(image, 0, 0, null);
                                 graphics.dispose();
-                                replayHandler.getReplayFile().writeThumb(bgrImage);
+                                java.io.ByteArrayOutputStream thumbOut = new java.io.ByteArrayOutputStream();
+                                javax.imageio.ImageIO.write(bgrImage, "jpg", thumbOut);
+                                replayHandler.getReplayFile().writeThumbBytes(thumbOut.toByteArray());
                                 core.printInfoToChat("scenecraft.chat.savedthumb");
                             } catch (IOException e) {
                                 e.printStackTrace();

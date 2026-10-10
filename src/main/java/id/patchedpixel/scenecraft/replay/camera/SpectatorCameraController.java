@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.replay.camera;
 
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.world.entity.Entity;
@@ -20,7 +20,7 @@ public class SpectatorCameraController implements CameraController {
     public void update(float partialTicksPassed) {
         Minecraft mc = getMinecraft();
         if (mc.options.keyShift.consumeClick()) {
-            SceneCraftReplay.instance.getReplayHandler().spectateCamera();
+            ReplayModReplay.instance.getReplayHandler().spectateCamera();
         }
 
         // Soak up all remaining key presses

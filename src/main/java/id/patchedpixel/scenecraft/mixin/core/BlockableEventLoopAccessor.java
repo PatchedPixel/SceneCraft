@@ -9,6 +9,8 @@ import java.util.function.Supplier;
 
 @Mixin(BlockableEventLoop.class)
 public interface BlockableEventLoopAccessor {
-    @Accessor
-    Supplier<CrashReport> getDelayedCrash();
+    @Accessor("delayedCrash")
+    static Supplier<CrashReport> getDelayedCrash() {
+        throw new AssertionError();
+    }
 }

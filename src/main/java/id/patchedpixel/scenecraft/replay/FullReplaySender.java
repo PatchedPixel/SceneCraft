@@ -73,6 +73,7 @@ import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.network.protocol.game.ClientboundBlockChangedAckPacket;
 import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
@@ -610,7 +611,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
         }
 
         if (p instanceof ClientboundSystemChatPacket || p instanceof ClientboundPlayerChatPacket || p instanceof ClientboundDisguisedChatPacket) {
-            if (!SceneCraftReplay.instance.getCore().getSettingsRegistry().get(Setting.SHOW_CHAT)) {
+            if (!ReplayModReplay.instance.getCore().getSettingsRegistry().get(Setting.SHOW_CHAT)) {
                 return null;
             }
         }
@@ -630,7 +631,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                 org.dimension(),
                 org.seed(),
                 GameType.SPECTATOR,
-                GameType.SPECTATOR,
+                java.util.Optional.of(GameType.SPECTATOR),
                 org.isDebug(),
                 org.isFlat(),
                 org.lastDeathLocation(),

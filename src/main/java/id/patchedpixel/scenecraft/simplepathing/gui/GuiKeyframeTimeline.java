@@ -9,7 +9,7 @@ import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.pathing.properties.CameraProperties;
 import id.patchedpixel.scenecraft.pathing.properties.SpectatorProperty;
 import id.patchedpixel.scenecraft.pathing.properties.TimestampProperty;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.gui.overlay.GuiMarkerTimeline;
 import id.patchedpixel.scenecraft.studio.pathing.change.Change;
 import id.patchedpixel.scenecraft.studio.pathing.path.Keyframe;
@@ -112,7 +112,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
 
         SPTimeline timeline = mod.getCurrentTimeline();
 
-        ReadablePoint screenOffset = renderer.getOpenGlOffset();
+        ReadablePoint screenOffset = new Point(renderer.getOpenGlOffsetX(), renderer.getOpenGlOffsetY());
         ReadableDimension screenSize = gui.overlay.getMaxSize();
         renderer.pushScissor(-screenOffset.getX(), -screenOffset.getY(), screenSize.getWidth(), screenSize.getHeight());
 
@@ -394,7 +394,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
     private <T> void applyPropertyToGame(Property<T> property, Path path, long time) {
         Optional<T> value = path.getValue(property, time);
         if (value.isPresent()) {
-            property.applyToGame(value.get(), SceneCraftReplay.instance.getReplayHandler());
+            property.applyToGame(value.get(), ReplayModReplay.instance.getReplayHandler());
         }
     }
 
@@ -402,7 +402,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
     private <T> void applyPropertyToGame(Property<T> property, Keyframe keyframe) {
         Optional<T> value = keyframe.getValue(property);
         if (value.isPresent()) {
-            property.applyToGame(value.get(), SceneCraftReplay.instance.getReplayHandler());
+            property.applyToGame(value.get(), ReplayModReplay.instance.getReplayHandler());
         }
     }
 

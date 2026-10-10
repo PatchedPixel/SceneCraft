@@ -44,6 +44,7 @@ import java.util.Objects;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
 
 public class RecordingEventHandler extends EventRegistrations {
+
     private final Minecraft mc = getMinecraft();
     private final PacketListener packetListener;
 
@@ -60,6 +61,7 @@ public class RecordingEventHandler extends EventRegistrations {
     private int ticksSinceLastCorrection;
     private boolean wasSleeping;
     private int lastRiding = -1;
+    private net.minecraft.world.entity.LivingEntity.SwingDescription lastSwing;
     private Integer rotationYawHeadBefore;
 
     public RecordingEventHandler(PacketListener packetListener) {
@@ -134,7 +136,7 @@ public class RecordingEventHandler extends EventRegistrations {
 
             Packet packet = null;
             if (force || Math.abs(dx) > maxRelDist || Math.abs(dy) > maxRelDist || Math.abs(dz) > maxRelDist) {
-                packet = new ClientboundEntityPositionSyncPacket(player.getId(), PositionMoveRotation.of(player), player.onGround());
+                packet = ClientboundEntityPositionSyncPacket.of(player);
                 lastX = player.getX();
                 lastY = player.getY();
                 lastZ = player.getZ();
@@ -145,7 +147,7 @@ public class RecordingEventHandler extends EventRegistrations {
 
                 packet = new ClientboundMoveEntityPacket.PosRot(
                         player.getId(),
-                        (short) dx, (short) dy, (short) dz,
+                        new net.minecraft.network.protocol.game.VecDelta.Linear((short) dx, (short) dy, (short) dz),
                         newYaw, newPitch
                         , player.onGround()
                 );
@@ -173,12 +175,13 @@ public class RecordingEventHandler extends EventRegistrations {
 
             //Animation Packets
             //Swing Animation
-            if (player.isSwinging() && player.swingTime == 0) {
-                packetListener.save(new ClientboundAnimatePacket(
-                        player,
-                        player.swingingArm == InteractionHand.MAIN_HAND ? 0 : 3
-                ));
+            net.minecraft.world.entity.LivingEntity.SwingDescription swing = player.getCurrentSwing();
+            if (swing != null && swing != lastSwing) {
+                // a new swing started (SwingDescription is re-created on every start)
+                packetListener.save(new net.minecraft.network.protocol.game.ClientboundSwingAnimationPacket(
+                        player, swing.hand(), swing.animation()));
             }
+            lastSwing = swing;
 
 			/*
         //Potion Effect Handling

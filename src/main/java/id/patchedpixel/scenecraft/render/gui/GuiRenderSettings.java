@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.SceneCraftRender;
+import id.patchedpixel.scenecraft.render.ReplayModRender;
 import id.patchedpixel.scenecraft.render.FFmpegWriter;
 import id.patchedpixel.scenecraft.render.rendering.VideoRenderer;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
@@ -46,7 +46,7 @@ import java.util.Date;
 import java.util.Map;
 
 import static id.patchedpixel.scenecraft.core.utils.Utils.error;
-import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
 
 public class GuiRenderSettings extends AbstractGuiPopup<GuiRenderSettings> {
     { disablePopupBackground(); }
@@ -559,7 +559,7 @@ public class GuiRenderSettings extends AbstractGuiPopup<GuiRenderSettings> {
 
     protected File generateOutputFile(RenderSettings.EncodingPreset encodingPreset) {
         String fileName = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
-        File folder = SceneCraftRender.instance.getVideoFolder();
+        File folder = ReplayModRender.instance.getVideoFolder();
         return new File(folder, fileName + "." + encodingPreset.getFileExtension());
     }
 
@@ -590,7 +590,7 @@ public class GuiRenderSettings extends AbstractGuiPopup<GuiRenderSettings> {
     }
 
     protected Path getSettingsPath() {
-        return SceneCraftRender.instance.getRenderSettingsPath();
+        return ReplayModRender.instance.getRenderSettingsPath();
     }
 
     @Override

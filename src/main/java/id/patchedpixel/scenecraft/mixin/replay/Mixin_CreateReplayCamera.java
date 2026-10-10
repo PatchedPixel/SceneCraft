@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.replay;
 
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
@@ -29,17 +29,18 @@ public abstract class Mixin_CreateReplayCamera {
     @Shadow
     private ClientPacketListener connection;
 
-    @Inject(method = "createPlayer(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/stats/StatsCounter;Lnet/minecraft/client/ClientRecipeBook;Lnet/minecraft/world/entity/player/Input;Z)Lnet/minecraft/client/player/LocalPlayer;", at=@At("HEAD"), cancellable = true)
+    @Inject(method = "createPlayer(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/stats/StatsCounter;Lnet/minecraft/client/ClientRecipeBook;Lnet/minecraft/world/entity/player/Input;ZLnet/minecraft/client/player/ItemActivation;)Lnet/minecraft/client/player/LocalPlayer;", at=@At("HEAD"), cancellable = true)
     private void replayModReplay_createReplayCamera(
             ClientLevel worldIn,
             StatsCounter statisticsManager,
             ClientRecipeBook recipeBookClient,
             Input playerInput,
             boolean lastSprinting,
+            net.minecraft.client.player.ItemActivation itemActivation,
             CallbackInfoReturnable<LocalPlayer> ci
     ) {
-        if (SceneCraftReplay.instance.getReplayHandler() != null) {
-            ci.setReturnValue(new CameraEntity(this.minecraft, worldIn, this.connection, statisticsManager, recipeBookClient));
+        if (ReplayModReplay.instance.getReplayHandler() != null) {
+            ci.setReturnValue(new CameraEntity(this.minecraft, worldIn, this.connection, statisticsManager, recipeBookClient, itemActivation));
             ci.cancel();
         }
     }

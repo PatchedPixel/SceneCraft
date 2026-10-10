@@ -22,6 +22,18 @@ public abstract class MixinMinecraft extends ReentrantBlockableEventLoop<Runnabl
         handleKeybinds();
     }
 
+    @Shadow @Final private com.mojang.blaze3d.platform.SDLEventHandler sdlEventHandler;
+
+    @Override
+    public void replayModPollEvents() {
+        com.mojang.blaze3d.systems.RenderSystem.pollEvents(this.sdlEventHandler);
+    }
+
+    @Override
+    public void replayModPumpEvents() {
+        com.mojang.blaze3d.systems.RenderSystem.pumpEvents(this.sdlEventHandler);
+    }
+
     @Shadow @Final private PacketProcessor packetProcessor;
     @Override
     public void replayModExecuteTaskQueue() {

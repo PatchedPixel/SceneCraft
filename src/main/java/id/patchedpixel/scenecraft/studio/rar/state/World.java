@@ -180,7 +180,7 @@ public class World implements RandomAccessState {
                     Packet.Reader.readList(registry, in, in::readString),
                     Registries.readInternal(registry, in),
                     in.readString(),
-                    new DimensionType(requireNonNull(Packet.Reader.readNBT(registry, in)), in.readString(), in.readVarInt()),
+                    new DimensionType((net.minecraft.nbt.CompoundTag) requireNonNull(Packet.Reader.readNBT(registry, in)), in.readString(), in.readVarInt()),
                     in.readLong(),
                     in.readByte(),
                     in.readBoolean(),

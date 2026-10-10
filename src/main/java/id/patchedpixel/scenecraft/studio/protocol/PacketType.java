@@ -113,7 +113,7 @@ public enum PacketType {
     EntityNBTUpdate(State.PLAY, null),
     UnloadChunk(State.PLAY, "forget_level_chunk"),
     SetPassengers(State.PLAY, "set_passengers"),
-    OpenHorseWindow(State.PLAY, "horse_screen_open"),
+    OpenHorseWindow(State.PLAY, "mount_screen_open"),
     UpdateLight(State.PLAY, "light_update"),
     TradeList(State.PLAY, "merchant_offers"),
     UpdateViewPosition(State.PLAY, "set_chunk_cache_center"),

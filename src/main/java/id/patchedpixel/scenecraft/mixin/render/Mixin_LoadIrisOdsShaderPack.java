@@ -2,7 +2,8 @@ package id.patchedpixel.scenecraft.mixin.render;
 
 import id.patchedpixel.scenecraft.render.capturer.IrisODSFrameCapturer;
 import net.irisshaders.iris.Iris;
-import net.neoforged.fml.ModList;
+import java.net.URISyntaxException;
+import java.net.URL;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,9 +18,20 @@ public class Mixin_LoadIrisOdsShaderPack {
     private static Path loadReplayModOdsPack(String name) {
         if (IrisODSFrameCapturer.INSTANCE != null && IrisODSFrameCapturer.SHADER_PACK_NAME.equals(name)) {
             // Root of our own mod file (contains the shaders/ directory of the ODS shader pack)
-            return ModList.get().getModFileById("scenecraft").getFile().findResource("assets").getParent();
+            return modRoot();
         } else {
             return Iris.getShaderpacksDirectory();
+        }
+    }
+
+    /** Root of our own mod file (contains the iris/ods shader pack under assets/scenecraft/). */
+    private static Path modRoot() {
+        try {
+            URL marker = Mixin_LoadIrisOdsShaderPack.class.getResource("/META-INF/neoforge.mods.toml");
+            if (marker == null) throw new IllegalStateException("neoforge.mods.toml not found");
+            return Path.of(marker.toURI()).getParent().getParent();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Failed to locate SceneCraft mod root", e);
         }
     }
 }

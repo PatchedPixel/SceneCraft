@@ -5,7 +5,7 @@ import id.patchedpixel.scenecraft.core.events.KeyBindingEventCallback;
 import id.patchedpixel.scenecraft.core.events.KeyEventCallback;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.ReplaySender;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
 import id.patchedpixel.scenecraft.gui.RenderInfo;
@@ -29,7 +29,7 @@ import net.minecraft.client.resources.language.I18n;
 import static id.patchedpixel.scenecraft.core.SceneCraft.TEXTURE_SIZE;
 
 public class GuiReplayOverlay extends AbstractGuiOverlay<GuiReplayOverlay> {
-    private final SceneCraftReplay mod = SceneCraftReplay.instance;
+    private final ReplayModReplay mod = ReplayModReplay.instance;
 
     public final GuiPanel topPanel = new GuiPanel(this)
             .setLayout(new HorizontalLayout(HorizontalLayout.Alignment.LEFT).setSpacing(5));

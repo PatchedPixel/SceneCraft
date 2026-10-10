@@ -56,12 +56,13 @@ public class KeyBindingRegistry extends EventRegistrations {
     private Binding registerKeyBinding(String name, int keyCode, boolean onlyInRepay) {
         Binding binding = bindings.get(name);
         if (binding == null) {
-            if (keyCode == 0) {
-                keyCode = -1;
-            }
             Identifier id = identifier(MOD_ID, name.substring(LEGACY_KEY_PREFIX.length()));
             String key = String.format("key.%s.%s", id.getNamespace(), id.getPath());
-            KeyMapping keyBinding = new KeyMapping(key, InputConstants.Type.KEYBOARD, keyCode, CATEGORY);
+            // Unbound mappings must use the vanilla UNKNOWN key; a key with another type and the value -1
+            // is not considered unbound by vanilla and is then used as an out of range index
+            KeyMapping keyBinding = keyCode > 0
+                    ? new KeyMapping(key, InputConstants.Type.KEYBOARD, keyCode, CATEGORY)
+                    : new KeyMapping(key, InputConstants.UNKNOWN.getType(), InputConstants.UNKNOWN.getValue(), CATEGORY);
             pendingMappings.add(keyBinding);
             binding = new Binding(name, keyBinding);
             bindings.put(name, binding);

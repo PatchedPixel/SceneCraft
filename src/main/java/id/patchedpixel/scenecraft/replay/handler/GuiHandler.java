@@ -8,7 +8,7 @@ import id.patchedpixel.scenecraft.gui.layout.CustomLayout;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.InitScreenCallback;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.gui.screen.GuiReplayViewer;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -20,8 +20,10 @@ import net.minecraft.client.gui.components.Tooltip;
 import id.patchedpixel.scenecraft.gui.MinecraftGuiRenderer;
 import id.patchedpixel.scenecraft.core.versions.ScreenWidgets;
 import net.neoforged.fml.ModList;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 
 import net.minecraft.client.gui.components.Button;
 
@@ -35,15 +37,15 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
-import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
+import static id.patchedpixel.scenecraft.replay.ReplayModReplay.LOGGER;
 
 public class GuiHandler extends EventRegistrations {
     private static final int BUTTON_REPLAY_VIEWER = 17890234;
     private static final int BUTTON_EXIT_REPLAY = 17890235;
 
-    private final SceneCraftReplay mod;
+    private final ReplayModReplay mod;
 
-    public GuiHandler(SceneCraftReplay mod) {
+    public GuiHandler(ReplayModReplay mod) {
         this.mod = mod;
     }
 

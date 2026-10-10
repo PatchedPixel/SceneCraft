@@ -1,4 +1,4 @@
-scenecraft.title=SceneCraft
+scenecraft.title=Replay Mod
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Запись началась
@@ -94,7 +94,7 @@ scenecraft.gui.loadentitytracker=Загрузка позиций сущност�
 scenecraft.gui.loadquickmode=Загрузка Быстрого Режима: %%d%%%%
 scenecraft.gui.noquickmode=Быстрый Режим доступен только в Minecraft %1$s и выше
 scenecraft.gui.minimalmode.unsupported=Эта функция недоступна в вашей версии Minecraft.
-scenecraft.gui.minimalmode.supportedversion=(текущая версия SceneCraft поддерживает только Minecraft %1$s)
+scenecraft.gui.minimalmode.supportedversion=(текущая версия Replay Mod поддерживает только Minecraft %1$s)
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=Просмотрщик Повторов
@@ -131,8 +131,8 @@ scenecraft.gui.playeroverview.spectate=Наблюдать за...
 scenecraft.gui.playeroverview.remembersettings=Запомнить скрытых игроков
 scenecraft.gui.playeroverview.remembersettings.description=Сохраняет информацию о видимости игроков в файле повтора
 
-#SceneCraft Settings GUI
-scenecraft.gui.settings.title=Настройки SceneCraft
+#Replay Mod Settings GUI
+scenecraft.gui.settings.title=Настройки Replay Mod
 scenecraft.gui.settings.default=ПО УМОЛЧАНИЮ
 
 scenecraft.gui.settings.notifications=Уведомления
@@ -150,7 +150,7 @@ scenecraft.gui.settings.fullbrightness.gamma=Гамма
 scenecraft.gui.settings.fullbrightness.nightvision=Эффект
 scenecraft.gui.settings.fullbrightness.both=Оба
 
-#SceneCraft Keybindings
+#Replay Mod Keybindings
 scenecraft.input.lighting=Полная яркость
 scenecraft.input.thumbnail=Сделать миниатюру
 scenecraft.input.playeroverview=Список игроков
@@ -171,7 +171,7 @@ scenecraft.input.timekeyframe=Ключевой кадр времени
 scenecraft.input.bothkeyframes=Ключевой кадр позиции + времени
 
 # CameraControllers
-scenecraft.camera.classic=SceneCraft
+scenecraft.camera.classic=Replay Mod
 scenecraft.camera.vanilla=Minecraft
 
 #Keyframe Presets GUI
@@ -321,7 +321,7 @@ scenecraft.error.negativetime1=Ключевые кадры времени рас
 scenecraft.error.negativetime2=Переход назад во времени не поддерживается.
 scenecraft.error.negativetime3=Недействительные части помечены красным.
 
-#SceneCraft Incompatibility Warning
+#Replay Mod Incompatibility Warning
 scenecraft.gui.modwarning.title=Обнаружена несовместимость
 scenecraft.gui.modwarning.message1=Обнаружена возможная несовместимость между
 scenecraft.gui.modwarning.message2=текущей версией Minecraft и выбранным повтором.

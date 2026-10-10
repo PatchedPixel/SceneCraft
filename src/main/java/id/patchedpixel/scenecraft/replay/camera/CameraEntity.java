@@ -14,7 +14,7 @@ import id.patchedpixel.scenecraft.mixin.replay.EntityPlayerAccessor;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import id.patchedpixel.scenecraft.core.utils.Utils;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.Setting;
 import id.patchedpixel.scenecraft.mixin.replay.FirstPersonRendererAccessor;
 import id.patchedpixel.scenecraft.studio.util.Location;
@@ -96,6 +96,7 @@ public class CameraEntity
             ClientPacketListener netHandlerPlayClient,
             StatsCounter statisticsManager
             , ClientRecipeBook recipeBook
+            , net.minecraft.client.player.ItemActivation itemActivation
     ) {
         super(mcIn,
                 worldIn,
@@ -105,11 +106,12 @@ public class CameraEntity
                 , Input.EMPTY
                 , false
                 , mcIn.computeChatAbilities()
+                , itemActivation
         );
         setUUID(CAMERA_UUID);
         eventHandler.register();
-        if (SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
-            cameraController = SceneCraftReplay.instance.createCameraController(this);
+        if (ReplayModReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
+            cameraController = ReplayModReplay.instance.createCameraController(this);
         } else {
             cameraController = new SpectatorCameraController(this);
         }
@@ -229,7 +231,7 @@ public class CameraEntity
             // Make sure we're always spectating the right entity
             // This is important if the spectated player respawns as their
             // entity is recreated and we have to spectate a new entity
-            UUID spectating = SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID();
+            UUID spectating = ReplayModReplay.instance.getReplayHandler().getSpectatedUUID();
             // FIXME remap bug: Pattern doesn't work when these two are inlined
             Level cameraWorld = this.level();
             Level viewWorld = view.level();
@@ -238,7 +240,7 @@ public class CameraEntity
                     || cameraWorld.getEntity(view.getId()) != view) {
                 if (spectating == null) {
                     // Entity (non-player) died, stop spectating
-                    SceneCraftReplay.instance.getReplayHandler().spectateEntity(this);
+                    ReplayModReplay.instance.getReplayHandler().spectateEntity(this);
                     return;
                 }
                 view = cameraWorld.getPlayerByUUID(spectating);
@@ -322,7 +324,7 @@ public class CameraEntity
 
     @Override
     public boolean isSpectator() {
-        ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
+        ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
         return replayHandler == null || replayHandler.isCameraView(); // Make sure we're treated as spectator
     }
 
@@ -377,12 +379,21 @@ public class CameraEntity
     }
 
     @Override
-    public float getAttackAnim(float renderPartialTicks) {
+    public float getSwingAnimation(float renderPartialTicks) {
         Entity view = this.minecraft.getCameraEntity();
         if (view != this && view instanceof Player) {
-            return ((Player) view).getAttackAnim(renderPartialTicks);
+            return ((Player) view).getSwingAnimation(renderPartialTicks);
         }
         return 0;
+    }
+
+    @Override
+    public net.minecraft.world.entity.LivingEntity.SwingDescription getCurrentSwing() {
+        Entity view = this.minecraft.getCameraEntity();
+        if (view != this && view instanceof Player) {
+            return ((Player) view).getCurrentSwing();
+        }
+        return null;
     }
 
     @Override
@@ -497,7 +508,6 @@ public class CameraEntity
         this.setItemSlot(EquipmentSlot.OFFHAND, viewPlayer != null ? viewPlayer.getItemBySlot(EquipmentSlot.OFFHAND) : empty);
 
         cameraA.setItemStackMainHand(viewPlayerA != null ? viewPlayerA.getItemStackMainHand() : empty);
-        this.swingingArm = viewPlayer != null ? viewPlayer.swingingArm : InteractionHand.MAIN_HAND;
         this.useItem = viewPlayer != null ? viewPlayer.getUseItem() : empty;
         cameraA.setActiveItemStackUseCount(viewPlayerA != null ? viewPlayerA.getActiveItemStackUseCount() : 0);
     }
@@ -505,7 +515,7 @@ public class CameraEntity
     private void handleInputEvents() {
         if (this.minecraft.options.keyAttack.consumeClick() || this.minecraft.options.keyUse.consumeClick()) {
             if (this.minecraft.gui.screen() == null && canSpectate(this.minecraft.crosshairPickEntity)) {
-                SceneCraftReplay.instance.getReplayHandler().spectateEntity(
+                ReplayModReplay.instance.getReplayHandler().spectateEntity(
                         this.minecraft.crosshairPickEntity);
                 // Make sure we don't exit right away
                 //noinspection StatementWithEmptyBody
@@ -585,8 +595,8 @@ public class CameraEntity
         { on(SettingsChangedCallback.EVENT, this::onSettingsChanged); }
         private void onSettingsChanged(SettingsRegistry registry, SettingsRegistry.SettingKey<?> key) {
             if (key == Setting.CAMERA) {
-                if (SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
-                    cameraController = SceneCraftReplay.instance.createCameraController(CameraEntity.this);
+                if (ReplayModReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
+                    cameraController = ReplayModReplay.instance.createCameraController(CameraEntity.this);
                 } else {
                     cameraController = new SpectatorCameraController(CameraEntity.this);
                 }

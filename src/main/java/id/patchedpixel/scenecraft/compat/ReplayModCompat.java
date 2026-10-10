@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import id.patchedpixel.scenecraft.compat.shaders.ShaderBeginRender;
 
-public class SceneCraftCompat implements Module {
+public class ReplayModCompat implements Module {
     public static Logger LOGGER = LogManager.getLogger();
 
     @Override

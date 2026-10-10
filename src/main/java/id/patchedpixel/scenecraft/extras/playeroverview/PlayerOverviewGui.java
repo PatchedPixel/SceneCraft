@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.extras.playeroverview;
 
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
 import id.patchedpixel.scenecraft.gui.RenderInfo;
 import id.patchedpixel.scenecraft.gui.container.GuiClickable;
@@ -108,7 +108,7 @@ public class PlayerOverviewGui extends GuiScreen implements Closeable {
             ).onClick(new Runnable() {
                 @Override
                 public void run() {
-                    SceneCraftReplay.instance.getReplayHandler().spectateEntity(p);
+                    ReplayModReplay.instance.getReplayHandler().spectateEntity(p);
                 }
             });
             final GuiCheckbox checkbox = new GuiCheckbox() {
@@ -138,12 +138,12 @@ public class PlayerOverviewGui extends GuiScreen implements Closeable {
             }
         });
 
-        SceneCraftReplay.instance.getReplayHandler().getOverlay().setVisible(false);
+        ReplayModReplay.instance.getReplayHandler().getOverlay().setVisible(false);
     }
 
     @Override
     public void close() {
-        SceneCraftReplay.instance.getReplayHandler().getOverlay().setVisible(true);
+        ReplayModReplay.instance.getReplayHandler().getOverlay().setVisible(true);
         extra.saveHiddenPlayers();
     }
 

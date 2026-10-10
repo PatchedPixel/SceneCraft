@@ -107,7 +107,8 @@
     "replay.MixinRenderLivingBase",
     "replay.MixinTileEntityEndPortalRenderer",
     "replay.MixinWorldClient",
-    "replay.LocalPlayerAccessor"
+    "replay.LocalPlayerAccessor",
+    "core.GuiAccessor"
   ],
   "server": [],
   "injectors": {

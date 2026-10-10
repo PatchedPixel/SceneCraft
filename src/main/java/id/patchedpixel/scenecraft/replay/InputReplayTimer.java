@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.LevelLoadingScreen;
 
 public class InputReplayTimer {
     public static void updateInReplay() {
-        SceneCraftReplay mod = SceneCraftReplay.instance;
+        ReplayModReplay mod = ReplayModReplay.instance;
         Minecraft mc = mod.getCore().getMinecraft();
 
         SceneCraft.instance.runTasks();
@@ -21,7 +21,7 @@ public class InputReplayTimer {
         // tick speed may vary or there may not be any ticks at all (when the replay is paused)
         if (mod.getReplayHandler() != null && mc.level != null && mc.player != null) {
             if (mc.gui.screen() == null || ((ScreenExt) mc.gui.screen()).doesPassEvents()) {
-                RenderSystem.pumpEvents();
+                MCVer.pumpEvents();
                 MCVer.processKeyBinds();
             }
             mc.keyboardHandler.tick();
@@ -42,7 +42,7 @@ public class InputReplayTimer {
 
     public static void handleScroll(int wheel) {
         if (wheel != 0) {
-            ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
+            ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
             if (replayHandler != null) {
                 CameraEntity cameraEntity = replayHandler.getCameraEntity();
                 if (cameraEntity != null) {

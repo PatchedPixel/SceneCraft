@@ -3,7 +3,6 @@ package id.patchedpixel.scenecraft.mixin.render;
 import com.mojang.blaze3d.platform.Window;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Window.class)
 public interface MainWindowAccessor {
@@ -15,6 +14,4 @@ public interface MainWindowAccessor {
     int getFramebufferHeight();
     @Accessor
     void setFramebufferHeight(int value);
-    @Invoker("onFramebufferResize")
-    void invokeOnFramebufferSizeChanged(long window, int width, int height);
 }

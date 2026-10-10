@@ -5,7 +5,7 @@ import id.patchedpixel.scenecraft.core.events.PostRenderCallback;
 import id.patchedpixel.scenecraft.core.events.PreRenderCallback;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
+import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
 import id.patchedpixel.scenecraft.replay.gui.overlay.GuiReplayOverlay;
 import id.patchedpixel.scenecraft.gui.element.GuiImage;
@@ -18,7 +18,7 @@ import net.minecraft.world.effect.MobEffects;
 
 public class FullBrightness extends EventRegistrations implements Extra {
     private SceneCraft core;
-    private SceneCraftReplay module;
+    private ReplayModReplay module;
 
     private final IGuiImage indicator = new GuiImage().setTexture(SceneCraft.TEXTURE, 90, 20, 19, 16).setSize(19, 16);
 
@@ -29,7 +29,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
     @Override
     public void register(final SceneCraft mod) throws Exception {
         this.core = mod;
-        this.module = SceneCraftReplay.instance;
+        this.module = ReplayModReplay.instance;
         this.mc = mod.getMinecraft();
 
         mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.lighting", Keyboard.KEY_Z, new Runnable() {

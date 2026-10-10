@@ -16,7 +16,6 @@ import net.minecraft.util.Util;
 import net.minecraft.world.phys.Vec3;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import org.joml.Matrix4f;
-import id.patchedpixel.scenecraft.mixin.render.MainWindowAccessor;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.components.events.ContainerEventHandler;
 import net.minecraft.client.gui.components.Button;
@@ -83,8 +82,7 @@ public class MCVer {
 
     public static void resizeMainWindow(Minecraft mc, int width, int height) {
         Window window = mc.getWindow();
-        MainWindowAccessor mainWindow = (MainWindowAccessor) (Object) window;
-        mainWindow.invokeOnFramebufferSizeChanged(window.handle(), width, height);
+        window.onFramebufferResize(width, height);
     }
 
     public static <T> void addCallback(
@@ -109,7 +107,7 @@ public class MCVer {
      */
     public static boolean isOpenGlBackend() {
         try {
-            return RenderSystem.getDevice().getBackendName().toLowerCase(java.util.Locale.ROOT).contains("opengl");
+            return RenderSystem.getDevice().getDeviceInfo().backendName().toLowerCase(java.util.Locale.ROOT).contains("opengl");
         } catch (Throwable t) {
             return false;
         }
@@ -151,6 +149,16 @@ public class MCVer {
         return Optional.empty();
     }
 
+    /** SDL3 event polling (replaces glfwPollEvents). */
+    public static void pollEvents() {
+        ((MinecraftMethodAccessor) getMinecraft()).replayModPollEvents();
+    }
+
+    /** Flushes and re-polls the SDL input events. */
+    public static void pumpEvents() {
+        ((MinecraftMethodAccessor) getMinecraft()).replayModPumpEvents();
+    }
+
     public static void processKeyBinds() {
         ((MinecraftMethodAccessor) getMinecraft()).replayModProcessKeyBinds();
     }
@@ -158,6 +166,8 @@ public class MCVer {
     public interface MinecraftMethodAccessor {
         void replayModProcessKeyBinds();
         void replayModExecuteTaskQueue();
+        void replayModPollEvents();
+        void replayModPumpEvents();
     }
 
     public static long milliTime() {

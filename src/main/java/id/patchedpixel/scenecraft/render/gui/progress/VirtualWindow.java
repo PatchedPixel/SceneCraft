@@ -94,7 +94,7 @@ public class VirtualWindow implements Closeable {
             }
         }
 
-        if (surfaceIsInvalid || window.isMinimized()) {
+        if (surfaceIsInvalid || window.isIconified()) {
             return;
         }
 
