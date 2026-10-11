@@ -16,7 +16,7 @@ public class Mixin_FakeSystemTimeUniforms_Iris {
     private long useReplayTimeDuringRender(long frameStartTimeNs) {
         GameRenderer gameRenderer = Minecraft.getInstance().gameRenderer;
         EntityRendererHandler entityRendererHandler =
-            ((EntityRendererHandler.IEntityRenderer) gameRenderer).replayModRender_getHandler();
+            ((EntityRendererHandler.IEntityRenderer) gameRenderer).sceneCraftRender_getHandler();
         if (entityRendererHandler != null) {
             frameStartTimeNs = entityRendererHandler.getFakeFinishTimeNano();
         }

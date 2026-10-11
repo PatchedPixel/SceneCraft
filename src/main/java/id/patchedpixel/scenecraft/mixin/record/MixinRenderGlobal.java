@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.record;
 
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.handler.RecordingEventHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +17,7 @@ public abstract class MixinRenderGlobal {
     public void saveBlockBreakProgressPacket(int breakerId,
                                              BlockPos pos,
                                              int progress, CallbackInfo info) {
-        RecordingEventHandler recordingEventHandler = SceneCraftRecording.instance.getConnectionEventHandler().getRecordingEventHandler();
+        RecordingEventHandler recordingEventHandler = SceneCraftRecorder.instance.getConnectionEventHandler().getRecordingEventHandler();
         if (recordingEventHandler != null) {
             recordingEventHandler.onBlockBreakAnim(breakerId,
                     pos,

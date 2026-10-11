@@ -7,7 +7,7 @@ import id.patchedpixel.scenecraft.core.utils.Restrictions;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.editor.gui.MarkerProcessor;
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.Setting;
 import id.patchedpixel.scenecraft.record.gui.GuiSavingReplay;
 import id.patchedpixel.scenecraft.record.handler.ConnectionEventHandler;
@@ -188,7 +188,7 @@ public class PacketListener extends ChannelInboundHandlerAdapter {
         saveMetaData();
 
         core.runLater(() -> {
-            ConnectionEventHandler connectionEventHandler = SceneCraftRecording.instance.getConnectionEventHandler();
+            ConnectionEventHandler connectionEventHandler = SceneCraftRecorder.instance.getConnectionEventHandler();
             if (connectionEventHandler.getPacketListener() == this) {
                 connectionEventHandler.reset();
             }

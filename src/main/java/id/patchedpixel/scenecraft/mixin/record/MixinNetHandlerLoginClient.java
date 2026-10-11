@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.record;
 
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl;
 import net.minecraft.network.Connection;
@@ -31,11 +31,11 @@ public abstract class MixinNetHandlerLoginClient {
     }
 
     private void initiateRecording(Packet<?> packet) {
-        if (SceneCraftRecording.instance.getConnectionEventHandler().getPacketListener() != null) {
+        if (SceneCraftRecorder.instance.getConnectionEventHandler().getPacketListener() != null) {
             return; // already record
         }
-        SceneCraftRecording.instance.initiateRecording(this.connection);
-        PacketListener packetListener = SceneCraftRecording.instance.getConnectionEventHandler().getPacketListener();
+        SceneCraftRecorder.instance.initiateRecording(this.connection);
+        PacketListener packetListener = SceneCraftRecorder.instance.getConnectionEventHandler().getPacketListener();
         if (packetListener != null) {
             packetListener.save(packet);
         }

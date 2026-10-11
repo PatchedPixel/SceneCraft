@@ -18,18 +18,18 @@ import org.apache.logging.log4j.Logger;
 
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
-public class SceneCraftRecording implements Module {
+public class SceneCraftRecorder implements Module {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final AttributeKey<Void> ATTR_CHECKED = AttributeKey.newInstance("ReplayModRecording_checked");
 
     { instance = this; }
-    public static SceneCraftRecording instance;
+    public static SceneCraftRecorder instance;
 
     private SceneCraft core;
 
     private ConnectionEventHandler connectionEventHandler;
 
-    public SceneCraftRecording(SceneCraft mod) {
+    public SceneCraftRecorder(SceneCraft mod) {
         core = mod;
 
         core.getSettingsRegistry().register(Setting.class);

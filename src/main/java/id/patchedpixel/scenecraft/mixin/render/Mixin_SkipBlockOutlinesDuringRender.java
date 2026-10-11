@@ -1,7 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.render;
 
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +17,7 @@ public abstract class Mixin_SkipBlockOutlinesDuringRender {
 
     @Inject(method = "submitHitOutline", at = @At("HEAD"), cancellable = true)
     private void replayModRender_drawSelectionBox(CallbackInfo ci) {
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) this.gameRenderer).replayModRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) this.gameRenderer).sceneCraftRender_getHandler();
         if (handler != null) {
             ci.cancel();
         }

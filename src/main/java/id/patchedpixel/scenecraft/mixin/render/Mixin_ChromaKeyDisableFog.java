@@ -17,7 +17,7 @@ public abstract class Mixin_ChromaKeyDisableFog {
         if (mc == null) return fogType;
         GameRenderer gameRenderer = mc.gameRenderer;
         if (gameRenderer == null) return fogType;
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) gameRenderer).replayModRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) gameRenderer).sceneCraftRender_getHandler();
         if (handler != null && handler.getSettings().getChromaKeyingColor() != null) {
             fogType = FogRenderer.FogMode.NONE;
         }

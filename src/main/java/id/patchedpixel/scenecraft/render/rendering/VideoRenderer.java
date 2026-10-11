@@ -369,7 +369,7 @@ public class VideoRenderer implements RenderInfo {
         }
         ((MinecraftMethodAccessor) mc).sceneCraftExecuteTaskQueue();
 
-        ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
+        ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(gui.toMinecraft());
     }
 
     private void tick() {
@@ -418,12 +418,12 @@ public class VideoRenderer implements RenderInfo {
             if (mc.gui.overlay() != null) {
                 Screen orgScreen = mc.gui.screen();
                 try {
-                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
+                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(gui.toMinecraft());
                     mc.gui.overlay().extractRenderState(
                             drawContext,
                             mouseX, mouseY, 0);
                 } finally {
-                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(orgScreen);
+                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(orgScreen);
                 }
             } else {
                 gui.toMinecraft().tick();

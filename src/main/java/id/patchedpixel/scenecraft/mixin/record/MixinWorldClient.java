@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.record;
 
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.handler.RecordingEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -44,7 +44,7 @@ public abstract class MixinWorldClient extends Level {
             long seed,
             CallbackInfo ci) {
         if (player == this.minecraft.player) {
-            RecordingEventHandler handler = SceneCraftRecording.instance.getConnectionEventHandler().getRecordingEventHandler();
+            RecordingEventHandler handler = SceneCraftRecorder.instance.getConnectionEventHandler().getRecordingEventHandler();
             if (handler != null) {
                 // Sent to all other players in ServerWorldEventHandler#playSoundToAllNearExcept
                 handler.onPacket(new ClientboundSoundPacket(
@@ -63,7 +63,7 @@ public abstract class MixinWorldClient extends Level {
     ) {
         if (player == this.minecraft.player) {
             // We caused this event, the server won't send it to us
-            RecordingEventHandler handler = SceneCraftRecording.instance.getConnectionEventHandler().getRecordingEventHandler();
+            RecordingEventHandler handler = SceneCraftRecorder.instance.getConnectionEventHandler().getRecordingEventHandler();
             if (handler != null) {
                 handler.onClientEffect(type, pos, data);
             }

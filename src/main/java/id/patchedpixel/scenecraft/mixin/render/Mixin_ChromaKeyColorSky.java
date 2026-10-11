@@ -24,7 +24,7 @@ public abstract class Mixin_ChromaKeyColorSky {
             at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V")
     )
     private void chromaKeyingSky(FramePass pass, Runnable task, Operation<Void> original) {
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) Minecraft.getInstance().gameRenderer).replayModRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) Minecraft.getInstance().gameRenderer).sceneCraftRender_getHandler();
         if (handler != null) {
             ReadableColor color = handler.getSettings().getChromaKeyingColor();
             if (color != null) {

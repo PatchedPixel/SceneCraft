@@ -15,7 +15,7 @@ public abstract class Mixin_PreserveDepthDuringHandRendering {
             at = @At(value = "INVOKE", target = "Lcom/mojang/renderpearl/api/commands/CommandEncoder;clearDepthTexture(Lcom/mojang/renderpearl/api/textures/GpuTexture;D)V")
     )
     private boolean replayModRender_skipClearWhenRecordingDepth(CommandEncoder instance, GpuTexture texture, double v) {
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) this).replayModRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) this).sceneCraftRender_getHandler();
         return handler == null || !handler.getSettings().isDepthMap();
     }
 }

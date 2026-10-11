@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.mixin.record;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.serialization.Codec;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import id.patchedpixel.scenecraft.studio.protocol.State;
 import id.patchedpixel.scenecraft.studio.protocol.Packet;
@@ -39,7 +39,7 @@ import java.util.Map;
 public abstract class MixinNetHandlerConfigClient {
     @Inject(method = "handleConfigurationFinished", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/Connection;setupInboundProtocol(Lnet/minecraft/network/ProtocolInfo;Lnet/minecraft/network/PacketListener;)V"))
     public void recordEnabledPackData(CallbackInfo ci, @Local RegistryAccess.Frozen registryManager) {
-        PacketListener packetListener = SceneCraftRecording.instance.getConnectionEventHandler().getPacketListener();
+        PacketListener packetListener = SceneCraftRecorder.instance.getConnectionEventHandler().getPacketListener();
         if (packetListener == null) return;
 
         ByteBuf byteBuf = Unpooled.buffer();

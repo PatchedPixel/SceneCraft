@@ -10,7 +10,7 @@ import id.patchedpixel.scenecraft.core.versions.scheduler.Scheduler;
 import id.patchedpixel.scenecraft.core.versions.scheduler.SchedulerImpl;
 import id.patchedpixel.scenecraft.editor.SceneCraftEditor;
 import id.patchedpixel.scenecraft.extras.SceneCraftExtras;
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.render.SceneCraftRender;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.studio.studio.ReplayStudio;
@@ -62,7 +62,7 @@ public class SceneCraft implements Module, Scheduler {
 
         // Register all RM modules
         modules.add(this);
-        modules.add(new SceneCraftRecording(this));
+        modules.add(new SceneCraftRecorder(this));
         SceneCraftReplay replayModule = new SceneCraftReplay(this);
         modules.add(replayModule);
         modules.add(new SceneCraftRender(this));

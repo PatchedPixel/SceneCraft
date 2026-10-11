@@ -57,6 +57,7 @@ class SettingsRegistryBackend {
             if (createIfMissingOrBroken) {
                 save();
             }
+
             return;
         }
         Gson gson = new Gson();

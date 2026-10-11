@@ -232,14 +232,17 @@ public class GuiHandler extends EventRegistrations {
                 public void extractContents(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
                     super.extractContents(context, mouseX, mouseY, delta);
 
-                    MinecraftGuiRenderer renderer = new MinecraftGuiRenderer(context);
-                    renderer.bindTexture(GuiReplayButton.ICON);
-                    renderer.drawTexturedRect(
+                    // Respect the widget alpha: TitleScreen fades its widgets in via setAlpha(), and the vanilla
+                    // button above already does; drawing the icon at full alpha made it pop in early.
+                    context.blit(
+                            net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
+                            GuiReplayButton.ICON,
                             this.getX() + 3, this.getY() + 3,
                             0, 0,
                             this.width - 6, this.height - 6,
                             1, 1,
-                            1, 1
+                            1, 1,
+                            net.minecraft.util.ARGB.white(this.getAlpha())
                     );
                 }
             };
@@ -329,11 +332,11 @@ public class GuiHandler extends EventRegistrations {
             return topRight;
         } else if (buttonPosition == MainMenuButtonPosition.DEFAULT) {
             return Stream.of(
-                    findButton(buttonList, "menu.singleplayer", 1),
-                    findButton(buttonList, "menu.multiplayer", 2),
-                    findButton(buttonList, "menu.online", 14),
-                    findButton(buttonList, "modmenu.title", 6)
-            )
+                            findButton(buttonList, "menu.singleplayer", 1),
+                            findButton(buttonList, "menu.multiplayer", 2),
+                            findButton(buttonList, "menu.online", 14),
+                            findButton(buttonList, "modmenu.title", 6)
+                    )
                     // skip buttons which do not exist
                     .flatMap(it -> it.map(Stream::of).orElseGet(Stream::empty))
                     // skip buttons which already have something next to them

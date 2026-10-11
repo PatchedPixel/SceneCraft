@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.core;
 
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import net.minecraft.SharedConstants;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -26,7 +27,7 @@ public class SceneCraftBackend {
             this.mod.registerModuleKeyBindings();
             this.mod.getKeyBindingRegistry().onRegisterKeyMappings(event);
         });
-        modBus.addListener(RegisterPayloadHandlersEvent.class, id.patchedpixel.scenecraft.record.SceneCraftRecording::registerPayloads);
+        modBus.addListener(RegisterPayloadHandlersEvent.class, SceneCraftRecorder::registerPayloads);
         modBus.addListener(FMLClientSetupEvent.class, event -> {
             if (this.mod != null) this.mod.initModules();
         });

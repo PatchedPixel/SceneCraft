@@ -22,7 +22,7 @@ public class ShaderBeginRender extends EventRegistrations {
 
         try {
             // check if video is being rendered
-            if (((EntityRendererHandler.IEntityRenderer) mc.gameRenderer).replayModRender_getHandler() == null)
+            if (((EntityRendererHandler.IEntityRenderer) mc.gameRenderer).sceneCraftRender_getHandler() == null)
                 return;
 
             // check if Shaders are enabled

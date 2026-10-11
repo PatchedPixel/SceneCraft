@@ -41,7 +41,7 @@ public class MixinCamera {
         Entity entity = this.entity;
         if (!(entity instanceof CameraEntity)) return;
 
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) getMinecraft().gameRenderer).replayModRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) getMinecraft().gameRenderer).sceneCraftRender_getHandler();
         if (handler != null && handler.getSettings().isStabilizeRoll()) return;
 
         this.rotation.rotateZ(-((CameraEntity) entity).roll * (float) Math.PI / 180f);

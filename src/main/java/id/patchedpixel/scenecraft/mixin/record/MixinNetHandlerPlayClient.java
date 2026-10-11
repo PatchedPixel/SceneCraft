@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.mixin.record;
 
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.handler.RecordingEventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -39,7 +39,7 @@ public abstract class MixinNetHandlerPlayClient {
         if (!mcStatic.isSameThread()) return;
         if (mcStatic.player == null) return;
 
-        RecordingEventHandler handler = SceneCraftRecording.instance.getConnectionEventHandler().getRecordingEventHandler();
+        RecordingEventHandler handler = SceneCraftRecorder.instance.getConnectionEventHandler().getRecordingEventHandler();
         if (handler != null && packet.actions().contains(ClientboundPlayerInfoUpdatePacket.Action.ADD_PLAYER)) {
             for (ClientboundPlayerInfoUpdatePacket.Entry entry : packet.entries()) {
                 UUID uuid = entry.profileId();
@@ -60,7 +60,7 @@ public abstract class MixinNetHandlerPlayClient {
      */
     @Inject(method = "handleRespawn", at=@At("RETURN"))
     public void recordOwnRespawn(ClientboundRespawnPacket packet, CallbackInfo ci) {
-        RecordingEventHandler handler = SceneCraftRecording.instance.getConnectionEventHandler().getRecordingEventHandler();
+        RecordingEventHandler handler = SceneCraftRecorder.instance.getConnectionEventHandler().getRecordingEventHandler();
         if (handler != null) {
             handler.spawnRecordingPlayer();
         }

@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import org.joml.Vector3fc;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -81,6 +79,6 @@ public abstract class Mixin_Omnidirectional_Rotation {
 
     @Unique
     private EntityRendererHandler getHandler() {
-        return ((EntityRendererHandler.IEntityRenderer) getMinecraft().gameRenderer).replayModRender_getHandler();
+        return ((EntityRendererHandler.IEntityRenderer) getMinecraft().gameRenderer).sceneCraftRender_getHandler();
     }
 }

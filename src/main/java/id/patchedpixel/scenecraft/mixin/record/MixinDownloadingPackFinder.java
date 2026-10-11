@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.record;
 
-import id.patchedpixel.scenecraft.record.SceneCraftRecording;
+import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import net.minecraft.client.resources.server.ServerPackManager;
 import net.minecraft.server.packs.DownloadQueue;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public abstract class MixinDownloadingPackFinder {
     @Inject(method = "onDownload", at = @At("HEAD"))
     private void recordDownloadedPack(@Coerce Object packs, DownloadQueue.BatchResult result, CallbackInfo ci) {
-        PacketListener packetListener = SceneCraftRecording.instance.getConnectionEventHandler().getPacketListener();
+        PacketListener packetListener = SceneCraftRecorder.instance.getConnectionEventHandler().getPacketListener();
         if (packetListener == null) {
             return;
         }

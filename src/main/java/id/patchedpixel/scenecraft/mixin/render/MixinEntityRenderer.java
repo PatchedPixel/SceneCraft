@@ -6,15 +6,15 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(GameRenderer.class)
 public abstract class MixinEntityRenderer implements EntityRendererHandler.IEntityRenderer {
-    private EntityRendererHandler replayModRender_handler;
+    private EntityRendererHandler sceneCraftRender_handler;
 
     @Override
-    public void replayModRender_setHandler(EntityRendererHandler handler) {
-        this.replayModRender_handler = handler;
+    public void sceneCraftRender_setHandler(EntityRendererHandler handler) {
+        this.sceneCraftRender_handler = handler;
     }
 
     @Override
-    public EntityRendererHandler replayModRender_getHandler() {
-        return replayModRender_handler;
+    public EntityRendererHandler sceneCraftRender_getHandler() {
+        return sceneCraftRender_handler;
     }
 }

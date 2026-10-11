@@ -195,10 +195,10 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             CrossFrameResourcePool pool = ((GameRendererAccessor) mc.gameRenderer).getPool();
             TimeTimelineLinesRenderer linesRenderer = pool.acquire(TimeTimelineLinesRenderer.FACTORY);
             linesRenderer.prepare(
-                linesRenderState,
-                ((DrawContextAccessor) renderer.getContext()).getState(),
-                mc.gameRenderer.featureRenderDispatcher(),
-                scale
+                    linesRenderState,
+                    ((DrawContextAccessor) renderer.getContext()).getState(),
+                    mc.gameRenderer.featureRenderDispatcher(),
+                    scale
             );
             pool.release(TimeTimelineLinesRenderer.FACTORY, linesRenderer); // Note: Assumes we only render one per frame
         }
@@ -239,13 +239,13 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             lines.add(Pair.of(p1, p2));
         }
 
-       @Override public int x0() {return x1;}
-       @Override public int x1() {return x2;}
-       @Override public int y0() {return y1;}
-       @Override public int y1() {return y2;}
-       @Override public float scale() {return 1; /* scale */}
-       @Override public @Nullable ScreenRectangle scissorArea() {return scissorState;}
-       @Override public @Nullable ScreenRectangle bounds() {return PictureInPictureRenderState.getBounds(x1, y1, x2, y2, scissorState);}
+        @Override public int x0() {return x1;}
+        @Override public int x1() {return x2;}
+        @Override public int y0() {return y1;}
+        @Override public int y1() {return y2;}
+        @Override public float scale() {return 1; /* scale */}
+        @Override public @Nullable ScreenRectangle scissorArea() {return scissorState;}
+        @Override public @Nullable ScreenRectangle bounds() {return PictureInPictureRenderState.getBounds(x1, y1, x2, y2, scissorState);}
     }
 
     private static class TimeTimelineLinesRenderer extends PictureInPictureRenderer<TimeTimelineLinesRenderState> {
@@ -268,9 +268,9 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
 
         @Override
         protected void renderToTexture(
-            TimeTimelineLinesRenderState state,
-            PoseStack matrixStack,
-            SubmitNodeCollector submitNodeCollector
+                TimeTimelineLinesRenderState state,
+                PoseStack matrixStack,
+                SubmitNodeCollector submitNodeCollector
         ) {
             matrixStack.translate(-state.x2 / 2f, -state.y2, 100);
             submitNodeCollector.submitCustomGeometry(matrixStack, RenderTypes.LINES, (pose, buffer) -> {
@@ -340,6 +340,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
 
     @Override
     public boolean mouseClick(Click click) {
+        logClick(click);
         int time = getTimeAt(click.x, click.y);
         Pair<SPPath, Long> pathKeyframePair = getKeyframe(click);
         if (pathKeyframePair.getRight() != null) {

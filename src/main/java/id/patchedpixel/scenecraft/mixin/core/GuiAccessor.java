@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(Gui.class)
 public interface GuiAccessor {
     @Accessor("screen")
-    void replaymod$setScreen(Screen screen);
+    void scenecraft$setScreen(Screen screen);
 }

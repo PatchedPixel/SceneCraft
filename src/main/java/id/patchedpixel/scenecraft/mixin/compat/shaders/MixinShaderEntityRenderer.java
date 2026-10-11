@@ -11,9 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public abstract class MixinShaderEntityRenderer {
-
     @Inject(method = "renderLevel", at = @At("HEAD"))
-    private void replayModCompat_updateShaderFrameTimeCounter(CallbackInfo ignore) {
+    private void sceneCraftCompat_updateShaderFrameTimeCounter(CallbackInfo ignore) {
         if (SceneCraftReplay.instance.getReplayHandler() == null) return;
         if (ShaderReflection.shaders_frameTimeCounter == null) return;
 

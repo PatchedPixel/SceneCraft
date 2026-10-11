@@ -27,6 +27,6 @@ public abstract class Mixin_Stereoscopic_Camera {
 
     @Unique
     private EntityRendererHandler getHandler() {
-        return ((EntityRendererHandler.IEntityRenderer) getMinecraft().gameRenderer).replayModRender_getHandler();
+        return ((EntityRendererHandler.IEntityRenderer) getMinecraft().gameRenderer).sceneCraftRender_getHandler();
     }
 }

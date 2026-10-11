@@ -43,7 +43,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
 
         on(PreRenderHandCallback.EVENT, () -> omnidirectional);
 
-        ((IEntityRenderer) mc.gameRenderer).replayModRender_setHandler(this);
+        ((IEntityRenderer) mc.gameRenderer).sceneCraftRender_setHandler(this);
         register();
     }
 
@@ -70,7 +70,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
             boolean orgPauseOnLostFocus = mc.options.pauseOnLostFocus;
             boolean orgHudIsHidden = mc.gui.hud.isHidden();
             try {
-                ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(null);
+                ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(null);
                 mc.options.pauseOnLostFocus = false; // do not want the pause menu to open if the window is unfocused
                 if (omnidirectional) {
                     // makes no sense, we wouldn't even know where to put it
@@ -82,7 +82,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
                 mc.gameRenderer.extract(mc.getDeltaTracker(), true);
                 mc.gameRenderer.render();
             } finally {
-                ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(orgScreen);
+                ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(orgScreen);
                 mc.options.pauseOnLostFocus = orgPauseOnLostFocus;
                 mc.gameRenderer.mainCamera().disablePanoramicMode();
                 if (!orgHudIsHidden) mc.gui.hud.toggle();
@@ -94,7 +94,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
 
     @Override
     public void close() throws IOException {
-        ((IEntityRenderer) mc.gameRenderer).replayModRender_setHandler(null);
+        ((IEntityRenderer) mc.gameRenderer).sceneCraftRender_setHandler(null);
         unregister();
     }
 
@@ -116,7 +116,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
     }
 
     public interface IEntityRenderer {
-        void replayModRender_setHandler(EntityRendererHandler handler);
-        EntityRendererHandler replayModRender_getHandler();
+        void sceneCraftRender_setHandler(EntityRendererHandler handler);
+        EntityRendererHandler sceneCraftRender_getHandler();
     }
 }

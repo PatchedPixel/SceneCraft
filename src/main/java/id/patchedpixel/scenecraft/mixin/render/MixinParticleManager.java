@@ -27,7 +27,7 @@ public abstract class MixinParticleManager {
             @Local(argsOnly = true) Camera camera,
             @Share("orgRotation") LocalRef<Quaternionf> orgRotationRef
     ) {
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) MCVer.getMinecraft().gameRenderer).replayModRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) MCVer.getMinecraft().gameRenderer).sceneCraftRender_getHandler();
         if (handler == null || !handler.omnidirectional) {
             return;
         }
