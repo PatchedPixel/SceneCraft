@@ -6,15 +6,29 @@ license="${mod_license}"
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
-authors="johni0702, CrushedPixel, PatchedPixel"
+authors="PatchedPixel"
+credits="johni0702 and CrushedPixel as original ReplayMod developers"
+issueTrackerURL="https://github.com/PatchedPixel/SceneCraft/issues"
+displayURL="https://modrinth.com/mod/scenecraft-replay"
 iconFile="assets/scenecraft/favicon_logo.png"
 bannerFile="scenecraft_logo.png"
 description='''
-A normal mod for record and replay your gameplay with friends.
+Fork of ReplayMod.
 '''
 
 [[mixins]]
 config="scenecraft.mixins.json"
+
+# Better Mod List integration
+[modproperties.modmenu]
+badges=["client"]
+links=[
+    "Original Mod=https://modrinth.com/mod/replaymod",
+    "Modrinth=https://modrinth.com/mod/scenecraft-replay",
+    "CurseForge=https://curseforge.com/minecraft/mc-mods/scenecraft-replay"
+]
+contributors=[]
+sources="https://github.com/PatchedPixel/SceneCraft"
 
 #[[accessTransformers]]
 #file="META-INF/accesstransformer.cfg"

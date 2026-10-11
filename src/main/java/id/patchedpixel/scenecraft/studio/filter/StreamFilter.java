@@ -65,5 +65,4 @@ public interface StreamFilter {
      * @param timestamp The current time int this stream in milliseconds
      */
     void onEnd(PacketStream stream, long timestamp) throws IOException;
-
 }
