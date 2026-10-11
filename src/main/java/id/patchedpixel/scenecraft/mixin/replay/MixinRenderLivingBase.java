@@ -16,7 +16,7 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
 @Mixin(LivingEntityRenderer.class)
 public abstract class MixinRenderLivingBase {
     @Inject(method = "shouldShowName(Lnet/minecraft/world/entity/LivingEntity;D)Z", at = @At("HEAD"), cancellable = true)
-    private void replayModReplay_canRenderInvisibleName(
+    private void sceneCraftReplay_canRenderInvisibleName(
             LivingEntity entity,
             double distSquared,
             CallbackInfoReturnable<Boolean> ci
@@ -34,7 +34,7 @@ public abstract class MixinRenderLivingBase {
                     target = "Lnet/minecraft/world/entity/LivingEntity;isInvisibleTo(Lnet/minecraft/world/entity/player/Player;)Z"
             )
     )
-    private boolean replayModReplay_shouldInvisibleNotBeRendered(LivingEntity entity, Player thePlayer) {
+    private boolean sceneCraftReplay_shouldInvisibleNotBeRendered(LivingEntity entity, Player thePlayer) {
         return thePlayer instanceof CameraEntity || entity.isInvisibleTo(thePlayer);
     }
 }

@@ -9,7 +9,7 @@ import id.patchedpixel.scenecraft.render.capturer.CaptureData;
 import id.patchedpixel.scenecraft.render.capturer.RenderInfo;
 import id.patchedpixel.scenecraft.render.capturer.WorldRenderer;
 import id.patchedpixel.scenecraft.mixin.render.GameRendererAccessor;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -52,7 +52,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
         this.data = data;
         long offsetMillis;
         if (SceneCraft.instance.getSettingsRegistry().get(Setting.FRAME_TIME_FROM_WORLD_TIME)) {
-            offsetMillis = ReplayModReplay.instance.getReplayHandler().getReplaySender().currentTimeStamp();
+            offsetMillis = SceneCraftReplay.instance.getReplayHandler().getReplaySender().currentTimeStamp();
         } else {
             offsetMillis = renderInfo.getFramesDone() * 1_000L / settings.getFramesPerSecond();
         }

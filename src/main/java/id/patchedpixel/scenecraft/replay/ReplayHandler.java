@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
 import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
@@ -55,11 +54,10 @@ import javax.annotation.Nullable;
 
 import static id.patchedpixel.scenecraft.core.utils.Utils.DEFAULT_MS_PER_TICK;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
-import static id.patchedpixel.scenecraft.replay.ReplayModReplay.LOGGER;
+import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
 
 public class ReplayHandler {
-
-    public static final String PACKET_HANDLER_NAME = "ReplayModReplay_packetHandler";
+    public static final String PACKET_HANDLER_NAME = "SceneCraftReplay_packetHandler";
 
     private static Minecraft mc = getMinecraft();
 
@@ -109,7 +107,7 @@ public class ReplayHandler {
         markers = replayFile.getMarkers().orElse(Collections.emptySet());
 
         fullReplaySender = new FullReplaySender(this, replayFile);
-        quickReplaySender = new QuickReplaySender(ReplayModReplay.instance, replayFile);
+        quickReplaySender = new QuickReplaySender(SceneCraftReplay.instance, replayFile);
 
         setup();
 
@@ -162,7 +160,7 @@ public class ReplayHandler {
         timer.setTickLength(DEFAULT_MS_PER_TICK);
         overlay.setVisible(false);
 
-        ReplayModReplay.instance.forcefullyStopReplay();
+        SceneCraftReplay.instance.forcefullyStopReplay();
 
         mc.gui.setScreen(null);
 
@@ -182,7 +180,7 @@ public class ReplayHandler {
         };
 
         channel = new EmbeddedChannel();
-        channel.pipeline().addFirst("ReplayModReplay_head", new DropOutboundMessagesHandler());
+        channel.pipeline().addFirst("SceneCraftReplay_head", new DropOutboundMessagesHandler());
 
         quickReplaySender.setChannel(channel);
         fullReplaySender.setChannel(channel);
@@ -349,7 +347,7 @@ public class ReplayHandler {
         }
 
         if (e == cameraEntity) {
-            cameraEntity.setCameraController(ReplayModReplay.instance.createCameraController(cameraEntity));
+            cameraEntity.setCameraController(SceneCraftReplay.instance.createCameraController(cameraEntity));
         } else {
             cameraEntity.setCameraController(new SpectatorCameraController(cameraEntity));
         }

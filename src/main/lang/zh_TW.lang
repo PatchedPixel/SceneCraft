@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=開始錄製
@@ -24,7 +24,7 @@ scenecraft.gui.save=儲存
 scenecraft.gui.rename=重新命名
 scenecraft.gui.remove=移除
 scenecraft.gui.delete=刪除
-scenecraft.gui.recording=記錄
+scenecraft.gui.record=記錄
 scenecraft.gui.speed=速率
 scenecraft.gui.pleasewait=請稍後
 scenecraft.gui.render=給予
@@ -107,7 +107,7 @@ scenecraft.gui.playeroverview.spectate=旁觀者
 scenecraft.gui.playeroverview.remembersettings=持續影藏玩家
 scenecraft.gui.playeroverview.remembersettings.description=儲存玩家可見的在 Replay 檔案
 
-#Replay Mod Settings GUI
+#SceneCraft Settings GUI
 scenecraft.gui.settings.title=Replay 模組設定
 
 scenecraft.gui.settings.notifications=啟用通知
@@ -117,7 +117,7 @@ scenecraft.gui.settings.indicator=錄製指示燈
 scenecraft.gui.settings.pathpreview=顯示路徑預覽
 scenecraft.gui.settings.showchat=顯示聊天
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=切換照明
 scenecraft.input.thumbnail=拍攝縮圖
 scenecraft.input.playeroverview=玩家簡介
@@ -130,7 +130,7 @@ scenecraft.input.resettilt=重置鏡頭傾斜
 scenecraft.input.playpause=播放/暫停 Replay
 scenecraft.input.marker=新增事件標籤
 scenecraft.input.pathpreview=切換路徑預覽
-scenecraft.input.settings=ReplayMod 設定
+scenecraft.input.settings=SceneCraft 設定
 
 #Keyframe Presets GUI
 scenecraft.gui.keyframerepository.title=關鍵影格儲存庫

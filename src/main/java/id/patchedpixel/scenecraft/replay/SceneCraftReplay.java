@@ -32,9 +32,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-public class ReplayModReplay implements Module {
+public class SceneCraftReplay implements Module {
     { instance = this; }
-    public static ReplayModReplay instance;
+    public static SceneCraftReplay instance;
 
     private SceneCraft core;
     public KeyBindingRegistry.Binding keyPlayPause;
@@ -49,7 +49,7 @@ public class ReplayModReplay implements Module {
         return replayHandler;
     }
 
-    public ReplayModReplay(SceneCraft core) {
+    public SceneCraftReplay(SceneCraft core) {
         this.core = core;
 
         core.getSettingsRegistry().register(Setting.class);
@@ -179,6 +179,7 @@ public class ReplayModReplay implements Module {
                         e.printStackTrace();
                     }
                 });
+
                 screen.display();
                 return null;
             }

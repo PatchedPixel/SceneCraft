@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Recording started
@@ -24,7 +24,7 @@ scenecraft.gui.save=Save
 scenecraft.gui.rename=Rename
 scenecraft.gui.remove=Remove
 scenecraft.gui.delete=Delete
-scenecraft.gui.recording=Recording
+scenecraft.gui.record=Recording
 scenecraft.gui.paused=Paused
 scenecraft.gui.speed=Speed
 scenecraft.gui.pleasewait=Please wait
@@ -39,10 +39,10 @@ scenecraft.gui.edit=Edit
 scenecraft.gui.copy=Copy
 scenecraft.gui.paste=Paste
 
-scenecraft.gui.recording.resume=Resume Recording
-scenecraft.gui.recording.pause=Pause Recording
-scenecraft.gui.recording.stop=Stop Recording
-scenecraft.gui.recording.start=Start Recording
+scenecraft.gui.record.resume=Resume Recording
+scenecraft.gui.record.pause=Pause Recording
+scenecraft.gui.record.stop=Stop Recording
+scenecraft.gui.record.start=Start Recording
 
 scenecraft.gui.renderdonetitle=Video rendered
 scenecraft.gui.openfolder=Open Video Folder
@@ -94,7 +94,7 @@ scenecraft.gui.loadentitytracker=Loading entity positions: %%d%%%%
 scenecraft.gui.loadquickmode=Loading Quick Mode: %%d%%%%
 scenecraft.gui.noquickmode=Quick Mode is only available on Minecraft %1$s and above
 scenecraft.gui.minimalmode.unsupported=This feature is not available for your current Minecraft version.
-scenecraft.gui.minimalmode.supportedversion=(only Minecraft %1$s is supported by your Replay Mod version)
+scenecraft.gui.minimalmode.supportedversion=(only Minecraft %1$s is supported by your SceneCraft version)
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=Replay Viewer
@@ -131,8 +131,8 @@ scenecraft.gui.playeroverview.spectate=Spectate Player
 scenecraft.gui.playeroverview.remembersettings=Remember Hidden Players
 scenecraft.gui.playeroverview.remembersettings.description=Saves Player Visibility in Replay File
 
-#Replay Mod Settings GUI
-scenecraft.gui.settings.title=Replay Mod Settings
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=SceneCraft Settings
 scenecraft.gui.settings.default=DEFAULT
 
 scenecraft.gui.settings.notifications=Enable Notifications
@@ -150,7 +150,7 @@ scenecraft.gui.settings.fullbrightness.gamma=Gamma
 scenecraft.gui.settings.fullbrightness.nightvision=Night Vision
 scenecraft.gui.settings.fullbrightness.both=Both
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=Toggle Lighting
 scenecraft.input.thumbnail=Capture Thumbnail
 scenecraft.input.playeroverview=Player Overview
@@ -163,7 +163,7 @@ scenecraft.input.resettilt=Reset Camera Tilt
 scenecraft.input.playpause=Play/Pause Replay
 scenecraft.input.marker=Add Event Marker
 scenecraft.input.pathpreview=Toggle Path Preview
-scenecraft.input.settings=ReplayMod Settings
+scenecraft.input.settings=SceneCraft Settings
 scenecraft.input.quickmode=Quick Mode
 scenecraft.input.positionkeyframe=Position/Spectator Keyframe
 scenecraft.input.positiononlykeyframe=Position Keyframe
@@ -194,7 +194,7 @@ scenecraft.gui.editkeyframe.timestamp=Time Index
 
 scenecraft.gui.editkeyframe.interpolator=Interpolator
 scenecraft.gui.editkeyframe.interpolator.default.name=Default Interpolator
-scenecraft.gui.editkeyframe.interpolator.default.desc=Uses the default interpolator defined in the Replay Mod Settings.
+scenecraft.gui.editkeyframe.interpolator.default.desc=Uses the default interpolator defined in the SceneCraft Settings.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull Rom Spline Interpolator
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=Calculates a catmull rom spline with customizable alpha value for precise tightness and smoothness of the camera path.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alpha:
@@ -321,7 +321,7 @@ scenecraft.error.negativetime1=Some of your time keyframes are out of order.
 scenecraft.error.negativetime2=Going backwards in time is not supported.
 scenecraft.error.negativetime3=The invalid parts are marked in red.
 
-#Replay Mod Incompatibility Warning
+#SceneCraft Incompatibility Warning
 scenecraft.gui.modwarning.title=Incompatibility detected
 scenecraft.gui.modwarning.message1=A possible incompatibility between your current
 scenecraft.gui.modwarning.message2=Minecraft version and this Replay has been detected.

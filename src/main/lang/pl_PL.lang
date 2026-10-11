@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Nagrywanie rozpoczęte
@@ -24,7 +24,7 @@ scenecraft.gui.save=Zapisz
 scenecraft.gui.rename=Zmień nazwę
 scenecraft.gui.remove=Usuń
 scenecraft.gui.delete=Usuń
-scenecraft.gui.recording=Nagrywanie
+scenecraft.gui.record=Nagrywanie
 scenecraft.gui.speed=Prędkość
 scenecraft.gui.pleasewait=Proszę czekać
 scenecraft.gui.render=Renderuj
@@ -105,8 +105,8 @@ scenecraft.gui.playeroverview.spectate=Obseruj gracza
 scenecraft.gui.playeroverview.remembersettings=Zapamietaj ukrytych graczy
 scenecraft.gui.playeroverview.remembersettings.description=Zapisz widocznosc graczy w pliku
 
-#Replay Mod Settings GUI
-scenecraft.gui.settings.title=Ustawienia Replay Mod
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=Ustawienia SceneCraft
 
 scenecraft.gui.settings.notifications=Wlacz powiadomienia
 scenecraft.gui.settings.recordserver=Nagrywaj na serwerach
@@ -115,7 +115,7 @@ scenecraft.gui.settings.indicator=Wskaznik nagrywania
 scenecraft.gui.settings.pathpreview=Pokaz podglad sciezki
 scenecraft.gui.settings.showchat=Pokazuj czat
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=Wlacz/wylacz oswietlenie
 scenecraft.input.thumbnail=Zapisz miniaturke
 scenecraft.input.playeroverview=Przeglad gracza
@@ -127,7 +127,7 @@ scenecraft.input.resettilt=Zresetuj nachylenie
 scenecraft.input.playpause=Wlacz/Wstrzymaj Replay
 scenecraft.input.marker=Dodaj marker wydarzenia
 scenecraft.input.pathpreview=Przelacz podglad sciezki
-scenecraft.input.settings=Ustawienia ReplayMod
+scenecraft.input.settings=Ustawienia SceneCraft
 
 #Edit Keyframe GUI
 scenecraft.gui.editkeyframe.title.pos=Edytuj pozycje kamery
@@ -158,7 +158,7 @@ scenecraft.gui.rendersettings.outputfile=Plik wyjsciowy
 
 scenecraft.gui.rendersettings.command=Komenda
 scenecraft.gui.rendersettings.arguments=Parametry linii komend
-scenecraft.gui.rendersettings.ffmpeg.description=Domyslnie Replay Mod bedzie renderowal pliki w formacie .webm. Jesli jestes zaawansowanym uzytkownikiem, mozesz dostowsowac parametry linii komend uzywanych do eksportowania filmu. Wiecej informacji znajdziesz na http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Domyslnie SceneCraft bedzie renderowal pliki w formacie .webm. Jesli jestes zaawansowanym uzytkownikiem, mozesz dostowsowac parametry linii komend uzywanych do eksportowania filmu. Wiecej informacji znajdziesz na http://scenecraft.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Ustabilizuj kamere
 

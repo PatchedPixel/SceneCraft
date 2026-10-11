@@ -37,7 +37,7 @@ import net.minecraft.resources.Identifier;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public abstract class AbstractGuiElement<T extends AbstractGuiElement<T>> implements GuiElement<T> {
-    protected static final Identifier TEXTURE = identifier("jgui", "gui.png");
+    protected static final Identifier TEXTURE = identifier("scenecraft", "gui.png");
 
     private final Minecraft minecraft = MCVer.getMinecraft();
 

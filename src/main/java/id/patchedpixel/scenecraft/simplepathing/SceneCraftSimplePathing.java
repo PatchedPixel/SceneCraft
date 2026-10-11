@@ -8,7 +8,7 @@ import id.patchedpixel.scenecraft.core.events.SettingsChangedCallback;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.ReplayClosedCallback;
 import id.patchedpixel.scenecraft.replay.events.ReplayClosingCallback;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
@@ -191,7 +191,7 @@ public class SceneCraftSimplePathing extends EventRegistrations implements Modul
     }
 
     private GuiReplayOverlay getReplayOverlay() {
-        return ReplayModReplay.instance.getReplayHandler().getOverlay();
+        return SceneCraftReplay.instance.getReplayHandler().getOverlay();
     }
 
     private SPTimeline currentTimeline;

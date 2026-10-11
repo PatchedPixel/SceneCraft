@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.replay;
 
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.world.entity.Entity;
@@ -22,6 +22,6 @@ public abstract class MixinRenderArrow extends EntityRenderer {
                                 Frustum camera,
                                 double camX, double camY, double camZ, float partialTicks) {
         // Force arrows to always render, otherwise they stop rendering when you get close to them
-        return ReplayModReplay.instance.getReplayHandler() != null || super.shouldRender(entity, camera, camX, camY, camZ, partialTicks);
+        return SceneCraftReplay.instance.getReplayHandler() != null || super.shouldRender(entity, camera, camX, camY, camZ, partialTicks);
     }
 }

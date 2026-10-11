@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class OptifineReflection {
-
     // GameSettings.ofFastRender
     public static Field gameSettings_ofFastRender;
 
@@ -40,5 +39,4 @@ public class OptifineReflection {
             e.printStackTrace();
         }
     }
-
 }

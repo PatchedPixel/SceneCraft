@@ -2,7 +2,7 @@ package id.patchedpixel.scenecraft.simplepathing.gui;
 
 import id.patchedpixel.scenecraft.pathing.properties.CameraProperties;
 import id.patchedpixel.scenecraft.pathing.properties.TimestampProperty;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.studio.pathing.change.Change;
 import id.patchedpixel.scenecraft.studio.pathing.change.CombinedChange;
 import id.patchedpixel.scenecraft.studio.pathing.interpolation.CatmullRomSplineInterpolator;
@@ -90,7 +90,7 @@ public abstract class GuiEditKeyframe<T extends GuiEditKeyframe<T>> extends Abst
     }
 
     public GuiEditKeyframe(GuiPathing gui, SPPath path, long time, String type) {
-        super(ReplayModReplay.instance.getReplayHandler().getOverlay());
+        super(SceneCraftReplay.instance.getReplayHandler().getOverlay());
         this.guiPathing = gui;
         this.time = time;
         this.path = gui.getMod().getCurrentTimeline().getPath(path);

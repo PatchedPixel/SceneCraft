@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.replay.gui.overlay;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
 import id.patchedpixel.scenecraft.studio.data.Marker;
 import id.patchedpixel.scenecraft.studio.util.Location;
@@ -53,14 +53,14 @@ public class GuiMarkerTimeline extends AbstractGuiTimeline<GuiMarkerTimeline> im
         try {
             this.markers = replayHandler.getReplayFile().getMarkers().orElseGet(HashSet::new);
         } catch (IOException e) {
-            ReplayModReplay.LOGGER.error("Failed to get markers from replay", e);
+            SceneCraftReplay.LOGGER.error("Failed to get markers from replay", e);
             this.markers = new HashSet<>();
         }
         this.saveMarkers = (markers) -> {
             try {
                 replayHandler.getReplayFile().writeMarkers(markers);
             } catch (IOException e) {
-                ReplayModReplay.LOGGER.error("Failed to save markers to replay", e);
+                SceneCraftReplay.LOGGER.error("Failed to save markers to replay", e);
             }
         };
     }

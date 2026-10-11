@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.mixin.core;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import net.minecraft.client.KeyMapping;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,7 +37,7 @@ public class Mixin_ContextualKeyBindings {
         }
 
         Set<KeyMapping> onlyInReplay = mod.getKeyBindingRegistry().getOnlyInReplay();
-        if (ReplayModReplay.instance.getReplayHandler() != null) {
+        if (SceneCraftReplay.instance.getReplayHandler() != null) {
             // In replay, remove any conflicting key bindings, so that ours are guaranteed in
             keyBindings().removeIf(keyBinding -> {
                 for (KeyMapping exclusiveBinding : onlyInReplay) {

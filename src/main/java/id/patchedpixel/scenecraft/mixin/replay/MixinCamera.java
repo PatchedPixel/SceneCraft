@@ -37,7 +37,7 @@ public class MixinCamera {
     @Shadow private int matrixPropertiesDirty;
 
     @Inject(method = "setRotation(FFF)V", at = @At("TAIL"))
-    private void replayModReplay_applyRoll(float yRot, float xRot, float roll, CallbackInfo ci) {
+    private void sceneCraftReplay_applyRoll(float yRot, float xRot, float roll, CallbackInfo ci) {
         Entity entity = this.entity;
         if (!(entity instanceof CameraEntity)) return;
 

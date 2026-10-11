@@ -56,13 +56,13 @@ public class KeyBindingRegistry extends EventRegistrations {
     private Binding registerKeyBinding(String name, int keyCode, boolean onlyInRepay) {
         Binding binding = bindings.get(name);
         if (binding == null) {
+            if (keyCode <= 0) {
+                // 26.x uses SDL scancodes: "unbound" is SDL_SCANCODE_UNKNOWN (0), -1 is out of range for SDL_GetKeyboardState
+                keyCode = InputConstants.UNKNOWN.getValue();
+            }
             Identifier id = identifier(MOD_ID, name.substring(LEGACY_KEY_PREFIX.length()));
             String key = String.format("key.%s.%s", id.getNamespace(), id.getPath());
-            // Unbound mappings must use the vanilla UNKNOWN key; a key with another type and the value -1
-            // is not considered unbound by vanilla and is then used as an out of range index
-            KeyMapping keyBinding = keyCode > 0
-                    ? new KeyMapping(key, InputConstants.Type.KEYBOARD, keyCode, CATEGORY)
-                    : new KeyMapping(key, InputConstants.UNKNOWN.getType(), InputConstants.UNKNOWN.getValue(), CATEGORY);
+            KeyMapping keyBinding = new KeyMapping(key, InputConstants.Type.KEYBOARD, keyCode, CATEGORY);
             pendingMappings.add(keyBinding);
             binding = new Binding(name, keyBinding);
             bindings.put(name, binding);

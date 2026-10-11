@@ -5,14 +5,13 @@ import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.replay.camera.CameraController;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
 import id.patchedpixel.scenecraft.gui.versions.ScreenExt;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Overlay;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
 
 public class InputReplayTimer {
     public static void updateInReplay() {
-        ReplayModReplay mod = ReplayModReplay.instance;
+        SceneCraftReplay mod = SceneCraftReplay.instance;
         Minecraft mc = mod.getCore().getMinecraft();
 
         SceneCraft.instance.runTasks();
@@ -42,7 +41,7 @@ public class InputReplayTimer {
 
     public static void handleScroll(int wheel) {
         if (wheel != 0) {
-            ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
+            ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
             if (replayHandler != null) {
                 CameraEntity cameraEntity = replayHandler.getCameraEntity();
                 if (cameraEntity != null) {

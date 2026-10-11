@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IrisODSFrameCapturer implements FrameCapturer<ODSOpenGlFrame> {
-
     public static final String SHADER_PACK_NAME = "assets/scenecraft/iris/ods";
     public static IrisODSFrameCapturer INSTANCE;
     private final CubicPboOpenGlFrameCapturer left, right;
@@ -107,8 +106,10 @@ public class IrisODSFrameCapturer implements FrameCapturer<ODSOpenGlFrame> {
                     result.put(channel, new ODSOpenGlFrame(leftFrame, rightFrame));
                 }
             }
+
             return result;
         }
+
         return null;
     }
 

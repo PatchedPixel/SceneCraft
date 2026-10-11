@@ -27,7 +27,7 @@ public abstract class MixinParticleManager {
      * @param ci Callback info
      */
     @Inject(method = "setLevel", at = @At("HEAD"))
-    public void replayModReplay_clearParticleQueue(
+    public void sceneCraftReplay_clearParticleQueue(
             ClientLevel world,
             CallbackInfo ci) {
         this.particlesToAdd.clear();

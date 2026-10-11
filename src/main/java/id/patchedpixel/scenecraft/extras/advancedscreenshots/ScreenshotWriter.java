@@ -7,7 +7,7 @@ import id.patchedpixel.scenecraft.extras.SceneCraftExtras;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.rendering.Channel;
 import id.patchedpixel.scenecraft.render.rendering.FrameConsumer;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.versions.Image;
 import net.minecraft.CrashReport;
@@ -52,7 +52,7 @@ public class ScreenshotWriter implements FrameConsumer<BitmapFrame> {
             CrashReport report = CrashReport.forThrowable(t, "Exporting frame");
 
             SceneCraft.instance.runLater(() -> Utils.error(SceneCraftExtras.LOGGER,
-                    ReplayModReplay.instance.getReplayHandler().getOverlay(),
+                    SceneCraftReplay.instance.getReplayHandler().getOverlay(),
                     report, null));
         }
     }

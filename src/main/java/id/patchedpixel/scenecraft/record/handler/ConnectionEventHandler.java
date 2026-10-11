@@ -33,7 +33,6 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
  * Handles connection events and initiates record if enabled.
  */
 public class ConnectionEventHandler {
-
     private static final String DATE_FORMAT = "yyyy_MM_dd_HH_mm_ss";
     private static final SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
     private static final Minecraft mc = getMinecraft();

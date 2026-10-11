@@ -136,27 +136,29 @@ public class OffsetGuiRenderer implements GuiRenderer {
     @Override
     public void pushScissor(int x, int y, int width, int height) {
         if (!strict) {
-            renderer.pushScissor(x + positionX, y + positionY, width, height);
+            renderer.pushScissor(
+                    x + positionX, y + positionY, width, height
+            );
+
             return;
         }
 
-        int x2 = x + width;
-        int y2 = y + height;
+        int left = Math.max(0, x);
+        int top = Math.max(0, y);
+        int right = Math.min(x + width, this.width);
+        int bottom = Math.min(y + height, this.height);
 
-        // Convert and clamp top and left border
-        x = Math.max(0, x + positionX);
-        y = Math.max(0, y + positionY);
+        left += positionX;
+        top += positionY;
+        right += positionX;
+        bottom += positionY;
 
-        // Clamp and convert bottom and right border
-        x2 = Math.min(x2, width) + positionX;
-        y2 = Math.min(y2, height) + positionY;
+        right = Math.max(left, right);
+        bottom = Math.max(top, bottom);
 
-        // Make sure bottom and top / right and left aren't flipped
-        x2 = Math.max(x2, x);
-        y2 = Math.max(y2, y);
-
-        // Pass to parent
-        renderer.pushScissor(x, y, x2 - x, y2 - y);
+        renderer.pushScissor(
+                left, top, right - left, bottom - top
+        );
     }
 
     @Override

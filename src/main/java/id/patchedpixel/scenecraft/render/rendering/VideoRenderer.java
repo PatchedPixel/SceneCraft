@@ -11,7 +11,7 @@ import id.patchedpixel.scenecraft.render.CameraPathExporter;
 import id.patchedpixel.scenecraft.render.EXRWriter;
 import id.patchedpixel.scenecraft.render.PNGWriter;
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.ReplayModRender;
+import id.patchedpixel.scenecraft.render.SceneCraftRender;
 import id.patchedpixel.scenecraft.render.FFmpegWriter;
 import id.patchedpixel.scenecraft.render.capturer.RenderInfo;
 import id.patchedpixel.scenecraft.render.events.ReplayRenderCallback;
@@ -60,7 +60,7 @@ import java.util.stream.Stream;
 import static com.google.common.collect.Iterables.getLast;
 import static id.patchedpixel.scenecraft.core.utils.Utils.DEFAULT_MS_PER_TICK;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
-import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public class VideoRenderer implements RenderInfo {
@@ -334,7 +334,7 @@ public class VideoRenderer implements RenderInfo {
 
         try {
             if (!hasFailed() && ffmpegWriter != null) {
-                new GuiRenderingDone(ReplayModRender.instance, ffmpegWriter.getVideoFile(), totalFrames, settings).display();
+                new GuiRenderingDone(SceneCraftRender.instance, ffmpegWriter.getVideoFile(), totalFrames, settings).display();
             }
         } catch (FFmpegWriter.FFmpegStartupException e) {
             setFailure(e);

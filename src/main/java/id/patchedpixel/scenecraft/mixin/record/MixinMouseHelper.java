@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.mixin.record;
 
 import id.patchedpixel.scenecraft.replay.InputReplayTimer;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import net.minecraft.client.MouseHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,7 +36,7 @@ public abstract class MixinMouseHelper {
             double xOffsetAccumulated,
             double yOffsetAccumulated
     ) {
-        if (ReplayModReplay.instance.getReplayHandler() != null) {
+        if (SceneCraftReplay.instance.getReplayHandler() != null) {
             InputReplayTimer.handleScroll((int) (yOffsetAccumulated * 120));
             ci.cancel();
         }

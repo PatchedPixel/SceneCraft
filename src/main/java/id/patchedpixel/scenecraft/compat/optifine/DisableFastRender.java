@@ -6,7 +6,6 @@ import id.patchedpixel.scenecraft.render.events.ReplayRenderCallback;
 import net.minecraft.client.Minecraft;
 
 public class DisableFastRender extends EventRegistrations {
-
     private final Minecraft mc = Minecraft.getInstance();
 
     private boolean wasFastRender = false;
@@ -33,5 +32,4 @@ public class DisableFastRender extends EventRegistrations {
             e.printStackTrace();
         }
     }
-
 }

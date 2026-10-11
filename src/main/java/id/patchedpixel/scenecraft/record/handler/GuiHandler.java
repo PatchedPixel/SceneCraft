@@ -22,7 +22,6 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.language.I18n;
 
 public class GuiHandler extends EventRegistrations {
-
     private final SceneCraft mod;
 
     public GuiHandler(SceneCraft mod) {

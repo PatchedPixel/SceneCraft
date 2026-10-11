@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Opptak startet
@@ -24,7 +24,7 @@ scenecraft.gui.save=Lagre
 scenecraft.gui.rename=Forandre navn
 scenecraft.gui.remove=Fjern
 scenecraft.gui.delete=Slett
-scenecraft.gui.recording=Opptak
+scenecraft.gui.record=Opptak
 scenecraft.gui.speed=Fart
 scenecraft.gui.pleasewait=Vennligst vent
 scenecraft.gui.render=Last

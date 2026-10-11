@@ -24,7 +24,7 @@ scenecraft.gui.save=שמור
 scenecraft.gui.rename=שנה שם
 scenecraft.gui.remove=הסר
 scenecraft.gui.delete=מחק
-scenecraft.gui.recording=מקליט
+scenecraft.gui.record=מקליט
 scenecraft.gui.speed=מהירות
 scenecraft.gui.pleasewait=חכה בבקשה
 scenecraft.gui.render=רנדר
@@ -94,7 +94,7 @@ scenecraft.gui.playeroverview.spectate=צפה בשחקן
 scenecraft.gui.playeroverview.remembersettings=זכור שחקנים נסתרים
 scenecraft.gui.playeroverview.remembersettings.description=שומר את נראות השחקנים בקובץ השידור החוזר
 
-#Replay Mod Settings GUI
+#SceneCraft Settings GUI
 scenecraft.gui.settings.title=הגדרות מוד השידור - החוזר
 
 scenecraft.gui.settings.notifications=אפשר התראות
@@ -103,7 +103,7 @@ scenecraft.gui.settings.recordsingleplayer=הקלט שחקן יחיד
 scenecraft.gui.settings.indicator=אינדיקטור הקלטה
 scenecraft.gui.settings.pathpreview=הצג תצוגה מקדימה של הנתיב
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=הפעל\כבה תאורה
 scenecraft.input.thumbnail=צלם תמונה
 scenecraft.input.playeroverview=סקירה כללית של השחקן

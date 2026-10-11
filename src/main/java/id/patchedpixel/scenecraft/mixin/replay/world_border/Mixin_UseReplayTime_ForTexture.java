@@ -2,7 +2,7 @@ package id.patchedpixel.scenecraft.mixin.replay.world_border;
 
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.WorldBorderRenderer;
 public class Mixin_UseReplayTime_ForTexture {
     @Redirect(method = "*", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Util;getMillis()J"))
     private long getWorldBorderTime() {
-        ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
+        ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
         if (replayHandler != null) {
             return replayHandler.getReplaySender().currentTimeStamp();
         }

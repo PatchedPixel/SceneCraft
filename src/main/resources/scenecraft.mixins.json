@@ -3,8 +3,7 @@
   "minVersion": "0.8",
   "package": "id.patchedpixel.scenecraft.mixin",
   "plugin": "id.patchedpixel.scenecraft.core.SceneCraftMixinConfigPlugin",
-  "compatibilityLevel": "JAVA_25",
-  "mixins": [],
+  "compatibilityLevel": "JAVA_17",
   "client": [
     "compat.shaders.MixinChunkVisibility",
     "compat.shaders.MixinShaderEntityRenderer",
@@ -106,11 +105,9 @@
     "replay.MixinRenderItem",
     "replay.MixinRenderLivingBase",
     "replay.MixinTileEntityEndPortalRenderer",
-    "replay.MixinWorldClient",
     "replay.LocalPlayerAccessor",
     "core.GuiAccessor"
   ],
-  "server": [],
   "injectors": {
     "defaultRequire": 1
   }

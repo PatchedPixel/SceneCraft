@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.extras;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
 import id.patchedpixel.scenecraft.replay.gui.overlay.GuiReplayOverlay;
 import id.patchedpixel.scenecraft.gui.element.GuiImage;
@@ -11,13 +11,13 @@ import id.patchedpixel.scenecraft.gui.layout.HorizontalLayout;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 
 public class QuickMode extends EventRegistrations implements Extra {
-    private ReplayModReplay module;
+    private SceneCraftReplay module;
 
     private final GuiImage indicator = new GuiImage().setTexture(SceneCraft.TEXTURE, 40, 100, 16, 16).setSize(16, 16);
 
     @Override
     public void register(final SceneCraft mod) {
-        this.module = ReplayModReplay.instance;
+        this.module = SceneCraftReplay.instance;
 
         mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.quickmode", Keyboard.KEY_Q, () -> {
             ReplayHandler replayHandler = module.getReplayHandler();

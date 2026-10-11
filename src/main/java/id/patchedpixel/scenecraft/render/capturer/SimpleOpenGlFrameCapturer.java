@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Map;
 
 public class SimpleOpenGlFrameCapturer extends OpenGlFrameCapturer<OpenGlFrame, CaptureData> {
-
     public SimpleOpenGlFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
         super(worldRenderer, renderInfo);
     }

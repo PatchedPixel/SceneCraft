@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=开始录制
@@ -24,7 +24,7 @@ scenecraft.gui.save=保存
 scenecraft.gui.rename=重命名
 scenecraft.gui.remove=删除
 scenecraft.gui.delete=删除
-scenecraft.gui.recording=录制中
+scenecraft.gui.record=录制中
 scenecraft.gui.paused=已暂停
 scenecraft.gui.speed=速度
 scenecraft.gui.pleasewait=请稍候
@@ -39,10 +39,10 @@ scenecraft.gui.edit=编辑
 scenecraft.gui.copy=复制
 scenecraft.gui.paste=粘贴
 
-scenecraft.gui.recording.resume=继续录制
-scenecraft.gui.recording.pause=暂停录制
-scenecraft.gui.recording.stop=停止录制
-scenecraft.gui.recording.start=开始录制
+scenecraft.gui.record.resume=继续录制
+scenecraft.gui.record.pause=暂停录制
+scenecraft.gui.record.stop=停止录制
+scenecraft.gui.record.start=开始录制
 
 scenecraft.gui.renderdonetitle=视频渲染
 scenecraft.gui.openfolder=打开视频文件夹
@@ -94,7 +94,7 @@ scenecraft.gui.loadentitytracker=加载实体位置：%%d%%%%
 scenecraft.gui.loadquickmode=正在加载快速模式： %%d%%%%
 scenecraft.gui.noquickmode=快速模式仅在Minecraft %1$s 及更高版本中可用
 scenecraft.gui.minimalmode.unsupported=此功能不适用于您当前的Minecraft版本。
-scenecraft.gui.minimalmode.supportedversion=（您的Replay Mod版本仅支持 Minecraft %1$s ）
+scenecraft.gui.minimalmode.supportedversion=（您的SceneCraft版本仅支持 Minecraft %1$s ）
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=回放中心
@@ -131,7 +131,7 @@ scenecraft.gui.playeroverview.spectate=玩家列表
 scenecraft.gui.playeroverview.remembersettings=持续隐藏玩家
 scenecraft.gui.playeroverview.remembersettings.description=玩家将在录像文件被隐藏
 
-#Replay Mod Settings GUI
+#SceneCraft Settings GUI
 scenecraft.gui.settings.title=录像回放设置
 scenecraft.gui.settings.default=默认
 
@@ -150,7 +150,7 @@ scenecraft.gui.settings.fullbrightness.gamma=Gamma值
 scenecraft.gui.settings.fullbrightness.nightvision=夜视
 scenecraft.gui.settings.fullbrightness.both=同时使用
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=照明模式
 scenecraft.input.thumbnail=截取缩略图
 scenecraft.input.playeroverview=玩家列表
@@ -163,7 +163,7 @@ scenecraft.input.resettilt=重置镜头的旋转角度
 scenecraft.input.playpause=播放/暂停回放
 scenecraft.input.marker=添加标记事件
 scenecraft.input.pathpreview=切换路径预览
-scenecraft.input.settings=ReplayMod配置
+scenecraft.input.settings=SceneCraft配置
 scenecraft.input.quickmode=快速模式
 scenecraft.input.positionkeyframe=位置/旁观者关键帧
 scenecraft.input.positiononlykeyframe=位置关键帧
@@ -194,7 +194,7 @@ scenecraft.gui.editkeyframe.timestamp=时间系数
 
 scenecraft.gui.editkeyframe.interpolator=插值器
 scenecraft.gui.editkeyframe.interpolator.default.name=默认插值器
-scenecraft.gui.editkeyframe.interpolator.default.desc=在Replay Mod设置中使用默认的插值器。
+scenecraft.gui.editkeyframe.interpolator.default.desc=在SceneCraft设置中使用默认的插值器。
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull Rom样条曲线插值器
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=利用自定义的alpha值计算得到的Catmull Rom样条曲线，来精准校对并平滑镜头路径。
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alpha:
@@ -321,7 +321,7 @@ scenecraft.error.negativetime1=你的一些时间关键帧出了问题。
 scenecraft.error.negativetime2=不支持倒放。
 scenecraft.error.negativetime3=无效部分标记为红色。
 
-#Replay Mod Incompatibility Warning
+#SceneCraft Incompatibility Warning
 scenecraft.gui.modwarning.title=不兼容检测
 scenecraft.gui.modwarning.message1=当前可能会发生不兼容
 scenecraft.gui.modwarning.message2=Minecraft版本和这个录像已经被检测。

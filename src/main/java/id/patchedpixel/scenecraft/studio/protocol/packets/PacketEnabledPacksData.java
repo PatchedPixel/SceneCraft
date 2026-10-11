@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * at the end of the configuration phase.
  */
 public class PacketEnabledPacksData {
-    public static final String ID = "replaymod:enabled_packs_data";
+    public static final String ID = "scenecraft:enabled_packs_data";
 
     public static Map<String, Map<String, Tag>> read(Packet packet) throws IOException {
         try (Packet.Reader in = packet.reader()) {

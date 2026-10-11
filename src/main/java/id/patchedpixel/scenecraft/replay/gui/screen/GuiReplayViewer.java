@@ -13,6 +13,7 @@ import id.patchedpixel.scenecraft.gui.function.Click;
 import id.patchedpixel.scenecraft.gui.function.KeyHandler;
 import id.patchedpixel.scenecraft.gui.function.KeyInput;
 import id.patchedpixel.scenecraft.gui.versions.Image;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import net.minecraft.client.gui.Font;
 import net.minecraft.ChatFormatting;
 import id.patchedpixel.scenecraft.core.SettingsRegistry;
@@ -20,7 +21,6 @@ import id.patchedpixel.scenecraft.core.gui.GuiReplaySettings;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.Setting;
 import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.studio.replay.ReplayMetaData;
@@ -68,11 +68,11 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static id.patchedpixel.scenecraft.replay.ReplayModReplay.LOGGER;
+import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.getFontRenderer;
 
 public class GuiReplayViewer extends GuiScreen {
-    private final ReplayModReplay mod;
+    private final SceneCraftReplay mod;
 
     public final GuiReplayList list = new GuiReplayList(this).onSelectionChanged(this::updateButtons).onSelectionDoubleClicked(() -> {
         if (this.loadButton.isEnabled()) {
@@ -214,7 +214,7 @@ public class GuiReplayViewer extends GuiScreen {
     public final GuiPanel buttonPanel = new GuiPanel(this).setLayout(new VerticalLayout().setSpacing(5))
             .addElements(null, upperButtonPanel, lowerButtonPanel);
 
-    public GuiReplayViewer(ReplayModReplay mod) {
+    public GuiReplayViewer(SceneCraftReplay mod) {
         this.mod = mod;
 
         try {
@@ -240,7 +240,7 @@ public class GuiReplayViewer extends GuiScreen {
         updateButtons();
     }
 
-    public ReplayModReplay getMod() {
+    public SceneCraftReplay getMod() {
         return mod;
     }
 

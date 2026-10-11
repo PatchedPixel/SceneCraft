@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import java.lang.reflect.InvocationTargetException;
 
 public class ShaderBeginRender extends EventRegistrations {
-
     private final Minecraft mc = Minecraft.getInstance();
 
     /**

@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.core;
 
-import id.patchedpixel.scenecraft.compat.ReplayModCompat;
+import id.patchedpixel.scenecraft.compat.SceneCraftCompat;
 import id.patchedpixel.scenecraft.core.files.ReplayFilesService;
 import id.patchedpixel.scenecraft.core.files.ReplayFoldersService;
 import id.patchedpixel.scenecraft.core.gui.GuiBackgroundProcesses;
@@ -11,8 +11,8 @@ import id.patchedpixel.scenecraft.core.versions.scheduler.SchedulerImpl;
 import id.patchedpixel.scenecraft.editor.SceneCraftEditor;
 import id.patchedpixel.scenecraft.extras.SceneCraftExtras;
 import id.patchedpixel.scenecraft.record.SceneCraftRecording;
-import id.patchedpixel.scenecraft.render.ReplayModRender;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.render.SceneCraftRender;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.studio.studio.ReplayStudio;
 import id.patchedpixel.scenecraft.studio.util.I18n;
 import id.patchedpixel.scenecraft.simplepathing.SceneCraftSimplePathing;
@@ -63,13 +63,13 @@ public class SceneCraft implements Module, Scheduler {
         // Register all RM modules
         modules.add(this);
         modules.add(new SceneCraftRecording(this));
-        ReplayModReplay replayModule = new ReplayModReplay(this);
+        SceneCraftReplay replayModule = new SceneCraftReplay(this);
         modules.add(replayModule);
-        modules.add(new ReplayModRender(this));
+        modules.add(new SceneCraftRender(this));
         modules.add(new SceneCraftSimplePathing(this));
         modules.add(new SceneCraftEditor(this));
         modules.add(new SceneCraftExtras(this));
-        modules.add(new ReplayModCompat());
+        modules.add(new SceneCraftCompat());
 
         settingsRegistry.register();
     }

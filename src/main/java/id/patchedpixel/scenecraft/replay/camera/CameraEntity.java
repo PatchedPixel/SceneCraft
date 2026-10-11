@@ -8,13 +8,13 @@ import id.patchedpixel.scenecraft.core.events.PreRenderCallback;
 import id.patchedpixel.scenecraft.core.events.PreRenderHandCallback;
 import id.patchedpixel.scenecraft.core.events.SettingsChangedCallback;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.RenderHotbarCallback;
 import id.patchedpixel.scenecraft.replay.events.RenderSpectatorCrosshairCallback;
 import id.patchedpixel.scenecraft.mixin.replay.EntityPlayerAccessor;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import id.patchedpixel.scenecraft.core.utils.Utils;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
 import id.patchedpixel.scenecraft.replay.Setting;
 import id.patchedpixel.scenecraft.mixin.replay.FirstPersonRendererAccessor;
 import id.patchedpixel.scenecraft.studio.util.Location;
@@ -110,8 +110,8 @@ public class CameraEntity
         );
         setUUID(CAMERA_UUID);
         eventHandler.register();
-        if (ReplayModReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
-            cameraController = ReplayModReplay.instance.createCameraController(this);
+        if (SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
+            cameraController = SceneCraftReplay.instance.createCameraController(this);
         } else {
             cameraController = new SpectatorCameraController(this);
         }
@@ -231,7 +231,7 @@ public class CameraEntity
             // Make sure we're always spectating the right entity
             // This is important if the spectated player respawns as their
             // entity is recreated and we have to spectate a new entity
-            UUID spectating = ReplayModReplay.instance.getReplayHandler().getSpectatedUUID();
+            UUID spectating = SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID();
             // FIXME remap bug: Pattern doesn't work when these two are inlined
             Level cameraWorld = this.level();
             Level viewWorld = view.level();
@@ -240,7 +240,7 @@ public class CameraEntity
                     || cameraWorld.getEntity(view.getId()) != view) {
                 if (spectating == null) {
                     // Entity (non-player) died, stop spectating
-                    ReplayModReplay.instance.getReplayHandler().spectateEntity(this);
+                    SceneCraftReplay.instance.getReplayHandler().spectateEntity(this);
                     return;
                 }
                 view = cameraWorld.getPlayerByUUID(spectating);
@@ -324,7 +324,7 @@ public class CameraEntity
 
     @Override
     public boolean isSpectator() {
-        ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
+        ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
         return replayHandler == null || replayHandler.isCameraView(); // Make sure we're treated as spectator
     }
 
@@ -515,7 +515,7 @@ public class CameraEntity
     private void handleInputEvents() {
         if (this.minecraft.options.keyAttack.consumeClick() || this.minecraft.options.keyUse.consumeClick()) {
             if (this.minecraft.gui.screen() == null && canSpectate(this.minecraft.crosshairPickEntity)) {
-                ReplayModReplay.instance.getReplayHandler().spectateEntity(
+                SceneCraftReplay.instance.getReplayHandler().spectateEntity(
                         this.minecraft.crosshairPickEntity);
                 // Make sure we don't exit right away
                 //noinspection StatementWithEmptyBody
@@ -595,8 +595,8 @@ public class CameraEntity
         { on(SettingsChangedCallback.EVENT, this::onSettingsChanged); }
         private void onSettingsChanged(SettingsRegistry registry, SettingsRegistry.SettingKey<?> key) {
             if (key == Setting.CAMERA) {
-                if (ReplayModReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
-                    cameraController = ReplayModReplay.instance.createCameraController(CameraEntity.this);
+                if (SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID() == null) {
+                    cameraController = SceneCraftReplay.instance.createCameraController(CameraEntity.this);
                 } else {
                     cameraController = new SpectatorCameraController(CameraEntity.this);
                 }

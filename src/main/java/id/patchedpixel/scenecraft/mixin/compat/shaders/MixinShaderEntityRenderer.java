@@ -2,7 +2,7 @@ package id.patchedpixel.scenecraft.mixin.compat.shaders;
 
 import id.patchedpixel.scenecraft.compat.shaders.ShaderReflection;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,10 +14,10 @@ public abstract class MixinShaderEntityRenderer {
 
     @Inject(method = "renderLevel", at = @At("HEAD"))
     private void replayModCompat_updateShaderFrameTimeCounter(CallbackInfo ignore) {
-        if (ReplayModReplay.instance.getReplayHandler() == null) return;
+        if (SceneCraftReplay.instance.getReplayHandler() == null) return;
         if (ShaderReflection.shaders_frameTimeCounter == null) return;
 
-        ReplayHandler replayHandler = ReplayModReplay.instance.getReplayHandler();
+        ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
         float timestamp = replayHandler.getReplaySender().currentTimeStamp() / 1000f % 3600f;
         try {
             ShaderReflection.shaders_frameTimeCounter.set(null, timestamp);

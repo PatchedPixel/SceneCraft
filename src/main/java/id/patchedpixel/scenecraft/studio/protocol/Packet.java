@@ -192,7 +192,8 @@ public class Packet {
         }
 
         public static BitSet readBitSet(PacketTypeRegistry registry, NetInput in) throws IOException {
-            return BitSet.valueOf(in.readLongs(in.readVarInt()));
+            // 26.x: ByteBufCodecs.BIT_SET is a length-prefixed byte array (it used to be a long array)
+            return BitSet.valueOf(in.readBytes(in.readVarInt()));
         }
 
         public <T> List<T> readList(IOSupplier<T> entryReader) throws IOException {
@@ -260,9 +261,9 @@ public class Packet {
         }
 
         public static void writeBitSet(PacketTypeRegistry registry, NetOutput out, BitSet bitSet) throws IOException {
-            long[] longs = bitSet.toLongArray();
-            out.writeVarInt(longs.length);
-            out.writeLongs(longs);
+            byte[] bytes = bitSet.toByteArray();
+            out.writeVarInt(bytes.length);
+            out.writeBytes(bytes, bytes.length);
         }
 
         public <T> void writeList(List<T> list, IOConsumer<T> entryWriter) throws IOException {

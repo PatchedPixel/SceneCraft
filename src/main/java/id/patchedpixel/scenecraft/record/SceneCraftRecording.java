@@ -20,7 +20,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class SceneCraftRecording implements Module {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final AttributeKey<Void> ATTR_CHECKED = AttributeKey.newInstance("ReplayModRecording_checked");
+    private static final AttributeKey<Void> ATTR_CHECKED = AttributeKey.newInstance("SceneCraftRecording_checked");
 
     { instance = this; }
     public static SceneCraftRecording instance;

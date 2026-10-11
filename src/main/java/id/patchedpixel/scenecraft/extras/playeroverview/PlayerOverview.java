@@ -5,7 +5,7 @@ import id.patchedpixel.scenecraft.core.events.PreRenderHandCallback;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.extras.Extra;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.replay.ReplayModReplay;
+import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
 import id.patchedpixel.scenecraft.replay.events.ReplayClosedCallback;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
@@ -20,14 +20,14 @@ import java.util.*;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
 
 public class PlayerOverview extends EventRegistrations implements Extra {
-    private ReplayModReplay module;
+    private SceneCraftReplay module;
 
     private final Set<UUID> hiddenPlayers = new HashSet<>();
     private boolean savingEnabled;
 
     @Override
     public void register(final SceneCraft mod) throws Exception {
-        this.module = ReplayModReplay.instance;
+        this.module = SceneCraftReplay.instance;
 
         mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.playeroverview", Keyboard.KEY_B, new Runnable() {
             @Override

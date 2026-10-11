@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class ShaderReflection {
-
     // Shaders.frameTimeCounter
     public static Field shaders_frameTimeCounter;
 

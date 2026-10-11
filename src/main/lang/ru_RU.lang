@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=Запись началась
@@ -24,7 +24,7 @@ scenecraft.gui.save=Сохранить
 scenecraft.gui.rename=Назвать
 scenecraft.gui.remove=Удалить
 scenecraft.gui.delete=Удалить
-scenecraft.gui.recording=Запись
+scenecraft.gui.record=Запись
 scenecraft.gui.paused=Пауза
 scenecraft.gui.speed=Скорость
 scenecraft.gui.pleasewait=Подождите
@@ -39,10 +39,10 @@ scenecraft.gui.edit=Изменить
 scenecraft.gui.copy=Копировать
 scenecraft.gui.paste=Вставить
 
-scenecraft.gui.recording.resume=Возобновить
-scenecraft.gui.recording.pause=Приостановить
-scenecraft.gui.recording.stop=Закончить запись
-scenecraft.gui.recording.start=Начать запись
+scenecraft.gui.record.resume=Возобновить
+scenecraft.gui.record.pause=Приостановить
+scenecraft.gui.record.stop=Закончить запись
+scenecraft.gui.record.start=Начать запись
 
 scenecraft.gui.renderdonetitle=Рендеринг завершён
 scenecraft.gui.openfolder=Открыть папку с видео
@@ -94,7 +94,7 @@ scenecraft.gui.loadentitytracker=Загрузка позиций сущност�
 scenecraft.gui.loadquickmode=Загрузка Быстрого Режима: %%d%%%%
 scenecraft.gui.noquickmode=Быстрый Режим доступен только в Minecraft %1$s и выше
 scenecraft.gui.minimalmode.unsupported=Эта функция недоступна в вашей версии Minecraft.
-scenecraft.gui.minimalmode.supportedversion=(текущая версия Replay Mod поддерживает только Minecraft %1$s)
+scenecraft.gui.minimalmode.supportedversion=(текущая версия SceneCraft поддерживает только Minecraft %1$s)
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=Просмотрщик Повторов
@@ -131,8 +131,8 @@ scenecraft.gui.playeroverview.spectate=Наблюдать за...
 scenecraft.gui.playeroverview.remembersettings=Запомнить скрытых игроков
 scenecraft.gui.playeroverview.remembersettings.description=Сохраняет информацию о видимости игроков в файле повтора
 
-#Replay Mod Settings GUI
-scenecraft.gui.settings.title=Настройки Replay Mod
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=Настройки SceneCraft
 scenecraft.gui.settings.default=ПО УМОЛЧАНИЮ
 
 scenecraft.gui.settings.notifications=Уведомления
@@ -150,7 +150,7 @@ scenecraft.gui.settings.fullbrightness.gamma=Гамма
 scenecraft.gui.settings.fullbrightness.nightvision=Эффект
 scenecraft.gui.settings.fullbrightness.both=Оба
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=Полная яркость
 scenecraft.input.thumbnail=Сделать миниатюру
 scenecraft.input.playeroverview=Список игроков
@@ -163,7 +163,7 @@ scenecraft.input.resettilt=Наклон камеры: сброс
 scenecraft.input.playpause=Воспроизвести или приостановить
 scenecraft.input.marker=Добавить маркер события
 scenecraft.input.pathpreview=Отображение дорожки
-scenecraft.input.settings=Настройки ReplayMod
+scenecraft.input.settings=Настройки SceneCraft
 scenecraft.input.quickmode=Быстрый Режим
 scenecraft.input.positionkeyframe=Ключевой кадр позиции
 scenecraft.input.positiononlykeyframe=Ключевой кадр позиции вне наблюдения
@@ -171,7 +171,7 @@ scenecraft.input.timekeyframe=Ключевой кадр времени
 scenecraft.input.bothkeyframes=Ключевой кадр позиции + времени
 
 # CameraControllers
-scenecraft.camera.classic=Replay Mod
+scenecraft.camera.classic=SceneCraft
 scenecraft.camera.vanilla=Minecraft
 
 #Keyframe Presets GUI
@@ -321,7 +321,7 @@ scenecraft.error.negativetime1=Ключевые кадры времени рас
 scenecraft.error.negativetime2=Переход назад во времени не поддерживается.
 scenecraft.error.negativetime3=Недействительные части помечены красным.
 
-#Replay Mod Incompatibility Warning
+#SceneCraft Incompatibility Warning
 scenecraft.gui.modwarning.title=Обнаружена несовместимость
 scenecraft.gui.modwarning.message1=Обнаружена возможная несовместимость между
 scenecraft.gui.modwarning.message2=текущей версией Minecraft и выбранным повтором.

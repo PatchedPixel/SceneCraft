@@ -25,11 +25,10 @@ import java.nio.channels.WritableByteChannel;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static id.patchedpixel.scenecraft.render.ReplayModRender.LOGGER;
+import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
 import static org.apache.commons.lang3.Validate.isTrue;
 
 public class FFmpegWriter implements FrameConsumer<BitmapFrame> {
-
     private final VideoRenderer renderer;
     private final RenderSettings settings;
     private final Process process;

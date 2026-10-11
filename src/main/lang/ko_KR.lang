@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=녹화를 시작했습니다
@@ -38,10 +38,10 @@ scenecraft.gui.edit=편집
 scenecraft.gui.copy=복사
 scenecraft.gui.paste=붙여넣기
 
-scenecraft.gui.recording.resume=녹화 재개
-scenecraft.gui.recording.pause=녹화 일시정지
-scenecraft.gui.recording.stop=녹화 중지
-scenecraft.gui.recording.start=녹화 시작
+scenecraft.gui.record.resume=녹화 재개
+scenecraft.gui.record.pause=녹화 일시정지
+scenecraft.gui.record.stop=녹화 중지
+scenecraft.gui.record.start=녹화 시작
 
 scenecraft.gui.renderdonetitle=영상이 렌더링됨
 scenecraft.gui.openfolder=영상 폴더 열기
@@ -93,7 +93,7 @@ scenecraft.gui.loadentitytracker=개체 위치 불러오는중: %%d%%%%
 scenecraft.gui.loadquickmode=퀵 모드 불러오는중: %%d%%%%
 scenecraft.gui.noquickmode=퀵 모드는 Minecraft 버전 %1$s 이상에서만 사용할 수 있습니다.
 scenecraft.gui.minimalmode.unsupported=현재 Minecraft 버전에서는 이 기능을 사용할 수 없습니다.
-scenecraft.gui.minimalmode.supportedversion=(현재 Replay Mod 버전에서는 Minecraft 버전 %1$s만 지원니다.)
+scenecraft.gui.minimalmode.supportedversion=(현재 SceneCraft 버전에서는 Minecraft 버전 %1$s만 지원니다.)
 
 #Only change these if it's neccessary
 scenecraft.gui.replayviewer=리플레이 뷰어
@@ -130,8 +130,8 @@ scenecraft.gui.playeroverview.spectate=플레이어 관전
 scenecraft.gui.playeroverview.remembersettings=숨긴 플레이어 기억
 scenecraft.gui.playeroverview.remembersettings.description=리플레이 파일에 플레이어 표시 여부 저장
 
-#Replay Mod Settings GUI
-scenecraft.gui.settings.title=Replay Mod 설정
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=SceneCraft 설정
 scenecraft.gui.settings.default=기본
 
 scenecraft.gui.settings.notifications=알림 켜기
@@ -149,7 +149,7 @@ scenecraft.gui.settings.fullbrightness.gamma=밝기
 scenecraft.gui.settings.fullbrightness.nightvision=야간 투시
 scenecraft.gui.settings.fullbrightness.both=모두
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=조명 전환
 scenecraft.input.thumbnail=썸네일 촬영
 scenecraft.input.playeroverview=플레이어 개요
@@ -162,7 +162,7 @@ scenecraft.input.resettilt=카메라 기울기 초기화
 scenecraft.input.playpause=리플레이 재생/일시정지
 scenecraft.input.marker=이벤트 마커 추가
 scenecraft.input.pathpreview=경로 미리보기 전환
-scenecraft.input.settings=Replay Mod 설정
+scenecraft.input.settings=SceneCraft 설정
 scenecraft.input.quickmode=퀵 모드
 scenecraft.input.positionkeyframe=위치/관전 키 프레임
 scenecraft.input.positiononlykeyframe=위치 키 프레임
@@ -193,7 +193,7 @@ scenecraft.gui.editkeyframe.timestamp=시간 색인
 
 scenecraft.gui.editkeyframe.interpolator=보간기
 scenecraft.gui.editkeyframe.interpolator.default.name=기본 보간기
-scenecraft.gui.editkeyframe.interpolator.default.desc=Replay Mod 설정에 정의된 기본 보간기를 사용합니다.
+scenecraft.gui.editkeyframe.interpolator.default.desc=SceneCraft 설정에 정의된 기본 보간기를 사용합니다.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=캣멀 롬 스플라인 보간기
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=카메라 경로의 정밀 조임 및 매끄러움을 위해 사용자 지정 가능한 알파 값으로 캣멀 롬 스플라인을 계산합니다.
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=알파:
@@ -319,7 +319,7 @@ scenecraft.error.negativetime1=일부 시간 키 프레임이 작동하지 않�
 scenecraft.error.negativetime2=시간을 되돌리는 것은 지원하지 않습니다.
 scenecraft.error.negativetime3=잘못된 부분은 빨간색으로 표시됩니다.
 
-#Replay Mod Incompatibility Warning
+#SceneCraft Incompatibility Warning
 scenecraft.gui.modwarning.title=비호환성이 감지됨
 scenecraft.gui.modwarning.message1=현재 사용하는 Minecraft 버전과
 scenecraft.gui.modwarning.message2=이 리플레이가 호환되지 않을 수 있습니다.

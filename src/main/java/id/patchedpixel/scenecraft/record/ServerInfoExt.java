@@ -4,7 +4,6 @@ import net.minecraft.client.multiplayer.ServerData;
 
 /** Extension interface for {@link ServerData}. */
 public interface ServerInfoExt {
-
     static ServerInfoExt from(ServerData base) {
         return (ServerInfoExt) base;
     }

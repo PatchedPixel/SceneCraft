@@ -44,7 +44,6 @@ import java.util.Objects;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
 
 public class RecordingEventHandler extends EventRegistrations {
-
     private final Minecraft mc = getMinecraft();
     private final PacketListener packetListener;
 
@@ -113,7 +112,6 @@ public class RecordingEventHandler extends EventRegistrations {
         if (mc.player == null) return;
         LocalPlayer player = mc.player;
         try {
-
             boolean force = false;
             if(lastX == null || lastY == null || lastZ == null) {
                 force = true;
@@ -148,8 +146,8 @@ public class RecordingEventHandler extends EventRegistrations {
                 packet = new ClientboundMoveEntityPacket.PosRot(
                         player.getId(),
                         new net.minecraft.network.protocol.game.VecDelta.Linear((short) dx, (short) dy, (short) dz),
-                        newYaw, newPitch
-                        , player.onGround()
+                        newYaw, newPitch,
+                        player.onGround()
                 );
 
                 lastX += (double) dx / TRACKED_POSITION_RESOLUTION;

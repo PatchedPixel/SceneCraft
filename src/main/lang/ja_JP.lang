@@ -1,4 +1,4 @@
-scenecraft.title=Replay Mod
+scenecraft.title=SceneCraft
 
 #All of the chat messages
 scenecraft.chat.recordingstarted=録画を開始しました
@@ -24,7 +24,7 @@ scenecraft.gui.save=保存
 scenecraft.gui.rename=名前変更
 scenecraft.gui.remove=消去
 scenecraft.gui.delete=削除
-scenecraft.gui.recording=録画中
+scenecraft.gui.record=録画中
 scenecraft.gui.speed=速度
 scenecraft.gui.pleasewait=お待ちください
 scenecraft.gui.render=書き出す
@@ -91,7 +91,7 @@ scenecraft.gui.viewer.replayfolder=リプレイのフォルダーを開く…
 
 scenecraft.gui.viewer.delete.linea=本当にこのリプレイを削除してよろしいですか?
 scenecraft.gui.viewer.delete.failed1=OSが原因で、リプレイを削除できませんでした。ここには
-scenecraft.gui.viewer.delete.failed2=ReplayModはお力になれませんので、あなた自身で削除してください。
+scenecraft.gui.viewer.delete.failed2=SceneCraftはお力になれませんので、あなた自身で削除してください。
 scenecraft.gui.viewer.delete.lineb=「%1$s」は削除されます! (二度と元に戻せません!)
 
 #Cancel Replay GUI
@@ -108,8 +108,8 @@ scenecraft.gui.playeroverview.spectate=プレイヤーを監視する
 scenecraft.gui.playeroverview.remembersettings=非表示のプレイヤーを記憶
 scenecraft.gui.playeroverview.remembersettings.description=プレイヤーの表示状態をリプレイファイルに保存
 
-#Replay Mod Settings GUI
-scenecraft.gui.settings.title=Replay Modの設定
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=SceneCraftの設定
 
 scenecraft.gui.settings.notifications=通知を有効にする
 scenecraft.gui.settings.recordserver=サーバーでのプレイを録画
@@ -120,7 +120,7 @@ scenecraft.gui.settings.camera=カメラ
 scenecraft.gui.settings.showchat=チャットを表示
 scenecraft.gui.settings.interpolator=デフォルトのカメラ移動補完方式
 
-#Replay Mod Keybindings
+#SceneCraft Keybindings
 scenecraft.input.lighting=暗視の切り替え
 scenecraft.input.thumbnail=サムネイルを撮影
 scenecraft.input.playeroverview=プレイヤーの一覧表示
@@ -133,7 +133,7 @@ scenecraft.input.resettilt=カメラの傾きをリセット
 scenecraft.input.playpause=リプレイを再生/一時停止
 scenecraft.input.marker=イベントマーカーを追加
 scenecraft.input.pathpreview=カメラ経路プレビューを切り替え
-scenecraft.input.settings=ReplayModの設定
+scenecraft.input.settings=SceneCraftの設定
 
 # CameraControllers
 scenecraft.camera.classic=クラシック
@@ -159,7 +159,7 @@ scenecraft.gui.editkeyframe.timestamp=時間指定
 
 scenecraft.gui.editkeyframe.interpolator=補完方式
 scenecraft.gui.editkeyframe.interpolator.default.name=デフォルトの経路補完方式
-scenecraft.gui.editkeyframe.interpolator.default.desc=ReplayModの設定画面で指定されたデフォルトの経路補完方式を使います。
+scenecraft.gui.editkeyframe.interpolator.default.desc=SceneCraftの設定画面で指定されたデフォルトの経路補完方式を使います。
 scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull-Romスプライン曲線
 scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=Catmull-Romスプライン曲線を計算します。精密な密度と滑らかさをアルファ値を使って調整できます。
 scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=アルファ値:
@@ -260,7 +260,7 @@ scenecraft.error.negativetime1=順番がおかしいタイムキーフレーム�
 scenecraft.error.negativetime2=時間を後戻りすることはできません。
 scenecraft.error.negativetime3=無効な区間は赤く表示されます。
 
-#Replay Mod Incompatibility Warning
+#SceneCraft Incompatibility Warning
 scenecraft.gui.modwarning.title=互換性エラーが検知されました
 scenecraft.gui.modwarning.message1=起こりうる互換性エラーが現在の
 scenecraft.gui.modwarning.message2=Minecraftのバージョンとこのリプレイの間で検知されました。

@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -66,7 +67,7 @@ public class ReplayFoldersService {
     }
 
     public Path getReplayPathForCache(Path cache) throws IOException {
-        String relative = URLDecoder.decode(cache.getFileName().toString(), "UTF-8");
+        String relative = URLDecoder.decode(cache.getFileName().toString(), StandardCharsets.UTF_8);
         Path replayFolder = getReplayFolder();
 
         return replayFolder.resolve(relative);
