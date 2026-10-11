@@ -35,5 +35,4 @@ public class ShaderBeginRender extends EventRegistrations {
             e.printStackTrace();
         }
     }
-
 }

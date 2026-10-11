@@ -24,7 +24,7 @@ public abstract class MixinChunkVisibility {
      * rendering the shader pass.
      */
     @Inject(method = "reset", at = @At("HEAD"), remap = false)
-    private static void replayModCompat_fixImproperReset(CallbackInfo ci) {
+    private static void sceneCraftCompat_fixImproperReset(CallbackInfo ci) {
         MixinChunkVisibility.counter = 0;
     }
 }

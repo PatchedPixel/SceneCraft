@@ -48,8 +48,6 @@ import net.minecraft.sounds.SoundEvent;
 
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.*;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.getMinecraft;
-
 public abstract class AbstractGuiButton<T extends AbstractGuiButton<T>> extends AbstractGuiClickable<T> implements Clickable, IGuiButton<T> {
     protected static final Identifier BUTTON_SOUND = identifier("gui.button.press");
     protected static final Identifier[] BUTTON_TEXTURES = new Identifier[] {

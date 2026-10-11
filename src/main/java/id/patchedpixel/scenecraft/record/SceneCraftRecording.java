@@ -20,7 +20,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class SceneCraftRecording implements Module {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final AttributeKey<Void> ATTR_CHECKED = AttributeKey.newInstance("SceneCraftRecording_checked");
+    private static final AttributeKey<Void> ATTR_CHECKED = AttributeKey.newInstance("ReplayModRecording_checked");
 
     { instance = this; }
     public static SceneCraftRecording instance;
@@ -61,7 +61,28 @@ public class SceneCraftRecording implements Module {
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         event.registrar("1").optional()
                 .configurationToClient(Restrictions.ID, Restrictions.CODEC, (payload, context) -> {})
-                .playToClient(Restrictions.ID, Restrictions.CODEC, (payload, context) -> {});
+                .playToClient(Restrictions.ID, Restrictions.CODEC, (payload, context) -> {})
+                // Synthetic packet we inject into recordings (see MixinNetHandlerConfigClient); only ever seen during replay.
+                .configurationToClient(ENABLED_PACKS_DATA, ENABLED_PACKS_CODEC, (payload, context) -> {});
+    }
+
+    private static final net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<EnabledPacksPayload> ENABLED_PACKS_DATA =
+            new net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<>(
+                    net.minecraft.resources.Identifier.parse(id.patchedpixel.scenecraft.studio.protocol.packets.PacketEnabledPacksData.ID));
+    private static final net.minecraft.network.codec.StreamCodec<? super net.minecraft.network.FriendlyByteBuf, EnabledPacksPayload> ENABLED_PACKS_CODEC =
+            net.minecraft.network.codec.StreamCodec.of(
+                    (buf, payload) -> buf.writeBytes(payload.bytes()),
+                    buf -> {
+                        byte[] bytes = new byte[buf.readableBytes()];
+                        buf.readBytes(bytes);
+                        return new EnabledPacksPayload(bytes);
+                    });
+
+    private record EnabledPacksPayload(byte[] bytes) implements net.minecraft.network.protocol.common.custom.CustomPacketPayload {
+        @Override
+        public net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<? extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> type() {
+            return ENABLED_PACKS_DATA;
+        }
     }
 
     public void initiateRecording(Connection networkManager) {

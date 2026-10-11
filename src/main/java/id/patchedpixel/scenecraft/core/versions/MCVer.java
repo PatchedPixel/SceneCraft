@@ -151,23 +151,23 @@ public class MCVer {
 
     /** SDL3 event polling (replaces glfwPollEvents). */
     public static void pollEvents() {
-        ((MinecraftMethodAccessor) getMinecraft()).replayModPollEvents();
+        ((MinecraftMethodAccessor) getMinecraft()).sceneCraftPollEvents();
     }
 
     /** Flushes and re-polls the SDL input events. */
     public static void pumpEvents() {
-        ((MinecraftMethodAccessor) getMinecraft()).replayModPumpEvents();
+        ((MinecraftMethodAccessor) getMinecraft()).sceneCraftPumpEvents();
     }
 
     public static void processKeyBinds() {
-        ((MinecraftMethodAccessor) getMinecraft()).replayModProcessKeyBinds();
+        ((MinecraftMethodAccessor) getMinecraft()).sceneCraftProcessKeyBinds();
     }
 
     public interface MinecraftMethodAccessor {
-        void replayModProcessKeyBinds();
-        void replayModExecuteTaskQueue();
-        void replayModPollEvents();
-        void replayModPumpEvents();
+        void sceneCraftProcessKeyBinds();
+        void sceneCraftExecuteTaskQueue();
+        void sceneCraftPollEvents();
+        void sceneCraftPumpEvents();
     }
 
     public static long milliTime() {

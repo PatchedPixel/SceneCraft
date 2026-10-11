@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.core.utils;
 
+import id.patchedpixel.scenecraft.core.SceneCraft;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,7 +14,7 @@ import io.netty.buffer.Unpooled;
  * @see <a href="https://gist.github.com/Johni0702/2547c463e51f65f312cb">Replay Restrictions Gist</a>
  */
 public class Restrictions {
-    public static final Identifier PLUGIN_CHANNEL = identifier("scenecraft", "restrict");
+    public static final Identifier PLUGIN_CHANNEL = identifier(SceneCraft.MOD_ID, "restrict");
     private boolean noXray;
     private boolean noNoclip;
     private boolean onlyFirstPerson;

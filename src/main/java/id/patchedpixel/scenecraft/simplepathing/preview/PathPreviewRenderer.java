@@ -36,7 +36,7 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.emitLine;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public class PathPreviewRenderer extends EventRegistrations {
-    private static final Identifier CAMERA_HEAD = identifier("scenecraft", "camera_head.png");
+    private static final Identifier CAMERA_HEAD = identifier(SceneCraft.MOD_ID, "camera_head.png");
     private static final Minecraft mc = MCVer.getMinecraft();
 
     private static final int SLOW_PATH_COLOR = 0xffcccc;

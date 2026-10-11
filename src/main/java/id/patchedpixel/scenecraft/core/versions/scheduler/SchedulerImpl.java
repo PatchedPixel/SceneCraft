@@ -54,10 +54,10 @@ public class SchedulerImpl implements  Scheduler {
     // stuff submitted via runLater is actually always run (e.g. record might not be fully stopped because parts
     // of that are run via runLater and stopping the record happens right around the time MC clears the queue).
     // Luckily, that's also the version where MC pulled out the executor implementation, so we can just spin up our own.
-    public static class ReplayModExecutor extends ReentrantBlockableEventLoop<Runnable> {
+    public static class SceneCraftExecutor extends ReentrantBlockableEventLoop<Runnable> {
         private final Thread mcThread = Thread.currentThread();
 
-        private ReplayModExecutor(String string_1) {
+        private SceneCraftExecutor(String string_1) {
             super(string_1, false);
         }
 
@@ -80,7 +80,7 @@ public class SchedulerImpl implements  Scheduler {
             super.runAllTasks();
         }
     }
-    public final ReplayModExecutor executor = new ReplayModExecutor("Client/SceneCraft");
+    public final SceneCraftExecutor executor = new SceneCraftExecutor("Client/SceneCraft");
     private final List<Runnable> delayedTasks = new ArrayList<>();
 
     @Override

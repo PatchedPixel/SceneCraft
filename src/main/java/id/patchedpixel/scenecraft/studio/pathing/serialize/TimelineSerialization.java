@@ -66,6 +66,7 @@ public class TimelineSerialization {
             Map<String, Timeline> deserialized = deserialize(serialized);
             timelines.putAll(deserialized);
         }
+
         return timelines;
     }
 

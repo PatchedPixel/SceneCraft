@@ -1,6 +1,7 @@
 package id.patchedpixel.scenecraft.render.rendering;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
 import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
@@ -64,7 +65,7 @@ import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public class VideoRenderer implements RenderInfo {
-    private static final Identifier SOUND_RENDER_SUCCESS = identifier("scenecraft", "render_success");
+    private static final Identifier SOUND_RENDER_SUCCESS = identifier(SceneCraft.MOD_ID, "render_success");
     private final Minecraft mc = MCVer.getMinecraft();
     private final RenderSettings settings;
     private final ReplayHandler replayHandler;
@@ -348,7 +349,7 @@ public class VideoRenderer implements RenderInfo {
         while (true) {
             while (mc.gui.overlay() != null) {
                 drawGui();
-                ((MinecraftMethodAccessor) mc).replayModExecuteTaskQueue();
+                ((MinecraftMethodAccessor) mc).sceneCraftExecuteTaskQueue();
 
                 // The SplashOverlay now only closes on `tick`, but there are no ticks while we're waiting,
                 // so we need to manually tick it to not get stuck.
@@ -366,7 +367,7 @@ public class VideoRenderer implements RenderInfo {
             }
             break;
         }
-        ((MinecraftMethodAccessor) mc).replayModExecuteTaskQueue();
+        ((MinecraftMethodAccessor) mc).sceneCraftExecuteTaskQueue();
 
         ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).replaymod$setScreen(gui.toMinecraft());
     }

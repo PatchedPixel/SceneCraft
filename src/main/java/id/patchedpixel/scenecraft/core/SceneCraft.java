@@ -32,9 +32,9 @@ import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 public class SceneCraft implements Module, Scheduler {
     public static final String MOD_ID = "scenecraft";
 
-    public static final Identifier TEXTURE = identifier("scenecraft", "replay_gui.png");
+    public static final Identifier TEXTURE = identifier(SceneCraft.MOD_ID, "replay_gui.png");
     public static final int TEXTURE_SIZE = 256;
-    public static final Identifier LOGO_FAVICON = identifier("scenecraft", "favicon_logo.png");
+    public static final Identifier LOGO_FAVICON = identifier(SceneCraft.MOD_ID, "favicon_logo.png");
 
     private static final Minecraft mc = MCVer.getMinecraft();
 

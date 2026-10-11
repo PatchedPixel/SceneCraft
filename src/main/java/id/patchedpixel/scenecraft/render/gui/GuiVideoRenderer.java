@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.render.gui;
 
+import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 
@@ -27,7 +28,7 @@ import java.nio.ByteBuffer;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public class GuiVideoRenderer extends GuiScreen implements Tickable {
-    private static final Identifier NO_PREVIEW_TEXTURE = identifier("scenecraft", "logo.png");
+    private static final Identifier NO_PREVIEW_TEXTURE = identifier(SceneCraft.MOD_ID, "logo.png");
 
     private final VideoRenderer renderer;
 

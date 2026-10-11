@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.core.gui;
 
+import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
 import id.patchedpixel.scenecraft.gui.RenderInfo;
 import id.patchedpixel.scenecraft.gui.element.GuiButton;
@@ -9,7 +10,7 @@ import net.minecraft.resources.Identifier;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
 
 public class GuiReplayButton extends GuiButton {
-    public static final Identifier ICON = identifier("scenecraft", "logo_button.png");
+    public static final Identifier ICON = identifier(SceneCraft.MOD_ID, "logo_button.png");
 
     @Override
     public void draw(GuiRenderer renderer, ReadableDimension size, RenderInfo renderInfo) {
