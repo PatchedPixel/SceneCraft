@@ -273,31 +273,8 @@ public abstract class AbstractGuiTimeline<T extends AbstractGuiTimeline<T>> exte
         return getThis();
     }
 
-    /** Debug helper: shows why a click on a timeline did (not) resolve to a time. */
-    protected void logClick(Click click) {
-        try {
-            Point mouse = new Point(click.x, click.y);
-            String converted;
-            try {
-                getContainer().convertFor(this, mouse);
-                converted = mouse.getX() + "," + mouse.getY();
-            } catch (Throwable t) {
-                converted = "failed: " + t;
-            }
-            org.apache.logging.log4j.LogManager.getLogger("SceneCraft/Timeline").info(
-                    "{} click raw=({},{}) button={} local=({}) size={} lastSize={} length={} zoom={} offset={} timeAt={}",
-                    getClass().getSimpleName(), click.x, click.y, click.button, converted,
-                    size == null ? null : size.getWidth() + "x" + size.getHeight(),
-                    getLastSize() == null ? null : getLastSize().getWidth() + "x" + getLastSize().getHeight(),
-                    length, zoom, offset, getTimeAt(click.x, click.y));
-        } catch (Throwable t) {
-            org.apache.logging.log4j.LogManager.getLogger("SceneCraft/Timeline").warn("click debug failed", t);
-        }
-    }
-
     @Override
     public boolean mouseClick(Click click) {
-        logClick(click);
         int time = getTimeAt(click.x, click.y);
         if (time != -1) {
             onClick(time);

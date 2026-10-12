@@ -38,6 +38,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static id.patchedpixel.scenecraft.extras.SceneCraftExtras.LOGGER;
 
+// The YouTube uploader is not working anymore
+@Deprecated(forRemoval = true)
 public class YoutubeUploader {
     private static final String CLIENT_ID = "743126594724-mfe7pj1k7e47uu5pk4503c8st9vj9ibu.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "gMwcy3mRYCRamCIjJIYP7rqc";
@@ -62,6 +64,7 @@ public class YoutubeUploader {
     private State state;
 
     private volatile boolean cancelled;
+    private volatile LocalServerReceiver receiver;
 
     public YoutubeUploader(Minecraft minecraft, File videoFile, int videoFrames,
                            String thumbnailFormat, byte[] thumbnailImage,
@@ -107,16 +110,32 @@ public class YoutubeUploader {
             } catch (Throwable t) {
                 future.setException(t);
             }
-        });
+        }, "scenecraft-youtube-upload");
+        // Never keep the JVM alive (e.g. while waiting for the browser OAuth callback) when the game quits
+        thread.setDaemon(true);
         thread.start();
         return future;
     }
 
-    //I blame the Google SDK for not supporting "proper" upload cancellation
-    @SuppressWarnings("unchecked")
+    /**
+     * Cancels the upload. Thread.stop() no longer exists (UnsupportedOperationException since Java 20), so instead we
+     * flag the cancellation, interrupt the worker, stop the OAuth callback server and let the progress listener abort
+     * a running upload.
+     */
     public void cancel() throws InterruptedException {
-        thread.stop();
         cancelled = true;
+        LocalServerReceiver r = receiver;
+        if (r != null) {
+            try {
+                r.stop();
+            } catch (IOException e) {
+                LOGGER.debug("Failed to stop OAuth receiver", e);
+            }
+        }
+        Thread t = thread;
+        if (t != null) {
+            t.interrupt();
+        }
     }
 
     private Credential auth() throws IOException {
@@ -124,7 +143,7 @@ public class YoutubeUploader {
                 httpTransport, JSON_FACTORY, CLIENT_ID, CLIENT_SECRET,
                 Collections.singleton(YouTubeScopes.YOUTUBE_UPLOAD)
         ).setDataStoreFactory(dataStoreFactory).build();
-        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+        return new AuthorizationCodeInstalledApp(flow, receiver = new LocalServerReceiver()).authorize("user");
     }
 
     private File preUpload() throws InterruptedException, IOException {
@@ -149,7 +168,7 @@ public class YoutubeUploader {
 
                 final AtomicBoolean active = new AtomicBoolean(true);
                 final InputStream in = process.getErrorStream();
-                new Thread(() -> {
+                Thread ffmpegLogThread = new Thread(() -> {
                     try {
                         StringBuilder sb = new StringBuilder();
                         while (active.get()) {
@@ -171,7 +190,9 @@ public class YoutubeUploader {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }).start();
+                });
+                ffmpegLogThread.setDaemon(true);
+                ffmpegLogThread.start();
 
                 int result;
                 try {
@@ -210,6 +231,11 @@ public class YoutubeUploader {
             content.setLength(processedFile.length());
             YouTube.Videos.Insert videoInsert = youTube.videos().insert(java.util.List.of("snippet", "statistics", "status"), video, content);
             final MediaHttpUploader uploader = videoInsert.getMediaHttpUploader();
+            uploader.setProgressListener(u -> {
+                if (cancelled) {
+                    throw new IOException("Upload cancelled");
+                }
+            });
             progress = () -> {
                 try {
                     return uploader.getProgress();

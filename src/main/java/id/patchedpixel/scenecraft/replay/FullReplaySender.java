@@ -746,7 +746,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
                                 // Process packet
                                 if (nextPacket.type == PacketType.Bundle) inBundle = !inBundle;
-                                fireAndCheck(nextPacket);
+                                channel.pipeline().fireChannelRead(Unpooled.wrappedBuffer(nextPacket.bytes));
                                 nextPacket = null;
 
                                 lastTimeStamp = nextTimeStamp;
@@ -954,7 +954,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
                         // Process packet
                         if (pd.type == PacketType.Bundle) inBundle = !inBundle;
-                        fireAndCheck(pd);
+                        channel.pipeline().fireChannelRead(Unpooled.wrappedBuffer(pd.bytes));
 
                         // MC as of 1.20.2 relies on autoRead, so it can update the connection state on the main
                         // thread before the next packet is read. As such, we need to stall if that was just
@@ -1065,30 +1065,6 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                 entity.tick();
             }
         } while (prevPos.distanceToSqr(entity.position()) > 0.0001 && ticks++ < 100);
-    }
-
-    /**
-     * Feeds a recorded packet into the channel. EmbeddedChannel silently stores decode errors (and only logs a
-     * confusing "More than one exception" later), so we check right away and log which packet was the culprit.
-     */
-    private void fireAndCheck(PacketData pd) {
-        // The replay is being torn down (pipeline closed from the main thread); don't push packets into a dead channel.
-        if (terminate) return;
-        channel.pipeline().fireChannelRead(Unpooled.wrappedBuffer(pd.bytes));
-        if (channel instanceof io.netty.channel.embedded.EmbeddedChannel ec) {
-            try {
-                ec.checkException();
-            } catch (Throwable t) {
-                if (terminate) return; // expected noise while shutting down
-                StringBuilder hex = new StringBuilder();
-                for (int i = 0; i < Math.min(48, pd.bytes.length); i++) {
-                    hex.append(String.format("%02x ", pd.bytes[i]));
-                }
-                org.apache.logging.log4j.LogManager.getLogger().error(
-                        "Failed to feed replay packet: type={} timestamp={} size={} head={}",
-                        pd.type, pd.timestamp, pd.bytes.length, hex.toString().trim(), t);
-            }
-        }
     }
 
     private static final class PacketData {

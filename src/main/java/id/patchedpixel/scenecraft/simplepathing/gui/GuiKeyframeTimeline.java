@@ -77,6 +77,11 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
     private boolean dragging;
 
     /**
+     * Whether the current left-button press started on empty space of this timeline (click-and-hold scrubbing).
+     */
+    private boolean scrubbing;
+
+    /**
      * Whether we have surpassed the initial threshold and are actually dragging the keyframe.
      */
     private boolean actuallyDragging;
@@ -192,15 +197,18 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             linesRenderState.x2 = mc.getWindow().getWidth() / scale;
             linesRenderState.y2 = mc.getWindow().getHeight() / scale;
 
-            CrossFrameResourcePool pool = ((GameRendererAccessor) mc.gameRenderer).getPool();
-            TimeTimelineLinesRenderer linesRenderer = pool.acquire(TimeTimelineLinesRenderer.FACTORY);
+            // The renderer owns a GPU texture that the queued blit refers to until GuiRenderer draws it at the end of
+            // the frame. The shared CrossFrameResourcePool may close it earlier (GameRenderer.resize() clears the pool,
+            // endFrame() evicts entries), which crashes with "Texture view ... has been closed". So we manage the
+            // lifetime ourselves: reuse while the size stays the same, and retire (close later) when it changes.
+            TimeTimelineLinesRenderer linesRenderer = obtainLinesRenderer(
+                    linesRenderState.x2 - linesRenderState.x1, linesRenderState.y2 - linesRenderState.y1, scale);
             linesRenderer.prepare(
                     linesRenderState,
                     ((DrawContextAccessor) renderer.getContext()).getState(),
                     mc.gameRenderer.featureRenderDispatcher(),
                     scale
             );
-            pool.release(TimeTimelineLinesRenderer.FACTORY, linesRenderer); // Note: Assumes we only render one per frame
         }
 
         renderer.popScissor();
@@ -225,6 +233,26 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
         }
 
         super.drawTimelineCursor(renderer, size);
+    }
+
+    private static TimeTimelineLinesRenderer currentLinesRenderer;
+    private static int currentLinesKey;
+    private static final java.util.ArrayDeque<TimeTimelineLinesRenderer> retiredLinesRenderers = new java.util.ArrayDeque<>();
+    private static final int MAX_RETIRED_RENDERERS = 4;
+
+    private static TimeTimelineLinesRenderer obtainLinesRenderer(int width, int height, int scale) {
+        int key = (width * 31 + height) * 31 + scale;
+        if (currentLinesRenderer == null || currentLinesKey != key) {
+            if (currentLinesRenderer != null) {
+                retiredLinesRenderers.addLast(currentLinesRenderer);
+                while (retiredLinesRenderers.size() > MAX_RETIRED_RENDERERS) {
+                    retiredLinesRenderers.pollFirst().close();
+                }
+            }
+            currentLinesRenderer = new TimeTimelineLinesRenderer();
+            currentLinesKey = key;
+        }
+        return currentLinesRenderer;
     }
 
     private static class TimeTimelineLinesRenderState implements PictureInPictureRenderState {
@@ -340,14 +368,14 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
 
     @Override
     public boolean mouseClick(Click click) {
-        logClick(click);
+        scrubbing = false; // drop any stale state from a press whose release never reached us
         int time = getTimeAt(click.x, click.y);
         Pair<SPPath, Long> pathKeyframePair = getKeyframe(click);
         if (pathKeyframePair.getRight() != null) {
             SPPath path = pathKeyframePair.getLeft();
             // Clicked on keyframe
             long keyframeTime = pathKeyframePair.getRight();
-            if (click.button == 0) { // Left click
+            if (click.button == 1) { // Left click ind SDL3
                 long now = MCVer.milliTime();
                 if (lastClickedKeyframe == keyframeTime) {
                     // Clicked the same keyframe again, potentially a double click
@@ -365,7 +393,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
                 // We might be dragging
                 draggingStartX = click.x;
                 dragging = true;
-            } else if (click.button == 1) { // Right click
+            } else if (click.button == 3) { // Right click in SDL3
                 Keyframe keyframe = gui.getMod().getCurrentTimeline().getKeyframe(path, keyframeTime);
                 for (Property property : keyframe.getProperties()) {
                     applyPropertyToGame(property, keyframe);
@@ -374,10 +402,11 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             return true;
         } else if (time != -1) {
             // Clicked on timeline but not on any keyframe
-            if (click.button == 0) { // Left click
+            if (click.button == 1) { // Left click
                 setCursorPosition(time);
+                scrubbing = true;
                 gui.getMod().setSelected(null, 0);
-            } else if (click.button == 1) { // Right click
+            } else if (click.button == 3) { // Right click in SDL3
                 if (pathKeyframePair.getLeft() != null) {
                     // Apply the value of the clicked path at the clicked position
                     Path path = gui.getMod().getCurrentTimeline().getPath(pathKeyframePair.getLeft());
@@ -410,7 +439,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
     @Override
     public boolean mouseDrag(Click click) {
         if (!dragging) {
-            if (click.button == 0) {
+            if (scrubbing && click.button == 1) {
                 // Left click, the user might try to move the cursor by clicking and holding
                 int time = getTimeAt(click.x, click.y);
                 if (time != -1) {
@@ -466,6 +495,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
 
     @Override
     public boolean mouseRelease(Click click) {
+        scrubbing = false;
         if (dragging) {
             if (actuallyDragging) {
                 gui.getMod().getCurrentTimeline().getTimeline().pushChange(draggingChange);
