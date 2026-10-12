@@ -58,8 +58,6 @@ public class PacketPlayerPositionRotation {
         yaw = in.readFloat();
         pitch = in.readFloat();
         flags = in.readInt();
-
-        
     }
 
     public Packet write(PacketTypeRegistry registry) throws IOException {
@@ -77,8 +75,6 @@ public class PacketPlayerPositionRotation {
             out.writeFloat(yaw);
             out.writeFloat(pitch);
             out.writeInt(flags);
-
-            
         }
         return packet;
     }

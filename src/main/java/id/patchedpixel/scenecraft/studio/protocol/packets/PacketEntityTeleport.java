@@ -33,9 +33,11 @@ public class PacketEntityTeleport {
             double x = in.readDouble();
             double y = in.readDouble();
             double z = in.readDouble();
+
             in.readDouble(); // unused
             in.readDouble(); // unused
             in.readDouble(); // unused
+
             float yaw = in.readFloat();
             float pitch = in.readFloat();
             return new Location(x, y, z, yaw, pitch);
@@ -50,14 +52,19 @@ public class PacketEntityTeleport {
             out.writeDouble(location.getX());
             out.writeDouble(location.getY());
             out.writeDouble(location.getZ());
+
             out.writeDouble(0); // unused
             out.writeDouble(0); // unused
             out.writeDouble(0); // unused
+
             out.writeFloat(location.getYaw());
             out.writeFloat(location.getPitch());
 
+            // Set<Relative> relatives (int bit mask). Required since 1.21.2: 0 means all values are absolute.
+            out.writeInt(0);
             out.writeBoolean(onGround);
         }
+
         return packet;
     }
 }
