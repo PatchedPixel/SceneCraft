@@ -16,7 +16,7 @@ public abstract class Mixin_SkipBlockOutlinesDuringRender {
     @Shadow @Final private GameRenderer gameRenderer;
 
     @Inject(method = "submitHitOutline", at = @At("HEAD"), cancellable = true)
-    private void replayModRender_drawSelectionBox(CallbackInfo ci) {
+    private void sceneCraftRender_drawSelectionBox(CallbackInfo ci) {
         EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) this.gameRenderer).sceneCraftRender_getHandler();
         if (handler != null) {
             ci.cancel();

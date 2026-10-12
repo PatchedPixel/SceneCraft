@@ -67,7 +67,7 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
 public class CameraEntity
         extends LocalPlayer
 {
-    private static final UUID CAMERA_UUID = UUID.nameUUIDFromBytes("ReplayModCamera".getBytes(StandardCharsets.UTF_8));
+    private static final UUID CAMERA_UUID = UUID.nameUUIDFromBytes("SceneCraftCamera".getBytes(StandardCharsets.UTF_8));
 
     /**
      * Roll of this camera in degrees.

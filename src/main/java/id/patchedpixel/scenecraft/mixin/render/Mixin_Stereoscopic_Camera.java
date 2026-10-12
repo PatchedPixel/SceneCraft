@@ -18,7 +18,7 @@ public abstract class Mixin_Stereoscopic_Camera {
     protected abstract void move(float forwards, float up, float right);
 
     @Inject(method = "alignWithEntity", at = @At("RETURN"))
-    private void replayModRender_setupStereoscopicProjection(CallbackInfo ci) {
+    private void sceneCraftRender_setupStereoscopicProjection(CallbackInfo ci) {
         if (getHandler() == null || !(getHandler().data instanceof StereoscopicOpenGlFrameCapturer.Data)) return;
         StereoscopicOpenGlFrameCapturer.Data data = (StereoscopicOpenGlFrameCapturer.Data) getHandler().data;
 

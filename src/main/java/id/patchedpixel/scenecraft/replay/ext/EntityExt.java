@@ -1,9 +1,9 @@
 package id.patchedpixel.scenecraft.replay.ext;
 
 public interface EntityExt {
-    float replaymod$getTrackedYaw();
-    void replaymod$setTrackedYaw(float value);
+    float scenecraft$getTrackedYaw();
+    void scenecraft$setTrackedYaw(float value);
 
-    float replaymod$getTrackedPitch();
-    void replaymod$setTrackedPitch(float value);
+    float scenecraft$getTrackedPitch();
+    void scenecraft$setTrackedPitch(float value);
 }

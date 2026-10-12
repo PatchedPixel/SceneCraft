@@ -15,7 +15,7 @@ import net.minecraft.client.Camera;
 @Mixin(value = Camera.class)
 public abstract class Mixin_StabilizeCamera {
     @WrapOperation(method = "alignWithEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setRotation(FF)V"))
-    private void replayModRender_stabilizeCamera(Camera instance, float yRot, float xRot, Operation<Void> original) {
+    private void sceneCraftRender_stabilizeCamera(Camera instance, float yRot, float xRot, Operation<Void> original) {
         if (getHandler() != null) {
             RenderSettings settings = getHandler().getSettings();
 

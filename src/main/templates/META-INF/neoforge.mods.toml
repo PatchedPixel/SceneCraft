@@ -36,7 +36,7 @@ sources="https://github.com/PatchedPixel/SceneCraft"
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
-    versionRange="[${neo_version},)"
+    versionRange="[26.3.0,)"
     ordering="NONE"
     side="CLIENT"
 

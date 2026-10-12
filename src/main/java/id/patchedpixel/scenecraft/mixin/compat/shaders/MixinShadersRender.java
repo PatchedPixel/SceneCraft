@@ -20,7 +20,7 @@ import id.patchedpixel.scenecraft.core.events.PreRenderHandCallback;
 public abstract class MixinShadersRender {
 
     @Inject(method = { "renderHand0", "renderHand1" }, at = @At("HEAD"), cancellable = true, remap = false)
-    private static void replayModCompat_disableRenderHand0(
+    private static void sceneCraftCompat_disableRenderHand0(
             GameRenderer er,
             PoseStack stack,
             Camera camera,

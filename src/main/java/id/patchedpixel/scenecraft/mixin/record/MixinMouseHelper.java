@@ -28,7 +28,7 @@ public abstract class MixinMouseHelper {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isSpectator()Z"),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true)
-    private void handleReplayModScroll(
+    private void handleSceneCraftScroll(
             long _p0, double _p1, double _p2,
             CallbackInfo ci,
             boolean discreteScroll,

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(FogRenderer.class)
 public abstract class Mixin_ChromaKeyDisableFog {
     @ModifyVariable(method = "getBuffer", at = @At("HEAD"), argsOnly = true)
-    private FogRenderer.FogMode replayModRender_suppressFogIfChromaKeyIsActive(FogRenderer.FogMode fogType) {
+    private FogRenderer.FogMode sceneCraftRender_suppressFogIfChromaKeyIsActive(FogRenderer.FogMode fogType) {
         Minecraft mc = MCVer.getMinecraft();
         if (mc == null) return fogType;
         GameRenderer gameRenderer = mc.gameRenderer;

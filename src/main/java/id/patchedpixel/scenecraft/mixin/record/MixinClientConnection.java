@@ -18,7 +18,7 @@ public abstract class MixinClientConnection {
     private Channel channel;
 
     @Inject(method = "setupCompression", at = @At("RETURN"))
-    private void ensureReplayModRecorderIsAfterDecompress(CallbackInfo ci) {
+    private void ensureSceneCraftRecorderIsAfterDecompress(CallbackInfo ci) {
         ChannelHandler recorder = null;
         for (Map.Entry<String, ChannelHandler> entry : channel.pipeline()) {
             String key = entry.getKey();

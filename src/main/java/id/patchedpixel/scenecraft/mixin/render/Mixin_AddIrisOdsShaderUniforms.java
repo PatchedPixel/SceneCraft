@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class Mixin_AddIrisOdsShaderUniforms {
     // Using ModifyVariable, so we only depend on a single argument. Hoping that reduces the chance of breaking changes.
     @ModifyVariable(method = "generalCommonUniforms", at = @At("HEAD"), argsOnly = true)
-    private static UniformHolder addReplayModOdsUniforms(UniformHolder uniforms) {
+    private static UniformHolder addSceneCraftOdsUniforms(UniformHolder uniforms) {
         IrisODSFrameCapturer ods = IrisODSFrameCapturer.INSTANCE;
         if (ods != null) {
             uniforms.uniform1b(UniformUpdateFrequency.PER_FRAME, "leftEye", ods::isLeftEye);

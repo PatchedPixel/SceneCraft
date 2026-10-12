@@ -22,22 +22,22 @@ public abstract class Mixin_EntityExt implements EntityExt {
     private float trackedPitch = Float.NaN;
 
     @Override
-    public float replaymod$getTrackedYaw() {
+    public float scenecraft$getTrackedYaw() {
         return !Float.isNaN(this.trackedYaw) ? this.trackedYaw : this.yRot;
     }
 
     @Override
-    public float replaymod$getTrackedPitch() {
+    public float scenecraft$getTrackedPitch() {
         return !Float.isNaN(this.trackedPitch) ? this.trackedPitch : this.xRot;
     }
 
     @Override
-    public void replaymod$setTrackedYaw(float value) {
+    public void scenecraft$setTrackedYaw(float value) {
         this.trackedYaw = value;
     }
 
     @Override
-    public void replaymod$setTrackedPitch(float value) {
+    public void scenecraft$setTrackedPitch(float value) {
         this.trackedPitch = value;
     }
 }

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityRenderDispatcher.class)
 public abstract class MixinRenderManager {
     @Inject(method = "submit", at = @At("HEAD"))
-    private void replayModRender_reorientForCubicRendering(
+    private void sceneCraftRender_reorientForCubicRendering(
             CallbackInfo ci,
             @Local(argsOnly = true, ordinal = 0) double dx,
             @Local(argsOnly = true, ordinal = 1) double dy,

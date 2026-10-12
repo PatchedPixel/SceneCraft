@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Hud.class)
 public abstract class Mixin_SkipHudDuringRender {
     @Inject(method = "extractRenderState", at = @At("HEAD"), cancellable = true)
-    private void replayModRender_skipHudDuringRender(CallbackInfo ci) {
+    private void sceneCraftRender_skipHudDuringRender(CallbackInfo ci) {
         if (((EntityRendererHandler.IEntityRenderer) Minecraft.getInstance().gameRenderer).sceneCraftRender_getHandler() != null) {
             ci.cancel();
         }

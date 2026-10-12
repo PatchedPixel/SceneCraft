@@ -35,7 +35,7 @@ public abstract class MixinWorldClient extends Level {
     // E.g. Block place sounds
     @Inject(method = "playSeededSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/core/Holder;Lnet/minecraft/sounds/SoundSource;FFJ)V",
             at = @At("HEAD"))
-    public void replayModRecording_recordClientSound(
+    public void sceneCraftRecording_recordClientSound(
             Entity player,
             double x, double y, double z,
             Holder<SoundEvent> sound,

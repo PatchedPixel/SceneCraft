@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = EntityRenderer.class, priority = 1200)
 public abstract class MixinRender {
     @Inject(method = "shouldRender", at=@At("HEAD"), cancellable = true)
-    public void replayModExtras_isPlayerHidden(Entity entity, @Coerce Object camera, double camX, double camY, double camZ, float partialTicks, CallbackInfoReturnable<Boolean> ci) {
+    public void sceneCraftExtras_isPlayerHidden(Entity entity, @Coerce Object camera, double camX, double camY, double camZ, float partialTicks, CallbackInfoReturnable<Boolean> ci) {
         SceneCraftExtras.instance.get(PlayerOverview.class).ifPresent(playerOverview -> {
             if (entity instanceof Player) {
                 Player player = (Player) entity;

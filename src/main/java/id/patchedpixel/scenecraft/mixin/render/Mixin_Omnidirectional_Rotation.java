@@ -46,7 +46,7 @@ public abstract class Mixin_Omnidirectional_Rotation {
     private int matrixPropertiesDirty;
 
     @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;alignWithEntity(F)V", shift = At.Shift.AFTER))
-    private void replayModRender_setupCubicFrameRotation(CallbackInfo ci) {
+    private void sceneCraftRender_setupCubicFrameRotation(CallbackInfo ci) {
         if (getHandler() == null || !(getHandler().data instanceof CubicOpenGlFrameCapturer.Data)) return;
         CubicOpenGlFrameCapturer.Data data = (CubicOpenGlFrameCapturer.Data) getHandler().data;
 
