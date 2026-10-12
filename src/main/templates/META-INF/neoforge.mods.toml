@@ -13,7 +13,7 @@ displayURL="https://modrinth.com/mod/scenecraft-replay"
 iconFile="assets/scenecraft/favicon_logo.png"
 bannerFile="scenecraft_logo.png"
 description='''
-Fork of ReplayMod.
+Record your world, replay it from any angle, and render it as cinematic video. A modern ReplayMod-based project.
 '''
 
 [[mixins]]

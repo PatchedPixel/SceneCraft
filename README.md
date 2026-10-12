@@ -7,7 +7,6 @@
 Started as a [ReplayMod](https://github.com/ReplayMod/ReplayMod) fork for modern Minecraft, and growing into its own project: multi-version, multi-loader, and rebuilt for the future after the first stable release.
 
 ![Version](https://img.shields.io/badge/version-beta-orange)
-![Minecraft](https://img.shields.io/badge/Minecraft-26.3-62B47A)
 ![Loader](https://img.shields.io/badge/loader-NeoForge%20%7C%20Forge%20(planned)-E68C3A)
 ![Renderer](https://img.shields.io/badge/renderer-OpenGL%20%7C%20Vulkan-8A63D2)
 ![License](https://img.shields.io/badge/license-GPLv3-blue)
@@ -22,15 +21,15 @@ Started as a [ReplayMod](https://github.com/ReplayMod/ReplayMod) fork for modern
 
 ## ✨ Features
 
-| | |
-|---|---|
-| 🔴 **Recording** | Capture singleplayer worlds and multiplayer servers into `.mcpr` replay files, saved automatically. |
-| ▶️ **Replay viewer** | Play, pause, change speed, and jump around the replay timeline. Fly a free camera through the recorded world, or spectate a player. |
-| 🎞️ **Camera path editor** | Place position and time keyframes on a timeline, preview the path, and edit or drag keyframes. Time keyframes let you speed up, slow down, or reverse playback. |
-| 📍 **Markers** | Add event markers to the replay timeline and jump back to them later. |
-| 🖥️ **Rendering** | Render the camera path to video through FFmpeg, with configurable resolution, frame rate and bitrate. Works on both the OpenGL and Vulkan backends. |
-| 🌐 **360° and stereoscopic** | Besides the default render, there are stereoscopic, cubic and equirectangular modes. ODS (VR video) needs an Iris shader pack and the OpenGL backend. |
-| ⚡ **Quick Mode** | A faster replay mode for scrubbing through long recordings. |
+| Feature                      | What you can do                                                                                                                                                  |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 🔴 **Recording**             | Capture singleplayer worlds and multiplayer servers into `.mcpr` replay files, saved automatically.                                                             |
+| ▶️ **Replay viewer**         | Play, pause, change speed, and jump around the replay timeline. Fly a free camera through the recorded world, or spectate a player.                             |
+| 🎞️ **Camera path editor**   | Place position and time keyframes on a timeline, preview the path, and edit or drag keyframes. Time keyframes let you speed up, slow down, or reverse playback. |
+| 📍 **Markers**               | Add event markers to the replay timeline and jump back to them later.                                                                                           |
+| 🖥️ **Rendering**            | Render the camera path to video through FFmpeg, with configurable resolution, frame rate and bitrate. Works on both the OpenGL and Vulkan backends.             |
+| 🌐 **360° and stereoscopic** | Besides the default render, there are stereoscopic, cubic and equirectangular modes. ODS (VR video) needs an Iris shader pack and the OpenGL backend.           |
+| ⚡ **Quick Mode**             | A faster replay mode for scrubbing through long recordings.                                                                                                     |
 
 ## 📦 Supported versions
 
@@ -43,7 +42,7 @@ Started as a [ReplayMod](https://github.com/ReplayMod/ReplayMod) fork for modern
 Each build targets one Minecraft version and one loader, so pick the jar that matches your game.
 
 **You also need**
-- The **Java** version your Minecraft version requires (Java 25 for 26.3)
+- The **Java** version your Minecraft version requires.
 - **FFmpeg** for video rendering. SceneCraft uses the default `ffmpeg` executable unless you set your own in the render settings.
 
 ## 🚀 Installation
@@ -72,7 +71,7 @@ cd SceneCraft
 
 The jar appears in `build/libs/`. To start a development client, run the `runClient` Gradle task (or the equivalent run configuration in your IDE).
 
-You need the JDK that matches the target Minecraft version (JDK 25 for 26.3). The current 26.3 build uses [ModDevGradle](https://github.com/neoforged/ModDevGradle) with NeoForge `26.3.0.64-beta`.
+You need the JDK that matches the target Minecraft version.
 
 ## ⚠️ Known issues
 
