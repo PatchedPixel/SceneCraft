@@ -37,6 +37,8 @@ import java.security.GeneralSecurityException;
 import static id.patchedpixel.scenecraft.extras.SceneCraftExtras.LOGGER;
 import static java.util.Arrays.asList;
 
+// The YouTube uploader is not working anymore
+@Deprecated(forRemoval = true)
 public class GuiYoutubeUpload extends GuiScreen {
     private final GuiScreen previousScreen;
     private final File videoFile;

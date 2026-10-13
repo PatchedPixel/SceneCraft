@@ -9,6 +9,8 @@ import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.InitScreenCallback;
 import net.minecraft.client.gui.screens.Screen;
 
+// The YouTube uploader is not working anymore
+@Deprecated(forRemoval = true)
 public class YoutubeUpload extends EventRegistrations implements Extra {
     @Override
     public void register(SceneCraft mod) {
