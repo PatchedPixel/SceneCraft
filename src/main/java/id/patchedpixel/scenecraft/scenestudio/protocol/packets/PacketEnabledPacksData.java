@@ -28,10 +28,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * This is a ReplayMod-specific custom packet which contains registry data which vanilla MC as of 1.20.5 no longer sends
+ * This is a SceneCraft-specific custom packet which contains registry data which vanilla MC as of 1.20.5 no longer sends
  * across the wire because server and client have already agreed (via the "known packs" packets) that they both already
  * know it.
- * SceneStudio doesn't though, so during recording ReplayMod will inject this custom packet containing that data
+ * SceneStudio doesn't though, so during recording SceneCraft will inject this custom packet containing that data
  * at the end of the configuration phase.
  */
 public class PacketEnabledPacksData {
