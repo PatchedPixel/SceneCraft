@@ -24,6 +24,7 @@
  */
 package id.patchedpixel.scenecraft.gui;
 
+import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.gui.utils.NonNull;
 import id.patchedpixel.scenecraft.gui.versions.MCVer;
 import net.minecraft.client.Minecraft;
@@ -142,7 +143,7 @@ public class MinecraftGuiRenderer implements GuiRenderer {
         if (boundTexture != null) {
             identifier = boundTexture;
         } else {
-            identifier = Identifier.fromNamespaceAndPath("jgui", "__tmp_texture__");
+            identifier = Identifier.fromNamespaceAndPath(SceneCraft.MOD_ID, "__tmp_texture__");
             mc.getTextureManager().register(identifier, new AbstractTexture() {
                 { this.textureView = RenderSystem.getDevice().createTextureView(boundTextureGpu); }
                 @Override public void close() {} // ignore later `destroyTexture` call
