@@ -1,23 +1,24 @@
 /*
  * Copyright (c) 2021
  *
- * This file is part of ReplayStudio.
+ * This file is part of SceneStudio.
  *
- * ReplayStudio is free software: you can redistribute it and/or modify
+ * SceneStudio is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ReplayStudio is distributed in the hope that it will be useful,
+ * SceneStudio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ReplayStudio.  If not, see <https://www.gnu.org/licenses/>.
+ * along with SceneStudio.  If not, see <https://www.gnu.org/licenses/>.
  */
 package id.patchedpixel.scenecraft.studio.io;
 
+import id.patchedpixel.scenecraft.studio.studio.SceneStudio;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -32,7 +33,6 @@ import id.patchedpixel.scenecraft.studio.protocol.CurrentProtocol;
 import id.patchedpixel.scenecraft.studio.protocol.PacketTypeRegistry;
 import id.patchedpixel.scenecraft.studio.protocol.packets.PacketLoginSuccess;
 import id.patchedpixel.scenecraft.studio.replay.ReplayMetaData;
-import id.patchedpixel.scenecraft.studio.studio.ReplayStudio;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -95,7 +95,7 @@ public class ReplayOutputStream extends OutputStream {
      * @throws IOException If an exception occurred while writing the first entry to the zip output stream
      */
     public ReplayOutputStream(OutputStream out, ReplayMetaData metaData) throws IOException {
-        Studio studio = new ReplayStudio();
+        Studio studio = new SceneStudio();
         if (metaData == null) {
             metaData = new ReplayMetaData();
             metaData.setSingleplayer(false);
@@ -105,7 +105,7 @@ public class ReplayOutputStream extends OutputStream {
         metaData.setFileFormat("MCPR");
         metaData.setFileFormatVersion(ReplayMetaData.CURRENT_FILE_FORMAT_VERSION);
         metaData.setProtocolVersion(CurrentProtocol.get());
-        metaData.setGenerator("SceneCraft ReplayStudio v" + studio.getVersion());
+        metaData.setGenerator("SceneCraft SceneStudio v" + studio.getVersion());
         this.metaData = metaData;
 
         this.out = zipOut = new ZipOutputStream(out);

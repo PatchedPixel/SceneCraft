@@ -91,6 +91,8 @@ dependencies {
     }
 
     compileOnly("maven.modrinth:YL57xq9U:Ag5S66CF")
+    compileOnly("maven.modrinth:1bokaNcj:j2Xo3Dhc")
+    compileOnly("maven.modrinth:9eGKb6K1:3rpCvvMZ")
 
     implementation(jarJar("com.googlecode.mp4parser:isoparser:1.1.22"))
     implementation(jarJar("de.javagl:jgltf-model:2.0.4"))

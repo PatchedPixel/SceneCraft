@@ -1,20 +1,20 @@
 /*
  * Copyright (c) 2021
  *
- * This file is part of ReplayStudio.
+ * This file is part of SceneStudio.
  *
- * ReplayStudio is free software: you can redistribute it and/or modify
+ * SceneStudio is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ReplayStudio is distributed in the hope that it will be useful,
+ * SceneStudio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ReplayStudio.  If not, see <https://www.gnu.org/licenses/>.
+ * along with SceneStudio.  If not, see <https://www.gnu.org/licenses/>.
  */
 package id.patchedpixel.scenecraft.studio.studio;
 
@@ -31,12 +31,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class ReplayStudio implements Studio {
+public class SceneStudio implements Studio {
     // Filters are registered explicitly instead of through a ServiceLoader, which does not reliably
     // see classes of a mod from the context class loader.
     private final Map<String, Supplier<StreamFilter>> streamFilters = new LinkedHashMap<>();
 
-    public ReplayStudio() {
+    public SceneStudio() {
         register(new ChangeTimestampFilter().getName(), ChangeTimestampFilter::new);
         register(new DimensionTracker().getName(), DimensionTracker::new);
         register(new PacketCountFilter().getName(), PacketCountFilter::new);
@@ -52,7 +52,7 @@ public class ReplayStudio implements Studio {
 
     @Override
     public String getName() {
-        return "ReplayStudio";
+        return "SceneStudio";
     }
 
     @Override

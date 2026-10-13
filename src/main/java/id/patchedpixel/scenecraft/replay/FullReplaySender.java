@@ -1089,8 +1089,8 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                 bytes = new byte[0];
                 return;
             }
-            // We need to re-encode ReplayStudio packets, so we can later decode them as NMS packets
-            // The main reason we aren't reading them as NMS packets is that ReplayStudio has its own
+            // We need to re-encode SceneStudio packets, so we can later decode them as NMS packets
+            // The main reason we aren't reading them as NMS packets is that SceneStudio has its own
             // (version independent) packet representation which also handles the cache/squash filters.
             synchronized (byteBuf) {
                 byteBuf.markReaderIndex(); // Mark the current reader and writer index (should be at start)

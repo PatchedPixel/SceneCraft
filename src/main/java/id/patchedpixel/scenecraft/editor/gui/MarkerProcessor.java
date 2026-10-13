@@ -237,7 +237,7 @@ public class MarkerProcessor {
 
                     outputReplayFile.writeModInfo(inputReplayFile.getModInfo());
 
-                    // We could filter these but ReplayStudio doesn't yet provide a nice method for determining
+                    // We could filter these but SceneStudio doesn't yet provide a nice method for determining
                     // which ones are used.
                     Map<Integer, String> resourcePackIndex = inputReplayFile.getResourcePackIndex();
                     if (resourcePackIndex != null) {

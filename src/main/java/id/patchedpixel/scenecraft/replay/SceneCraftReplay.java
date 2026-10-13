@@ -4,6 +4,8 @@ import com.google.common.base.Function;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import de.maxhenkel.voicechat.VoicechatClient;
+import id.patchedpixel.scenecraft.compat.SceneCraftCompat;
 import id.patchedpixel.scenecraft.core.KeyBindingRegistry;
 import id.patchedpixel.scenecraft.core.Module;
 import id.patchedpixel.scenecraft.core.SceneCraft;
@@ -166,6 +168,9 @@ public class SceneCraftReplay implements Module {
 
     public ReplayHandler startReplay(ReplayFile replayFile, boolean checkModCompat, boolean asyncMode) throws IOException {
         if (replayHandler != null) {
+            if(VoicechatClient.CLIENT_CONFIG.hideIcons.get()) {
+                SceneCraftCompat.showModHud();
+            }
             replayHandler.endReplay();
         }
         if (checkModCompat) {
@@ -185,6 +190,9 @@ public class SceneCraftReplay implements Module {
             }
         }
         replayHandler = new ReplayHandler(replayFile, asyncMode);
+        if(!VoicechatClient.CLIENT_CONFIG.hideIcons.get()) {
+            SceneCraftCompat.hideModHud();
+        }
         KeyMapping.resetMapping(); // see Mixin_ContextualKeyBindings
 
         return replayHandler;
@@ -192,6 +200,9 @@ public class SceneCraftReplay implements Module {
 
     public void forcefullyStopReplay() {
         replayHandler = null;
+        if(VoicechatClient.CLIENT_CONFIG.hideIcons.get()) {
+            SceneCraftCompat.showModHud();
+        }
         KeyMapping.resetMapping(); // see Mixin_ContextualKeyBindings
     }
 

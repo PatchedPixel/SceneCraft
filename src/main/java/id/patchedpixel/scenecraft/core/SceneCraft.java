@@ -13,7 +13,7 @@ import id.patchedpixel.scenecraft.extras.SceneCraftExtras;
 import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.render.SceneCraftRender;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
-import id.patchedpixel.scenecraft.studio.studio.ReplayStudio;
+import id.patchedpixel.scenecraft.studio.studio.SceneStudio;
 import id.patchedpixel.scenecraft.studio.util.I18n;
 import id.patchedpixel.scenecraft.simplepathing.SceneCraftSimplePathing;
 import net.minecraft.client.Minecraft;
@@ -182,6 +182,6 @@ public class SceneCraft implements Module, Scheduler {
     }
 
     public static boolean isCompatible(int fileFormatVersion, int protocolVersion) {
-        return new ReplayStudio().isCompatible(fileFormatVersion, protocolVersion, MCVer.getProtocolVersion());
+        return new SceneStudio().isCompatible(fileFormatVersion, protocolVersion, MCVer.getProtocolVersion());
     }
 }

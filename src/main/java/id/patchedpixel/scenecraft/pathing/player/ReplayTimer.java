@@ -15,11 +15,7 @@ public class ReplayTimer extends DeltaTracker.Timer {
 
     @Override
     // This should be handled by Remap but it isn't (was handled before a9724e3).
-    public
-    int
-    advanceGameTime(
-            long sysClock
-    ) {
+    public int advanceGameTime(long sysClock) {
         UpdatedCallback.EVENT.invoker().onUpdate();
         return ticksThisFrame;
     }

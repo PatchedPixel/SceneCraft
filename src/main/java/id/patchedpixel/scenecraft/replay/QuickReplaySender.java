@@ -62,7 +62,7 @@ public class QuickReplaySender extends ChannelHandlerAdapter implements ReplaySe
 
             @Override
             protected void dispatch(id.patchedpixel.scenecraft.studio.protocol.Packet packet) {
-                // Convert ReplayStudio-Netty buffer into MC-Netty buffer
+                // Convert SceneStudio-Netty buffer into MC-Netty buffer
                 ByteBuf byteBuf = packet.getBuf();
                 int size = byteBuf.readableBytes();
                 if (buf.length < size) {

@@ -1,20 +1,20 @@
 /*
  * Copyright (c) 2023
  *
- * This file is part of ReplayStudio.
+ * This file is part of SceneStudio.
  *
- * ReplayStudio is free software: you can redistribute it and/or modify
+ * SceneStudio is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ReplayStudio is distributed in the hope that it will be useful,
+ * SceneStudio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ReplayStudio.  If not, see <https://www.gnu.org/licenses/>.
+ * along with SceneStudio.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package id.patchedpixel.scenecraft.studio.protocol.packets;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * This is a ReplayMod-specific custom packet which contains registry data which vanilla MC as of 1.20.5 no longer sends
  * across the wire because server and client have already agreed (via the "known packs" packets) that they both already
  * know it.
- * ReplayStudio doesn't though, so during recording ReplayMod will inject this custom packet containing that data
+ * SceneStudio doesn't though, so during recording ReplayMod will inject this custom packet containing that data
  * at the end of the configuration phase.
  */
 public class PacketEnabledPacksData {

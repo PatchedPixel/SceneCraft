@@ -1,20 +1,20 @@
 /*
  * Copyright (c) 2021
  *
- * This file is part of ReplayStudio.
+ * This file is part of SceneStudio.
  *
- * ReplayStudio is free software: you can redistribute it and/or modify
+ * SceneStudio is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * ReplayStudio is distributed in the hope that it will be useful,
+ * SceneStudio is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with ReplayStudio.  If not, see <https://www.gnu.org/licenses/>.
+ * along with SceneStudio.  If not, see <https://www.gnu.org/licenses/>.
  */
 package id.patchedpixel.scenecraft.studio.protocol.packets;
 
@@ -83,7 +83,7 @@ public class PacketJoinGame {
         this.enforcesSecureChat = other.enforcesSecureChat;
     }
 
-    public static PacketJoinGame read(Packet packet, /* 1.20.2+ */ Registries registries) throws IOException {
+    public static PacketJoinGame read(Packet packet, Registries registries) throws IOException {
         try (Packet.Reader in = packet.reader()) {
             PacketJoinGame joinGame = new PacketJoinGame();
             joinGame.registries = registries;
@@ -142,6 +142,7 @@ public class PacketJoinGame {
         try (Packet.Writer out = packet.overwrite()) {
             write(packet, out);
         }
+
         return packet;
     }
 
