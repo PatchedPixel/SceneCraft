@@ -2,7 +2,7 @@ package id.patchedpixel.scenecraft.pathing.player;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.studio.pathing.path.Timeline;
+import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
 import net.minecraft.client.Minecraft;
 
 /**

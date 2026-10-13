@@ -4,9 +4,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.ReplaySender;
-import id.patchedpixel.scenecraft.studio.pathing.property.AbstractProperty;
-import id.patchedpixel.scenecraft.studio.pathing.property.PropertyPart;
-import id.patchedpixel.scenecraft.studio.pathing.property.PropertyParts;
+import id.patchedpixel.scenecraft.scenestudio.pathing.property.AbstractProperty;
+import id.patchedpixel.scenecraft.scenestudio.pathing.property.PropertyPart;
+import id.patchedpixel.scenecraft.scenestudio.pathing.property.PropertyParts;
 import id.patchedpixel.scenecraft.gui.utils.NonNull;
 
 import java.io.IOException;

@@ -12,7 +12,7 @@ import id.patchedpixel.scenecraft.gui.layout.HorizontalLayout;
 import id.patchedpixel.scenecraft.gui.layout.VerticalLayout;
 import id.patchedpixel.scenecraft.gui.popup.AbstractGuiPopup;
 import id.patchedpixel.scenecraft.gui.utils.Colors;
-import id.patchedpixel.scenecraft.studio.data.Marker;
+import id.patchedpixel.scenecraft.scenestudio.data.Marker;
 
 import java.util.function.Consumer;
 

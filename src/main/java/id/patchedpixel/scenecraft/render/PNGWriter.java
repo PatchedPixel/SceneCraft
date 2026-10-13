@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.render;
 
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.studio.util.IOConsumer;
+import id.patchedpixel.scenecraft.scenestudio.util.IOConsumer;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.rendering.Channel;
 import id.patchedpixel.scenecraft.render.rendering.FrameConsumer;

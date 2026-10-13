@@ -4,7 +4,7 @@ import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.record.Setting;
 import id.patchedpixel.scenecraft.replay.gui.screen.GuiReplayViewer;
-import id.patchedpixel.scenecraft.studio.replay.ReplayMetaData;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
 import id.patchedpixel.scenecraft.gui.container.AbstractGuiScreen;
 import id.patchedpixel.scenecraft.gui.container.GuiContainer;
 import id.patchedpixel.scenecraft.gui.container.GuiPanel;

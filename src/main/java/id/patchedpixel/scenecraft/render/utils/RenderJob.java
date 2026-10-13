@@ -7,10 +7,10 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import id.patchedpixel.scenecraft.render.RenderSettings;
 import java.util.Optional;
-import id.patchedpixel.scenecraft.studio.pathing.PathingRegistry;
-import id.patchedpixel.scenecraft.studio.pathing.path.Timeline;
-import id.patchedpixel.scenecraft.studio.pathing.serialize.TimelineSerialization;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.pathing.PathingRegistry;
+import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
+import id.patchedpixel.scenecraft.scenestudio.pathing.serialize.TimelineSerialization;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.simplepathing.SPTimeline;
 
 import java.io.IOException;

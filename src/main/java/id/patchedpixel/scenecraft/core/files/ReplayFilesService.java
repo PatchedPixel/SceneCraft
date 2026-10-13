@@ -2,9 +2,9 @@ package id.patchedpixel.scenecraft.core.files;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.gui.RestoreReplayGui;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
-import id.patchedpixel.scenecraft.studio.replay.ZipReplayFile;
-import id.patchedpixel.scenecraft.studio.studio.SceneStudio;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ZipReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.studio.SceneStudio;
 import id.patchedpixel.scenecraft.gui.container.GuiScreen;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;

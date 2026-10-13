@@ -5,11 +5,11 @@ import com.google.gson.Gson;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.studio.io.ReplayInputStream;
-import id.patchedpixel.scenecraft.studio.io.ReplayOutputStream;
-import id.patchedpixel.scenecraft.studio.protocol.State;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
-import id.patchedpixel.scenecraft.studio.replay.ReplayMetaData;
+import id.patchedpixel.scenecraft.scenestudio.io.ReplayInputStream;
+import id.patchedpixel.scenecraft.scenestudio.io.ReplayOutputStream;
+import id.patchedpixel.scenecraft.scenestudio.protocol.State;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
 import id.patchedpixel.scenecraft.gui.container.AbstractGuiScreen;
 import id.patchedpixel.scenecraft.gui.container.GuiPanel;
 import id.patchedpixel.scenecraft.gui.container.GuiScreen;
@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.function.Consumer;
 
-import static id.patchedpixel.scenecraft.studio.util.Utils.readInt;
-import static id.patchedpixel.scenecraft.studio.util.Utils.writeInt;
+import static id.patchedpixel.scenecraft.scenestudio.util.Utils.readInt;
+import static id.patchedpixel.scenecraft.scenestudio.util.Utils.writeInt;
 
 public class RestoreReplayGui extends AbstractGuiScreen<RestoreReplayGui> {
     private static Logger LOGGER = LogManager.getLogger();

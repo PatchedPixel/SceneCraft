@@ -1,8 +1,8 @@
 package id.patchedpixel.scenecraft.replay.gui.screen;
 
 import id.patchedpixel.scenecraft.core.utils.ModCompat;
-import id.patchedpixel.scenecraft.studio.data.ModInfo;
-import id.patchedpixel.scenecraft.studio.util.I18n;
+import id.patchedpixel.scenecraft.scenestudio.data.ModInfo;
+import id.patchedpixel.scenecraft.scenestudio.util.I18n;
 import id.patchedpixel.scenecraft.gui.container.AbstractGuiScreen;
 import id.patchedpixel.scenecraft.gui.container.GuiPanel;
 import id.patchedpixel.scenecraft.gui.container.GuiVerticalList;

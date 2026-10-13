@@ -68,7 +68,7 @@ public class SceneCraftRecorder implements Module {
 
     private static final net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<EnabledPacksPayload> ENABLED_PACKS_DATA =
             new net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<>(
-                    net.minecraft.resources.Identifier.parse(id.patchedpixel.scenecraft.studio.protocol.packets.PacketEnabledPacksData.ID));
+                    net.minecraft.resources.Identifier.parse(id.patchedpixel.scenecraft.scenestudio.protocol.packets.PacketEnabledPacksData.ID));
     private static final net.minecraft.network.codec.StreamCodec<? super net.minecraft.network.FriendlyByteBuf, EnabledPacksPayload> ENABLED_PACKS_CODEC =
             net.minecraft.network.codec.StreamCodec.of(
                     (buf, payload) -> buf.writeBytes(payload.bytes()),

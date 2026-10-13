@@ -2,8 +2,8 @@ package id.patchedpixel.scenecraft.simplepathing.properties;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import id.patchedpixel.scenecraft.studio.pathing.property.AbstractProperty;
-import id.patchedpixel.scenecraft.studio.pathing.property.PropertyPart;
+import id.patchedpixel.scenecraft.scenestudio.pathing.property.AbstractProperty;
+import id.patchedpixel.scenecraft.scenestudio.pathing.property.PropertyPart;
 import id.patchedpixel.scenecraft.gui.utils.NonNull;
 import org.apache.commons.lang3.ObjectUtils;
 

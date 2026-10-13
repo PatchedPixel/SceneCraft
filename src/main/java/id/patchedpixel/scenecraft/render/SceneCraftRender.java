@@ -7,7 +7,7 @@ import id.patchedpixel.scenecraft.render.utils.RenderJob;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.events.ReplayClosedCallback;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.gui.container.VanillaGuiScreen;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import net.minecraft.CrashReport;

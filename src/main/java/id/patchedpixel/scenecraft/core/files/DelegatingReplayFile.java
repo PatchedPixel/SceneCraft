@@ -1,17 +1,16 @@
 package id.patchedpixel.scenecraft.core.files;
 
-import id.patchedpixel.scenecraft.studio.data.Marker;
-import id.patchedpixel.scenecraft.studio.data.ModInfo;
-import id.patchedpixel.scenecraft.studio.data.ReplayAssetEntry;
-import id.patchedpixel.scenecraft.studio.io.ReplayInputStream;
-import id.patchedpixel.scenecraft.studio.io.ReplayOutputStream;
-import id.patchedpixel.scenecraft.studio.pathing.PathingRegistry;
-import id.patchedpixel.scenecraft.studio.pathing.path.Timeline;
-import id.patchedpixel.scenecraft.studio.protocol.PacketTypeRegistry;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
-import id.patchedpixel.scenecraft.studio.replay.ReplayMetaData;
+import id.patchedpixel.scenecraft.scenestudio.data.Marker;
+import id.patchedpixel.scenecraft.scenestudio.data.ModInfo;
+import id.patchedpixel.scenecraft.scenestudio.data.ReplayAssetEntry;
+import id.patchedpixel.scenecraft.scenestudio.io.ReplayInputStream;
+import id.patchedpixel.scenecraft.scenestudio.io.ReplayOutputStream;
+import id.patchedpixel.scenecraft.scenestudio.pathing.PathingRegistry;
+import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
+import id.patchedpixel.scenecraft.scenestudio.protocol.PacketTypeRegistry;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

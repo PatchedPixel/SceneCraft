@@ -6,9 +6,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
 import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
-import id.patchedpixel.scenecraft.studio.protocol.State;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
-import id.patchedpixel.scenecraft.studio.rar.RandomAccessReplay;
+import id.patchedpixel.scenecraft.scenestudio.protocol.State;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.rar.RandomAccessReplay;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import io.netty.buffer.ByteBuf;
@@ -61,7 +61,7 @@ public class QuickReplaySender extends ChannelHandlerAdapter implements ReplaySe
             private byte[] buf = new byte[0];
 
             @Override
-            protected void dispatch(id.patchedpixel.scenecraft.studio.protocol.Packet packet) {
+            protected void dispatch(id.patchedpixel.scenecraft.scenestudio.protocol.Packet packet) {
                 // Convert SceneStudio-Netty buffer into MC-Netty buffer
                 ByteBuf byteBuf = packet.getBuf();
                 int size = byteBuf.readableBytes();

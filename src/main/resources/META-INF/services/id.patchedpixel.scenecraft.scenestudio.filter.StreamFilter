@@ -1,0 +1,4 @@
+id.patchedpixel.scenecraft.scenestudio.filter.PacketCountFilter
+id.patchedpixel.scenecraft.scenestudio.filter.RemoveFilter
+id.patchedpixel.scenecraft.scenestudio.filter.SquashFilter
+id.patchedpixel.scenecraft.scenestudio.filter.ChangeTimestampFilter

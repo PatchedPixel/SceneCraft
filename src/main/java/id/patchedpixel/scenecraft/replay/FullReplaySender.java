@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.replay;
 
-import id.patchedpixel.scenecraft.studio.netio.NetOutput;
-import id.patchedpixel.scenecraft.studio.netio.ByteBufNetOutput;
+import id.patchedpixel.scenecraft.scenestudio.netio.NetOutput;
+import id.patchedpixel.scenecraft.scenestudio.netio.ByteBufNetOutput;
 import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
 import id.patchedpixel.scenecraft.core.SceneCraft;
@@ -9,11 +9,11 @@ import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
 import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
-import id.patchedpixel.scenecraft.studio.io.ReplayInputStream;
-import id.patchedpixel.scenecraft.studio.protocol.State;
-import id.patchedpixel.scenecraft.studio.protocol.PacketType;
-import id.patchedpixel.scenecraft.studio.protocol.PacketTypeRegistry;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.io.ReplayInputStream;
+import id.patchedpixel.scenecraft.scenestudio.protocol.State;
+import id.patchedpixel.scenecraft.scenestudio.protocol.PacketType;
+import id.patchedpixel.scenecraft.scenestudio.protocol.PacketTypeRegistry;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import io.netty.buffer.Unpooled;
@@ -1076,12 +1076,12 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
         private final PacketType type;
 
         PacketData(ReplayInputStream in) throws IOException {
-            id.patchedpixel.scenecraft.studio.PacketData data = in.readPacket();
+            id.patchedpixel.scenecraft.scenestudio.PacketData data = in.readPacket();
             if (data == null) {
                 throw new EOFException();
             }
             timestamp = (int) data.getTime();
-            id.patchedpixel.scenecraft.studio.protocol.Packet packet = data.getPacket();
+            id.patchedpixel.scenecraft.scenestudio.protocol.Packet packet = data.getPacket();
             type = packet.getType();
             // Workaround for SceneCraft 2.7.16-17 saving the LoginSuccess packet with an incorrect packet id
             // A fake one will have been sythesized by ReplayStudo, so we can simply drop the broken one.

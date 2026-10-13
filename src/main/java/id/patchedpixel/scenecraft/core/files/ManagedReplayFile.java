@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.core.files;
 
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 
 import java.io.IOException;
 

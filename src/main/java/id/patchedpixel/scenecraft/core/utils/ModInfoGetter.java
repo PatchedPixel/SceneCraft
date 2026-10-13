@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.core.utils;
 
-import id.patchedpixel.scenecraft.studio.data.ModInfo;
+import id.patchedpixel.scenecraft.scenestudio.data.ModInfo;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.neoforged.fml.ModList;

@@ -1,9 +1,9 @@
 package id.patchedpixel.scenecraft.simplepathing;
 
-import id.patchedpixel.scenecraft.studio.pathing.interpolation.CatmullRomSplineInterpolator;
-import id.patchedpixel.scenecraft.studio.pathing.interpolation.CubicSplineInterpolator;
-import id.patchedpixel.scenecraft.studio.pathing.interpolation.Interpolator;
-import id.patchedpixel.scenecraft.studio.pathing.interpolation.LinearInterpolator;
+import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.CatmullRomSplineInterpolator;
+import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.CubicSplineInterpolator;
+import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator;
+import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.LinearInterpolator;
 
 import java.util.function.Supplier;
 

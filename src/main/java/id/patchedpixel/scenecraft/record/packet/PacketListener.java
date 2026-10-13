@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.record.packet;
 
-import id.patchedpixel.scenecraft.studio.protocol.State;
+import id.patchedpixel.scenecraft.scenestudio.protocol.State;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
@@ -11,12 +11,12 @@ import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import id.patchedpixel.scenecraft.record.Setting;
 import id.patchedpixel.scenecraft.record.gui.GuiSavingReplay;
 import id.patchedpixel.scenecraft.record.handler.ConnectionEventHandler;
-import id.patchedpixel.scenecraft.studio.PacketData;
-import id.patchedpixel.scenecraft.studio.data.Marker;
-import id.patchedpixel.scenecraft.studio.io.ReplayOutputStream;
-import id.patchedpixel.scenecraft.studio.protocol.Packet;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
-import id.patchedpixel.scenecraft.studio.replay.ReplayMetaData;
+import id.patchedpixel.scenecraft.scenestudio.PacketData;
+import id.patchedpixel.scenecraft.scenestudio.data.Marker;
+import id.patchedpixel.scenecraft.scenestudio.io.ReplayOutputStream;
+import id.patchedpixel.scenecraft.scenestudio.protocol.Packet;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
 import id.patchedpixel.scenecraft.gui.container.VanillaGuiScreen;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.record.packet;
 
 import com.google.common.hash.Hashing;
-import id.patchedpixel.scenecraft.studio.replay.ReplayFile;
+import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

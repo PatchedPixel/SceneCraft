@@ -17,7 +17,7 @@ import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.replay.Setting;
 import id.patchedpixel.scenecraft.mixin.replay.FirstPersonRendererAccessor;
-import id.patchedpixel.scenecraft.studio.util.Location;
+import id.patchedpixel.scenecraft.scenestudio.util.Location;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.multiplayer.ClientPacketListener;

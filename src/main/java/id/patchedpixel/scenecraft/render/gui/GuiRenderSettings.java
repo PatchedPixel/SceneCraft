@@ -9,7 +9,7 @@ import id.patchedpixel.scenecraft.render.SceneCraftRender;
 import id.patchedpixel.scenecraft.render.FFmpegWriter;
 import id.patchedpixel.scenecraft.render.rendering.VideoRenderer;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
-import id.patchedpixel.scenecraft.studio.pathing.path.Timeline;
+import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
 import id.patchedpixel.scenecraft.gui.container.AbstractGuiScreen;
 import id.patchedpixel.scenecraft.gui.container.GuiContainer;
 import id.patchedpixel.scenecraft.gui.container.GuiPanel;
