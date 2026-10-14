@@ -18,4 +18,4 @@ Briefly explain:
 - How you tested it, if applicable.
 - Any relevant performance impact.
   
-Thanks for helping make SceneCraft smoother and better!
+Thanks for helping make SceneCraft better!
