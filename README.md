@@ -45,6 +45,9 @@ Each build targets one Minecraft version and one loader, so pick the jar that ma
 - The **Java** version your Minecraft version requires.
 - **FFmpeg** for video rendering. SceneCraft uses the default `ffmpeg` executable unless you set your own in the render settings.
 
+## Contributing to SceneCraft
+If you want to contribute to SceneCraft, read [workflow][CONTRIBUTING].
+
 ## 🚀 Installation
 
 1. Install the mod loader for your Minecraft version.
@@ -117,3 +120,5 @@ Existing replays and workflows are a priority when this happens, so the stable r
 ## 📄 License
 
 SceneCraft is licensed under the **GNU General Public License v3.0**. See [LICENSE.md](LICENSE.md). Bundled components keep their own licenses and copyright notices.
+
+[CONTRIBUTING]: ../docs/CONTRIBUTING.md
