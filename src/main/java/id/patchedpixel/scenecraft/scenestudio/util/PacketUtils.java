@@ -93,6 +93,8 @@ public class PacketUtils {
                 return new Location(x, y, z, yaw, pitch);
             case EntityTeleport:
                 return PacketEntityTeleport.getLocation(packet);
+            case EntityPositionSync:
+                return PacketEntityTeleport.getSyncLocation(packet);
             default:
                 return null;
         }

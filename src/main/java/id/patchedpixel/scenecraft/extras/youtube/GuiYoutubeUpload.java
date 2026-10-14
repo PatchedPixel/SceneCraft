@@ -201,7 +201,8 @@ public class GuiYoutubeUpload extends GuiScreen {
                     snippet.setTags(asList(tagsField.getText().split(",")));
                     upload = new YoutubeUploader(getMinecraft(), videoFile, videoFrames,
                             thumbnailFormat, thumbnailImage, settings, visibility, snippet);
-                    ListenableFuture<Video> future = upload.upload();
+                    final YoutubeUploader currentUpload = upload;
+                    ListenableFuture<Video> future = currentUpload.upload();
                     Futures.addCallback(future, new FutureCallback<Video>() {
                         @Override
                         public void onSuccess(Video result) {
@@ -218,7 +219,7 @@ public class GuiYoutubeUpload extends GuiScreen {
 
                         @Override
                         public void onFailure(Throwable t) {
-                            if (t instanceof InterruptedException || upload.isCancelled()) {
+                            if (t instanceof InterruptedException || currentUpload.isCancelled()) {
                                 progressBar.setProgress(0);
                                 progressBar.setLabel("%d%%");
                             } else {

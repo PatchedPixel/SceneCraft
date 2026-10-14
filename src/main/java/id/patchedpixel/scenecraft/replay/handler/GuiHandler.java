@@ -141,6 +141,7 @@ public class GuiHandler extends EventRegistrations {
         if (!(guiScreen instanceof TitleScreen || guiScreen instanceof JoinMultiplayerScreen)) {
             return;
         }
+        id.patchedpixel.scenecraft.compat.SceneCraftCompat.recoverStaleHud();
 
         if (mod.getReplayHandler() != null) {
             // Something went terribly wrong and we ended up in the main menu with the replay still active.

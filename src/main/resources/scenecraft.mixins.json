@@ -5,6 +5,7 @@
   "plugin": "id.patchedpixel.scenecraft.core.SceneCraftMixinConfigPlugin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "compat.minimap.MinimapRendererMixin",
     "compat.shaders.MixinChunkVisibility",
     "compat.shaders.MixinShaderEntityRenderer",
     "compat.shaders.MixinShadersRender",
@@ -112,6 +113,5 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "compat.minimap.MinimapRendererMixin"
   ]
 }

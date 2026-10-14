@@ -62,6 +62,35 @@ public class QuickReplaySender extends ChannelHandlerAdapter implements ReplaySe
 
             @Override
             protected void dispatch(id.patchedpixel.scenecraft.scenestudio.protocol.Packet packet) {
+                // Teleports are built with Minecraft's own packet class instead of hand-written bytes: the wire
+                // format of entity movement changes between 26.x builds, and one malformed packet makes the
+                // decoder keep leftover bytes that corrupt every packet after it.
+                if (packet.getType() == id.patchedpixel.scenecraft.scenestudio.protocol.PacketType.EntityTeleport) {
+                    try {
+                        int entityId;
+                        try (id.patchedpixel.scenecraft.scenestudio.protocol.Packet.Reader in = packet.reader()) {
+                            entityId = in.readVarInt();
+                        }
+                        id.patchedpixel.scenecraft.scenestudio.util.Location loc =
+                                id.patchedpixel.scenecraft.scenestudio.protocol.packets.PacketEntityTeleport.getLocation(packet);
+                        packet.release();
+                        channel.pipeline().fireChannelRead(
+                                new net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket(
+                                        entityId,
+                                        new net.minecraft.world.entity.PositionMoveRotation(
+                                                new net.minecraft.world.phys.Vec3(loc.getX(), loc.getY(), loc.getZ()),
+                                                net.minecraft.world.phys.Vec3.ZERO,
+                                                loc.getYaw(), loc.getPitch()),
+                                        java.util.Set.of(),
+                                        false));
+                        return;
+                    } catch (IOException e) {
+                        LOGGER.error("Failed to build entity teleport packet", e);
+                        packet.release();
+                        return;
+                    }
+                }
+
                 // Convert SceneStudio-Netty buffer into MC-Netty buffer
                 ByteBuf byteBuf = packet.getBuf();
                 int size = byteBuf.readableBytes();

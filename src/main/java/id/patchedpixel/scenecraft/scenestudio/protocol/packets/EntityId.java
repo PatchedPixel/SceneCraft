@@ -83,6 +83,7 @@ public class EntityId {
             case EntityAnimation:
             case EntityProperties:
             case EntityTeleport:
+            case EntityPositionSync:
             case EntityVelocity:
             case SwitchCamera: try (Packet.Reader in = packet.reader()) {
                 return in.readVarInt();

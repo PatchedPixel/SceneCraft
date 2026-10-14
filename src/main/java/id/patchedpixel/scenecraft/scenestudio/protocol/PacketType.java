@@ -66,6 +66,7 @@ public enum PacketType {
     EntityRotation(State.PLAY, "move_entity_rot"),
     EntityPositionRotation(State.PLAY, "move_entity_pos_rot"),
     EntityTeleport(State.PLAY, "teleport_entity"),
+    EntityPositionSync(State.PLAY, "entity_position_sync"),
     EntityHeadLook(State.PLAY, "rotate_head"),
     EntityStatus(State.PLAY, "entity_event"),
     EntityAttach(State.PLAY, "set_entity_link"),

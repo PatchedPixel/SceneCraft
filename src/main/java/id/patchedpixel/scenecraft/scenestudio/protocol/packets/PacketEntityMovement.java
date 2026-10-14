@@ -28,6 +28,16 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.io.IOException;
 
 public class PacketEntityMovement {
+    /**
+     * Reads a move_entity_* packet (26.x format).
+     * <pre>
+     * Pos:    varint id, varint properties (onGround | stepCount &lt;&lt; 1), VecDelta
+     * PosRot: Pos + byte yaw + byte pitch
+     * Rot:    varint id, boolean onGround, byte yaw, byte pitch
+     * VecDelta: stepCount == 0: 3 shorts; otherwise stepCount * (varint ticks, 3 shorts)
+     * </pre>
+     * For stepped movement the returned delta is the sum of all steps (the final displacement).
+     */
     public static Triple<DPosition, Pair<Float, Float>, Boolean> getMovement(Packet packet) throws IOException {
         PacketType type = packet.getType();
         boolean hasPos = type == PacketType.EntityPosition || type == PacketType.EntityPositionRotation;
@@ -35,13 +45,28 @@ public class PacketEntityMovement {
         try (Packet.Reader in = packet.reader()) {
             in.readVarInt(); // entity id
 
+            boolean onGround;
             DPosition pos = null;
             if (hasPos) {
-                pos = new DPosition(
-                        in.readShort() / 4096.0,
-                        in.readShort() / 4096.0,
-                        in.readShort() / 4096.0
-                );
+                int properties = in.readVarInt();
+                onGround = (properties & 1) != 0;
+                int steps = properties >>> 1;
+                long dx = 0, dy = 0, dz = 0;
+                if (steps <= 0) {
+                    dx = in.readShort();
+                    dy = in.readShort();
+                    dz = in.readShort();
+                } else {
+                    for (int i = 0; i < steps; i++) {
+                        in.readVarInt(); // ticks
+                        dx += in.readShort();
+                        dy += in.readShort();
+                        dz += in.readShort();
+                    }
+                }
+                pos = new DPosition(dx / 4096.0, dy / 4096.0, dz / 4096.0);
+            } else {
+                onGround = in.readBoolean();
             }
             Pair<Float, Float> yawPitch = null;
             if (hasRot) {
@@ -49,10 +74,6 @@ public class PacketEntityMovement {
                         in.readByte() / 256f * 360,
                         in.readByte() / 256f * 360
                 );
-            }
-            boolean onGround = true;
-            if ((hasPos || hasRot)) {
-                onGround = in.readBoolean();
             }
             return Triple.of(pos, yawPitch, onGround);
         }
@@ -67,11 +88,7 @@ public class PacketEntityMovement {
         boolean hasRot = yawPitch != null;
         PacketType type;
         if (hasPos) {
-            if (hasRot) {
-                type = PacketType.EntityPositionRotation;
-            } else {
-                type = PacketType.EntityPosition;
-            }
+            type = hasRot ? PacketType.EntityPositionRotation : PacketType.EntityPosition;
         } else {
             type = PacketType.EntityRotation;
         }
@@ -80,16 +97,16 @@ public class PacketEntityMovement {
             out.writeVarInt(entityId);
 
             if (hasPos) {
-                out.writeShort((int) (deltaPos.getX() * 4096));
-                out.writeShort((int) (deltaPos.getY() * 4096));
-                out.writeShort((int) (deltaPos.getZ() * 4096));
+                out.writeVarInt(onGround ? 1 : 0); // properties: no steps
+                out.writeShort((int) Math.round(deltaPos.getX() * 4096));
+                out.writeShort((int) Math.round(deltaPos.getY() * 4096));
+                out.writeShort((int) Math.round(deltaPos.getZ() * 4096));
+            } else {
+                out.writeBoolean(onGround);
             }
             if (hasRot) {
                 out.writeByte((int) (yawPitch.getKey() / 360 * 256));
                 out.writeByte((int) (yawPitch.getValue() / 360 * 256));
-            }
-            if ((hasPos || hasRot)) {
-                out.writeBoolean(onGround);
             }
         }
         return packet;

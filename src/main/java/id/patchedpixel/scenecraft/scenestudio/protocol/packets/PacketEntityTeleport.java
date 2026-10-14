@@ -44,6 +44,37 @@ public class PacketEntityTeleport {
         }
     }
 
+    /**
+     * Reads an entity_position_sync packet: varint id, PositionPath (varint type; 0 = Vec3 doubles,
+     * 1 = list of (Vec3, varint ticks)), float yaw, float pitch, boolean onGround.
+     * Returns the end position of the path.
+     */
+    public static Location getSyncLocation(Packet packet) throws IOException {
+        try (Packet.Reader in = packet.reader()) {
+            in.readVarInt(); // entity id
+
+            int pathType = in.readVarInt();
+            double x, y, z;
+            if (pathType == 0) {
+                x = in.readDouble();
+                y = in.readDouble();
+                z = in.readDouble();
+            } else {
+                int count = in.readVarInt();
+                x = y = z = 0;
+                for (int i = 0; i < count; i++) {
+                    x = in.readDouble();
+                    y = in.readDouble();
+                    z = in.readDouble();
+                    in.readVarInt(); // tick offset
+                }
+            }
+            float yaw = in.readFloat();
+            float pitch = in.readFloat();
+            return new Location(x, y, z, yaw, pitch);
+        }
+    }
+
     public static Packet write(PacketTypeRegistry registry, int entityId, Location location, boolean onGround) throws IOException {
         Packet packet = new Packet(registry, PacketType.EntityTeleport);
         try (Packet.Writer out = packet.overwrite()) {
