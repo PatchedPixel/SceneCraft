@@ -91,6 +91,7 @@
     "replay.Mixin_FixNPCSkinCaching",
     "replay.Mixin_HandleInputsInReplay",
     "replay.Mixin_MoveRealmsButton",
+    "replay.Mixin_NoFriendsHotkeyInReplay",
     "replay.Mixin_ShowSpectatedHand_Iris",
     "replay.Mixin_ShowSpectatedHand_NoOF",
     "replay.Mixin_ShowSpectatedHand_OF",
