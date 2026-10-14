@@ -15,7 +15,6 @@ public interface KeyEventCallback {
             }
     );
 
-    int ACTION_RELEASE = 0;
     int ACTION_PRESS = 1;
 
     boolean onKeyEvent(KeyInput keyInput, int action);

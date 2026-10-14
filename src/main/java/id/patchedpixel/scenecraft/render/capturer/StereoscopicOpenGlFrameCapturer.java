@@ -7,8 +7,7 @@ import id.patchedpixel.scenecraft.render.rendering.Channel;
 import java.util.Collections;
 import java.util.Map;
 
-public class StereoscopicOpenGlFrameCapturer
-        extends OpenGlFrameCapturer<StereoscopicOpenGlFrame, StereoscopicOpenGlFrameCapturer.Data> {
+public class StereoscopicOpenGlFrameCapturer extends OpenGlFrameCapturer<StereoscopicOpenGlFrame, StereoscopicOpenGlFrameCapturer.Data> {
     public enum Data implements CaptureData {
         LEFT_EYE, RIGHT_EYE
     }

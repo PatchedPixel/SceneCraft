@@ -34,7 +34,6 @@ public class SceneCraft implements Module, Scheduler {
 
     public static final Identifier TEXTURE = identifier(SceneCraft.MOD_ID, "replay_gui.png");
     public static final int TEXTURE_SIZE = 256;
-    public static final Identifier LOGO_FAVICON = identifier(SceneCraft.MOD_ID, "favicon_logo.png");
 
     private static final Minecraft mc = MCVer.getMinecraft();
 
@@ -139,10 +138,6 @@ public class SceneCraft implements Module, Scheduler {
 
     public String getMinecraftVersion() {
         return backend.getMinecraftVersion();
-    }
-
-    public boolean isModLoaded(String id) {
-        return backend.isModLoaded(id);
     }
 
     public Minecraft getMinecraft() {

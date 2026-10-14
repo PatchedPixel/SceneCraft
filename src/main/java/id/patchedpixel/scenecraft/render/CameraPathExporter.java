@@ -36,7 +36,6 @@ public class CameraPathExporter {
     /** OpenGL's GL_FLOAT, which is what glTF uses as component type for 32 bit floats. */
     private static final int GL_FLOAT = 0x1406;
 
-
     private final Minecraft mc = MCVer.getMinecraft();
     private final RenderSettings settings;
     private int framesDone;

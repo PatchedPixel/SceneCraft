@@ -20,7 +20,6 @@ public class MCVer {
     }
 
     public static class ScissorBounds {
-        private static final ScissorBounds DISABLED = new ScissorBounds(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
         public final int x;
         public final int y;
         public final int width;

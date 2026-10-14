@@ -29,12 +29,7 @@ package id.patchedpixel.scenecraft.gui.utils.color;
  */
 public interface ReadableColor {
     ReadableColor RED = new Color(255, 0, 0);
-    ReadableColor ORANGE = new Color(255, 200, 0);
-    ReadableColor YELLOW = new Color(255, 255, 0);
     ReadableColor GREEN = new Color(0, 255, 0);
-    ReadableColor CYAN = new Color(0, 255, 255);
-    ReadableColor BLUE = new Color(0, 0, 255);
-    ReadableColor PURPLE = new Color(255, 0, 255);
     ReadableColor WHITE = new Color(255, 255, 255);
     ReadableColor BLACK = new Color(0, 0, 0);
     ReadableColor LTGREY = new Color(192, 192, 192);

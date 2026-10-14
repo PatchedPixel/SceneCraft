@@ -148,10 +148,6 @@ public class Utils {
         return new Dimension(width, height);
     }
 
-    public static boolean isValidEmailAddress(String mail) {
-        return mail.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
-    }
-
     private static final PercentEscaper REPLAY_NAME_ENCODER = new PercentEscaper(".-_ ", false);
 
     public static Path replayNameToPath(Path folder, String replayName) {
@@ -219,20 +215,6 @@ public class Utils {
         return Keyboard.isKeyDown(Keyboard.LEFT_CTRL) || Keyboard.isKeyDown(Keyboard.RIGHT_CTRL);
     }
 
-    public static <T> void addCallback(ListenableFuture<T> future, Consumer<T> onSuccess, Consumer<Throwable> onFailure) {
-        Futures.addCallback(future, new FutureCallback<T>() {
-            @Override
-            public void onSuccess(@Nullable T result) {
-                onSuccess.accept(result);
-            }
-
-            @Override
-            public void onFailure(@Nonnull Throwable t) {
-                onFailure.accept(t);
-            }
-        }, Runnable::run);
-    }
-
     public static GuiInfoPopup error(Logger logger, GuiContainer container, CrashReport crashReport, Runnable onClose) {
         // Convert crash report to string
         String crashReportStr = crashReport.getFriendlyReport(ReportType.CRASH);
@@ -298,19 +280,6 @@ public class Utils {
             // Re-size the scrollable containing the crash report to 3/4 of the screen
             scrollable.setSize(size.getWidth() * 3 / 4, size.getHeight() * 3 / 4);
             super.draw(renderer, size, renderInfo);
-        }
-    }
-
-    public static <T extends Throwable> void throwIfInstanceOf(Throwable t, Class<T> cls) throws T {
-        if (cls.isInstance(t)) {
-            throw cls.cast(t);
-        }
-    }
-    public static void throwIfUnchecked(Throwable t) {
-        if (t instanceof RuntimeException) {
-            throw (RuntimeException) t;
-        } else if (t instanceof Error) {
-            throw (Error) t;
         }
     }
 

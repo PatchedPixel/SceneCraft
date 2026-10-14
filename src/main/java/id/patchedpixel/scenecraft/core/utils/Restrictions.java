@@ -15,36 +15,15 @@ import io.netty.buffer.Unpooled;
  */
 public class Restrictions {
     public static final Identifier PLUGIN_CHANNEL = identifier(SceneCraft.MOD_ID, "restrict");
-    private boolean noXray;
-    private boolean noNoclip;
-    private boolean onlyFirstPerson;
-    private boolean onlyRecordingPlayer;
 
     public String handle(ClientboundCustomPayloadPacket packet) {
         FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.wrappedBuffer(((Payload) packet.payload()).bytes()));
         while (buffer.isReadable()) {
             String name = buffer.readUtf(64);
-            boolean active = buffer.readBoolean();
-                return name;
+            return name;
         }
 
         return null;
-    }
-
-    public boolean isNoXray() {
-        return noXray;
-    }
-
-    public boolean isNoNoclip() {
-        return noNoclip;
-    }
-
-    public boolean isOnlyFirstPerson() {
-        return onlyFirstPerson;
-    }
-
-    public boolean isOnlyRecordingPlayer() {
-        return onlyRecordingPlayer;
     }
 
     public static final CustomPacketPayload.Type<Payload> ID = new CustomPacketPayload.Type<>(PLUGIN_CHANNEL);

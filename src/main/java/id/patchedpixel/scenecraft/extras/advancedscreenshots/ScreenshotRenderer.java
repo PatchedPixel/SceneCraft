@@ -24,7 +24,7 @@ public class ScreenshotRenderer implements RenderInfo {
         this.settings = settings;
     }
 
-    public boolean renderScreenshot() throws Throwable {
+    public boolean renderScreenshot() {
         try {
             Window window = mc.getWindow();
             int widthBefore = window.getWidth();

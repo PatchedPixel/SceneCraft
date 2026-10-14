@@ -48,7 +48,6 @@ public class SchedulerImpl implements  Scheduler {
      * processed, otherwise a livelock may occur.
      */
     private boolean inRunLater = false;
-    private boolean inRenderTaskQueue = false;
     // Starting 1.14 MC clears the queue of scheduled tasks on disconnect.
     // This works fine for MC since it uses the queue only for packet handling but breaks our assumption that
     // stuff submitted via runLater is actually always run (e.g. record might not be fully stopped because parts

@@ -17,8 +17,7 @@ import com.mojang.renderpearl.api.commands.CommandEncoder;
 import com.mojang.renderpearl.api.device.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> & CaptureData>
-        extends OpenGlFrameCapturer<F, D> {
+public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> & CaptureData> extends OpenGlFrameCapturer<F, D> {
     private final boolean withDepth;
     private final D[] data;
     private GpuBuffer pbo, otherPBO;

@@ -4,7 +4,6 @@ import id.patchedpixel.scenecraft.core.Module;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.extras.advancedscreenshots.AdvancedScreenshots;
 import id.patchedpixel.scenecraft.extras.playeroverview.PlayerOverview;
-import id.patchedpixel.scenecraft.extras.youtube.YoutubeUpload;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +20,6 @@ public class SceneCraftExtras implements Module {
     private static final List<Class<? extends Extra>> builtin = Arrays.asList(
             AdvancedScreenshots.class,
             PlayerOverview.class,
-            YoutubeUpload.class,
             FullBrightness.class,
             QuickMode.class,
             HotkeyButtons.class

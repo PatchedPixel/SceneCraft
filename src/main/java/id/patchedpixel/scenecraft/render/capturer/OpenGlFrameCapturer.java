@@ -20,7 +20,6 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.pushMatrix;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.resizeMainWindow;
 
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
-import com.mojang.blaze3d.systems.RenderSystem;
 
 import com.mojang.renderpearl.api.buffers.GpuBuffer;
 import com.mojang.renderpearl.api.device.GpuDevice;
@@ -114,6 +113,5 @@ public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData
     }
 
     @Override
-    public void close() throws IOException {
-    }
+    public void close() throws IOException {}
 }

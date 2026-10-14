@@ -19,21 +19,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.client.server.IntegratedServer;
-// FIXME not (yet?) 1.13 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
-
-import net.minecraft.world.entity.PositionMoveRotation;
 import net.minecraft.network.protocol.game.ClientboundEntityPositionSyncPacket;
-
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-
 import com.mojang.datafixers.util.Pair;
-
 import net.minecraft.core.NonNullList;
 
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.InteractionHand;
 
 import net.minecraft.core.BlockPos;
 

@@ -321,11 +321,6 @@ public class GuiFileChooserPopup extends AbstractGuiPopup<GuiFileChooserPopup> i
         return this;
     }
 
-    public GuiFileChooserPopup onCancel(Runnable onCancel) {
-        this.onCancel = onCancel;
-        return this;
-    }
-
     @Override
     public boolean handleKey(KeyInput keyInput) {
         if (keyInput.isEscape()) {

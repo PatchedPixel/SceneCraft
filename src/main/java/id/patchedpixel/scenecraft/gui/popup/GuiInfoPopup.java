@@ -73,16 +73,6 @@ public class GuiInfoPopup extends AbstractGuiPopup<GuiInfoPopup> implements KeyH
         super(container);
     }
 
-    public GuiInfoPopup setCloseLabel(String label) {
-        closeButton.setLabel(label);
-        return this;
-    }
-
-    public GuiInfoPopup setCloseI18nLabel(String label, Object...args) {
-        closeButton.setI18nLabel(label, args);
-        return this;
-    }
-
     public GuiInfoPopup onClosed(Runnable onClosed) {
         this.onClosed = onClosed;
         return this;

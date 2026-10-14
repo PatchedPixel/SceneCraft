@@ -86,16 +86,6 @@ public class GuiYesNoPopup extends AbstractGuiPopup<GuiYesNoPopup> implements Ke
         super(container);
     }
 
-    public GuiYesNoPopup setYesLabel(String label) {
-        yesButton.setLabel(label);
-        return this;
-    }
-
-    public GuiYesNoPopup setNoLabel(String label) {
-        noButton.setLabel(label);
-        return this;
-    }
-
     public GuiYesNoPopup setYesI18nLabel(String label, Object...args) {
         yesButton.setI18nLabel(label, args);
         return this;
@@ -106,18 +96,8 @@ public class GuiYesNoPopup extends AbstractGuiPopup<GuiYesNoPopup> implements Ke
         return this;
     }
 
-    public GuiYesNoPopup onClosed(Consumer<Boolean> onClosed) {
-        this.onClosed = onClosed;
-        return this;
-    }
-
     public GuiYesNoPopup onAccept(Runnable onAccept) {
         this.onAccept = onAccept;
-        return this;
-    }
-
-    public GuiYesNoPopup onReject(Runnable onReject) {
-        this.onReject = onReject;
         return this;
     }
 
@@ -137,10 +117,6 @@ public class GuiYesNoPopup extends AbstractGuiPopup<GuiYesNoPopup> implements Ke
 
     public GuiButton getYesButton() {
         return this.yesButton;
-    }
-
-    public GuiButton getNoButton() {
-        return this.noButton;
     }
 
     public GuiPanel getInfo() {

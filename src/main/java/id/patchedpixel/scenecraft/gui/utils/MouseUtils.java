@@ -42,10 +42,4 @@ public class MouseUtils {
 
         return new Point(mouseX, mouseY);
     }
-
-    public static Point getScaledDimensions() {
-        Window
-                res = MCVer.newScaledResolution(mc);
-        return new Point(res.getGuiScaledWidth(), res.getGuiScaledHeight());
-    }
 }

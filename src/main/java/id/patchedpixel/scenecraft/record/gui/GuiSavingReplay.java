@@ -38,7 +38,6 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
 import static id.patchedpixel.scenecraft.gui.utils.Utils.link;
 
 public class GuiSavingReplay {
-
     private static final Minecraft mc = getMinecraft();
     private static final Logger logger = LogManager.getLogger();
 

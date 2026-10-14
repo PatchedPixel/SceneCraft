@@ -97,12 +97,6 @@ dependencies {
     implementation(jarJar("com.googlecode.mp4parser:isoparser:1.1.22"))
     implementation(jarJar("de.javagl:jgltf-model:2.0.4"))
     implementation(jarJar("org.apache.commons:commons-exec:1.5.0"))
-
-    implementation(jarJar("com.google.apis:google-api-services-youtube:v3-rev20240916-2.0.0"))
-    implementation(jarJar("com.google.api-client:google-api-client:2.7.0"))
-    implementation(jarJar("com.google.oauth-client:google-oauth-client-jetty:1.36.0"))
-    implementation(jarJar("com.google.oauth-client:google-oauth-client-java6:1.36.0"))
-    implementation(jarJar("com.google.http-client:google-http-client-gson:1.45.0"))
 }
 
 def convertLang = tasks.register("convertLang") {

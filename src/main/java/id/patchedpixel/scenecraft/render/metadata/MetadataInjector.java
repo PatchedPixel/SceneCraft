@@ -17,7 +17,6 @@ import java.nio.ByteBuffer;
 import static id.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
 
 public class MetadataInjector {
-
     private static final String STITCHING_SOFTWARE = "Minecraft SceneCraft";
 
     /*
@@ -144,7 +143,7 @@ public class MetadataInjector {
         for (Box box : container.getBoxes()) {
             if(box.getType().equals(boxName)) return box;
         }
+
         return null;
     }
-
 }

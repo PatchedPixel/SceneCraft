@@ -29,7 +29,6 @@ import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 
 public interface Colors extends ReadableColor {
     ReadableColor TRANSPARENT = new Color(0, 0, 0, 0);
-    ReadableColor LIGHT_TRANSPARENT = new Color(0, 0, 0, 64);
     ReadableColor HALF_TRANSPARENT = new Color(0, 0, 0, 128);
     ReadableColor DARK_TRANSPARENT = new Color(0, 0, 0, 192);
     ReadableColor LIGHT_GRAY = new Color(192, 192, 192);

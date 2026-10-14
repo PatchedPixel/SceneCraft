@@ -30,10 +30,6 @@ public class BitmapFrame implements Frame {
         return this.size;
     }
 
-    public int getBytesPerPixel() {
-        return bytesPerPixel;
-    }
-
     public ByteBuffer getByteBuffer() {
         return this.byteBuffer;
     }

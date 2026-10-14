@@ -10,7 +10,6 @@ import java.nio.ByteBuffer;
 import static id.patchedpixel.scenecraft.render.utils.Utils.openGlBytesToBitmap;
 
 public class CubicToBitmapProcessor extends AbstractFrameProcessor<CubicOpenGlFrame, BitmapFrame> {
-
     @Override
     public BitmapFrame process(CubicOpenGlFrame rawFrame) {
         int size = rawFrame.getLeft().getSize().getWidth();

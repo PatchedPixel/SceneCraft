@@ -11,25 +11,12 @@ import org.apache.logging.log4j.Logger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * Hides other mods' HUD elements (Simple Voice Chat icons, Xaero's Minimap) while a replay is active.
- * <p>
- * Voice chat has no runtime toggle, only a persisted config option, so hiding it modifies the user's config file.
- * To make sure this is always undone even if the game crashes or the JVM is killed mid-replay:
- * <ul>
- *   <li>a marker file is written before the option is changed and removed after it is restored,</li>
- *   <li>a JVM shutdown hook restores it on normal exit, crash and force close (window close, System.exit),</li>
- *   <li>if a marker is found on the next start (hard kill / power loss), the option is restored then.</li>
- * </ul>
- * The original value is remembered, so a user who had icons hidden on purpose keeps them hidden.
- */
 public class SceneCraftCompat implements Module {
     public static Logger LOGGER = LogManager.getLogger();
 
     private static final String MARKER_NAME = "scenecraft-voicechat-hud.marker";
 
     private static volatile boolean minimapHide;
-    /** True while we have changed the voice chat option and have not restored it yet. */
     private static boolean voicechatChanged;
     private static boolean hooked;
 

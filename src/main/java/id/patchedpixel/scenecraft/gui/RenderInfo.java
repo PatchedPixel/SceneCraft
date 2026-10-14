@@ -59,10 +59,6 @@ public class RenderInfo {
         MCVer.addDetail(category, "Layer", () -> "" + layer);
     }
 
-    public float getPartialTick() {
-        return this.partialTick;
-    }
-
     public int getMouseX() {
         return this.mouseX;
     }

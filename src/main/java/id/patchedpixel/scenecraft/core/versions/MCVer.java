@@ -85,22 +85,6 @@ public class MCVer {
         window.onFramebufferResize(width, height);
     }
 
-    public static <T> void addCallback(
-            CompletableFuture<T> future,
-            Consumer<T> success,
-            Consumer<Throwable> failure
-    ) {
-        future.thenAccept(success).exceptionally(throwable -> {
-            failure.accept(throwable);
-            return null;
-        });
-    }
-
-    @SuppressWarnings("unchecked")
-    public static List<VertexFormatElement> getElements(VertexFormat vertexFormat) {
-        return vertexFormat.getElements();
-    }
-
     /**
      * Whether the active renderpearl backend is OpenGL (as opposed to Vulkan).
      * Used to gate features which only exist for OpenGL (e.g. Iris based ODS rendering).
@@ -203,10 +187,6 @@ public class MCVer {
         return new org.joml.Quaternionf().fromAxisAngleDeg(axis.x, axis.y, axis.z, angle);
     }
 
-    public static Matrix4f ortho(float left, float right, float top, float bottom, float zNear, float zFar) {
-        return new Matrix4f().ortho(left, right, bottom, top, zNear, zFar);
-    }
-
     public static void emitLine(PoseStack.Pose matrixStack, VertexConsumer buffer, Vector2f p1, Vector2f p2, int color, float lineWidth) {
         emitLine(matrixStack, buffer, new Vector3f(p1.x, p1.y, 0), new Vector3f(p2.x, p2.y, 0), color, lineWidth);
     }
@@ -250,25 +230,11 @@ public class MCVer {
         public static final int LEFT_CTRL = Util.getPlatform() == Util.OS.OSX ? KEY_LSUPER : KEY_LCONTROL;
         public static final int RIGHT_CTRL = Util.getPlatform() == Util.OS.OSX ? KEY_RSUPER : KEY_RCONTROL;
         public static final int KEY_LSHIFT = SDLScancode.SDL_SCANCODE_LSHIFT;
-        public static final int KEY_ESCAPE = SDLScancode.SDL_SCANCODE_ESCAPE;
-        public static final int KEY_HOME = SDLScancode.SDL_SCANCODE_HOME;
-        public static final int KEY_END = SDLScancode.SDL_SCANCODE_END;
-        public static final int KEY_UP = SDLScancode.SDL_SCANCODE_UP;
-        public static final int KEY_DOWN = SDLScancode.SDL_SCANCODE_DOWN;
-        public static final int KEY_LEFT = SDLScancode.SDL_SCANCODE_LEFT;
-        public static final int KEY_RIGHT = SDLScancode.SDL_SCANCODE_RIGHT;
-        public static final int KEY_BACK = SDLScancode.SDL_SCANCODE_BACKSPACE;
         public static final int KEY_DELETE = SDLScancode.SDL_SCANCODE_DELETE;
-        public static final int KEY_RETURN = SDLScancode.SDL_SCANCODE_RETURN;
-        public static final int KEY_TAB = SDLScancode.SDL_SCANCODE_TAB;
         public static final int KEY_F1 = SDLScancode.SDL_SCANCODE_F1;
         public static final int KEY_A = SDLScancode.SDL_SCANCODE_A;
         public static final int KEY_B = SDLScancode.SDL_SCANCODE_B;
         public static final int KEY_C = SDLScancode.SDL_SCANCODE_C;
-        public static final int KEY_D = SDLScancode.SDL_SCANCODE_D;
-        public static final int KEY_E = SDLScancode.SDL_SCANCODE_E;
-        public static final int KEY_F = SDLScancode.SDL_SCANCODE_F;
-        public static final int KEY_G = SDLScancode.SDL_SCANCODE_G;
         public static final int KEY_H = SDLScancode.SDL_SCANCODE_H;
         public static final int KEY_I = SDLScancode.SDL_SCANCODE_I;
         public static final int KEY_J = SDLScancode.SDL_SCANCODE_J;
@@ -279,12 +245,7 @@ public class MCVer {
         public static final int KEY_O = SDLScancode.SDL_SCANCODE_O;
         public static final int KEY_P = SDLScancode.SDL_SCANCODE_P;
         public static final int KEY_Q = SDLScancode.SDL_SCANCODE_Q;
-        public static final int KEY_R = SDLScancode.SDL_SCANCODE_R;
-        public static final int KEY_S = SDLScancode.SDL_SCANCODE_S;
-        public static final int KEY_T = SDLScancode.SDL_SCANCODE_T;
-        public static final int KEY_U = SDLScancode.SDL_SCANCODE_U;
         public static final int KEY_V = SDLScancode.SDL_SCANCODE_V;
-        public static final int KEY_W = SDLScancode.SDL_SCANCODE_W;
         public static final int KEY_X = SDLScancode.SDL_SCANCODE_X;
         public static final int KEY_Y = SDLScancode.SDL_SCANCODE_Y;
         public static final int KEY_Z = SDLScancode.SDL_SCANCODE_Z;

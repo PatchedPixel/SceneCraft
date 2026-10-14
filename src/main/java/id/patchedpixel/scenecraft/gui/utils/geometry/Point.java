@@ -85,19 +85,6 @@ public final class Point implements ReadablePoint, WritablePoint {
         this.y += dy;
     }
 
-    public void translate(ReadablePoint point) {
-        translate(point.getX(), point.getY());
-    }
-
-    public void untranslate(int dx, int dy) {
-        this.x -= dx;
-        this.y -= dy;
-    }
-
-    public void untranslate(ReadablePoint point) {
-        untranslate(point.getX(), point.getY());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

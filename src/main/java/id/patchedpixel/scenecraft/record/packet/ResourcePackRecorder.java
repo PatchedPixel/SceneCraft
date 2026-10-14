@@ -26,7 +26,6 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
  */
 public class ResourcePackRecorder {
     private static final Logger logger = LogManager.getLogger();
-    private static final Minecraft mc = getMinecraft();
 
     private final ReplayFile replayFile;
 

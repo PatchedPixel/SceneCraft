@@ -3,7 +3,6 @@ package id.patchedpixel.scenecraft.render.capturer;
 import id.patchedpixel.scenecraft.render.frame.OpenGlFrame;
 
 public class SimplePboOpenGlFrameCapturer extends PboOpenGlFrameCapturer<OpenGlFrame, SimplePboOpenGlFrameCapturer.SinglePass> {
-
     public SimplePboOpenGlFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
         super(worldRenderer, renderInfo, SinglePass.class,
                 renderInfo.getFrameSize().getWidth() * renderInfo.getFrameSize().getHeight());

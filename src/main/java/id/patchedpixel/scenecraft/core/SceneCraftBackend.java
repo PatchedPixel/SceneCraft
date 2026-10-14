@@ -40,8 +40,4 @@ public class SceneCraftBackend {
     public String getMinecraftVersion() {
         return SharedConstants.getCurrentVersion().name();
     }
-
-    public boolean isModLoaded(String id) {
-        return ModList.get().isLoaded(id.toLowerCase());
-    }
 }

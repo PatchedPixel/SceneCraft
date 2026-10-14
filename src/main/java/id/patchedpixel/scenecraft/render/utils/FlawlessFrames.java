@@ -21,15 +21,6 @@ public class FlawlessFrames {
 
     private FlawlessFrames() {}
 
-    public static void registerConsumer(Function<String, Consumer<Boolean>> provider) {
-        Consumer<Boolean> consumer = provider.apply(MOD_ID);
-        CONSUMERS.add(consumer);
-
-        if (provider.getClass().getName().contains(".sodium.") || consumer.getClass().getName().contains(".sodium.")) {
-            hasSodium = true;
-        }
-    }
-
     public static void setEnabled(boolean enabled) {
         CONSUMERS.forEach(it -> it.accept(enabled));
     }

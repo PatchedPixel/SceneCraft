@@ -26,7 +26,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.tinyexr.TinyEXR.*;
 
 public class EXRWriter implements FrameConsumer<BitmapFrame> {
-
     public static FrameConsumer<BitmapFrame> create(Path outputFolder, boolean keepAlpha) {
         return Lwjgl3Loader.createFrameConsumer(
                 EXRWriter.class,

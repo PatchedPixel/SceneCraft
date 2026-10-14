@@ -3,9 +3,7 @@ package id.patchedpixel.scenecraft.render.capturer;
 import id.patchedpixel.scenecraft.render.frame.OpenGlFrame;
 import id.patchedpixel.scenecraft.render.frame.StereoscopicOpenGlFrame;
 
-public class StereoscopicPboOpenGlFrameCapturer
-        extends PboOpenGlFrameCapturer<StereoscopicOpenGlFrame, StereoscopicOpenGlFrameCapturer.Data> {
-
+public class StereoscopicPboOpenGlFrameCapturer extends PboOpenGlFrameCapturer<StereoscopicOpenGlFrame, StereoscopicOpenGlFrameCapturer.Data> {
     public StereoscopicPboOpenGlFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
         super(worldRenderer, renderInfo, StereoscopicOpenGlFrameCapturer.Data.class,
                 renderInfo.getFrameSize().getWidth() / 2 * renderInfo.getFrameSize().getHeight());

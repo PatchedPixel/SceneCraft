@@ -17,7 +17,6 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public class PNGWriter implements FrameConsumer<BitmapFrame> {
-
     private final Path outputFolder;
     private final boolean keepAlpha;
 
