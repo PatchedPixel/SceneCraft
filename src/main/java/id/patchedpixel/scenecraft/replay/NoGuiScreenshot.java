@@ -6,9 +6,8 @@ import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.gui.versions.Image;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.systems.RenderSystem;
-
-import static id.patchedpixel.scenecraft.core.versions.MCVer.popMatrix;
-import static id.patchedpixel.scenecraft.core.versions.MCVer.pushMatrix;
+import id.patchedpixel.scenecraft.mixin.core.GuiAccessor;
+import net.minecraft.client.gui.screens.Screen;
 
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 import com.mojang.renderpearl.api.commands.GpuFence;
@@ -56,23 +55,20 @@ public class NoGuiScreenshot {
                 int frameHeight = mc.getWindow().getHeight();
 
                 final boolean guiHidden = mc.gui.hud.isHidden();
+                final Screen orgScreen = mc.gui.screen();
                 try {
+                    ((GuiAccessor) mc.gui).scenecraft$setScreen(null);
                     if (!guiHidden) mc.gui.hud.toggle();
 
-                    // Render frame without GUI
-                    pushMatrix();
-                    RenderSystem.getDevice()
-                            .createCommandEncoder()
-                            .clearColorAndDepthTextures(mc.gameRenderer.mainRenderTarget().getColorTexture(), new org.joml.Vector4f(), mc.gameRenderer.mainRenderTarget().getDepthTexture(), 0);
-
-                    mc.gameRenderer.renderLevel();
-
-                    popMatrix();
+                    mc.gameRenderer.update(mc.getDeltaTracker());
+                    mc.gameRenderer.extract(mc.getDeltaTracker(), true);
+                    mc.gameRenderer.render();
                 } catch (Throwable t) {
                     future.setException(t);
                     return;
                 } finally {
                     // Reset GUI settings
+                    ((GuiAccessor) mc.gui).scenecraft$setScreen(orgScreen);
                     if (!guiHidden) mc.gui.hud.toggle();
                 }
 
