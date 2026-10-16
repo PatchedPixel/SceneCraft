@@ -532,13 +532,6 @@ public class CameraEntity
         this.wrapArmYaw();
     }
 
-    /**
-     * Minecraft renders the arm offset based on the difference between {@link #yaw} and {@link #renderYaw}. It does not
-     * wrap around the difference though, so if {@link #yaw} just wrapped around from 350 to 10 but {@link #renderYaw}
-     * is still at 355, then the difference will be inappropriately large. To fix this, we always wrap the
-     * {@link #renderYaw} such that it is no more than 180 degrees away from {@link #yaw}, even if that requires going
-     * outside the normal range.
-     */
     private void wrapArmYaw() {
         this.yBob = wrapDegreesTo(this.yBob, this.getYRot());
         this.yBobO = wrapDegreesTo(this.yBobO, this.yBob);
