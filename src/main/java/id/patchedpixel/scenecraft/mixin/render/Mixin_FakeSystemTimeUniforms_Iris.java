@@ -1,7 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.render;
 
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
-import net.irisshaders.iris.uniforms.SystemTimeUniforms;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Pseudo
-@Mixin(value = SystemTimeUniforms.Timer.class, remap = false)
+@Mixin(targets = "net.irisshaders.iris.uniforms.SystemTimeUniforms$Timer", remap = false)
 public class Mixin_FakeSystemTimeUniforms_Iris {
     @ModifyVariable(method = "beginFrame", at = @At("HEAD"), argsOnly = true)
     private long useReplayTimeDuringRender(long frameStartTimeNs) {

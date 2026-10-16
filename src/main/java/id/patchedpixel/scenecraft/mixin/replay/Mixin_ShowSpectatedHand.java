@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
 
 @Mixin(GameRenderer.class)
-public abstract class Mixin_ShowSpectatedHand_NoOF {
+public abstract class Mixin_ShowSpectatedHand {
     @Redirect(
             method = "renderItemInHand",
             at = @At(

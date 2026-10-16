@@ -1,7 +1,5 @@
 package id.patchedpixel.scenecraft.compat;
 
-import id.patchedpixel.scenecraft.compat.optifine.DisableFastRender;
-import id.patchedpixel.scenecraft.compat.shaders.ShaderBeginRender;
 import id.patchedpixel.scenecraft.core.Module;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
@@ -126,8 +124,6 @@ public class SceneCraftCompat implements Module {
 
     @Override
     public void initClient() {
-        new ShaderBeginRender().register();
-        new DisableFastRender().register();
         recoverStaleHud();
     }
 }
