@@ -18,7 +18,7 @@ public class MixinGui {
     // NeoForge wraps Screen#extractRenderStateWithTooltipAndSubtitles in this hook (screen layers and
     // ScreenEvent.Render.Pre/Post), so the vanilla call is no longer present in Gui#extractRenderState.
     // The descriptor is left out on purpose so this keeps working if the layer parameter type changes.
-    private static final String RENDER = "Lnet/neoforged/neoforge/client/ClientHooks;extractScreen";
+    private static final String RENDER = "Lnet/neoforged/neoforge/client/ClientHooks;extractScreen(Lnet/minecraft/client/gui/screens/Screen;Ljava/util/Stack;Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V";
 
     @Unique
     private GuiGraphicsExtractor context;
