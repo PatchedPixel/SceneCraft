@@ -15,12 +15,13 @@ import net.minecraft.client.renderer.WorldBorderRenderer;
  */
 @Mixin(WorldBorderRenderer.class)
 public class Mixin_UseReplayTime_ForTexture {
-    @Redirect(method = "*", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Util;getMillis()J"))
+    @Redirect(method = "prepareDynamicTransforms", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Util;getMillis()J"))
     private long getWorldBorderTime() {
         ReplayHandler replayHandler = SceneCraftReplay.instance.getReplayHandler();
         if (replayHandler != null) {
             return replayHandler.getReplaySender().currentTimeStamp();
         }
+
         return MCVer.milliTime();
     }
 }

@@ -28,7 +28,7 @@
     "gui.Mixin_PassEvents_HandleKeys",
     "gui.Mixin_PassEventsExt",
     "gui.Mixin_RenderHudCallback",
-    "gui.MixinGameRenderer",
+    "gui.MixinGui",
     "gui.MixinKeyboardHandler",
     "gui.MixinMinecraft",
     "gui.MixinMouseListener",
@@ -38,7 +38,7 @@
     "record.DecoderHandlerAccessor",
     "record.EntityLivingBaseAccessor",
     "record.IntegratedServerAccessor",
-    "record.MixinClientConnection",
+    "record.MixinConnection",
     "record.MixinDownloadingPackFinder",
     "record.MixinMouseHelper",
     "record.MixinNetHandlerConfigClient",
@@ -55,15 +55,11 @@
     "render.Mixin_BlockOnChunkRebuilds",
     "render.Mixin_ChromaKeyColorSky",
     "render.Mixin_ChromaKeyDisableFog",
-    "render.Mixin_ChromaKeyForceSky",
     "render.Mixin_FakeSystemTimeUniforms_Iris",
     "render.Mixin_FixCopyTextureToBuffer_DepthTexture",
     "render.Mixin_ForceChunkLoading",
     "render.Mixin_HideNameTags",
-    "render.Mixin_HideNameTags_LivingEntity",
-    "render.Mixin_HideNameTags_PlayerEntity",
     "render.Mixin_LoadIrisOdsShaderPack",
-    "render.Mixin_Omnidirectional_Camera",
     "render.Mixin_Omnidirectional_Rotation",
     "render.Mixin_PreserveDepthDuringGuiRendering",
     "render.Mixin_PreserveDepthDuringHandRendering",
@@ -71,14 +67,12 @@
     "render.Mixin_SkipHudDuringRender",
     "render.Mixin_StabilizeCamera",
     "render.Mixin_Stereoscopic_Camera",
-    "render.Mixin_Stereoscopic_HandRenderPass",
     "render.Mixin_SuppressFramebufferResizeDuringRender",
     "render.Mixin_UseGuiFramebufferDuringGuiRendering",
     "render.MixinEntityRenderer",
     "render.MixinParticleManager",
     "render.MixinRenderManager",
     "render.ParticleAccessor",
-    "render.WorldRendererAccessor",
     "replay.ClientWorldAccessor",
     "replay.DrawContextAccessor",
     "replay.EntityLivingBaseAccessor",
@@ -104,15 +98,11 @@
     "replay.MixinRenderArrow",
     "replay.MixinRenderItem",
     "replay.MixinRenderLivingBase",
-    "replay.MixinTileEntityEndPortalRenderer",
     "replay.entity_tracking.Mixin_EntityExt",
-    "replay.entity_tracking.Mixin_FixPartialUpdates",
-    "replay.world_border.Mixin_UseReplayTime_ForMovement",
-    "replay.world_border.Mixin_UseReplayTime_ForTexture"
+    "replay.world_border.Mixin_UseReplayTime_ForTexture",
+    "replay.world_border.Mixin_UseReplayTime_ForMovement"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-  ]
+  }
 }

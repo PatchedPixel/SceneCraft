@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Map;
 
 @Mixin(Connection.class)
-public abstract class MixinClientConnection {
+public abstract class MixinConnection {
     @Shadow
     private Channel channel;
 

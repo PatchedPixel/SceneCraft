@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
-public class MixinGameRenderer {
+public class MixinGui {
     private static final String EXTRACT_GUI = "extractRenderState";
 
     // NeoForge wraps Screen#extractRenderStateWithTooltipAndSubtitles in this hook (screen layers and

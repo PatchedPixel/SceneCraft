@@ -18,6 +18,7 @@ public class SceneCraftCompat implements Module {
 
     private static volatile boolean minimapHide;
     private static boolean voicechatChanged;
+    private static boolean voicechatOriginalHidden;
     private static boolean hooked;
 
     public static boolean shouldHide() {
@@ -30,11 +31,12 @@ public class SceneCraftCompat implements Module {
             return;
         }
         try {
-            if (VoicechatCompat.isHidden()) {
+            voicechatOriginalHidden = VoicechatCompat.isHidden();
+            if (voicechatOriginalHidden) {
                 return; // user already hides them, nothing to change or restore
             }
             installHook();
-            writeMarker();
+            writeMarker(voicechatOriginalHidden);
             voicechatChanged = true;
             VoicechatCompat.setHidden(true);
         } catch (Throwable t) {
@@ -48,7 +50,7 @@ public class SceneCraftCompat implements Module {
             return;
         }
         try {
-            VoicechatCompat.setHidden(false);
+            VoicechatCompat.setHidden(voicechatOriginalHidden);
             voicechatChanged = false;
             deleteMarker();
         } catch (Throwable t) {
@@ -66,7 +68,7 @@ public class SceneCraftCompat implements Module {
         }
         try {
             if (Files.exists(markerPath())) {
-                VoicechatCompat.setHidden(false);
+                VoicechatCompat.setHidden(readMarker());
                 deleteMarker();
                 LOGGER.info("Restored Simple Voice Chat icons left hidden by an earlier replay session");
             }
@@ -98,11 +100,19 @@ public class SceneCraftCompat implements Module {
         return FMLPaths.CONFIGDIR.get().resolve(MARKER_NAME);
     }
 
-    private static void writeMarker() {
+    private static void writeMarker(boolean originalHidden) {
         try {
-            Files.writeString(markerPath(), "SceneCraft hid the Simple Voice Chat icons; they will be restored automatically.\n");
+            Files.writeString(markerPath(), "originalHidden=" + originalHidden + "\n");
         } catch (Exception e) {
             LOGGER.warn("Could not write HUD marker", e);
+        }
+    }
+
+    private static boolean readMarker() {
+        try {
+            return Files.readString(markerPath()).contains("originalHidden=true");
+        } catch (Exception e) {
+            return false;
         }
     }
 

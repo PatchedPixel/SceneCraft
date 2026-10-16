@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(Entity.class)
 public abstract class Mixin_EntityExt implements EntityExt {
-
     @Shadow
     public float yRot;
 

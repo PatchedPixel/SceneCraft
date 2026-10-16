@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientHandshakePacketListenerImpl.class)
 public abstract class MixinNetHandlerLoginClient {
-
     @Final @Shadow
     private Connection connection;
 

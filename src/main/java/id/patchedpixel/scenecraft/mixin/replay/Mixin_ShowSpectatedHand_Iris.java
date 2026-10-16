@@ -15,7 +15,7 @@ import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
 @Mixin(targets = "net.irisshaders.iris.pathways.HandRenderer", remap = false)
 public abstract class Mixin_ShowSpectatedHand_Iris {
     @Redirect(
-            method = "*",
+            method = "canRender",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;getPlayerMode()Lnet/minecraft/world/level/GameType;",
@@ -28,6 +28,7 @@ public abstract class Mixin_ShowSpectatedHand_Iris {
             // alternative doesn't really matter, the caller only checks for equality to SPECTATOR
             return camera.isSpectator() ? GameType.SPECTATOR : GameType.SURVIVAL;
         }
+
         return interactionManager.getPlayerMode();
     }
 }

@@ -486,11 +486,11 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
             Identifier channelName = packet.payload().type().id();
             String channelNameStr = channelName.toString();
 
-            if (channelNameStr.startsWith("fabric-screen-handler-api-v")) {
-                return null; // we do not want to show modded screens which got opened for the record player
+            if (channelNameStr.startsWith("voicechat:")) {
+                // The recorded Simple Voice Chat handshake (secret, player state, ...) belongs to a live server session.
+                // Replaying it makes the voice chat client try to connect to the original server.
+                return null;
             }
-
-            // On 1.14+ there's a dedicated OpenWrittenBookS2CPacket now
         }
 
         if(p instanceof ClientboundResourcePackPushPacket) {

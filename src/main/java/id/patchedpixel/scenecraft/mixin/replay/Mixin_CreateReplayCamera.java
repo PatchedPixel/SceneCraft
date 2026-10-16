@@ -22,7 +22,6 @@ import net.minecraft.client.player.LocalPlayer;
 
 @Mixin(MultiPlayerGameMode.class)
 public abstract class Mixin_CreateReplayCamera {
-
     @Shadow
     private Minecraft minecraft;
 

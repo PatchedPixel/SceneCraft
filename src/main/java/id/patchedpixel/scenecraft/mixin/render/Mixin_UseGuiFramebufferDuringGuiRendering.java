@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.GameRenderer;
 
 @Mixin(GameRenderer.class)
 public abstract class Mixin_UseGuiFramebufferDuringGuiRendering implements FramebufferDelegateHolder {
-
     @Unique
     private RenderTarget framebufferDelegate;
 

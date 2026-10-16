@@ -633,7 +633,5 @@ public class CameraEntity
         // Moved to MixinCamera
 
         private boolean heldItemTooltipsWasTrue;
-
-        // FIXME fabric
     }
 }

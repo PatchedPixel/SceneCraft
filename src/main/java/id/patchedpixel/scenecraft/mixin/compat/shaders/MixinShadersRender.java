@@ -18,7 +18,6 @@ import id.patchedpixel.scenecraft.core.events.PreRenderHandCallback;
         "net/optifine/shaders/ShadersRender" // Post Optifine 1.12.2 E1
 }, remap = false)
 public abstract class MixinShadersRender {
-
     @Inject(method = { "renderHand0", "renderHand1" }, at = @At("HEAD"), cancellable = true, remap = false)
     private static void sceneCraftCompat_disableRenderHand0(
             GameRenderer er,

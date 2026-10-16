@@ -20,20 +20,12 @@ import java.util.UUID;
 
 @Mixin(ClientPacketListener.class)
 public abstract class MixinNetHandlerPlayClient {
-
     // The stupid name is required as otherwise Mixin treats it as a shadow, seemingly ignoring the lack of @Shadow
     private static Minecraft mcStatic = MCVer.getMinecraft();
 
     @Shadow
     private Map<UUID, PlayerInfo> playerInfoMap;
 
-    /**
-     * Record the own player entity joining the world.
-     * We cannot use the {@link net.minecraftforge.event.entity.EntityJoinWorldEvent} because the entity id
-     * of the player is set afterwards and the tablist entry might not yet be sent.
-     * @param packet The packet
-     * @param ci Callback info
-     */
     @Inject(method = "handlePlayerInfoUpdate", at=@At("HEAD"))
     public void recordOwnJoin(ClientboundPlayerInfoUpdatePacket packet, CallbackInfo ci) {
         if (!mcStatic.isSameThread()) return;
@@ -51,13 +43,6 @@ public abstract class MixinNetHandlerPlayClient {
         }
     }
 
-    /**
-     * Record the own player entity respawning.
-     * We cannot use the {@link net.minecraftforge.event.entity.EntityJoinWorldEvent} because that would also include
-     * the first spawn which is already handled by the above method.
-     * @param packet The packet
-     * @param ci Callback info
-     */
     @Inject(method = "handleRespawn", at=@At("RETURN"))
     public void recordOwnRespawn(ClientboundRespawnPacket packet, CallbackInfo ci) {
         RecordingEventHandler handler = SceneCraftRecorder.instance.getConnectionEventHandler().getRecordingEventHandler();

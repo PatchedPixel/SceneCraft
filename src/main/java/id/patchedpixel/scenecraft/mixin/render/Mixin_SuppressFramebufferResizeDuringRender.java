@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public abstract class Mixin_SuppressFramebufferResizeDuringRender implements WindowDelegateHolder {
-
     @Unique
     private VirtualWindow windowDelegate;
 
