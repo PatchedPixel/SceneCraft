@@ -34,30 +34,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-
 import net.minecraft.world.entity.EntityTypes;
-
 import net.minecraft.network.Connection;
 import net.minecraft.network.PacketListener;
-
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
-
 import net.minecraft.network.protocol.common.ClientboundTransferPacket;
-
 import net.minecraft.network.protocol.configuration.ClientboundFinishConfigurationPacket;
-
 import net.minecraft.world.entity.Relative;
-
 import org.apache.commons.lang3.mutable.MutableBoolean;
-
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.lighting.LevelLightEngine;
-
 import net.minecraft.resources.Identifier;
-
 import net.minecraft.world.level.GameType;
-
 import net.minecraft.network.protocol.common.ClientboundResourcePackPushPacket;
 
 import java.io.*;
