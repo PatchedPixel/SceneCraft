@@ -5,7 +5,6 @@ import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.rendering.Channel;
 import id.patchedpixel.scenecraft.render.rendering.FrameConsumer;
 import id.patchedpixel.scenecraft.render.utils.ByteBufferPool;
-import id.patchedpixel.scenecraft.render.utils.Lwjgl3Loader;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import net.minecraft.CrashReport;
 import org.lwjgl.PointerBuffer;
@@ -14,6 +13,7 @@ import org.lwjgl.util.tinyexr.EXRHeader;
 import org.lwjgl.util.tinyexr.EXRImage;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -27,11 +27,11 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
 
 public class EXRWriter implements FrameConsumer<BitmapFrame> {
     public static FrameConsumer<BitmapFrame> create(Path outputFolder, boolean keepAlpha) {
-        return Lwjgl3Loader.createFrameConsumer(
-                EXRWriter.class,
-                new Class[]{ Path.class, boolean.class },
-                new Object[]{ outputFolder, keepAlpha }
-        );
+        try {
+            return new EXRWriter(outputFolder, keepAlpha);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     // Compression is pretty slow, so we'll only use it when we've got enough cpu cores to make up for that
