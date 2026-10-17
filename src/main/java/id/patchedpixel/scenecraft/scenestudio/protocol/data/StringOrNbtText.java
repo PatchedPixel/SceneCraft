@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2023
  *
- * This file is part of SceneStudio.
+ * This file is part of ReplayStudio.
  *
  * SceneStudio is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
