@@ -23,7 +23,6 @@ import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.network.chat.Component;
 import com.mojang.blaze3d.platform.InputConstants;
-import id.patchedpixel.scenecraft.mixin.render.ParticleAccessor;
 import net.minecraft.client.particle.Particle;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -154,12 +153,10 @@ public class MCVer {
         return Util.getMillis();
     }
 
-    // TODO: this can be inlined once https://github.com/SpongePowered/Mixin/issues/305 is fixed
     public static Vec3 getPosition(Particle particle, float partialTicks) {
-        ParticleAccessor acc = (ParticleAccessor) particle;
-        double x = acc.getPrevPosX() + (acc.getPosX() - acc.getPrevPosX()) * partialTicks;
-        double y = acc.getPrevPosY() + (acc.getPosY() - acc.getPrevPosY()) * partialTicks;
-        double z = acc.getPrevPosZ() + (acc.getPosZ() - acc.getPrevPosZ()) * partialTicks;
+        double x = particle.xo + (particle.x - particle.xo) * partialTicks;
+        double y = particle.yo + (particle.y - particle.yo) * partialTicks;
+        double z = particle.zo + (particle.z - particle.zo) * partialTicks;
         return new Vec3(x, y, z);
     }
 

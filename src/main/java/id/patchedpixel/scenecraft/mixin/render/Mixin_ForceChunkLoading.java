@@ -58,7 +58,6 @@ public abstract class Mixin_ForceChunkLoading {
         }
 
         SectionOcclusionGraph sectionOcclusionGraph = this.levelRenderer.sectionOcclusionGraph();
-        ChunkRenderingDataPreparerAccessor sectionOcclusionGraphAcc = (ChunkRenderingDataPreparerAccessor) sectionOcclusionGraph;
 
         while (true) {
             boolean areWeDoneYet = true;
@@ -68,7 +67,7 @@ public abstract class Mixin_ForceChunkLoading {
             sectionOcclusionGraph.update(this.levelRenderState.cameraRenderState, (int) camera.getFov(), this.levelRenderState.chunkLoadingRenderState);
 
             // Wait for any async occlusion graph updates to be done
-            Future<?> fullUpdateFuture = sectionOcclusionGraphAcc.fullUpdateFuture();
+            Future<?> fullUpdateFuture = sectionOcclusionGraph.fullUpdateTask;
             if (fullUpdateFuture != null) {
                 try {
                     fullUpdateFuture.get(5, TimeUnit.SECONDS);

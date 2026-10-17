@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.replay.camera;
 
+import net.minecraft.client.player.FirstPersonHandsAndItems;
 import id.patchedpixel.scenecraft.core.KeyBindingRegistry;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.SettingsRegistry;
@@ -11,12 +12,10 @@ import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.RenderHotbarCallback;
 import id.patchedpixel.scenecraft.replay.events.RenderSpectatorCrosshairCallback;
-import id.patchedpixel.scenecraft.mixin.replay.EntityPlayerAccessor;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.replay.Setting;
-import id.patchedpixel.scenecraft.mixin.replay.FirstPersonRendererAccessor;
 import id.patchedpixel.scenecraft.scenestudio.util.Location;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -497,8 +496,6 @@ public class CameraEntity
     private void syncInventory() {
         Entity view = this.minecraft.getCameraEntity();
         Player viewPlayer = view != this && view instanceof Player ? (Player) view : null;
-        EntityPlayerAccessor cameraA = (EntityPlayerAccessor) this;
-        EntityPlayerAccessor viewPlayerA = (EntityPlayerAccessor) viewPlayer;
 
         ItemStack empty = ItemStack.EMPTY;
 
@@ -507,9 +504,9 @@ public class CameraEntity
         this.setItemSlot(EquipmentSlot.MAINHAND, viewPlayer != null ? viewPlayer.getItemBySlot(EquipmentSlot.MAINHAND) : empty);
         this.setItemSlot(EquipmentSlot.OFFHAND, viewPlayer != null ? viewPlayer.getItemBySlot(EquipmentSlot.OFFHAND) : empty);
 
-        cameraA.setItemStackMainHand(viewPlayerA != null ? viewPlayerA.getItemStackMainHand() : empty);
+        this.lastItemInMainHand = viewPlayer != null ? viewPlayer.lastItemInMainHand : empty;
         this.useItem = viewPlayer != null ? viewPlayer.getUseItem() : empty;
-        cameraA.setActiveItemStackUseCount(viewPlayerA != null ? viewPlayerA.getActiveItemStackUseCount() : 0);
+        this.useItemRemaining = viewPlayer != null ? viewPlayer.useItemRemaining : 0;
     }
 
     private void handleInputEvents() {
@@ -608,13 +605,13 @@ public class CameraEntity
                 if (lastHandRendered != player) {
                     lastHandRendered = player;
 
-                    FirstPersonRendererAccessor acc = (FirstPersonRendererAccessor) ((id.patchedpixel.scenecraft.mixin.replay.LocalPlayerAccessor) mc.player).scenecraft$getFirstPersonHandsAndItems();
-                    acc.setPrevEquippedProgressMainHand(1);
-                    acc.setPrevEquippedProgressOffHand(1);
-                    acc.setEquippedProgressMainHand(1);
-                    acc.setEquippedProgressOffHand(1);
-                    acc.setItemStackMainHand(player.getItemBySlot(EquipmentSlot.MAINHAND));
-                    acc.setItemStackOffHand(player.getItemBySlot(EquipmentSlot.OFFHAND));
+                    FirstPersonHandsAndItems acc = mc.player.firstPersonHandsAndItems();
+                    acc.oMainHandHeight = 1;
+                    acc.oOffHandHeight = 1;
+                    acc.mainHandHeight = 1;
+                    acc.offHandHeight = 1;
+                    acc.mainHandItem = player.getItemBySlot(EquipmentSlot.MAINHAND);
+                    acc.offHandItem = player.getItemBySlot(EquipmentSlot.OFFHAND);
 
                     mc.player.yBob = mc.player.yBobO = player.getYRot();
                     mc.player.xBob = mc.player.xBobO = player.getXRot();

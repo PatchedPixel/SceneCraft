@@ -98,7 +98,6 @@ dependencies {
 
     implementation(jarJar("com.googlecode.mp4parser:isoparser:1.1.22"))
     implementation(jarJar("de.javagl:jgltf-model:2.0.4"))
-    implementation(jarJar("org.apache.commons:commons-exec:1.5.0"))
 }
 
 def convertLang = tasks.register("convertLang") {

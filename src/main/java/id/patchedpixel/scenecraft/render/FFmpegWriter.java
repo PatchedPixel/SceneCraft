@@ -10,7 +10,6 @@ import id.patchedpixel.scenecraft.render.utils.StreamPipe;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
-import org.apache.commons.exec.CommandLine;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.TeeOutputStream;
@@ -22,6 +21,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -57,9 +58,11 @@ public class FFmpegWriter implements FrameConsumer<BitmapFrame> {
 
         String executable = settings.getExportCommandOrDefault();
         LOGGER.info("Starting {} with args: {}", executable, commandArgs);
-        String[] cmdline;
+        List<String> cmdline;
         try {
-            cmdline = new CommandLine(executable).addArguments(commandArgs, false).toStrings();
+            cmdline = new ArrayList<>();
+            cmdline.add(executable.replace('/', File.separatorChar).replace('\\', File.separatorChar));
+            cmdline.addAll(splitArguments(commandArgs));
         } catch (IllegalArgumentException e) {
             LOGGER.error("Failed to parse ffmpeg command line:", e);
             throw new FFmpegStartupException(settings, e.getLocalizedMessage());
@@ -75,6 +78,41 @@ public class FFmpegWriter implements FrameConsumer<BitmapFrame> {
         new StreamPipe(process.getErrorStream(), exportLogOut).start();
         outputStream = process.getOutputStream();
         channel = Channels.newChannel(outputStream);
+    }
+
+    private static List<String> splitArguments(String line) {
+        List<String> result = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        char quote = 0;
+        boolean lastQuoted = false;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (quote != 0) {
+                if (c == quote) {
+                    quote = 0;
+                } else {
+                    current.append(c);
+                }
+            } else if (c == '\'' || c == '"') {
+                quote = c;
+                lastQuoted = true;
+            } else if (Character.isWhitespace(c)) {
+                if (lastQuoted || current.length() > 0) {
+                    result.add(current.toString());
+                    current.setLength(0);
+                    lastQuoted = false;
+                }
+            } else {
+                current.append(c);
+            }
+        }
+        if (quote != 0) {
+            throw new IllegalArgumentException("Unbalanced quotes in " + line);
+        }
+        if (lastQuoted || current.length() > 0) {
+            result.add(current.toString());
+        }
+        return result;
     }
 
     @Override

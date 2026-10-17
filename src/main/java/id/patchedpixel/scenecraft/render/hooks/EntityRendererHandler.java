@@ -8,7 +8,6 @@ import id.patchedpixel.scenecraft.render.Setting;
 import id.patchedpixel.scenecraft.render.capturer.CaptureData;
 import id.patchedpixel.scenecraft.render.capturer.RenderInfo;
 import id.patchedpixel.scenecraft.render.capturer.WorldRenderer;
-import id.patchedpixel.scenecraft.mixin.render.GameRendererAccessor;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import net.minecraft.client.Minecraft;
@@ -65,7 +64,6 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
         PreRenderCallback.EVENT.invoker().preRender();
 
         if (mc.level != null && mc.player != null) {
-            GameRendererAccessor gameRenderer = (GameRendererAccessor) mc.gameRenderer;
             Screen orgScreen = mc.gui.screen();
             boolean orgPauseOnLostFocus = mc.options.pauseOnLostFocus;
             boolean orgHudIsHidden = mc.gui.hud.isHidden();

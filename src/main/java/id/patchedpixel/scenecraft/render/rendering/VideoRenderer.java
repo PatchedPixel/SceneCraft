@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.render.rendering;
 
+import net.minecraft.client.renderer.GameRenderer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
@@ -36,7 +37,6 @@ import net.minecraft.ReportedException;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.client.renderer.state.WindowRenderState;
 import net.minecraft.client.gui.screens.Overlay;
-import id.patchedpixel.scenecraft.mixin.render.GameRendererAccessor;
 import net.minecraft.client.renderer.state.gui.GuiRenderState;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -398,12 +398,12 @@ public class VideoRenderer implements RenderInfo {
             int mouseX = (int) mc.mouseHandler.xpos() * window.getGuiScaledWidth() / Math.max(window.getScreenWidth(), 1);
             int mouseY = (int) mc.mouseHandler.ypos() * window.getGuiScaledHeight() / Math.max(window.getScreenHeight(), 1);
 
-            GameRendererAccessor gameRenderer = (GameRendererAccessor) mc.gameRenderer;
-            GuiRenderState guiRenderState = gameRenderer.getGameRenderState().guiRenderState;
+            GameRenderer gameRenderer = mc.gameRenderer;
+            GuiRenderState guiRenderState = gameRenderer.gameRenderState().guiRenderState;
             guiRenderState.reset();
             GuiGraphicsExtractor drawContext = new GuiGraphicsExtractor(mc, guiRenderState, mouseX, mouseY);
 
-            WindowRenderState windowRenderState = gameRenderer.getGameRenderState().windowRenderState;
+            WindowRenderState windowRenderState = gameRenderer.gameRenderState().windowRenderState;
             windowRenderState.width = window.getWidth();
             windowRenderState.height = window.getHeight();
             windowRenderState.guiScale = window.getGuiScale();
@@ -429,7 +429,7 @@ public class VideoRenderer implements RenderInfo {
             var orgFog = RenderSystem.getShaderFog();
             var orgProjBuf = RenderSystem.getProjectionMatrixBuffer();
             var orgProjType = RenderSystem.getProjectionType();
-            gameRenderer.getGuiRenderer().render();
+            gameRenderer.guiRenderer.render();
             RenderSystem.setShaderFog(orgFog);
             RenderSystem.setProjectionMatrix(orgProjBuf, orgProjType);
 

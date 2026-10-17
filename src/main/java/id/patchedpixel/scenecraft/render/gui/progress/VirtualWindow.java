@@ -2,7 +2,6 @@ package id.patchedpixel.scenecraft.render.gui.progress;
 
 import id.patchedpixel.scenecraft.render.hooks.FramebufferDelegateHolder;
 import id.patchedpixel.scenecraft.render.hooks.WindowDelegateHolder;
-import id.patchedpixel.scenecraft.mixin.render.MainWindowAccessor;
 import id.patchedpixel.scenecraft.gui.function.Closeable;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.pipeline.RenderTarget;
@@ -21,7 +20,6 @@ public class VirtualWindow implements Closeable {
     private static final Logger LOGGER = LogManager.getLogger();
     private final Minecraft mc;
     private final Window window;
-    private final MainWindowAccessor acc;
 
     private final RenderTarget guiFramebuffer;
     private boolean isBound;
@@ -32,10 +30,9 @@ public class VirtualWindow implements Closeable {
     public VirtualWindow(Minecraft mc) {
         this.mc = mc;
         this.window = mc.getWindow();
-        this.acc = (MainWindowAccessor) (Object) this.window;
 
-        framebufferWidth = acc.getFramebufferWidth();
-        framebufferHeight = acc.getFramebufferHeight();
+        framebufferWidth = window.framebufferWidth;
+        framebufferHeight = window.framebufferHeight;
 
         guiFramebuffer = new MainTarget(framebufferWidth, framebufferHeight);
 
@@ -50,17 +47,17 @@ public class VirtualWindow implements Closeable {
     }
 
     public void bind() {
-        gameWidth = acc.getFramebufferWidth();
-        gameHeight = acc.getFramebufferHeight();
-        acc.setFramebufferWidth(framebufferWidth);
-        acc.setFramebufferHeight(framebufferHeight);
+        gameWidth = window.framebufferWidth;
+        gameHeight = window.framebufferHeight;
+        window.framebufferWidth = framebufferWidth;
+        window.framebufferHeight = framebufferHeight;
         applyScaleFactor();
         isBound = true;
     }
 
     public void unbind() {
-        acc.setFramebufferWidth(gameWidth);
-        acc.setFramebufferHeight(gameHeight);
+        window.framebufferWidth = gameWidth;
+        window.framebufferHeight = gameHeight;
         applyScaleFactor();
         isBound = false;
     }

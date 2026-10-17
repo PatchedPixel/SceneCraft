@@ -8,7 +8,6 @@ import id.patchedpixel.scenecraft.record.ServerInfoExt;
 import id.patchedpixel.scenecraft.record.Setting;
 import id.patchedpixel.scenecraft.record.gui.GuiRecordingControls;
 import id.patchedpixel.scenecraft.record.gui.GuiRecordingOverlay;
-import id.patchedpixel.scenecraft.mixin.record.NetworkManagerAccessor;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
@@ -110,7 +109,7 @@ public class ConnectionEventHandler {
             metaData.setDate(System.currentTimeMillis());
             metaData.setMcVersion(SceneCraft.instance.getMinecraftVersion());
 
-            Channel channel = ((NetworkManagerAccessor) networkManager).getChannel();
+            Channel channel = networkManager.channel;
             packetListener = new PacketListener(core, channel, outputPath, replayFile, metaData);
 
             String target = channel.pipeline().get("inbound_config") != null ? "inbound_config" : PacketListener.DECODER_KEY;

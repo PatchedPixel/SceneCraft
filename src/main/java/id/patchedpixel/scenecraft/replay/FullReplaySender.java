@@ -23,29 +23,13 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.AlertScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.protocol.game.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.login.ClientboundHelloPacket;
-import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.ClientboundDisconnectPacket;
-import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.network.protocol.game.ClientboundSetExperiencePacket;
-import net.minecraft.network.protocol.game.ClientboundLoginPacket;
-import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
-import net.minecraft.network.protocol.game.ClientboundContainerClosePacket;
-import net.minecraft.network.protocol.game.ClientboundMountScreenOpenPacket;
-import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
-import net.minecraft.network.protocol.game.ClientboundContainerSetDataPacket;
-import net.minecraft.network.protocol.game.ClientboundSetHealthPacket;
 import net.minecraft.network.protocol.login.ClientboundLoginFinishedPacket;
-import net.minecraft.network.protocol.game.ClientboundLevelParticlesPacket;
-import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket;
-import net.minecraft.network.protocol.game.ClientboundRespawnPacket;
-import net.minecraft.network.protocol.game.ClientboundOpenSignEditorPacket;
-import net.minecraft.network.protocol.game.ClientboundAwardStatsPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.io.FileUtils;
@@ -61,43 +45,23 @@ import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.network.protocol.common.ClientboundTransferPacket;
 
 import net.minecraft.network.protocol.configuration.ClientboundFinishConfigurationPacket;
-import net.minecraft.network.protocol.game.CommonPlayerSpawnInfo;
-import net.minecraft.network.protocol.game.ClientboundStartConfigurationPacket;
 
 import net.minecraft.world.entity.Relative;
 
-import net.minecraft.network.protocol.game.ClientboundDisguisedChatPacket;
-
-import net.minecraft.network.protocol.game.ClientboundPlayerChatPacket;
-
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
-import net.minecraft.network.protocol.game.ClientboundBlockChangedAckPacket;
-import net.minecraft.network.protocol.game.ClientboundOpenScreenPacket;
-import net.minecraft.network.protocol.game.ClientboundOpenBookPacket;
 import net.minecraft.world.level.chunk.ChunkSource;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.lighting.LevelLightEngine;
 
 import net.minecraft.resources.Identifier;
 
-import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
-import net.minecraft.network.protocol.game.ClientboundSelectAdvancementsTabPacket;
-import net.minecraft.network.protocol.game.ClientboundUpdateRecipesPacket;
 import net.minecraft.world.level.GameType;
 
-import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
-
 import net.minecraft.network.protocol.common.ClientboundResourcePackPushPacket;
-import net.minecraft.network.protocol.game.ClientboundSetCameraPacket;
-import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -246,6 +210,9 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
     private final EventHandler events = new EventHandler();
 
+    /** Replay timestamp of the packet currently being pushed through the pipeline (sender thread). */
+    private volatile int sendingTimeStamp = -1;
+
     /**
      * Create a new replay sender.
      * @param file The replay file
@@ -260,6 +227,18 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
     public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    /** Replay timestamps of border packets, read later on the main thread by the border mixins. */
+    private static final Map<Packet<?>, Integer> BORDER_PACKET_TIMES = Collections.synchronizedMap(new IdentityHashMap<>());
+
+    public static int borderPacketTime(Packet<?> packet) {
+        Integer time = BORDER_PACKET_TIMES.get(packet);
+        return time != null ? time : -1;
+    }
+
+    public static void forgetBorderPacket(Packet<?> packet) {
+        BORDER_PACKET_TIMES.remove(packet);
     }
 
     /**
@@ -428,6 +407,9 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
      * @return The processed packet or {@code null} if no packet shall be sent
      */
     protected Packet processPacket(Packet p) throws Exception {
+        if (p instanceof ClientboundSetBorderLerpSizePacket || p instanceof ClientboundInitializeBorderPacket) {
+            BORDER_PACKET_TIMES.put(p, sendingTimeStamp);
+        }
         if (p instanceof ClientboundLoginFinishedPacket) {
             registry = registry.withLoginSuccess();
             return p;
@@ -745,6 +727,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
                                 // Process packet
                                 if (nextPacket.type == PacketType.Bundle) inBundle = !inBundle;
+                                sendingTimeStamp = nextTimeStamp;
                                 channel.pipeline().fireChannelRead(Unpooled.wrappedBuffer(nextPacket.bytes));
                                 nextPacket = null;
 
@@ -953,6 +936,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
                         // Process packet
                         if (pd.type == PacketType.Bundle) inBundle = !inBundle;
+                        sendingTimeStamp = nextTimeStamp;
                         channel.pipeline().fireChannelRead(Unpooled.wrappedBuffer(pd.bytes));
 
                         // MC as of 1.20.2 relies on autoRead, so it can update the connection state on the main

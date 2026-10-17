@@ -32,7 +32,6 @@ import java.util.Optional;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.emitLine;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import id.patchedpixel.scenecraft.mixin.replay.DrawContextAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
@@ -203,7 +202,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
                     linesRenderState.x2 - linesRenderState.x1, linesRenderState.y2 - linesRenderState.y1, scale);
             linesRenderer.prepare(
                     linesRenderState,
-                    ((DrawContextAccessor) renderer.getContext()).getState(),
+                    renderer.getContext().guiRenderState,
                     mc.gameRenderer.featureRenderDispatcher(),
                     scale
             );

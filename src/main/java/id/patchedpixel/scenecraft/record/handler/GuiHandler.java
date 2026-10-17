@@ -5,7 +5,6 @@ import id.patchedpixel.scenecraft.core.SettingsRegistry;
 import id.patchedpixel.scenecraft.core.gui.GuiReplayButton;
 import id.patchedpixel.scenecraft.record.ServerInfoExt;
 import id.patchedpixel.scenecraft.record.Setting;
-import id.patchedpixel.scenecraft.mixin.record.AddServerScreenAccessor;
 import id.patchedpixel.scenecraft.gui.container.GuiScreen;
 import id.patchedpixel.scenecraft.gui.container.VanillaGuiScreen;
 import id.patchedpixel.scenecraft.gui.element.GuiButton;
@@ -56,7 +55,7 @@ public class GuiHandler extends EventRegistrations {
         if (gui instanceof ManageServerScreen) {
             VanillaGuiScreen vanillaGui = VanillaGuiScreen.wrap(gui);
             GuiButton replayButton = new GuiReplayButton().onClick(() -> {
-                ServerData serverInfo = ((AddServerScreenAccessor) gui).getServer();
+                ServerData serverInfo = ((ManageServerScreen) gui).serverData;
                 ServerInfoExt serverInfoExt = ServerInfoExt.from(serverInfo);
                 Boolean state = serverInfoExt.getAutoRecording();
                 GuiToggleButton<String> autoRecording = new GuiToggleButton<String>()

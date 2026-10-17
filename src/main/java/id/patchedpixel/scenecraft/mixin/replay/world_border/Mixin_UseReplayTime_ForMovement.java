@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.replay.world_border;
 
+import id.patchedpixel.scenecraft.replay.BorderReplayTime;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import org.spongepowered.asm.mixin.Final;
@@ -28,7 +29,8 @@ public class Mixin_UseReplayTime_ForMovement {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void scenecraft$captureStart(CallbackInfo ci) {
-        scenecraft$beginReplayMs = scenecraft$replayNow();
+        long packetTime = BorderReplayTime.pending;
+        scenecraft$beginReplayMs = packetTime >= 0L ? packetTime : scenecraft$replayNow();
     }
 
     @Inject(method = "update", at = @At("HEAD"))

@@ -7,7 +7,6 @@ import id.patchedpixel.scenecraft.core.utils.Restrictions;
 import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.record.handler.ConnectionEventHandler;
 import id.patchedpixel.scenecraft.record.handler.GuiHandler;
-import id.patchedpixel.scenecraft.mixin.record.NetworkManagerAccessor;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import io.netty.channel.Channel;
@@ -86,7 +85,7 @@ public class SceneCraftRecorder implements Module {
     }
 
     public void initiateRecording(Connection networkManager) {
-        Channel channel = ((NetworkManagerAccessor) networkManager).getChannel();
+        Channel channel = networkManager.channel;
         if (channel.pipeline().get(ReplayHandler.PACKET_HANDLER_NAME) != null) return;
         if (channel.hasAttr(ATTR_CHECKED)) return;
         channel.attr(ATTR_CHECKED).set(null);

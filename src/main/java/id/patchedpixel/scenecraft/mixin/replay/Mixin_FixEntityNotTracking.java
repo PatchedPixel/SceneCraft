@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.replay;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
@@ -18,8 +19,8 @@ public class Mixin_FixEntityNotTracking {
     }
 
     private void updatePositionIfNotTracked(Entity entity) {
-        if (entity != null && entity.level() instanceof ClientWorldAccessor world) {
-            if (!world.getEntityList().contains(entity)) {
+        if (entity != null && entity.level() instanceof ClientLevel world) {
+            if (!world.tickingEntities.contains(entity)) {
                 // This only applies to entities that are server-controlled.
                 // You wouldn't think this check is necessary but for some stupid reason Spigot sends entities before
                 // chunks, so we must not update the entity if it is being ridden by the client player because those
