@@ -182,14 +182,6 @@ public abstract class AbstractGuiVerticalList<T extends AbstractGuiVerticalList<
         int sliderX = lastRenderSize.getWidth() / 2 + listPanel.calcMinSize().getWidth() / 2 + 3;
         return sliderX <= point.getX() && point.getX() < sliderX + 6;
     }
-
-    private boolean isOnBackground(ReadablePoint point) {
-        int width = lastRenderSize.getWidth();
-        int listPanelWidth = listPanel.calcMinSize().getWidth();
-        return point.getX() < width / 2 - listPanelWidth / 2
-                || width / 2 + listPanelWidth / 2 + (drawSlider ? 6 : 0) < point.getX();
-    }
-
     public boolean doesDrawSlider() {
         return drawSlider;
     }

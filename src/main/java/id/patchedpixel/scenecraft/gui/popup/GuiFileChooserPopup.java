@@ -58,14 +58,6 @@ public class GuiFileChooserPopup extends AbstractGuiPopup<GuiFileChooserPopup> i
         popup.open();
         return popup;
     }
-
-    public static GuiFileChooserPopup openLoadGui(GuiContainer container, String buttonLabel, String...fileExtensions) {
-        GuiFileChooserPopup popup = new GuiFileChooserPopup(container, fileExtensions, true).setBackgroundColor(Colors.DARK_TRANSPARENT);
-        popup.acceptButton.setI18nLabel(buttonLabel).setDisabled();
-        popup.open();
-        return popup;
-    }
-
     private Consumer<File> onAccept = (file) -> {};
     private Runnable onCancel = () -> {};
 

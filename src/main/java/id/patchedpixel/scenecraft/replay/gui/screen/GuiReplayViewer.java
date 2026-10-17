@@ -271,13 +271,6 @@ public class GuiReplayViewer extends GuiScreen {
     private static final GuiImage DEFAULT_THUMBNAIL = new GuiImage().setTexture(Utils.DEFAULT_THUMBNAIL);
 
     public static class GuiSelectReplayPopup extends AbstractGuiPopup<GuiSelectReplayPopup> {
-        public static GuiSelectReplayPopup openGui(GuiContainer container, File folder) {
-            GuiSelectReplayPopup popup = new GuiSelectReplayPopup(container, folder);
-            popup.list.load();
-            popup.open();
-            return popup;
-        }
-
         private final SettableFuture<File> future = SettableFuture.create();
 
         private final GuiReplayList list = new GuiReplayList(popup);
@@ -325,11 +318,6 @@ public class GuiReplayViewer extends GuiScreen {
         public SettableFuture<File> getFuture() {
             return future;
         }
-
-        public GuiReplayList getList() {
-            return list;
-        }
-
         public GuiButton getAcceptButton() {
             return acceptButton;
         }

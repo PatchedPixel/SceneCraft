@@ -85,7 +85,7 @@ public class SceneCraftRecorder implements Module {
     }
 
     public void initiateRecording(Connection networkManager) {
-        Channel channel = networkManager.channel;
+        Channel channel = networkManager.channel();
         if (channel.pipeline().get(ReplayHandler.PACKET_HANDLER_NAME) != null) return;
         if (channel.hasAttr(ATTR_CHECKED)) return;
         channel.attr(ATTR_CHECKED).set(null);

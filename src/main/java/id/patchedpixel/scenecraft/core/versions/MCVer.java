@@ -37,17 +37,6 @@ public class MCVer {
         return CurrentProtocol.get();
     }
 
-    public static ConnectionProtocol asMc(State state) {
-        switch (state) {
-            case HANDSHAKE: return ConnectionProtocol.HANDSHAKING;
-            case STATUS: return ConnectionProtocol.STATUS;
-            case LOGIN: return ConnectionProtocol.LOGIN;
-            case CONFIGURATION: return ConnectionProtocol.CONFIGURATION;
-            case PLAY: return ConnectionProtocol.PLAY;
-        }
-        throw new IllegalArgumentException("Unexpected value: " + state);
-    }
-
     public static State fromMc(ConnectionProtocol mcState) {
         switch (mcState) {
             case HANDSHAKING: return State.HANDSHAKE;

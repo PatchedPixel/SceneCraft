@@ -77,11 +77,6 @@ public class ReplayHandler {
      */
     private Restrictions restrictions = new Restrictions();
 
-    /**
-     * Whether camera movements by user input and/or server packets should be suppressed.
-     */
-    private boolean suppressCameraMovements;
-
     private Set<Marker> markers;
 
     private final GuiReplayOverlay overlay;
@@ -310,22 +305,6 @@ public class ReplayHandler {
 
     public int getReplayDuration() {
         return replayDuration;
-    }
-
-    /**
-     * Return whether camera movement by user inputs and/or server packets should be suppressed.
-     * @return {@code true} if these kinds of movement should be suppressed
-     */
-    public boolean shouldSuppressCameraMovements() {
-        return suppressCameraMovements;
-    }
-
-    /**
-     * Set whether camera movement by user inputs and/or server packets should be suppressed.
-     * @param suppressCameraMovements {@code true} to suppress these kinds of movement, {@code false} to allow them
-     */
-    public void setSuppressCameraMovements(boolean suppressCameraMovements) {
-        this.suppressCameraMovements = suppressCameraMovements;
     }
 
     /**

@@ -1,7 +1,9 @@
-package id.patchedpixel.scenecraft.mixin.extras.playeroverview;
+package id.patchedpixel.scenecraft.mixin;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.extras.SceneCraftExtras;
 import id.patchedpixel.scenecraft.extras.playeroverview.PlayerOverview;
+import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -9,25 +11,23 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/**
- * This mixin prevents players that are hidden in the PlayerOverview from being rendered.
- *
- * Cancelling the RenderPlayerEvent.Pre is insufficient because it affects neither the shadows nor the fire texture.
- * See: https://github.com/MinecraftForge/MinecraftForge/issues/2987
- *
- * The previous solution was to overwrite the RenderPlayer instances which has been dropped in favor of this one
- * because it is less compatible with other mods whereas this one should be fine as long as no other mod completely
- * overwrites the shouldRender method.
- * One example of the previous solution breaking is when used with VanillaEnhancements because it replaces the
- * RenderManager with a new custom one which in turn will reset our registered RenderPlayer instances because
- * it does so after we have already registered with the old RenderManager.
- *
- * For 1.7.10, that method doesn't exist, so we use a combination of the event and inject into
- */
 @Mixin(value = EntityRenderer.class, priority = 1200)
-public abstract class MixinRender {
+public abstract class MixinEntityRenderer {
+    @Inject(method = "submitNameDisplay(Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;I)V", at = @At("HEAD"), cancellable = true)
+    private void sceneCraftRender_areAllNamesHidden(CallbackInfo ci) {
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) MCVer.getMinecraft().gameRenderer).sceneCraftRender_getHandler();
+        if (handler != null && !handler.getSettings().isRenderNameTags()) {
+            ci.cancel();
+        }
+    }
+
+    /**
+     * Prevents players that are hidden in the PlayerOverview from being rendered.
+     * Cancelling the render event alone is insufficient because it affects neither the shadows nor the fire texture.
+     */
     @Inject(method = "shouldRender", at=@At("HEAD"), cancellable = true)
     public void sceneCraftExtras_isPlayerHidden(Entity entity, @Coerce Object camera, double camX, double camY, double camZ, float partialTicks, CallbackInfoReturnable<Boolean> ci) {
         SceneCraftExtras.instance.get(PlayerOverview.class).ifPresent(playerOverview -> {

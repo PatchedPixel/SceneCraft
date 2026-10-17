@@ -160,46 +160,6 @@ public final class Color implements ReadableColor {
         setBlue(Math.round(b * 255f));
     }
 
-    /**
-     * Converts the RGB channels to hue/saturation/brightness (each in the range 0-1).
-     *
-     * @param dest Array of at least 3 elements to write into, or null to allocate a new one
-     * @return The array holding hue, saturation and brightness
-     */
-    public float[] toHSB(float[] dest) {
-        if (dest == null) {
-            dest = new float[3];
-        }
-        int max = Math.max(red, Math.max(green, blue));
-        int min = Math.min(red, Math.min(green, blue));
-        float brightness = max / 255f;
-        float saturation = max == 0 ? 0f : (max - min) / (float) max;
-        float hue;
-        if (saturation == 0f) {
-            hue = 0f;
-        } else {
-            float delta = max - min;
-            float rc = (max - red) / delta;
-            float gc = (max - green) / delta;
-            float bc = (max - blue) / delta;
-            if (red == max) {
-                hue = bc - gc;
-            } else if (green == max) {
-                hue = 2f + rc - bc;
-            } else {
-                hue = 4f + gc - rc;
-            }
-            hue /= 6f;
-            if (hue < 0f) {
-                hue += 1f;
-            }
-        }
-        dest[0] = hue;
-        dest[1] = saturation;
-        dest[2] = brightness;
-        return dest;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

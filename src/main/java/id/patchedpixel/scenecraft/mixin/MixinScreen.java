@@ -1,8 +1,11 @@
-package id.patchedpixel.scenecraft.mixin.gui;
+package id.patchedpixel.scenecraft.mixin;
 
+import com.google.common.collect.Collections2;
+import id.patchedpixel.scenecraft.gui.versions.ScreenExt;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.InitScreenCallback;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,13 +16,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-import com.google.common.collect.Collections2;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-
 // Increased priority so we can consider existing third-party buttons when choosing the position for our button
 @Mixin(value = Screen.class, priority = 1100)
-public class MixinScreen {
+public abstract class MixinScreen implements ScreenExt {
     @Shadow @Final private List<GuiEventListener> children;
+
+    @Unique
+    private boolean passEvents;
+
+    @Override
+    public boolean doesPassEvents() {
+        return this.passEvents;
+    }
+
+    @Override
+    public void setPassEvents(boolean passEvents) {
+        this.passEvents = passEvents;
+    }
 
     @Inject(method = "init(II)V", at = @At("HEAD"))
     private void preInit(CallbackInfo ci) {

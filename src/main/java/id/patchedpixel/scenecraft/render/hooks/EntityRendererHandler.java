@@ -104,11 +104,6 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
     public RenderSettings getSettings() {
         return this.settings;
     }
-
-    public RenderInfo getRenderInfo() {
-        return this.renderInfo;
-    }
-
     public long getFakeFinishTimeNano() {
         return fakeFinishTimeNano;
     }

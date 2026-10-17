@@ -22,7 +22,6 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.stats.StatsCounter;
 import net.minecraft.world.phys.AABB;
@@ -489,8 +488,6 @@ public class CameraEntity
         syncInventory();
     }
 
-    private final Inventory originalInventory = this.getInventory();
-
     // If we are spectating a player, "steal" its inventory so the rendering code knows what item(s) to render
     // and if we aren't, then reset ours.
     private void syncInventory() {
@@ -621,7 +618,5 @@ public class CameraEntity
         }
 
         // Moved to MixinCamera
-
-        private boolean heldItemTooltipsWasTrue;
     }
 }

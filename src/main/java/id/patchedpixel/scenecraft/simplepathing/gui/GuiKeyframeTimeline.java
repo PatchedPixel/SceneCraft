@@ -36,7 +36,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
 import net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState;
-import com.mojang.blaze3d.resource.ResourceDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2f;
 
@@ -274,18 +273,6 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
     }
 
     private static class TimeTimelineLinesRenderer extends PictureInPictureRenderer<TimeTimelineLinesRenderState> {
-        private static ResourceDescriptor<TimeTimelineLinesRenderer> FACTORY = new ResourceDescriptor<>() {
-            @Override
-            public TimeTimelineLinesRenderer allocate() {
-                return new TimeTimelineLinesRenderer();
-            }
-
-            @Override
-            public void free(TimeTimelineLinesRenderer object) {
-                object.close();
-            }
-        };
-
         @Override
         public Class<TimeTimelineLinesRenderState> getRenderStateClass() {
             return TimeTimelineLinesRenderState.class;

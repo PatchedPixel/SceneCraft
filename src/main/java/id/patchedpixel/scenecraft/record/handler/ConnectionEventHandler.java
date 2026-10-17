@@ -109,7 +109,7 @@ public class ConnectionEventHandler {
             metaData.setDate(System.currentTimeMillis());
             metaData.setMcVersion(SceneCraft.instance.getMinecraftVersion());
 
-            Channel channel = networkManager.channel;
+            Channel channel = networkManager.channel();
             packetListener = new PacketListener(core, channel, outputPath, replayFile, metaData);
 
             String target = channel.pipeline().get("inbound_config") != null ? "inbound_config" : PacketListener.DECODER_KEY;

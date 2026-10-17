@@ -53,8 +53,6 @@ public class GuiHandler extends EventRegistrations {
         if (mod.getReplayHandler() != null) {
             // Pause replay when menu is opened
             mod.getReplayHandler().getReplaySender().setReplaySpeed(0);
-
-            final Component BUTTON_OPTIONS = Component.translatable("menu.options");
             final Component BUTTON_EXIT_SERVER = Component.translatable("menu.disconnect");
             final Component BUTTON_ADVANCEMENTS = Component.translatable("gui.advancements");
             final Component BUTTON_STATS = Component.translatable("gui.stats");

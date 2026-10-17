@@ -537,8 +537,6 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                 }
             });
 
-            if(replayHandler.shouldSuppressCameraMovements()) return null;
-
             for (Relative relative : ppl.relatives()) {
                 if (relative == Relative.X || relative == Relative.Y || relative == Relative.Z) {
                     return null; // At least one of the coordinates is relative, so we don't care
@@ -799,13 +797,6 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
      */
     public boolean isHurrying() {
         return desiredTimeStamp != -1;
-    }
-
-    /**
-     * Cancels the hurrying.
-     */
-    public void stopHurrying() {
-        desiredTimeStamp = -1;
     }
 
     /**
