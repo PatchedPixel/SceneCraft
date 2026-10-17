@@ -1,7 +1,6 @@
 package id.patchedpixel.scenecraft.replay;
 
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
-import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
@@ -15,8 +14,8 @@ public interface ReplaySender {
      */
     public default boolean paused() {
         Minecraft mc = getMinecraft();
-        TimerAccessor timer = (TimerAccessor) ((MinecraftAccessor) mc).getTimer();
-        return timer.getTickLength() == Float.POSITIVE_INFINITY;
+        DeltaTracker.Timer timer = (DeltaTracker.Timer) mc.getDeltaTracker();
+        return timer.msPerTick == Float.POSITIVE_INFINITY;
     }
 
     void setReplaySpeed(double factor);

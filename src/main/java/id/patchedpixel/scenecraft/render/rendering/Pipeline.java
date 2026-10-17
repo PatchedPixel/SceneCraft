@@ -1,6 +1,5 @@
 package id.patchedpixel.scenecraft.render.rendering;
 
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.render.capturer.WorldRenderer;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
@@ -8,6 +7,7 @@ import id.patchedpixel.scenecraft.render.processor.GlToAbsoluteDepthProcessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.ReportedException;
 import net.minecraft.CrashReport;
+import net.minecraft.util.thread.BlockableEventLoop;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class Pipeline<R extends Frame, P extends Frame> implements Runnable {
 
         Minecraft mc = MCVer.getMinecraft();
         while (!capturer.isDone() && !abort) {
-            if (mc.getWindow().shouldClose() || id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash() != null) {
+            if (mc.getWindow().shouldClose() || BlockableEventLoop.delayedCrash != null) {
                 processService.shutdown();
                 return;
             }

@@ -5,8 +5,6 @@ import id.patchedpixel.scenecraft.scenestudio.netio.ByteBufNetOutput;
 import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
 import id.patchedpixel.scenecraft.core.SceneCraft;
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
-import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
 import id.patchedpixel.scenecraft.scenestudio.io.ReplayInputStream;
@@ -21,6 +19,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.AlertScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -662,8 +661,8 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
             this.realTimeStartSpeed = d;
             this.realTimeStart = System.currentTimeMillis() - (long) (lastTimeStamp / d);
         }
-        TimerAccessor timer = (TimerAccessor) ((MinecraftAccessor) mc).getTimer();
-        timer.setTickLength(DEFAULT_MS_PER_TICK / (float) d);
+        DeltaTracker.Timer timer = mc.deltaTracker;
+        timer.msPerTick = DEFAULT_MS_PER_TICK / (float) d;
     }
 
     /////////////////////////////////////////////////////////

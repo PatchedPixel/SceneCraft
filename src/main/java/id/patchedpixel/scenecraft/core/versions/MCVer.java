@@ -2,9 +2,6 @@ package id.patchedpixel.scenecraft.core.versions;
 
 import com.mojang.blaze3d.Blaze3D;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.renderpearl.api.vertex.VertexFormat;
-import com.mojang.renderpearl.api.vertex.VertexFormatElement;
-import id.patchedpixel.scenecraft.mixin.core.GuiScreenAccessor;
 import id.patchedpixel.scenecraft.scenestudio.protocol.State;
 import id.patchedpixel.scenecraft.scenestudio.protocol.CurrentProtocol;
 import id.patchedpixel.scenecraft.scenestudio.protocol.PacketTypeRegistry;
@@ -105,8 +102,7 @@ public class MCVer {
             Screen screen,
             Button button
     ) {
-        GuiScreenAccessor acc = (GuiScreenAccessor) screen;
-        acc.invokeAddButton(button);
+        screen.addRenderableWidget(button);
     }
 
     public static Optional<AbstractWidget> findButton(Iterable<? extends GuiEventListener> buttonList, @SuppressWarnings("unused") String text, @SuppressWarnings("unused") int id) {

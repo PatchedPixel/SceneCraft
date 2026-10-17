@@ -4,8 +4,6 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
-import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.scenestudio.protocol.State;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.scenestudio.rar.RandomAccessReplay;
@@ -16,6 +14,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -187,8 +186,8 @@ public class QuickReplaySender extends ChannelHandlerAdapter implements ReplaySe
             }
             this.replaySpeed = factor;
         }
-        TimerAccessor timer = (TimerAccessor) ((MinecraftAccessor) mc).getTimer();
-        timer.setTickLength(DEFAULT_MS_PER_TICK / (float) factor);
+        DeltaTracker.Timer timer = mc.deltaTracker;
+        timer.msPerTick = DEFAULT_MS_PER_TICK / (float) factor;
     }
 
     @Override

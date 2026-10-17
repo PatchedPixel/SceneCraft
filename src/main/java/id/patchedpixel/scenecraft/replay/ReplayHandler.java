@@ -4,8 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
-import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
@@ -28,6 +26,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 import io.netty.channel.embedded.EmbeddedChannel;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl;
 import net.minecraft.CrashReport;
@@ -156,8 +155,8 @@ public class ReplayHandler {
             mc.disconnectWithProgressScreen();
         }
 
-        TimerAccessor timer = (TimerAccessor) ((MinecraftAccessor) mc).getTimer();
-        timer.setTickLength(DEFAULT_MS_PER_TICK);
+        DeltaTracker.Timer timer = mc.deltaTracker;
+        timer.msPerTick = DEFAULT_MS_PER_TICK;
         overlay.setVisible(false);
 
         SceneCraftReplay.instance.forcefullyStopReplay();
@@ -200,7 +199,7 @@ public class ReplayHandler {
         ));
         networkManager.setupOutboundProtocol(LoginProtocols.SERVERBOUND);
 
-        ((MinecraftAccessor) mc).setConnection(networkManager);
+        mc.pendingConnection = networkManager;
 
         mc.getDownloadedPackSource().configureForServerControl(networkManager, ServerPackManager.PackPromptStatus.ALLOWED);
     }

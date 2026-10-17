@@ -14,13 +14,11 @@ import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
 import io.netty.channel.Channel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.Connection;
 import org.apache.logging.log4j.Logger;
-
-import id.patchedpixel.scenecraft.mixin.record.ClientLoginNetworkHandlerAccessor;
-
 import net.minecraft.world.level.Level;
 
 import java.nio.file.Path;
@@ -70,8 +68,8 @@ public class ConnectionEventHandler {
             }
 
             ServerData serverInfo;
-            serverInfo = networkManager.getPacketListener() instanceof ClientLoginNetworkHandlerAccessor loginNetworkHandler
-                    ? loginNetworkHandler.getServerInfo()
+            serverInfo = networkManager.getPacketListener() instanceof ClientHandshakePacketListenerImpl handler
+                    ? handler.serverData
                     : null;
 
             String worldName;

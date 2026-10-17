@@ -13,6 +13,7 @@ import id.patchedpixel.scenecraft.gui.element.IGuiImage;
 import id.patchedpixel.scenecraft.gui.layout.HorizontalLayout;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 
@@ -64,7 +65,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
             Type type = getType();
             if (type == Type.Gamma || type == Type.Both) {
                 originalGamma = mc.options.gamma().get();
-                ((id.patchedpixel.scenecraft.mixin.core.SimpleOptionAccessor<Double>) (Object) mc.options.gamma()).setRawValue(1000.0);
+                mc.options.gamma().value = 1000.0;
             }
             if (type == Type.NightVision || type == Type.Both) {
                 if (mc.player != null) {
@@ -80,7 +81,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
         if (active && module.getReplayHandler() != null) {
             Type type = getType();
             if (type == Type.Gamma || type == Type.Both) {
-                ((id.patchedpixel.scenecraft.mixin.core.SimpleOptionAccessor<Double>) (Object) mc.options.gamma()).setRawValue(originalGamma);
+                mc.options.gamma().value = originalGamma;
             }
             if (type == Type.NightVision || type == Type.Both) {
                 if (mc.player != null) {

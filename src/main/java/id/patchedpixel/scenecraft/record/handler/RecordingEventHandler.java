@@ -1,7 +1,6 @@
 package id.patchedpixel.scenecraft.record.handler;
 
 import id.patchedpixel.scenecraft.core.events.PreRenderCallback;
-import id.patchedpixel.scenecraft.mixin.record.IntegratedServerAccessor;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
@@ -243,7 +242,7 @@ public class RecordingEventHandler extends EventRegistrations {
     private void checkForGamePaused() {
         if (mc.hasSingleplayerServer()) {
             IntegratedServer server =  mc.getSingleplayerServer();
-            if (server != null && ((IntegratedServerAccessor) server).isGamePaused()) {
+            if (server != null && server.isPaused()) {
                 packetListener.setServerWasPaused();
             }
         }

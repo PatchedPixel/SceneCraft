@@ -40,7 +40,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraft.world.entity.EntityTypes;
-import id.patchedpixel.scenecraft.mixin.record.DecoderHandlerAccessor;
 import net.minecraft.network.ProtocolInfo;
 import net.minecraft.network.PacketDecoder;
 import net.minecraft.network.UnconfiguredPipelineHandler;
@@ -286,11 +285,11 @@ public class PacketListener extends ChannelInboundHandlerAdapter {
     }
 
     private ConnectionProtocol getConnectionState() {
-        var decoderHandler = (DecoderHandlerAccessor<?>) channel.pipeline().get(PacketDecoder.class);
+        var decoderHandler = channel.pipeline().get(PacketDecoder.class);
         if (decoderHandler == null) {
             return ConnectionProtocol.LOGIN;
         }
-        return decoderHandler.getState().id();
+        return decoderHandler.protocolInfo.id();
     }
 
     private Packet encodeMcPacket(ConnectionProtocol connectionState, net.minecraft.network.protocol.Packet packet) throws Exception {
@@ -303,7 +302,7 @@ public class PacketListener extends ChannelInboundHandlerAdapter {
                 // also don't need it).
                 state = LoginProtocols.CLIENTBOUND;
             } else {
-                state = ((DecoderHandlerAccessor<?>) channel.pipeline().get(PacketDecoder.class)).getState();
+                state = channel.pipeline().get(PacketDecoder.class).protocolInfo;
             }
             state.codec().encode(byteBuf, packet);
             return decodePacket(state.id(), byteBuf);

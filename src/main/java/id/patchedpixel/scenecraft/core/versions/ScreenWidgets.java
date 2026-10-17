@@ -59,7 +59,7 @@ public final class ScreenWidgets {
             }
 
             private void register(AbstractWidget widget) {
-                ((id.patchedpixel.scenecraft.mixin.core.GuiScreenAccessor) screen).invokeAddButton(widget);
+                screen.addRenderableWidget(widget);
             }
         };
     }

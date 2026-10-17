@@ -3,7 +3,6 @@ package id.patchedpixel.scenecraft.core;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import id.patchedpixel.scenecraft.core.events.PreRenderCallback;
-import id.patchedpixel.scenecraft.mixin.core.KeyBindingAccessor;
 import id.patchedpixel.scenecraft.gui.function.KeyInput;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import id.patchedpixel.scenecraft.core.events.KeyBindingEventCallback;
@@ -172,8 +171,7 @@ public class KeyBindingRegistry extends EventRegistrations {
         }
 
         public void trigger() {
-            KeyBindingAccessor acc = (KeyBindingAccessor) keyBinding;
-            acc.setPressTime(acc.getPressTime() + 1);
+            keyBinding.clickCount = keyBinding.clickCount + 1;
             handleKeyBindings();
         }
 

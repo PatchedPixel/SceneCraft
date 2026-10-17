@@ -30,8 +30,8 @@ links=[
 contributors=[]
 sources="https://github.com/PatchedPixel/SceneCraft"
 
-#[[accessTransformers]]
-#file="META-INF/accesstransformer.cfg"
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
 
 [[dependencies.${mod_id}]]
     modId="neoforge"

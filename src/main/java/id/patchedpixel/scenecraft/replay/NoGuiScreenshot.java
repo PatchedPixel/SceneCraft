@@ -6,7 +6,6 @@ import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.gui.versions.Image;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.systems.RenderSystem;
-import id.patchedpixel.scenecraft.mixin.core.GuiAccessor;
 import net.minecraft.client.gui.screens.Screen;
 
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
@@ -57,7 +56,7 @@ public class NoGuiScreenshot {
                 final boolean guiHidden = mc.gui.hud.isHidden();
                 final Screen orgScreen = mc.gui.screen();
                 try {
-                    ((GuiAccessor) mc.gui).scenecraft$setScreen(null);
+                    mc.gui.screen = null;
                     if (!guiHidden) mc.gui.hud.toggle();
 
                     mc.gameRenderer.update(mc.getDeltaTracker());
@@ -68,7 +67,7 @@ public class NoGuiScreenshot {
                     return;
                 } finally {
                     // Reset GUI settings
-                    ((GuiAccessor) mc.gui).scenecraft$setScreen(orgScreen);
+                    mc.gui.screen = orgScreen;
                     if (!guiHidden) mc.gui.hud.toggle();
                 }
 

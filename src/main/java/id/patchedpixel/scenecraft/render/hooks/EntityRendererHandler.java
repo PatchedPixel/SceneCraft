@@ -70,7 +70,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
             boolean orgPauseOnLostFocus = mc.options.pauseOnLostFocus;
             boolean orgHudIsHidden = mc.gui.hud.isHidden();
             try {
-                ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(null);
+                mc.gui.screen = null;
                 mc.options.pauseOnLostFocus = false; // do not want the pause menu to open if the window is unfocused
                 if (omnidirectional) {
                     // makes no sense, we wouldn't even know where to put it
@@ -82,7 +82,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
                 mc.gameRenderer.extract(mc.getDeltaTracker(), true);
                 mc.gameRenderer.render();
             } finally {
-                ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(orgScreen);
+                mc.gui.screen = orgScreen;
                 mc.options.pauseOnLostFocus = orgPauseOnLostFocus;
                 mc.gameRenderer.mainCamera().disablePanoramicMode();
                 if (!orgHudIsHidden) mc.gui.hud.toggle();

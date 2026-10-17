@@ -2,8 +2,6 @@ package id.patchedpixel.scenecraft.render.rendering;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import id.patchedpixel.scenecraft.core.SceneCraft;
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
-import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.pathing.player.AbstractTimelinePlayer;
 import id.patchedpixel.scenecraft.pathing.player.ReplayTimer;
@@ -36,17 +34,14 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.ReportedException;
 import net.minecraft.sounds.SoundSource;
-
 import net.minecraft.client.renderer.state.WindowRenderState;
-
 import net.minecraft.client.gui.screens.Overlay;
-
 import id.patchedpixel.scenecraft.mixin.render.GameRendererAccessor;
 import net.minecraft.client.renderer.state.gui.GuiRenderState;
-
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.util.thread.BlockableEventLoop;
+
 import java.util.concurrent.CompletableFuture;
 
 import java.io.IOException;
@@ -155,7 +150,7 @@ public class VideoRenderer implements RenderInfo {
         // Because this might take some time to prepare we'll render the GUI at least once to not confuse the user
         drawGui();
 
-        ReplayTimer timer = (ReplayTimer) ((MinecraftAccessor) mc).getTimer();
+        ReplayTimer timer = (ReplayTimer) mc.deltaTracker;
 
         // Play up to one second before starting to render
         // This is necessary in order to ensure that all entities have at least two position packets
@@ -170,7 +165,7 @@ public class VideoRenderer implements RenderInfo {
             if (videoStart > 1000) {
                 int replayTime = videoStart - 1000;
                 timer.tickDelta = 0;
-                ((TimerAccessor) timer).setTickLength(DEFAULT_MS_PER_TICK);
+                timer.msPerTick = DEFAULT_MS_PER_TICK;
                 while (replayTime < videoStart) {
                     replayTime += 50;
                     replayHandler.getReplaySender().sendPacketsTill(replayTime);
@@ -181,8 +176,8 @@ public class VideoRenderer implements RenderInfo {
 
         renderingPipeline.run();
 
-        if (id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash() != null) {
-            throw new ReportedException(id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash().get());
+        if (BlockableEventLoop.delayedCrash != null) {
+            throw new ReportedException(BlockableEventLoop.delayedCrash.get());
         }
 
         if (settings.isInjectSphericalMetadata()) {
@@ -220,7 +215,7 @@ public class VideoRenderer implements RenderInfo {
         }
 
         // Updating the timer will cause the timeline player to update the game state
-        ReplayTimer timer = (ReplayTimer) ((MinecraftAccessor) mc).getTimer();
+        ReplayTimer timer = (ReplayTimer) mc.deltaTracker;
         int elapsedTicks =
         timer.advanceGameTime(
                 MCVer.milliTime()
@@ -359,9 +354,9 @@ public class VideoRenderer implements RenderInfo {
                 }
             }
 
-            CompletableFuture<Void> resourceReloadFuture = ((MinecraftAccessor) mc).getResourceReloadFuture();
+            CompletableFuture<Void> resourceReloadFuture = mc.pendingReload;
             if (resourceReloadFuture != null) {
-                ((MinecraftAccessor) mc).setResourceReloadFuture(null);
+                mc.pendingReload = null;
                 mc.reloadResourcePacks().thenRun(() -> resourceReloadFuture.complete(null));
                 continue;
             }
@@ -369,7 +364,7 @@ public class VideoRenderer implements RenderInfo {
         }
         ((MinecraftMethodAccessor) mc).sceneCraftExecuteTaskQueue();
 
-        ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(gui.toMinecraft());
+        mc.gui.screen = gui.toMinecraft();
     }
 
     private void tick() {
@@ -381,7 +376,7 @@ public class VideoRenderer implements RenderInfo {
     public boolean drawGui() {
         Window window = mc.getWindow();
         do {
-            if (window.shouldClose() || id.patchedpixel.scenecraft.mixin.core.BlockableEventLoopAccessor.getDelayedCrash() != null) {
+            if (window.shouldClose() || BlockableEventLoop.delayedCrash != null) {
                 return false;
             }
             MCVer.pollEvents();
@@ -418,12 +413,12 @@ public class VideoRenderer implements RenderInfo {
             if (mc.gui.overlay() != null) {
                 Screen orgScreen = mc.gui.screen();
                 try {
-                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(gui.toMinecraft());
+                    mc.gui.screen = gui.toMinecraft();
                     mc.gui.overlay().extractRenderState(
                             drawContext,
                             mouseX, mouseY, 0);
                 } finally {
-                    ((id.patchedpixel.scenecraft.mixin.core.GuiAccessor) mc.gui).scenecraft$setScreen(orgScreen);
+                    mc.gui.screen = orgScreen;
                 }
             } else {
                 gui.toMinecraft().tick();

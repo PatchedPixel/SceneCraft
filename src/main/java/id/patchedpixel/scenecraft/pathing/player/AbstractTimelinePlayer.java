@@ -6,8 +6,6 @@ import com.google.common.collect.Ordering;
 import com.google.common.primitives.Longs;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
-import id.patchedpixel.scenecraft.mixin.core.MinecraftAccessor;
-import id.patchedpixel.scenecraft.mixin.core.TimerAccessor;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
@@ -76,14 +74,12 @@ public abstract class AbstractTimelinePlayer extends EventRegistrations {
         register();
         lastTime = 0;
 
-        MinecraftAccessor mcA = (MinecraftAccessor) mc;
-        orgTimer = mcA.getTimer();
+        orgTimer = mc.deltaTracker;
         ReplayTimer timer = new ReplayTimer();
-        mcA.setTimer(timer);
+        mc.deltaTracker = timer;
 
         //noinspection ConstantConditions
-        TimerAccessor timerA = (TimerAccessor) timer;
-        timerA.setTickLength(DEFAULT_MS_PER_TICK);
+        timer.msPerTick = DEFAULT_MS_PER_TICK;
         timer.tickDelta = timer.ticksThisFrame = 0;
         return future = settableFuture = SettableFuture.create();
     }
@@ -99,8 +95,7 @@ public abstract class AbstractTimelinePlayer extends EventRegistrations {
     { on(ReplayTimer.UpdatedCallback.EVENT, this::onTick); }
     public void onTick() {
         if (future.isDone()) {
-            MinecraftAccessor mcA = (MinecraftAccessor) mc;
-            mcA.setTimer(orgTimer);
+            mc.deltaTracker = orgTimer;
             replayHandler.getReplaySender().setReplaySpeed(0);
             if (wasAsyncMode) {
                 replayHandler.getReplaySender().setAsyncMode(true);
@@ -127,7 +122,7 @@ public abstract class AbstractTimelinePlayer extends EventRegistrations {
         float timeInTicks = replayTime / 50f;
         float previousTimeInTicks = lastTime / 50f;
         float passedTicks = timeInTicks - previousTimeInTicks;
-        DeltaTracker renderTickCounter = ((MinecraftAccessor) mc).getTimer();
+        DeltaTracker renderTickCounter = mc.deltaTracker;
         if (renderTickCounter instanceof ReplayTimer) {
             ReplayTimer timer = (ReplayTimer) renderTickCounter;
             timer.tickDelta += passedTicks;
