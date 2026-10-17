@@ -42,6 +42,7 @@ import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import net.minecraft.client.gui.screens.AlertScreen;
 import net.minecraft.CrashReport;
 import net.minecraft.ReportedException;
+import net.minecraft.client.gui.screens.Screen;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
@@ -73,6 +74,7 @@ import static id.patchedpixel.scenecraft.gui.versions.MCVer.getFontRenderer;
 
 public class GuiReplayViewer extends GuiScreen implements KeyHandler {
     private final SceneCraftReplay mod;
+    private Screen parentScreen;
 
     public final GuiReplayList list = new GuiReplayList(this).onSelectionChanged(this::updateButtons).onSelectionDoubleClicked(() -> {
         if (this.loadButton.isEnabled()) {
@@ -80,8 +82,25 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
         }
     });
 
+    @Override
+    public void display() {
+        Screen currentScreen = getMinecraft().gui.screen();
+
+        if (currentScreen != null && currentScreen != toMinecraft()) {
+            parentScreen = currentScreen;
+        }
+
+        super.display();
+    }
+
+    @Override
+    protected boolean handleClose() {
+        close();
+        return true;
+    }
+
     private void close() {
-        getMinecraft().gui.setScreen(null);
+        getMinecraft().gui.setScreen(parentScreen);
     }
 
     public final GuiButton loadButton = new GuiButton().onClick(new Runnable() {
