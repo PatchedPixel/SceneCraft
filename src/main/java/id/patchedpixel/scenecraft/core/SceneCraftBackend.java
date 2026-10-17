@@ -1,15 +1,15 @@
 package id.patchedpixel.scenecraft.core;
 
-import id.patchedpixel.scenecraft.ScbinMappingReloadListener;
+//import id.patchedpixel.scenecraft.ScbinMappingReloadListener;
 import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
-import net.minecraft.resources.Identifier;
+//import net.minecraft.resources.Identifier;
 import net.minecraft.SharedConstants;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+//import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
