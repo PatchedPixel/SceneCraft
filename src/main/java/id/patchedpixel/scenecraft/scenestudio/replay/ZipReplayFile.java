@@ -18,7 +18,6 @@
  */
 package id.patchedpixel.scenecraft.scenestudio.replay;
 
-import java.util.Optional;
 import com.google.common.io.Closeables;
 import id.patchedpixel.scenecraft.scenestudio.Studio;
 import id.patchedpixel.scenecraft.scenestudio.util.Utils;
@@ -39,7 +38,6 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import static java.nio.file.Files.*;
-import static java.nio.file.Files.move;
 
 public class ZipReplayFile extends AbstractReplayFile {
     private static final String ENTRY_RECORDING_HASH = "recording.tmcpr.crc32";

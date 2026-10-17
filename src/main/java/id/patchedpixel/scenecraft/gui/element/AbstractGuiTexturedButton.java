@@ -40,10 +40,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundEvent;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.*;
-
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.getMinecraft;
-
 public abstract class AbstractGuiTexturedButton<T extends AbstractGuiTexturedButton<T>> extends AbstractGuiClickable<T> implements Clickable, IGuiTexturedButton<T> {
     private Identifier texture;
 

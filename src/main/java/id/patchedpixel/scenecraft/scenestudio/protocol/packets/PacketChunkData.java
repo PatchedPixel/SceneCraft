@@ -396,9 +396,7 @@ public class PacketChunkData {
                 if(this.states.size() > 1 << this.bitsPerEntry) {
                     this.bitsPerEntry++;
 
-                    List<Integer> oldStates = this.states;
                     if(this.bitsPerEntry > type.highestBitsPerValue()) {
-                        oldStates = new ArrayList<Integer>(this.states);
                         this.states.clear();
                         // These match the size of the vanilla global palette and may be incorrect when it comes to
                         // modded servers.

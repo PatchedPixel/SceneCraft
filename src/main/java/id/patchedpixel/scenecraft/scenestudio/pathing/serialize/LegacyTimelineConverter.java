@@ -18,7 +18,6 @@
  */
 package id.patchedpixel.scenecraft.scenestudio.pathing.serialize;
 
-import java.util.Optional;
 import com.google.gson.GsonBuilder;
 import id.patchedpixel.scenecraft.scenestudio.pathing.PathingRegistry;
 import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.CubicSplineInterpolator;

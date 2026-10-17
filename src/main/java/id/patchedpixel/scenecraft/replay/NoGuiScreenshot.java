@@ -16,8 +16,6 @@ import com.mojang.renderpearl.api.commands.CommandEncoder;
 import com.mojang.renderpearl.api.device.GpuDevice;
 import com.mojang.blaze3d.platform.NativeImage;
 
-import net.minecraft.client.DeltaTracker;
-
 public class NoGuiScreenshot {
     private final Image image;
     private final int width;

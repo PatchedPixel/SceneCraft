@@ -13,7 +13,6 @@ import id.patchedpixel.scenecraft.gui.element.IGuiImage;
 import id.patchedpixel.scenecraft.gui.layout.HorizontalLayout;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.OptionInstance;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 

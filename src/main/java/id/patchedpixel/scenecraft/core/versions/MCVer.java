@@ -12,14 +12,11 @@ import net.minecraft.network.ConnectionProtocol;
 import net.minecraft.util.Util;
 import net.minecraft.world.phys.Vec3;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import org.joml.Matrix4f;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.components.events.ContainerEventHandler;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.AbstractWidget;
 import com.mojang.blaze3d.platform.Window;
-
-import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.network.chat.Component;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -30,8 +27,6 @@ import org.lwjgl.sdl.SDLScancode;
 
 import java.io.File;
 import java.net.URI;
-import java.util.List;
-import java.util.function.Consumer;
 import java.util.Optional;
 
 /**

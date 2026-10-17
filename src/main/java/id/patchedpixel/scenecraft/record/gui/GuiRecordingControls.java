@@ -1,7 +1,6 @@
 package id.patchedpixel.scenecraft.record.gui;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
-import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.editor.gui.MarkerProcessor;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;

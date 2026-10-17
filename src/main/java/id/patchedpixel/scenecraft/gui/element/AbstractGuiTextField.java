@@ -53,7 +53,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
 
 import static id.patchedpixel.scenecraft.gui.utils.Utils.clamp;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.*;
 
 public abstract class AbstractGuiTextField<T extends AbstractGuiTextField<T>>
         extends AbstractGuiElement<T> implements Clickable, Tickable, KeyHandler, CharHandler, IGuiTextField<T> {

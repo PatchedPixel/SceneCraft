@@ -14,7 +14,6 @@ import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 
 import com.mojang.renderpearl.api.buffers.GpuBuffer;
 import com.mojang.renderpearl.api.commands.CommandEncoder;
-import com.mojang.renderpearl.api.device.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> & CaptureData> extends OpenGlFrameCapturer<F, D> {

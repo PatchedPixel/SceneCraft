@@ -1,7 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.render;
 
 import id.patchedpixel.scenecraft.render.hooks.FramebufferDelegateHolder;
-import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

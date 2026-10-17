@@ -2,14 +2,9 @@ package id.patchedpixel.scenecraft.record.packet;
 
 import com.google.common.hash.Hashing;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
-import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.UUID;
-
 import net.minecraft.network.protocol.common.ClientboundResourcePackPushPacket;
-
 import net.minecraft.network.Connection;
 
 import java.io.IOException;
@@ -18,8 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-
-import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
+import java.util.UUID;
 
 /**
  * Records resource packs and handles incoming resource pack packets during record.

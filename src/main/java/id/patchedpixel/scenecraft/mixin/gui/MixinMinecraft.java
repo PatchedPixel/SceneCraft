@@ -1,24 +1,33 @@
 package id.patchedpixel.scenecraft.mixin.gui;
 
-import id.patchedpixel.scenecraft.gui.versions.callbacks.OpenGuiScreenCallback;
-import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import id.patchedpixel.scenecraft.gui.versions.ScreenExt;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Slice;
 
-import net.minecraft.client.gui.Gui;
+@Mixin(Minecraft.class)
+public class MixinMinecraft {
+    /**
+     * Minecraft#tick checks Gui#screen() twice between the "gui" and "gameRenderer" profiler sections:
+     * once to block attacks while a screen is open (missTime) and once to decide whether keybinds are handled.
+     * Hiding the screen from both lets screens that pass events keep the game controllable.
+     */
+    @ModifyExpressionValue(
+            method = "tick",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;"),
+            slice = @Slice(
+                    from = @At(value = "CONSTANT", args = "stringValue=gui"),
+                    to = @At(value = "CONSTANT", args = "stringValue=gameRenderer")
+            )
+    )
+    private Screen doesScreenPassEvents(Screen screen) {
+        if (screen instanceof ScreenExt ext && ext.doesPassEvents()) {
+            return null;
+        }
 
-@Mixin(Gui.class)
-public abstract class MixinMinecraft {
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void preTick(CallbackInfo ci) {
-        PreTickCallback.EVENT.invoker().preTick();
-    }
-
-    @Inject(method = "setScreen", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/Gui;screen:Lnet/minecraft/client/gui/screens/Screen;"))
-    private void openGuiScreen(Screen newGuiScreen, CallbackInfo ci) {
-        OpenGuiScreenCallback.EVENT.invoker().openGuiScreen(newGuiScreen);
+        return screen;
     }
 }

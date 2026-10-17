@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerData.class)
-public abstract class MixinServerInfo implements ServerInfoExt {
+public abstract class MixinServerData implements ServerInfoExt {
     private Boolean autoRecording;
 
     @Override

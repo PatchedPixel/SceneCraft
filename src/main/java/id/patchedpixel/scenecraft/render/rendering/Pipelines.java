@@ -13,13 +13,10 @@ import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.frame.StereoscopicOpenGlFrame;
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
 import id.patchedpixel.scenecraft.render.processor.CubicToBitmapProcessor;
-import id.patchedpixel.scenecraft.render.processor.DummyProcessor;
 import id.patchedpixel.scenecraft.render.processor.EquirectangularToBitmapProcessor;
 import id.patchedpixel.scenecraft.render.processor.ODSToBitmapProcessor;
 import id.patchedpixel.scenecraft.render.processor.OpenGlToBitmapProcessor;
 import id.patchedpixel.scenecraft.render.processor.StereoscopicToBitmapProcessor;
-
-import java.util.Map;
 
 public class Pipelines {
     public static Pipeline newPipeline(RenderSettings.RenderMethod method, RenderInfo renderInfo, FrameConsumer<BitmapFrame> consumer) {

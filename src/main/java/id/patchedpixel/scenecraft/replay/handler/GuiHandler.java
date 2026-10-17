@@ -17,12 +17,9 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Tooltip;
-import id.patchedpixel.scenecraft.gui.MinecraftGuiRenderer;
 import id.patchedpixel.scenecraft.core.versions.ScreenWidgets;
 import net.neoforged.fml.ModList;
-
 import net.minecraft.network.chat.Component;
-
 import net.minecraft.client.gui.components.Button;
 
 import java.io.IOException;
@@ -335,8 +332,7 @@ public class GuiHandler extends EventRegistrations {
             return Stream.of(
                             findButton(buttonList, "menu.singleplayer", 1),
                             findButton(buttonList, "menu.multiplayer", 2),
-                            findButton(buttonList, "menu.online", 14),
-                            findButton(buttonList, "modmenu.title", 6)
+                            findButton(buttonList, "menu.online", 14)
                     )
                     // skip buttons which do not exist
                     .flatMap(it -> it.map(Stream::of).orElseGet(Stream::empty))
@@ -365,9 +361,6 @@ public class GuiHandler extends EventRegistrations {
                     case LEFT_OF_REALMS:
                     case RIGHT_OF_REALMS:
                         return findButton(buttons, "menu.online", 14);
-                    case LEFT_OF_MODS:
-                    case RIGHT_OF_MODS:
-                        return findButton(buttons, "modmenu.title", 6);
                 }
                 throw new RuntimeException();
             }).map(button -> {
@@ -375,9 +368,6 @@ public class GuiHandler extends EventRegistrations {
                     case LEFT_OF_SINGLEPLAYER:
                     case LEFT_OF_MULTIPLAYER:
                     case LEFT_OF_REALMS:
-                    case LEFT_OF_MODS:
-                        return new Point(button.getX() - 4 - 20, button.getY());
-                    case RIGHT_OF_MODS:
                     case RIGHT_OF_SINGLEPLAYER:
                     case RIGHT_OF_MULTIPLAYER:
                     case RIGHT_OF_REALMS:
@@ -446,9 +436,9 @@ public class GuiHandler extends EventRegistrations {
                     y,
                     width,
                     height,
-                    Component.translatable(buttonText)
-                    , self -> onClick.accept((InjectedButton) self)
-                    , Button.DEFAULT_NARRATION
+                    Component.translatable(buttonText),
+                    self -> onClick.accept((InjectedButton) self),
+                    Button.DEFAULT_NARRATION
             );
             this.guiScreen = guiScreen;
             this.id = buttonId;
@@ -458,7 +448,6 @@ public class GuiHandler extends EventRegistrations {
                 setTooltip(Tooltip.create(Component.translatable(tooltip)));
             }
         }
-
     }
 
     public enum MainMenuButtonPosition {
@@ -474,8 +463,6 @@ public class GuiHandler extends EventRegistrations {
         LEFT_OF_MULTIPLAYER,
         RIGHT_OF_MULTIPLAYER,
         LEFT_OF_REALMS,
-        RIGHT_OF_REALMS,
-        LEFT_OF_MODS,
-        RIGHT_OF_MODS,
+        RIGHT_OF_REALMS
     }
 }

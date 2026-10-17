@@ -20,12 +20,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.core.Holder;
 
 @Mixin(ClientLevel.class)
-public abstract class MixinWorldClient extends Level {
+public abstract class MixinClientLevel extends Level {
     @Shadow
     private Minecraft minecraft;
 
     @SuppressWarnings("ConstantConditions")
-    protected MixinWorldClient() {
+    protected MixinClientLevel() {
         super(null, null, null, null, false, false, 0, 0);
     }
 

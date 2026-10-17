@@ -22,11 +22,9 @@ import net.minecraft.network.protocol.game.ClientboundEntityPositionSyncPacket;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.NonNullList;
-
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
 import net.minecraft.world.entity.EquipmentSlot;
-
 import net.minecraft.core.BlockPos;
 
 import java.util.Collections;

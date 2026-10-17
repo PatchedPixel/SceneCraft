@@ -19,7 +19,7 @@
 package id.patchedpixel.scenecraft.scenestudio.pathing.serialize;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
+
 import com.google.common.io.CharStreams;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;

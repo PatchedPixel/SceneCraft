@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(MouseHandler.class)
-public abstract class MixinMouseHelper {
+public abstract class MixinMouseHandler {
     @Shadow
     private boolean mouseGrabbed;
 

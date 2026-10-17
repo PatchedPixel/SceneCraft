@@ -2,9 +2,6 @@ package id.patchedpixel.scenecraft.core.utils;
 
 import com.google.common.base.Throwables;
 import com.google.common.net.PercentEscaper;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
@@ -28,8 +25,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Hud.class)
-public class Mixin_RenderHudCallback {
+public class MixinHud {
     // The demo overlay call no longer exists in Hud#extractRenderState. All HUD layers are now
     // rendered through the NeoForge layer manager, so fire the callback right after it has finished.
     @Inject(

@@ -54,7 +54,6 @@ import net.minecraft.client.resources.language.I18n;
 import java.util.Arrays;
 
 import static id.patchedpixel.scenecraft.gui.utils.Utils.clamp;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.*;
 
 public abstract class AbstractGuiTextArea<T extends AbstractGuiTextArea<T>>
         extends AbstractGuiElement<T> implements Clickable, KeyHandler, CharHandler, Tickable, IGuiTextArea<T> {

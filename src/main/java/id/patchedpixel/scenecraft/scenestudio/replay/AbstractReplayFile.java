@@ -18,7 +18,6 @@
  */
 package id.patchedpixel.scenecraft.scenestudio.replay;
 
-import java.util.Optional;
 import com.google.common.io.Closeables;
 import com.google.gson.*;
 import id.patchedpixel.scenecraft.scenestudio.Studio;
@@ -61,7 +60,7 @@ public abstract class AbstractReplayFile implements ReplayFile {
     @Override
     public ReplayMetaData getMetaData() throws IOException {
         Optional<InputStream> in = get(ENTRY_META_DATA);
-        if (!in.isPresent()) {
+        if (in.isEmpty()) {
             return null;
         }
         try (Reader is = new InputStreamReader(in.get())) {
