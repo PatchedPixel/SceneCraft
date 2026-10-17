@@ -71,7 +71,7 @@ import java.util.stream.Collectors;
 import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.getFontRenderer;
 
-public class GuiReplayViewer extends GuiScreen {
+public class GuiReplayViewer extends GuiScreen implements KeyHandler {
     private final SceneCraftReplay mod;
 
     public final GuiReplayList list = new GuiReplayList(this).onSelectionChanged(this::updateButtons).onSelectionDoubleClicked(() -> {
@@ -79,6 +79,10 @@ public class GuiReplayViewer extends GuiScreen {
             this.loadButton.onClick(new Click(-1, -1, 0, 0));
         }
     });
+
+    private void close() {
+        getMinecraft().gui.setScreen(null);
+    }
 
     public final GuiButton loadButton = new GuiButton().onClick(new Runnable() {
         private boolean loading = false;
@@ -196,12 +200,10 @@ public class GuiReplayViewer extends GuiScreen {
             .setTooltip(new GuiTooltip().setI18nText("scenecraft.gui.settings"))
             .onClick(() -> new GuiReplaySettings(toMinecraft(), getMod().getCore().getSettingsRegistry()).display());
 
-    public final GuiButton cancelButton = new GuiButton().onClick(new Runnable() {
-        @Override
-        public void run() {
-            getMinecraft().gui.setScreen(null);
-        }
-    }).setSize(73, 20).setI18nLabel("scenecraft.gui.cancel");
+    public final GuiButton cancelButton = new GuiButton()
+            .onClick(this::close)
+            .setSize(73, 20)
+            .setI18nLabel("scenecraft.gui.cancel");
 
     public final List<GuiButton> replaySpecificButtons = new ArrayList<>();
     { replaySpecificButtons.addAll(Arrays.asList(renameButton)); }
@@ -269,6 +271,16 @@ public class GuiReplayViewer extends GuiScreen {
     }
 
     private static final GuiImage DEFAULT_THUMBNAIL = new GuiImage().setTexture(Utils.DEFAULT_THUMBNAIL);
+
+    @Override
+    public boolean handleKey(KeyInput keyInput) {
+        if (keyInput.key == Keyboard.KEY_ESCAPE) {
+            close();
+            return true;
+        }
+
+        return false;
+    }
 
     public static class GuiSelectReplayPopup extends AbstractGuiPopup<GuiSelectReplayPopup> {
         private final SettableFuture<File> future = SettableFuture.create();

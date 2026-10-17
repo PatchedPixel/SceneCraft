@@ -39,14 +39,12 @@ import id.patchedpixel.scenecraft.gui.versions.MCVer;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
-
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-
 import net.minecraft.network.chat.Component;
+
 import static id.patchedpixel.scenecraft.gui.versions.MCVer.literalText;
 
 public abstract class AbstractGuiScreen<T extends AbstractGuiScreen<T>> extends AbstractGuiContainer<T> {
-
     private final MinecraftGuiScreen wrapped = new MinecraftGuiScreen();
 
     private Dimension screenSize;
@@ -162,6 +160,10 @@ public abstract class AbstractGuiScreen<T extends AbstractGuiScreen<T>> extends 
         getMinecraft().gui.setScreen(toMinecraft());
     }
 
+    protected boolean handleClose() {
+        return false;
+    }
+
     public Background getBackground() {
         return this.background;
     }
@@ -250,21 +252,21 @@ public abstract class AbstractGuiScreen<T extends AbstractGuiScreen<T>> extends 
         public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent mcClick, boolean doubled) {
             Click click = new Click(mcClick);
             return
-            invokeHandlers(Clickable.class, e -> e.mouseClick(click));
+                    invokeHandlers(Clickable.class, e -> e.mouseClick(click));
         }
 
         @Override
         public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent mcClick) {
             Click click = new Click(mcClick);
             return
-            invokeHandlers(Draggable.class, e -> e.mouseRelease(click));
+                    invokeHandlers(Draggable.class, e -> e.mouseRelease(click));
         }
 
         @Override
         public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent mcClick, double deltaX, double deltaY) {
             Click click = new Click(mcClick);
             return
-            invokeHandlers(Draggable.class, e -> e.mouseDrag(click));
+                    invokeHandlers(Draggable.class, e -> e.mouseDrag(click));
         }
 
         @Override
@@ -282,6 +284,13 @@ public abstract class AbstractGuiScreen<T extends AbstractGuiScreen<T>> extends 
             Point mouse = new Point((int) mouseX, (int) mouseY);
             int wheel = (int) (dWheel * 120);
             return invokeHandlers(Scrollable.class, e -> e.scroll(mouse, wheel));
+        }
+
+        @Override
+        public void onClose() {
+            if (!AbstractGuiScreen.this.handleClose()) {
+                super.onClose();
+            }
         }
 
         @Override

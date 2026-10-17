@@ -1,6 +1,7 @@
 package id.patchedpixel.scenecraft.core;
 
 //import id.patchedpixel.scenecraft.ScbinMappingReloadListener;
+import id.patchedpixel.scenecraft.core.gui.GuiReplaySettings;
 import id.patchedpixel.scenecraft.record.SceneCraftRecorder;
 //import net.minecraft.resources.Identifier;
 import net.minecraft.SharedConstants;
@@ -11,6 +12,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 //import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(value = SceneCraft.MOD_ID, dist = Dist.CLIENT)
@@ -34,6 +36,12 @@ public class SceneCraftBackend {
 //                event.addListener(
 //                        Identifier.fromNamespaceAndPath(SceneCraft.MOD_ID, "scbin_mapping_generator"),
 //                        new ScbinMappingReloadListener()));
+        container.registerExtensionPoint(IConfigScreenFactory.class, (modContainer, parent) -> {
+            if (this.mod == null) {
+                return parent;
+            }
+            return new GuiReplaySettings(parent, this.mod.getSettingsRegistry()).toMinecraft();
+        });
         modBus.addListener(FMLClientSetupEvent.class, event -> {
             if (this.mod != null) this.mod.initModules();
         });

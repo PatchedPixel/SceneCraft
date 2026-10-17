@@ -187,6 +187,7 @@ public class MCVer {
     }
 
     public static abstract class Keyboard {
+        public static final int KEY_ESCAPE = SDLScancode.SDL_SCANCODE_ESCAPE;
         public static final int KEY_LCONTROL = SDLScancode.SDL_SCANCODE_LCTRL;
         public static final int KEY_RCONTROL = SDLScancode.SDL_SCANCODE_RCTRL;
         public static final int KEY_LSUPER = SDLScancode.SDL_SCANCODE_LGUI;

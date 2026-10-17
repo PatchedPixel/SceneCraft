@@ -19,7 +19,11 @@ import net.minecraft.client.resources.language.I18n;
 import java.util.List;
 
 public class GuiReplaySettings extends AbstractGuiScreen<GuiReplaySettings> {
+    private final net.minecraft.client.gui.screens.Screen parent;
+
     public GuiReplaySettings(final net.minecraft.client.gui.screens.Screen parent, final SettingsRegistry settingsRegistry) {
+        this.parent = parent;
+
         final GuiButton doneButton = new GuiButton(this).setI18nLabel("gui.done").setSize(200, 20).onClick(new Runnable() {
             @Override
             public void run() {
@@ -111,6 +115,12 @@ public class GuiReplaySettings extends AbstractGuiScreen<GuiReplaySettings> {
     @Override
     protected GuiReplaySettings getThis() {
         return this;
+    }
+
+    @Override
+    protected boolean handleClose() {
+        getMinecraft().gui.setScreen(parent);
+        return true;
     }
 
     private static class MultipleChoiceDropdownEntry {
