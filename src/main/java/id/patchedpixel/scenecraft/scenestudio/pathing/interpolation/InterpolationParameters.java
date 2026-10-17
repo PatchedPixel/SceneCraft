@@ -18,12 +18,11 @@
  */
 package id.patchedpixel.scenecraft.scenestudio.pathing.interpolation;
 
-import lombok.Data;
+import java.util.Objects;
 
 /**
  * Parameters which can be used to make an interpolation more fitting to the previous one.
  */
-@Data
 public class InterpolationParameters {
     /**
      * The final value.
@@ -43,4 +42,42 @@ public class InterpolationParameters {
      * Normally this is the second derivative of the interpolating function at the end of the interpolation.
      */
     private final double acceleration;
+
+    public InterpolationParameters(double value, double velocity, double acceleration) {
+        this.value = value;
+        this.velocity = velocity;
+        this.acceleration = acceleration;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public double getAcceleration() {
+        return acceleration;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InterpolationParameters)) return false;
+        InterpolationParameters that = (InterpolationParameters) o;
+        return Double.compare(value, that.value) == 0
+                && Double.compare(velocity, that.velocity) == 0
+                && Double.compare(acceleration, that.acceleration) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, velocity, acceleration);
+    }
+
+    @Override
+    public String toString() {
+        return "InterpolationParameters(value=" + value + ", velocity=" + velocity + ", acceleration=" + acceleration + ")";
+    }
 }

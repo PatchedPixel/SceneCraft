@@ -22,7 +22,6 @@ import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.PathSegment;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.Property;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.PropertyPart;
-import lombok.NonNull;
 
 import java.util.Collection;
 import java.util.List;
@@ -52,7 +51,6 @@ public interface Interpolator {
      *
      * @return Collection of properties or empty collection if none
      */
-    @NonNull
     Collection<Property> getKeyframeProperties();
 
     /**
@@ -80,7 +78,6 @@ public interface Interpolator {
      *
      * @return List of path segments or empty list if none
      */
-    @NonNull
     List<PathSegment> getSegments();
 
     /**
@@ -92,7 +89,6 @@ public interface Interpolator {
      * @throws IllegalStateException If no segments have been set yet
      *                               or the segments are not continuous
      */
-    @NonNull
     Map<PropertyPart, InterpolationParameters> bake(Map<PropertyPart, InterpolationParameters> parameters);
 
     /**

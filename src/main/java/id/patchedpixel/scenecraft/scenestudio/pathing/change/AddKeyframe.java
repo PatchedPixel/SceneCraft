@@ -24,13 +24,11 @@ import com.google.common.collect.Iterables;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
-import lombok.NonNull;
 
 /**
  * Adds a new property.
  */
 public final class AddKeyframe implements Change {
-    @NonNull
     public static AddKeyframe create(Path path, long time) {
         return new AddKeyframe(path.getTimeline().getPaths().indexOf(path), time);
     }

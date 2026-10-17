@@ -25,14 +25,16 @@ import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
-import lombok.NonNull;
+
+import java.util.Objects;
 
 /**
  * Removes a property.
  */
 public final class RemoveKeyframe implements Change {
-    @NonNull
-    public static RemoveKeyframe create(@NonNull Path path, @NonNull Keyframe keyframe) {
+    public static RemoveKeyframe create(Path path, Keyframe keyframe) {
+        Objects.requireNonNull(path, "path");
+        Objects.requireNonNull(keyframe, "keyframe");
         return new RemoveKeyframe(path.getTimeline().getPaths().indexOf(path),
                 Iterables.indexOf(path.getKeyframes(), Predicates.equalTo(keyframe)));
     }

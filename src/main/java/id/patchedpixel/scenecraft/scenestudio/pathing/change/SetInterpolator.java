@@ -24,13 +24,11 @@ import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.PathSegment;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
-import lombok.NonNull;
 
 /**
  * Sets the interpolator of a path segment.
  */
 public final class SetInterpolator implements Change {
-    @NonNull
     public static SetInterpolator create(PathSegment segment, Interpolator interpolator) {
         Path path = segment.getPath();
         return new SetInterpolator(path.getTimeline().getPaths().indexOf(path),

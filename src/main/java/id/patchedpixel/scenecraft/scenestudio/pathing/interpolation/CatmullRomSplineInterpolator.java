@@ -23,15 +23,19 @@ import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.PathSegment;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.Property;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.PropertyPart;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.*;
 
-@RequiredArgsConstructor
 public class CatmullRomSplineInterpolator extends AbstractInterpolator {
-    @Getter
     private final double alpha;
+
+    public CatmullRomSplineInterpolator(double alpha) {
+        this.alpha = alpha;
+    }
+
+    public double getAlpha() {
+        return alpha;
+    }
 
     private Map<PropertyPart<?>, Polynomial[]> cubicPolynomials = new HashMap<>();
     private Map<Property<?>, Set<Keyframe>> framesToProperty = new HashMap<>();

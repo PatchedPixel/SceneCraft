@@ -20,7 +20,6 @@ package id.patchedpixel.scenecraft.scenestudio.pathing.property;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import lombok.NonNull;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -40,7 +39,6 @@ public interface Property<T> {
      *
      * @return Localized name.
      */
-    @NonNull
     String getLocalizedName();
 
     /**
@@ -57,7 +55,6 @@ public interface Property<T> {
      *
      * @return Unique ID
      */
-    @NonNull
     String getId();
 
     /**

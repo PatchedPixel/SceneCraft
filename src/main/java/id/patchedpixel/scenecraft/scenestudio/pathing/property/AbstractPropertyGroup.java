@@ -19,7 +19,6 @@
 package id.patchedpixel.scenecraft.scenestudio.pathing.property;
 
 import id.patchedpixel.scenecraft.scenestudio.util.I18n;
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +26,14 @@ import java.util.List;
 /**
  * Abstract base class for most property groups.
  */
-@RequiredArgsConstructor
 public abstract class AbstractPropertyGroup implements PropertyGroup {
     private final String id, localizationKey;
     private final List<Property> properties = new ArrayList<>();
+
+    public AbstractPropertyGroup(String id, String localizationKey) {
+        this.id = id;
+        this.localizationKey = localizationKey;
+    }
 
     @Override
     public String getLocalizedName() {

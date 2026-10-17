@@ -19,7 +19,6 @@
 package id.patchedpixel.scenecraft.scenestudio.pathing.path;
 
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.Property;
-import lombok.NonNull;
 
 import java.util.Optional;
 import java.util.Set;
@@ -44,7 +43,6 @@ public interface Keyframe {
      * @param <T>      Type of the property
      * @return Optional value of the property
      */
-    @NonNull
     <T> Optional<T> getValue(Property<T> property);
 
     /**

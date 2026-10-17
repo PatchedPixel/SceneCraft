@@ -86,8 +86,6 @@ configurations {
 }
 
 dependencies {
-    compileOnly(annotationProcessor("org.projectlombok:lombok:1.18.42"))
-
     implementation(jarJar("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}"))
     ["natives-windows", "natives-windows-arm64", "natives-linux", "natives-linux-arm64", "natives-macos", "natives-macos-arm64"].each { n ->
         runtimeOnly(jarJar("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}:${n}"))

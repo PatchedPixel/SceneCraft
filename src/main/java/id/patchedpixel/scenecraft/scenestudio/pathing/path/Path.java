@@ -20,7 +20,6 @@ package id.patchedpixel.scenecraft.scenestudio.pathing.path;
 
 import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.Property;
-import lombok.NonNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -41,7 +40,6 @@ public interface Path {
      *
      * @return Collection of keyframes or empty list if none
      */
-    @NonNull
     Collection<Keyframe> getKeyframes();
 
     /**
@@ -49,7 +47,6 @@ public interface Path {
      *
      * @return Collection of segments or empty list if none
      */
-    @NonNull
     Collection<PathSegment> getSegments();
 
     /**

@@ -20,7 +20,6 @@ package id.patchedpixel.scenecraft.scenestudio.pathing.change;
 
 import com.google.common.base.Preconditions;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
-import lombok.NonNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +36,6 @@ public class CombinedChange implements Change {
      * @param changes List of changes
      * @return A new CombinedChange instance
      */
-    @NonNull
     public static CombinedChange create(Change... changes) {
         return new CombinedChange(Arrays.asList(changes), false);
     }
@@ -49,7 +47,6 @@ public class CombinedChange implements Change {
      * @param changes List of changes
      * @return A new CombinedChange instance
      */
-    @NonNull
     public static CombinedChange createFromApplied(Change... changes) {
         return new CombinedChange(Arrays.asList(changes), true);
     }

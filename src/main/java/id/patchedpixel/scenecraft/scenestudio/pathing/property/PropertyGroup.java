@@ -19,7 +19,6 @@
 package id.patchedpixel.scenecraft.scenestudio.pathing.property;
 
 import id.patchedpixel.scenecraft.scenestudio.pathing.change.Change;
-import lombok.NonNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +36,6 @@ public interface PropertyGroup {
      *
      * @return Localized name.
      */
-    @NonNull
     String getLocalizedName();
 
     /**
@@ -45,7 +43,6 @@ public interface PropertyGroup {
      *
      * @return Unique ID
      */
-    @NonNull
     String getId();
 
     /**
@@ -53,7 +50,6 @@ public interface PropertyGroup {
      *
      * @return List of properties or empty list if none.
      */
-    @NonNull
     List<Property> getProperties();
 
     /**
@@ -63,6 +59,5 @@ public interface PropertyGroup {
      *
      * @return Optional callable
      */
-    @NonNull
     Optional<Callable<Change>> getSetter();
 }

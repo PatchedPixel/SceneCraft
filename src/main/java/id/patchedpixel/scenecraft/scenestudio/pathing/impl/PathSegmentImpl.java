@@ -22,22 +22,44 @@ import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.PathSegment;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
 public class PathSegmentImpl implements PathSegment {
     private final Path path;
     private final Keyframe startKeyframe;
     private final Keyframe endKeyframe;
     private Interpolator interpolator;
 
+    public PathSegmentImpl(Path path, Keyframe startKeyframe, Keyframe endKeyframe) {
+        this.path = path;
+        this.startKeyframe = startKeyframe;
+        this.endKeyframe = endKeyframe;
+    }
+
     public PathSegmentImpl(Path path, Keyframe startKeyframe, Keyframe endKeyframe, Interpolator interpolator) {
         this.path = path;
         this.startKeyframe = startKeyframe;
         this.endKeyframe = endKeyframe;
         setInterpolator(interpolator);
+    }
+
+    @Override
+    public Path getPath() {
+        return path;
+    }
+
+    @Override
+    public Keyframe getStartKeyframe() {
+        return startKeyframe;
+    }
+
+    @Override
+    public Keyframe getEndKeyframe() {
+        return endKeyframe;
+    }
+
+    @Override
+    public Interpolator getInterpolator() {
+        return interpolator;
     }
 
     @Override

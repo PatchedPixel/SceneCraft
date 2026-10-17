@@ -99,9 +99,9 @@ public class GuiPanel extends AbstractGuiContainer<GuiPanel> {
                 this.withElements$key = new ArrayList<GuiElement>();
                 this.withElements$value = new ArrayList<LayoutData>();
             }
-            for (final Map.Entry<? extends GuiElement, ? extends LayoutData> $lombokEntry : withElements.entrySet()) {
-                this.withElements$key.add($lombokEntry.getKey());
-                this.withElements$value.add($lombokEntry.getValue());
+            for (final Map.Entry<? extends GuiElement, ? extends LayoutData> entry : withElements.entrySet()) {
+                this.withElements$key.add(entry.getKey());
+                this.withElements$value.add(entry.getValue());
             }
             return this;
         }

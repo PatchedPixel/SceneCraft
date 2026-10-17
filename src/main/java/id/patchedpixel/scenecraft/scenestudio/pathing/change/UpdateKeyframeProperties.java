@@ -24,7 +24,7 @@ import id.patchedpixel.scenecraft.scenestudio.pathing.path.Path;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Timeline;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.Property;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.PropertyGroup;
-import lombok.NonNull;
+import java.util.Objects;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,8 +84,9 @@ public final class UpdateKeyframeProperties implements Change {
         }
     }
 
-    @NonNull
-    public static UpdateKeyframeProperties.Builder create(@NonNull Path path, @NonNull Keyframe keyframe) {
+    public static UpdateKeyframeProperties.Builder create(Path path, Keyframe keyframe) {
+        Objects.requireNonNull(path, "path");
+        Objects.requireNonNull(keyframe, "keyframe");
         return new Builder(path.getTimeline().getPaths().indexOf(path),
                 indexOf(path.getKeyframes(), equalTo(keyframe)));
     }

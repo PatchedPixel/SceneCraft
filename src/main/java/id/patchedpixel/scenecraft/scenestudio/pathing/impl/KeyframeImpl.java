@@ -20,7 +20,6 @@ package id.patchedpixel.scenecraft.scenestudio.pathing.impl;
 
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
 import id.patchedpixel.scenecraft.scenestudio.pathing.property.Property;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,10 +27,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class KeyframeImpl implements Keyframe {
     private final long time;
     private final Map<Property, Object> properties = new HashMap<>();
+
+    public KeyframeImpl(long time) {
+        this.time = time;
+    }
 
     @Override
     public long getTime() {

@@ -19,7 +19,6 @@
 package id.patchedpixel.scenecraft.scenestudio.pathing.path;
 
 import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator;
-import lombok.NonNull;
 
 /**
  * Represents a segment of a Path consisting of one start property and one end property.
@@ -27,7 +26,6 @@ import lombok.NonNull;
  * be interpolated together (they may or may not influence each other indirectly).
  */
 public interface PathSegment {
-    @NonNull
     Path getPath();
 
     /**
@@ -35,7 +33,6 @@ public interface PathSegment {
      *
      * @return The first property
      */
-    @NonNull
     Keyframe getStartKeyframe();
 
     /**
@@ -43,7 +40,6 @@ public interface PathSegment {
      *
      * @return The second property
      */
-    @NonNull
     Keyframe getEndKeyframe();
 
     /**
@@ -52,7 +48,6 @@ public interface PathSegment {
      * @return The interpolator or {@code null} if not yet set
      * @throws IllegalStateException If no interpolator has been set yet
      */
-    @NonNull
     Interpolator getInterpolator();
 
     /**
