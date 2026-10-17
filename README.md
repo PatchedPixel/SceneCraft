@@ -103,6 +103,7 @@ Existing replays and workflows are a priority when this happens, so the stable r
 - Testing and fixes for known issues (EXR, translations, and more)
 
 **Toward 1.0.0 (stable)**
+- SceneCraft official logo
 - Forge support
 - Access Transformer migration
 - Translation updates
