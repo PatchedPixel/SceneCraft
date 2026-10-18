@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.Cleaner;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -20,6 +21,8 @@ import java.nio.file.Path;
  */
 public class Image implements AutoCloseable {
     private NativeImage inner;
+    private final Cleaner.Cleanable cleanable;
+    private static final Cleaner CLEANER = Cleaner.create();
 
     public Image(int width, int height) {
         this(
@@ -29,24 +32,14 @@ public class Image implements AutoCloseable {
 
     public Image(NativeImage inner) {
         this.inner = inner;
-    }
-
-    public NativeImage getInner() {
-        return inner;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        // NativeImage owns native memory, so it has to be released explicitly
-        close();
-        super.finalize();
+        this.cleanable = CLEANER.register(this, new NativeImageCloser(inner));
     }
 
     @Override
     public void close() {
         if (inner != null) {
-            inner.close();
             inner = null;
+            cleanable.clean();
         }
     }
 
@@ -118,5 +111,18 @@ public class Image implements AutoCloseable {
 
     public DynamicTexture toTexture() {
         return new DynamicTexture(null, inner);
+    }
+
+    private static final class NativeImageCloser implements Runnable {
+        private final NativeImage image;
+
+        private NativeImageCloser(NativeImage image) {
+            this.image = image;
+        }
+
+        @Override
+        public void run() {
+            image.close();
+        }
     }
 }

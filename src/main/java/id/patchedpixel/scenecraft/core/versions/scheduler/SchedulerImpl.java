@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.core.versions.scheduler;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.ReportedException;
 import net.minecraft.util.thread.ReentrantBlockableEventLoop;
@@ -12,8 +13,8 @@ import java.util.concurrent.TimeoutException;
 
 import net.minecraft.ReportType;
 
-public class SchedulerImpl implements  Scheduler {
-    private static final Minecraft mc = Minecraft.getInstance();
+public class SchedulerImpl implements Scheduler {
+    private static final Minecraft mc = MCVer.getMinecraft();
 
     @Override
     public void runSync(Runnable runnable) throws InterruptedException, ExecutionException, TimeoutException {

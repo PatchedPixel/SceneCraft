@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import id.patchedpixel.scenecraft.core.events.SettingsChangedCallback;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -118,7 +119,7 @@ class SettingsRegistryBackend {
                     }
                     Path fileName = ((Path) event.context());
                     if (fileName.equals(configFile.getFileName())) {
-                        Minecraft.getInstance().schedule(this::reload);
+                        MCVer.getMinecraft().schedule(this::reload);
                     }
                 }
                 if (!nextKey.reset()) {

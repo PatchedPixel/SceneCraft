@@ -10,7 +10,7 @@ import id.patchedpixel.scenecraft.gui.layout.VerticalLayout;
 import java.net.URI;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.openURL;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.setClipboardString;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.setClipboardString;
 
 public class GuiNoFfmpeg extends GuiScreen {
     private static final String LINK = "https://www.replaymod.com/docs/#installing-ffmpeg";

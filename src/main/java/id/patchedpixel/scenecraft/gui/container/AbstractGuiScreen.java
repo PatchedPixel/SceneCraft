@@ -35,14 +35,14 @@ import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadablePoint;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.literalText;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.literalText;
 
 public abstract class AbstractGuiScreen<T extends AbstractGuiScreen<T>> extends AbstractGuiContainer<T> {
     private final MinecraftGuiScreen wrapped = new MinecraftGuiScreen();

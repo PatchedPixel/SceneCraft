@@ -34,6 +34,8 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
 
     private long fakeFinishTimeNano;
 
+    private boolean warmedUp;
+
     public EntityRendererHandler(RenderSettings settings, RenderInfo renderInfo) {
         this.settings = settings;
         this.renderInfo = renderInfo;
@@ -47,7 +49,7 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
     }
 
     @Override
-    public void renderWorld(final float partialTicks, CaptureData data) {
+    public void renderWorld(CaptureData data) {
         this.data = data;
         long offsetMillis;
         if (SceneCraft.instance.getSettingsRegistry().get(Setting.FRAME_TIME_FROM_WORLD_TIME)) {
@@ -56,10 +58,10 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
             offsetMillis = renderInfo.getFramesDone() * 1_000L / settings.getFramesPerSecond();
         }
         long frameStartTimeNano = startTime + offsetMillis * 1_000_000L;
-        renderWorld(partialTicks, frameStartTimeNano);
+        renderWorld(frameStartTimeNano);
     }
 
-    public void renderWorld(float partialTicks, long finishTimeNano) {
+    public void renderWorld(long finishTimeNano) {
         fakeFinishTimeNano = finishTimeNano;
         PreRenderCallback.EVENT.invoker().preRender();
 
@@ -77,6 +79,11 @@ public class EntityRendererHandler extends EventRegistrations implements WorldRe
                 if (!orgHudIsHidden) mc.gui.hud.toggle();
 
                 mc.gameRenderer.update(mc.getDeltaTracker());
+                if(!warmedUp) {
+                    warmedUp = true;
+                    mc.gameRenderer.extract(mc.getDeltaTracker(), true);
+                    mc.gameRenderer.render();
+                }
                 mc.gameRenderer.extract(mc.getDeltaTracker(), true);
                 mc.gameRenderer.render();
             } finally {

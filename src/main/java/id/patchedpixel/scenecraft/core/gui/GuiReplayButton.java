@@ -7,7 +7,7 @@ import id.patchedpixel.scenecraft.gui.element.GuiButton;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import net.minecraft.resources.Identifier;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 public class GuiReplayButton extends GuiButton {
     public static final Identifier ICON = identifier(SceneCraft.MOD_ID, "logo_button.png");

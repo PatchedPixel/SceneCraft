@@ -127,9 +127,9 @@ public class IrisODSFrameCapturer implements FrameCapturer<ODSOpenGlFrame> {
         }
 
         @Override
-        protected OpenGlFrame renderFrame(int frameId, float partialTicks, CubicOpenGlFrameCapturer.Data captureData) {
+        protected OpenGlFrame renderFrame(int frameId, CubicOpenGlFrameCapturer.Data captureData) {
             direction = captureData.ordinal();
-            return super.renderFrame(frameId, partialTicks, captureData);
+            return super.renderFrame(frameId, captureData);
         }
     }
 }

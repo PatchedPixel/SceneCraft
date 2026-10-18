@@ -24,7 +24,7 @@
  */
 package id.patchedpixel.scenecraft.gui.utils;
 
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.gui.Font;
 
 import java.util.ArrayList;

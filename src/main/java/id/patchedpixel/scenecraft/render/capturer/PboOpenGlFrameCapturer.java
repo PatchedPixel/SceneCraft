@@ -86,10 +86,9 @@ public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> 
         }
 
         if (framesDone < renderInfo.getTotalFrames()) {
-            float partialTicks = renderInfo.updateForNextFrame();
             // Then fill it again
             for (D data : this.data) {
-                renderFrame(framesDone, partialTicks, data);
+                renderFrame(framesDone, data);
             }
         } else {
             RenderSystem.getDevice().createCommandEncoder().submit();

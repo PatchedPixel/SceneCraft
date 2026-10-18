@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.mixin;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.extras.FullBrightness;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
@@ -14,7 +15,7 @@ public class MixinOptionInstance {
     @Inject(method = "get", at = @At("HEAD"), cancellable = true)
     private void modifyGet(CallbackInfoReturnable<Object> cir) {
         if (FullBrightness.getGamma()) {
-            Minecraft mc = Minecraft.getInstance();
+            Minecraft mc = MCVer.getMinecraft();
             OptionInstance<?> current = (OptionInstance<?>) (Object) this;
             if (current == mc.options.gamma()) {
                 cir.setReturnValue(1000.0);

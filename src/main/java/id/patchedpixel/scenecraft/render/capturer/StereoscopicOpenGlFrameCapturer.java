@@ -23,10 +23,9 @@ public class StereoscopicOpenGlFrameCapturer extends OpenGlFrameCapturer<Stereos
 
     @Override
     public Map<Channel, StereoscopicOpenGlFrame> process() {
-        float partialTicks = renderInfo.updateForNextFrame();
         int frameId = framesDone++;
-        OpenGlFrame left = renderFrame(frameId, partialTicks, Data.LEFT_EYE);
-        OpenGlFrame right = renderFrame(frameId, partialTicks, Data.RIGHT_EYE);
+        OpenGlFrame left = renderFrame(frameId, Data.LEFT_EYE);
+        OpenGlFrame right = renderFrame(frameId, Data.RIGHT_EYE);
         StereoscopicOpenGlFrame frame = new StereoscopicOpenGlFrame(left, right);
         return Collections.singletonMap(Channel.BRGA, frame);
     }

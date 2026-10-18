@@ -31,7 +31,7 @@ import id.patchedpixel.scenecraft.gui.element.AbstractGuiElement;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
 

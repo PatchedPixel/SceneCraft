@@ -16,7 +16,7 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.resources.Identifier;
 import static id.patchedpixel.scenecraft.core.SceneCraft.MOD_ID;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 import java.util.ArrayList;
 import java.util.Collection;

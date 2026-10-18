@@ -32,12 +32,12 @@ import id.patchedpixel.scenecraft.gui.utils.color.Color;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.Identifier;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 public abstract class AbstractGuiCheckbox<T extends AbstractGuiCheckbox<T>>
         extends AbstractGuiClickable<T> implements IGuiCheckbox<T> {

@@ -70,7 +70,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static id.patchedpixel.scenecraft.replay.SceneCraftReplay.LOGGER;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.getFontRenderer;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.getFontRenderer;
 
 public class GuiReplayViewer extends GuiScreen implements KeyHandler {
     private final SceneCraftReplay mod;

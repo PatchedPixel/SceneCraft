@@ -30,7 +30,7 @@ import id.patchedpixel.scenecraft.gui.container.GuiContainer;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
 
@@ -40,7 +40,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import net.minecraft.network.chat.Style;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.literalText;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.literalText;
 
 public abstract class AbstractGuiLabel<T extends AbstractGuiLabel<T>> extends AbstractGuiElement<T> implements IGuiLabel<T> {
     private String text = "";

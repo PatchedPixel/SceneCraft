@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.mixin;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.RenderHudCallback;
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
 import id.patchedpixel.scenecraft.replay.events.RenderHotbarCallback;
@@ -31,7 +32,7 @@ public abstract class MixinHud {
 
     @Inject(method = "extractRenderState", at = @At("HEAD"), cancellable = true)
     private void sceneCraftRender_skipHudDuringRender(CallbackInfo ci) {
-        if (((EntityRendererHandler.IEntityRenderer) Minecraft.getInstance().gameRenderer).sceneCraftRender_getHandler() != null) {
+        if (((EntityRendererHandler.IEntityRenderer) MCVer.getMinecraft().gameRenderer).sceneCraftRender_getHandler() != null) {
             ci.cancel();
         }
     }

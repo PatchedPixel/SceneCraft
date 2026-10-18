@@ -25,7 +25,7 @@ import com.mojang.blaze3d.platform.NativeImage;
 
 import java.nio.ByteBuffer;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 public class GuiVideoRenderer extends GuiScreen implements Tickable {
     private static final Identifier NO_PREVIEW_TEXTURE = identifier(SceneCraft.MOD_ID, "logo.png");

@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 public class SceneCraft implements Module, Scheduler {
     public static final String MOD_ID = "scenecraft";

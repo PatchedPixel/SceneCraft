@@ -31,7 +31,7 @@ import id.patchedpixel.scenecraft.gui.element.AbstractGuiElement;
 import id.patchedpixel.scenecraft.gui.utils.Colors;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 
 import static id.patchedpixel.scenecraft.gui.element.advanced.AbstractGuiTimeline.BORDER_LEFT;
 import static id.patchedpixel.scenecraft.gui.element.advanced.AbstractGuiTimeline.BORDER_RIGHT;

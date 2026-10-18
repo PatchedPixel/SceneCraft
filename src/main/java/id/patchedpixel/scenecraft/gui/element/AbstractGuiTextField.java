@@ -47,7 +47,7 @@ import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
 import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadablePoint;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.gui.versions.TextInputAdapter;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;

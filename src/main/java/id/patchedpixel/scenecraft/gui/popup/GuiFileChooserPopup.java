@@ -44,7 +44,7 @@ import id.patchedpixel.scenecraft.gui.utils.Colors;
 import id.patchedpixel.scenecraft.gui.utils.Consumer;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 
 import java.io.File;
 import java.io.IOException;

@@ -6,6 +6,11 @@ import id.patchedpixel.scenecraft.scenestudio.protocol.State;
 import id.patchedpixel.scenecraft.scenestudio.protocol.CurrentProtocol;
 import id.patchedpixel.scenecraft.scenestudio.protocol.PacketTypeRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.gui.Font;
+import java.util.concurrent.Callable;
+import java.util.Objects;
 import net.minecraft.client.gui.screens.Screen;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.ConnectionProtocol;
@@ -17,7 +22,6 @@ import net.minecraft.client.gui.components.events.ContainerEventHandler;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.AbstractWidget;
 import com.mojang.blaze3d.platform.Window;
-
 import net.minecraft.network.chat.Component;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.particle.Particle;
@@ -88,6 +92,73 @@ public class MCVer {
             Button button
     ) {
         screen.addRenderableWidget(button);
+    }
+
+    public static class ScissorBounds {
+        public final int x;
+        public final int y;
+        public final int width;
+        public final int height;
+
+        public ScissorBounds(int x, int y, int width, int height) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ScissorBounds that = (ScissorBounds) o;
+            return x == that.x && y == that.y && width == that.width && height == that.height;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y, width, height);
+        }
+    }
+
+    public static Window newScaledResolution(Minecraft mc) {
+        return mc.getWindow();
+    }
+
+    public static void addDetail(CrashReportCategory category, String name, Callable<String> callable) {
+        category.setDetail(name, callable::call);
+    }
+
+    public static Font getFontRenderer() {
+        return getMinecraft().font;
+    }
+
+    public static void setClipboardString(String text) {
+        getMinecraft().keyboardHandler.setClipboard(text);
+    }
+
+    public static String getClipboardString() {
+        return getMinecraft().keyboardHandler.getClipboard();
+    }
+
+    /**
+     * Tells the game that the given element starts or stops receiving text input.
+     * With SDL this is required for typed characters to be delivered at all.
+     */
+    public static void onTextInputFocusChange(GuiEventListener element, boolean focused) {
+        getMinecraft().onTextInputFocusChange(element, focused);
+    }
+
+    public static Component literalText(String str) {
+        return Component.literal(str);
+    }
+
+    public static Identifier identifier(String id) {
+        return Identifier.parse(id);
+    }
+
+    public static Identifier identifier(String namespace, String path) {
+        return Identifier.fromNamespaceAndPath(namespace, path);
     }
 
     public static Optional<AbstractWidget> findButton(Iterable<? extends GuiEventListener> buttonList, @SuppressWarnings("unused") String text, @SuppressWarnings("unused") int id) {

@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.mixin.replay;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.RemotePlayer;
@@ -31,7 +32,7 @@ public abstract class Mixin_FixNPCSkinCaching {
         if (!(((Object) this) instanceof RemotePlayer)) return;
 
         // To get the player list entry, we need to be connected (we usually are, but better be safe than sorry)
-        if (Minecraft.getInstance().getConnection() == null) return;
+        if (MCVer.getMinecraft().getConnection() == null) return;
 
         // And we catch any exceptions, so if there is still something, it's hopefully not fatal
         try {

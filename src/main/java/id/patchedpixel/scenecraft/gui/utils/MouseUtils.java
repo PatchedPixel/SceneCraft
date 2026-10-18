@@ -25,7 +25,7 @@
 package id.patchedpixel.scenecraft.gui.utils;
 
 import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.Minecraft;
 
 import com.mojang.blaze3d.platform.Window;

@@ -1,12 +1,13 @@
 package id.patchedpixel.scenecraft.replay.camera;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import org.joml.Vector3f;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 
 import static net.minecraft.util.Mth.cos;
 import static net.minecraft.util.Mth.sin;
 
+// TODO: Marius is responsible for this. Please, someone clean it up.
 public class ClassicCameraController implements CameraController {
     private static final double LOWER_SPEED = 0.2;
     private static final double UPPER_SPEED = 200;
@@ -33,7 +34,7 @@ public class ClassicCameraController implements CameraController {
     public void update(float partialTicksPassed) {
         boolean forward = false, backward = false, left = false, right = false, up = false, down = false;
         speedup = false;
-        for(KeyMapping kb : Minecraft.getInstance().options.keyMappings) {
+        for(KeyMapping kb : MCVer.getMinecraft().options.keyMappings) {
             if(!kb.isDown()) continue;
             if(kb.getName().equals("key.forward")) {
                 forward = true;
@@ -172,10 +173,11 @@ public class ClassicCameraController implements CameraController {
     }
 
     private Vector3f getVectorForRotation(float pitch, float yaw) {
-        float f2 = cos(-yaw * 0.017453292F - (float) Math.PI);
-        float f3 = sin(-yaw * 0.017453292F - (float)Math.PI);
-        float f4 = -cos(-pitch * 0.017453292F);
-        float f5 = sin(-pitch * 0.017453292F);
+        float f1 = 0.017453292F;
+        float f2 = cos(-yaw * f1 - (float) Math.PI);
+        float f3 = sin(-yaw * f1 - (float) Math.PI);
+        float f4 = -cos(-pitch * f1);
+        float f5 = sin(-pitch * f1);
         return new Vector3f(f3 * f4, f5, f2 * f4);
     }
 

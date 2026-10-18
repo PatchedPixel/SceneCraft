@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.mixin.render;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class Mixin_FakeSystemTimeUniforms_Iris {
     @ModifyVariable(method = "beginFrame", at = @At("HEAD"), argsOnly = true)
     private long useReplayTimeDuringRender(long frameStartTimeNs) {
-        GameRenderer gameRenderer = Minecraft.getInstance().gameRenderer;
+        GameRenderer gameRenderer = MCVer.getMinecraft().gameRenderer;
         EntityRendererHandler entityRendererHandler =
             ((EntityRendererHandler.IEntityRenderer) gameRenderer).sceneCraftRender_getHandler();
         if (entityRendererHandler != null) {

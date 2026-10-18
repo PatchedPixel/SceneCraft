@@ -18,7 +18,7 @@ import id.patchedpixel.scenecraft.gui.layout.VerticalLayout;
 import id.patchedpixel.scenecraft.gui.popup.GuiInfoPopup;
 import id.patchedpixel.scenecraft.gui.utils.Colors;
 import id.patchedpixel.scenecraft.gui.versions.Image;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.CrashReport;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FilenameUtils;

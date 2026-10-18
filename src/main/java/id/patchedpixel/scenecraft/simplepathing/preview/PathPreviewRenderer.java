@@ -34,7 +34,7 @@ import java.util.Optional;
 
 import static id.patchedpixel.scenecraft.core.SceneCraft.TEXTURE;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.emitLine;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.identifier;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 public class PathPreviewRenderer extends EventRegistrations {
     private static final Identifier CAMERA_HEAD = identifier(SceneCraft.MOD_ID, "camera_head.png");

@@ -49,8 +49,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.getClipboardString;
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.setClipboardString;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.getClipboardString;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.setClipboardString;
 
 /**
  * Gui for loading and saving {@link Timeline Timelines}.

@@ -31,16 +31,19 @@ import id.patchedpixel.scenecraft.gui.container.GuiContainer;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.versions.Image;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.resources.Identifier;
 
-public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>>
-        extends AbstractGuiElement<T> implements IGuiImage<T> {
+import java.lang.ref.Cleaner;
+
+public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>> extends AbstractGuiElement<T> implements IGuiImage<T> {
     private DynamicTexture texture;
     private Identifier resourceLocation;
     private int u, v;
     private int uWidth, vHeight;
     private int textureWidth, textureHeight;
+    private static final Cleaner CLEANER = Cleaner.create();
 
     /**
      * Reference to the copied image to prevent it from being garbage collected
@@ -48,11 +51,15 @@ public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>>
      */
     private AbstractGuiImage<T> copyOf;
 
+    private TextureHolder textureHolder;
+
     public AbstractGuiImage() {
+        registerCleaner();
     }
 
     public AbstractGuiImage(GuiContainer container) {
         super(container);
+        registerCleaner();
     }
 
     public AbstractGuiImage(AbstractGuiImage<T> copyOf) {
@@ -80,12 +87,9 @@ public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>>
         renderer.drawTexturedRect(0, 0, u, v, w, h, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        if (texture != null && copyOf == null) {
-            getMinecraft().execute(new Finalizer(texture));
-        }
+    private void registerCleaner() {
+        textureHolder = new TextureHolder();
+        CLEANER.register(this, textureHolder);
     }
 
     @Override
@@ -101,6 +105,7 @@ public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>>
             texture.close();
         }
         texture = img.toTexture();
+        textureHolder.texture = texture;
         textureWidth = uWidth = img.getWidth();
         textureHeight = vHeight = img.getHeight();
         return getThis();
@@ -112,6 +117,7 @@ public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>>
         if (texture != null) {
             texture.close();
             texture = null;
+            textureHolder.texture = null;
         }
         this.resourceLocation = resourceLocation;
         textureWidth = textureHeight = 256;
@@ -166,16 +172,16 @@ public abstract class AbstractGuiImage<T extends AbstractGuiImage<T>>
      * We use a static class here in order to prevent the inner class from keeping the outer class
      * alive after finalization when still unloading the texture.
      */
-    private static final class Finalizer implements Runnable {
-        private final DynamicTexture texture;
-
-        public Finalizer(DynamicTexture texture) {
-            this.texture = texture;
-        }
+    private static final class TextureHolder implements Runnable {
+        private volatile DynamicTexture texture;
 
         @Override
         public void run() {
-            texture.close();
+            DynamicTexture texture = this.texture;
+            this.texture = null;
+            if(texture != null) {
+                MCVer.getMinecraft().execute(texture::close);
+            }
         }
     }
 }

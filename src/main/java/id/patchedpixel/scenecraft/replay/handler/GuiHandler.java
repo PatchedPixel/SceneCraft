@@ -419,25 +419,12 @@ public class GuiHandler extends EventRegistrations {
         }
     }
 
-    public static class InjectedButton extends
-            Button.Plain
-    {
+    public static class InjectedButton extends Button.Plain {
         public final Screen guiScreen;
         public final int id;
         private Consumer<InjectedButton> onClick;
-        public InjectedButton(Screen guiScreen, int buttonId, int x, int y, int width, int height, String buttonText,
-                              String tooltip,
-                              Consumer<InjectedButton> onClick
-        ) {
-            super(
-                    x,
-                    y,
-                    width,
-                    height,
-                    Component.translatable(buttonText),
-                    self -> onClick.accept((InjectedButton) self),
-                    Button.DEFAULT_NARRATION
-            );
+        public InjectedButton(Screen guiScreen, int buttonId, int x, int y, int width, int height, String buttonText, String tooltip, Consumer<InjectedButton> onClick) {
+            super(x, y, width, height, Component.translatable(buttonText), self -> onClick.accept((InjectedButton) self), Button.DEFAULT_NARRATION);
             this.guiScreen = guiScreen;
             this.id = buttonId;
             this.onClick = onClick;

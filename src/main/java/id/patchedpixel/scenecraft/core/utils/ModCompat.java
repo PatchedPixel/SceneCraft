@@ -16,6 +16,7 @@ public class ModCompat {
             Collection<ModInfo> installedList = getInstalledNetworkMods();
             REQUIRED:
             for (ModInfo required : requiredList) {
+                if("neoforge".equals(required.getId())) continue;
                 for (ModInfo installed : installedList) {
                     if (required.getId().equals(installed.getId())) {
                         // Mod is installed, check if versions match

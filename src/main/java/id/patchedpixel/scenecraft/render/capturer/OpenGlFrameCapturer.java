@@ -74,11 +74,7 @@ public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData
         return framesDone >= renderInfo.getTotalFrames();
     }
 
-    protected OpenGlFrame renderFrame(int frameId, float partialTicks) {
-        return renderFrame(frameId, partialTicks, null);
-    }
-
-    protected OpenGlFrame renderFrame(int frameId, float partialTicks, D captureData) {
+    protected OpenGlFrame renderFrame(int frameId, D captureData) {
         resizeMainWindow(mc, getFrameWidth(), getFrameHeight());
 
         pushMatrix();
@@ -87,7 +83,7 @@ public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData
                 .createCommandEncoder()
                 .clearColorAndDepthTextures(mc.gameRenderer.mainRenderTarget().getColorTexture(), new org.joml.Vector4f(), mc.gameRenderer.mainRenderTarget().getDepthTexture(), 0);
 
-        worldRenderer.renderWorld(partialTicks, captureData);
+        worldRenderer.renderWorld(captureData);
 
         popMatrix();
 

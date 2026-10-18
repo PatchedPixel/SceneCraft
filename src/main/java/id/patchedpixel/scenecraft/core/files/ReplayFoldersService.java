@@ -3,6 +3,7 @@ package id.patchedpixel.scenecraft.core.files;
 import com.google.common.net.PercentEscaper;
 import id.patchedpixel.scenecraft.core.Setting;
 import id.patchedpixel.scenecraft.core.SettingsRegistry;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.Minecraft;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.nio.file.Path;
 import static id.patchedpixel.scenecraft.core.utils.Utils.ensureDirectoryExists;
 
 public class ReplayFoldersService {
-    private final Path mcDir = Minecraft.getInstance().gameDirectory.toPath();
+    private final Path mcDir = MCVer.getMinecraft().gameDirectory.toPath();
     private final SettingsRegistry settings;
 
     public ReplayFoldersService(SettingsRegistry settings) {

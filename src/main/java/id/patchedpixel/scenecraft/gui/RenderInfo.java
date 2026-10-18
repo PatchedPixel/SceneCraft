@@ -24,7 +24,7 @@
  */
 package id.patchedpixel.scenecraft.gui;
 
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 

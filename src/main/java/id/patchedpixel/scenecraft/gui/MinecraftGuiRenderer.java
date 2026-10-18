@@ -26,7 +26,7 @@ package id.patchedpixel.scenecraft.gui;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.gui.utils.NonNull;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -42,7 +42,7 @@ import java.util.List;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.*;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
 
 public class MinecraftGuiRenderer implements GuiRenderer {
     private final Minecraft mc = getMinecraft();

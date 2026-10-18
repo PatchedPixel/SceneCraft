@@ -30,14 +30,13 @@ public class CubicOpenGlFrameCapturer extends OpenGlFrameCapturer<CubicOpenGlFra
 
     @Override
     public Map<Channel, CubicOpenGlFrame> process() {
-        float partialTicks = renderInfo.updateForNextFrame();
         int frameId = framesDone++;
-        CubicOpenGlFrame frame =  new CubicOpenGlFrame(renderFrame(frameId, partialTicks, Data.LEFT),
-                renderFrame(frameId, partialTicks, Data.RIGHT),
-                renderFrame(frameId, partialTicks, Data.FRONT),
-                renderFrame(frameId, partialTicks, Data.BACK),
-                renderFrame(frameId, partialTicks, Data.TOP),
-                renderFrame(frameId, partialTicks, Data.BOTTOM));
+        CubicOpenGlFrame frame =  new CubicOpenGlFrame(renderFrame(frameId, Data.LEFT),
+                renderFrame(frameId, Data.RIGHT),
+                renderFrame(frameId, Data.FRONT),
+                renderFrame(frameId, Data.BACK),
+                renderFrame(frameId, Data.TOP),
+                renderFrame(frameId, Data.BOTTOM));
         return Collections.singletonMap(Channel.BRGA, frame);
     }
 }

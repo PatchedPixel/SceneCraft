@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.replay.camera;
 
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.client.player.FirstPersonHandsAndItems;
 import id.patchedpixel.scenecraft.core.KeyBindingRegistry;
 import id.patchedpixel.scenecraft.core.SceneCraft;
@@ -459,8 +460,7 @@ public class CameraEntity
     }
 
     private void update() {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.level != this.level()) {
+        if (MCVer.getMinecraft().level != this.level()) {
             if (eventHandler != null) {
                 eventHandler.unregister();
                 eventHandler = null;

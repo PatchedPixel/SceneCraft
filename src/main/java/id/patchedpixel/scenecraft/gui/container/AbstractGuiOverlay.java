@@ -36,7 +36,7 @@ import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadablePoint;
-import id.patchedpixel.scenecraft.gui.versions.MCVer;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.gui.versions.ScreenExt;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.PreTickCallback;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.RenderHudCallback;
@@ -47,7 +47,7 @@ import net.minecraft.ReportedException;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
-import static id.patchedpixel.scenecraft.gui.versions.MCVer.literalText;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.literalText;
 
 import com.mojang.blaze3d.platform.Window;
 

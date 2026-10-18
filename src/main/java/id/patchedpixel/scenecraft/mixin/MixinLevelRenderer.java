@@ -6,6 +6,7 @@ import com.mojang.blaze3d.framegraph.FramePass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import id.patchedpixel.scenecraft.core.events.PostRenderWorldCallback;
+import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
 import net.minecraft.client.Minecraft;
@@ -35,12 +36,12 @@ public abstract class MixinLevelRenderer {
             at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V")
     )
     private void chromaKeyingSky(FramePass pass, Runnable task, Operation<Void> original) {
-        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) Minecraft.getInstance().gameRenderer).sceneCraftRender_getHandler();
+        EntityRendererHandler handler = ((EntityRendererHandler.IEntityRenderer) MCVer.getMinecraft().gameRenderer).sceneCraftRender_getHandler();
         if (handler != null) {
             ReadableColor color = handler.getSettings().getChromaKeyingColor();
             if (color != null) {
                 original.call(pass, (Runnable) () -> RenderSystem.getDevice().createCommandEncoder().clearColorTexture(
-                        Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTexture(),
+                        MCVer.getMinecraft().gameRenderer.mainRenderTarget().getColorTexture(),
                         new org.joml.Vector4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1f)
                 ));
                 return;
