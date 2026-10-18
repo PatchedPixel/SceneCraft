@@ -9,8 +9,12 @@ import id.patchedpixel.scenecraft.gui.function.CharInput;
 import id.patchedpixel.scenecraft.gui.function.KeyInput;
 import id.patchedpixel.scenecraft.gui.versions.ScreenExt;
 import id.patchedpixel.scenecraft.gui.versions.callbacks.KeyboardCallback;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.input.KeyEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,7 +26,7 @@ public class MixinKeyboardHandler {
     private static final String ON_KEY_PRESSED = "Lnet/minecraft/client/KeyMapping;click(Lcom/mojang/blaze3d/platform/InputConstants$Key;)V";
 
     @Inject(method = "keyPress", at = @At(value = "INVOKE", target = ON_KEY_PRESSED), cancellable = true)
-    private void beforeKeyBindingTick(long window, int action, net.minecraft.client.input.KeyEvent mcKeyInput, CallbackInfo ci) {
+    private void beforeKeyBindingTick(long window, int action, KeyEvent mcKeyInput, CallbackInfo ci) {
         KeyInput keyInput = new KeyInput(mcKeyInput);
         if (KeyEventCallback.EVENT.invoker().onKeyEvent(keyInput, action)) {
             ci.cancel();
@@ -35,7 +39,7 @@ public class MixinKeyboardHandler {
     }
 
     @WrapOperation(method = "keyPress", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;keyPressed(Lnet/minecraft/client/input/KeyEvent;)Z"))
-    private boolean keyPressed(Screen screen, net.minecraft.client.input.KeyEvent mcKeyInput, Operation<Boolean> original) {
+    private boolean keyPressed(Screen screen, KeyEvent mcKeyInput, Operation<Boolean> original) {
         if (KeyboardCallback.EVENT.invoker().keyPressed(new KeyInput(mcKeyInput))) {
             return true;
         }
@@ -56,15 +60,16 @@ public class MixinKeyboardHandler {
     }
 
     @WrapOperation(method = "keyPress", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;keyReleased(Lnet/minecraft/client/input/KeyEvent;)Z"))
-    private boolean keyReleased(Screen screen, net.minecraft.client.input.KeyEvent mcKeyInput, Operation<Boolean> original) {
-        if (KeyboardCallback.EVENT.invoker().keyReleased(new KeyInput(mcKeyInput))) {
-            return true;
+    private boolean keyReleased(Screen screen, KeyEvent mcKeyInput, Operation<Boolean> original) {
+        boolean consumed = KeyboardCallback.EVENT.invoker().keyReleased(new KeyInput(mcKeyInput)) || original.call(screen, mcKeyInput);
+        if (consumed && screen instanceof ScreenExt ext && ext.doesPassEvents()) {
+            KeyMapping.set(InputConstants.getKey(mcKeyInput), false);
         }
-        return original.call(screen, mcKeyInput);
+        return consumed;
     }
 
     @WrapOperation(method = "charTyped", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;charTyped(Lnet/minecraft/client/input/CharacterEvent;)Z"))
-    private boolean charTyped(Screen screen, net.minecraft.client.input.CharacterEvent mcCharInput, Operation<Boolean> original) {
+    private boolean charTyped(Screen screen, CharacterEvent mcCharInput, Operation<Boolean> original) {
         if (KeyboardCallback.EVENT.invoker().charTyped(new CharInput(mcCharInput))) {
             return true;
         }
