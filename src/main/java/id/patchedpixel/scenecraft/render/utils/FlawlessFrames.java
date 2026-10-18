@@ -1,11 +1,12 @@
 package id.patchedpixel.scenecraft.render.utils;
 
+import id.patchedpixel.scenecraft.core.SceneCraft;
+import net.neoforged.fml.ModList;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 import java.util.function.Function;
-
-import static id.patchedpixel.scenecraft.core.SceneCraft.MOD_ID;
 
 /**
  * Uses the "Flawless Frames" FREX feature which allows us to instruct third-party mods to sacrifice performance (even
@@ -17,21 +18,18 @@ import static id.patchedpixel.scenecraft.core.SceneCraft.MOD_ID;
  */
 public class FlawlessFrames {
     private static final List<Consumer<Boolean>> CONSUMERS = new CopyOnWriteArrayList<>();
-    private static boolean hasSodium;
+    private static volatile boolean hasSodium;
 
     private FlawlessFrames() {}
 
-    /**
-     * Integration hook of the FREX Flawless Frames API; mods (e.g. Sodium) call this to register their consumer.
-     * It looks unused inside SceneCraft but is called from the outside, do not remove.
-     */
-    public static void registerConsumer(Function<String, Consumer<Boolean>> provider) {
-        Consumer<Boolean> consumer = provider.apply(MOD_ID);
-        CONSUMERS.add(consumer);
+    public static void acceptController(Function<String, Consumer<Boolean>> provider) {
+        Consumer<Boolean> consumer = provider.apply(SceneCraft.MOD_ID);
 
-        if (provider.getClass().getName().contains(".sodium.") || consumer.getClass().getName().contains(".sodium.")) {
-            hasSodium = true;
+        if(consumer != null) {
+            CONSUMERS.add(consumer);
         }
+
+        hasSodium = ModList.get().isLoaded("sodium");
     }
 
     public static void setEnabled(boolean enabled) {

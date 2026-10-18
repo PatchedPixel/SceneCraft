@@ -31,6 +31,10 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+    maven {
+        name = "caffeinemcRepositoryMaven"
+        url = uri("https://maven.caffeinemc.net/releases")
+    }
 }
 
 base {
@@ -94,6 +98,7 @@ dependencies {
     compileOnly("maven.modrinth:YL57xq9U:Ag5S66CF")
     compileOnly("maven.modrinth:1bokaNcj:j2Xo3Dhc")
     compileOnly("maven.modrinth:9eGKb6K1:3rpCvvMZ")
+    compileOnly("net.caffeinemc:sodium-neoforge-mod:0.9.3-beta.1+mc26.3")
 
     implementation(jarJar("com.googlecode.mp4parser:isoparser:1.1.22"))
     implementation(jarJar("de.javagl:jgltf-model:2.0.4"))

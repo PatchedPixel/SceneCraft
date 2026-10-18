@@ -86,6 +86,7 @@ public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> 
         }
 
         if (framesDone < renderInfo.getTotalFrames()) {
+            renderInfo.updateForNextFrame();
             // Then fill it again
             for (D data : this.data) {
                 renderFrame(framesDone, data);

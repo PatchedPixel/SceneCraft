@@ -30,6 +30,7 @@ public class CubicOpenGlFrameCapturer extends OpenGlFrameCapturer<CubicOpenGlFra
 
     @Override
     public Map<Channel, CubicOpenGlFrame> process() {
+        renderInfo.updateForNextFrame();
         int frameId = framesDone++;
         CubicOpenGlFrame frame =  new CubicOpenGlFrame(renderFrame(frameId, Data.LEFT),
                 renderFrame(frameId, Data.RIGHT),

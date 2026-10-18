@@ -6,18 +6,11 @@
 
 Started as a [ReplayMod](https://github.com/ReplayMod/ReplayMod) fork for modern Minecraft, and growing into its own project: multi-version, multi-loader, and rebuilt for the future after the first stable release.
 
-![Version](https://img.shields.io/badge/version-beta-orange)
 ![Loader](https://img.shields.io/badge/loader-NeoForge%20%7C%20Forge%20(planned)-E68C3A)
 ![Renderer](https://img.shields.io/badge/renderer-OpenGL%20%7C%20Vulkan-8A63D2)
 ![License](https://img.shields.io/badge/license-GPLv3-blue)
 
 </div>
-
-> ⚠️ **Beta.** SceneCraft is on its first release. The core workflow (record → replay → edit → render) works, but expect rough edges. See [Known issues](#-known-issues).
->
-> 🧭 **Where this is going:** the beta and 1.0.0 focus on a solid, stable port. After the stable release, SceneCraft moves beyond ReplayMod with an architecture overhaul and new modern features. See [Vision](#-vision) and [Roadmap](#-roadmap).
-
----
 
 ## ✨ Features
 
@@ -33,11 +26,12 @@ Started as a [ReplayMod](https://github.com/ReplayMod/ReplayMod) fork for modern
 
 ## 📦 Supported versions
 
-| Minecraft      | Loader | Status |
-|----------------|---|---|
-| 26.3           | NeoForge | ✅ Available (beta) |
-| 1.20.1         | Forge | 🛠️ Planned |
-| Other versions | NeoForge / Forge | 🛠️ Planned |
+| Minecraft       | Loader   | Status      |
+|-----------------|----------|-------------|
+| 26.3            | NeoForge | ✅ Available |
+| 1.21.1          | NeoForge | 🛠️ Planned |
+| 1.20.1          | Forge    | 🛠️ Planned |
+| Other versions  | NeoForge | 🛠️ Planned |
 
 Each build targets one Minecraft version and one loader, so pick the jar that matches your game.
 
@@ -67,45 +61,35 @@ All actions can be rebound under **Options → Controls** (SceneCraft category):
 ## 🛠️ Building from source
 
 ```bash
-git clone <this repository>
+git clone https://github.com/PatchedPixel/SceneCraft.git
 cd SceneCraft
 ./gradlew build
 ```
 
 The jar appears in `build/libs/`. To start a development client, run the `runClient` Gradle task (or the equivalent run configuration in your IDE).
 
-You need the JDK that matches the target Minecraft version.
-
 ## ⚠️ Known issues
 
 - **ODS (VR) rendering** needs Iris, which only exists for OpenGL.
-- Some **26.3 packets are not mapped** in the studio library yet; unmapped packets pass through unchanged.
 - **EXR export** is not tested yet.
 - Languages other than English may still show older translations or fall back to English for new strings.
 - Do not minimize the window while rendering.
 
-Found something else? Please open an issue with your `latest.log` and, if there was a crash, the crash report.
+Found something else? Please open an [issue](https://github.com/PatchedPixel/SceneCraft/issues) with your `latest.log` and, if there was a crash, the crash report.
 
 ## 🧭 Vision
 
 SceneCraft starts from ReplayMod's proven record, replay and render workflow, but it is not meant to stay a straight port forever.
 
-- **Now (beta → 1.0.0):** a stable, well-tested port. Same familiar workflow, running on current Minecraft and mod loaders, with fixes and polish along the way.
-- **After 1.0.0:** a rework of the architecture and new features that fit modern Minecraft and modern tooling, rather than carrying over every design decision of the original. Details will be announced as they are decided, and may change.
+- **Now (1.0.0 → 2.0.0):** expand support to Forge and performance optimization.
+- **After 2.0.0:** a rework of the architecture and new features that fit modern Minecraft and modern tooling, rather than carrying over every design decision of the original. Details will be announced as they are decided, and may change.
 
 Existing replays and workflows are a priority when this happens, so the stable release is intended as the solid base to build on.
 
 ## 🗺️ Roadmap
 
-**Beta (0.x)**
-- Support for more Minecraft versions
-- Full mapping of Minecraft packets
-- Testing and fixes for known issues (EXR, translations, and more)
-
-**Toward 1.0.0 (stable)**
-- SceneCraft official logo
+**Now 1.0.0**
 - Forge support
-- Access Transformer migration
 - Translation updates
 - Cleanup of temporary debug code and wider testing across OpenGL and Vulkan
 

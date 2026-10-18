@@ -23,6 +23,7 @@ public class StereoscopicOpenGlFrameCapturer extends OpenGlFrameCapturer<Stereos
 
     @Override
     public Map<Channel, StereoscopicOpenGlFrame> process() {
+        renderInfo.updateForNextFrame();
         int frameId = framesDone++;
         OpenGlFrame left = renderFrame(frameId, Data.LEFT_EYE);
         OpenGlFrame right = renderFrame(frameId, Data.RIGHT_EYE);
