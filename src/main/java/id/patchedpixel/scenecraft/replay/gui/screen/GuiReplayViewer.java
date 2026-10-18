@@ -285,7 +285,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
         } else {
             loadButton.setI18nLabel("scenecraft.gui.load");
             loadButton.setTooltip(null);
-            loadButton.setEnabled(count == 1 && !selected.get(0).incompatible);
+            loadButton.setEnabled(count == 1 && !selected.getFirst().incompatible);
         }
     }
 

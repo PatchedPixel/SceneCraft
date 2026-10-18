@@ -24,7 +24,12 @@ public class FullBrightness extends EventRegistrations implements Extra {
 
     private Minecraft mc;
     private boolean active;
-    private double originalGamma;
+
+    private static boolean gamma;
+
+    public static boolean getGamma() {
+        return gamma;
+    }
 
     @Override
     public void register(final SceneCraft mod) throws Exception {
@@ -63,8 +68,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
         if (active && module.getReplayHandler() != null) {
             Type type = getType();
             if (type == Type.Gamma || type == Type.Both) {
-                originalGamma = mc.options.gamma().get();
-                mc.options.gamma().value = 1000.0;
+                gamma = true;
             }
             if (type == Type.NightVision || type == Type.Both) {
                 if (mc.player != null) {
@@ -80,7 +84,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
         if (active && module.getReplayHandler() != null) {
             Type type = getType();
             if (type == Type.Gamma || type == Type.Both) {
-                mc.options.gamma().value = originalGamma;
+                gamma = false;
             }
             if (type == Type.NightVision || type == Type.Both) {
                 if (mc.player != null) {

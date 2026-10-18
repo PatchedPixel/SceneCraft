@@ -6,6 +6,7 @@ import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.pathing.properties.CameraProperties;
 import id.patchedpixel.scenecraft.pathing.properties.SpectatorProperty;
 import id.patchedpixel.scenecraft.pathing.properties.TimestampProperty;
+import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.scenestudio.pathing.interpolation.Interpolator;
 import id.patchedpixel.scenecraft.scenestudio.pathing.path.Keyframe;
@@ -56,6 +57,7 @@ public class PathPreviewRenderer extends EventRegistrations {
     { on(PostRenderWorldCallback.EVENT, this::renderCameraPath); }
     private void renderCameraPath(PoseStack matrixStack, SubmitNodeStorage submitNodeStorage) {
         this.submitNodeStorage = submitNodeStorage;
+        if (((EntityRendererHandler.IEntityRenderer) mc.gameRenderer).sceneCraftRender_getHandler() != null) return;
         if (!replayHandler.getReplaySender().isAsyncMode() || mc.gui.hud.isHidden()) return;
 
         Entity view = mc.getCameraEntity();
