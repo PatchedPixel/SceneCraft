@@ -11,7 +11,6 @@ import java.nio.ByteBuffer;
 import static id.patchedpixel.scenecraft.render.utils.Utils.openGlBytesToBitmap;
 
 public class OpenGlToBitmapProcessor extends AbstractFrameProcessor<OpenGlFrame, BitmapFrame> {
-
     @Override
     public BitmapFrame process(OpenGlFrame rawFrame) {
         ReadableDimension size = rawFrame.getSize();

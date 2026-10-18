@@ -63,6 +63,8 @@ public class MCVer {
     public static void resizeMainWindow(Minecraft mc, int width, int height) {
         Window window = mc.getWindow();
         window.onFramebufferResize(width, height);
+        window.framebufferWidth = width;
+        window.framebufferHeight = height;
     }
 
     /**
