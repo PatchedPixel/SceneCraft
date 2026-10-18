@@ -81,12 +81,10 @@ public class SceneCraft implements Module, Scheduler {
         return settingsRegistry;
     }
 
-    /** Phase 1: collect key bindings (runs when the Minecraft instance exists, before key mappings are registered). */
     void registerModuleKeyBindings() {
         modules.forEach(m -> m.registerKeyBindings(keyBindingRegistry));
     }
 
-    /** Phase 2: runs on FMLClientSetupEvent, when options/resources are ready. */
     void initModules() {
         modules.forEach(Module::initCommon);
         modules.forEach(Module::initClient);

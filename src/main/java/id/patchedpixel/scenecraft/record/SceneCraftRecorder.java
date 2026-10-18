@@ -9,12 +9,16 @@ import id.patchedpixel.scenecraft.record.handler.ConnectionEventHandler;
 import id.patchedpixel.scenecraft.record.handler.GuiHandler;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
+import id.patchedpixel.scenecraft.scenestudio.protocol.packets.PacketEnabledPacksData;
 import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;
 import net.minecraft.network.Connection;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class SceneCraftRecorder implements Module {
@@ -24,26 +28,22 @@ public class SceneCraftRecorder implements Module {
     { instance = this; }
     public static SceneCraftRecorder instance;
 
-    private SceneCraft core;
+    private final SceneCraft core;
 
     private ConnectionEventHandler connectionEventHandler;
 
     public SceneCraftRecorder(SceneCraft mod) {
         core = mod;
-
         core.getSettingsRegistry().register(Setting.class);
     }
 
     @Override
     public void registerKeyBindings(KeyBindingRegistry registry) {
-        registry.registerKeyBinding("scenecraft.input.marker", Keyboard.KEY_M, new Runnable() {
-            @Override
-            public void run() {
-                PacketListener packetListener = connectionEventHandler.getPacketListener();
-                if (packetListener != null) {
-                    packetListener.addMarker(null);
-                    core.printInfoToChat("scenecraft.chat.addedmarker");
-                }
+        registry.registerKeyBinding("scenecraft.input.marker", Keyboard.KEY_M, () -> {
+            PacketListener packetListener = connectionEventHandler.getPacketListener();
+            if (packetListener != null) {
+                packetListener.addMarker(null);
+                core.printInfoToChat("scenecraft.chat.addedmarker");
             }
         }, false);
     }
@@ -51,25 +51,23 @@ public class SceneCraftRecorder implements Module {
     @Override
     public void initClient() {
         connectionEventHandler = new ConnectionEventHandler(LOGGER, core);
-
         new GuiHandler(core).register();
-
     }
 
-    /** Registers the (ignored) restrictions payload so the connection doesn't reject it. */
+    public ConnectionEventHandler getConnectionEventHandler() {
+        return connectionEventHandler;
+    }
+
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         event.registrar("1").optional()
-                .configurationToClient(Restrictions.ID, Restrictions.CODEC, (payload, context) -> {})
-                .playToClient(Restrictions.ID, Restrictions.CODEC, (payload, context) -> {})
-                // Synthetic packet we inject into recordings (see MixinNetHandlerConfigClient); only ever seen during replay.
-                .configurationToClient(ENABLED_PACKS_DATA, ENABLED_PACKS_CODEC, (payload, context) -> {});
+                .configurationToClient(Restrictions.ID, Restrictions.CODEC, (_, _) -> {})
+                .playToClient(Restrictions.ID, Restrictions.CODEC, (_, _) -> {})
+                .configurationToClient(ENABLED_PACKS_DATA, ENABLED_PACKS_CODEC, (_, _) -> {});
     }
 
-    private static final net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<EnabledPacksPayload> ENABLED_PACKS_DATA =
-            new net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<>(
-                    net.minecraft.resources.Identifier.parse(id.patchedpixel.scenecraft.scenestudio.protocol.packets.PacketEnabledPacksData.ID));
-    private static final net.minecraft.network.codec.StreamCodec<? super net.minecraft.network.FriendlyByteBuf, EnabledPacksPayload> ENABLED_PACKS_CODEC =
-            net.minecraft.network.codec.StreamCodec.of(
+    private static final CustomPacketPayload.Type<EnabledPacksPayload> ENABLED_PACKS_DATA = new CustomPacketPayload.Type<>(Identifier.parse(PacketEnabledPacksData.ID));
+    private static final StreamCodec<? super FriendlyByteBuf, EnabledPacksPayload> ENABLED_PACKS_CODEC =
+            StreamCodec.of(
                     (buf, payload) -> buf.writeBytes(payload.bytes()),
                     buf -> {
                         byte[] bytes = new byte[buf.readableBytes()];
@@ -77,9 +75,9 @@ public class SceneCraftRecorder implements Module {
                         return new EnabledPacksPayload(bytes);
                     });
 
-    private record EnabledPacksPayload(byte[] bytes) implements net.minecraft.network.protocol.common.custom.CustomPacketPayload {
+    private record EnabledPacksPayload(byte[] bytes) implements CustomPacketPayload {
         @Override
-        public net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<? extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> type() {
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
             return ENABLED_PACKS_DATA;
         }
     }
@@ -90,9 +88,5 @@ public class SceneCraftRecorder implements Module {
         if (channel.hasAttr(ATTR_CHECKED)) return;
         channel.attr(ATTR_CHECKED).set(null);
         connectionEventHandler.onConnectedToServerEvent(networkManager);
-    }
-
-    public ConnectionEventHandler getConnectionEventHandler() {
-        return connectionEventHandler;
     }
 }

@@ -33,7 +33,6 @@ public class KeyBindingRegistry extends EventRegistrations {
     public static final String LEGACY_KEY_PREFIX = "scenecraft.input.";
     private static final KeyMapping.Category CATEGORY = new KeyMapping.Category(identifier(MOD_ID, "general"));
 
-    /** Key mappings collected before NeoForge fires {@link RegisterKeyMappingsEvent}. */
     private final List<KeyMapping> pendingMappings = new ArrayList<>();
 
     private final Map<String, Binding> bindings = new HashMap<>();
@@ -56,7 +55,6 @@ public class KeyBindingRegistry extends EventRegistrations {
         Binding binding = bindings.get(name);
         if (binding == null) {
             if (keyCode <= 0) {
-                // 26.x uses SDL scancodes: "unbound" is SDL_SCANCODE_UNKNOWN (0), -1 is out of range for SDL_GetKeyboardState
                 keyCode = InputConstants.UNKNOWN.getValue();
             }
             Identifier id = identifier(MOD_ID, name.substring(LEGACY_KEY_PREFIX.length()));

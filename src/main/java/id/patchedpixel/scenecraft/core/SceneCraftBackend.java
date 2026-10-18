@@ -23,9 +23,6 @@ public class SceneCraftBackend {
     public SceneCraftBackend(IEventBus modBus, ModContainer container) {
         this.version = container.getModInfo().getVersion().toString();
 
-        // NOTE: the mod is constructed before the Minecraft instance exists (Main -> ClientModLoader.begin),
-        // so SceneCraft (which captures Minecraft.getInstance()) must NOT be created here.
-        // RegisterKeyMappingsEvent fires from the Options constructor, i.e. after Minecraft.instance is set.
         modBus.addListener(RegisterKeyMappingsEvent.class, event -> {
             this.mod = new SceneCraft(this);
             this.mod.registerModuleKeyBindings();

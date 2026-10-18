@@ -7,7 +7,6 @@ import net.minecraft.client.KeyMapping;
 import static net.minecraft.util.Mth.cos;
 import static net.minecraft.util.Mth.sin;
 
-// TODO: Marius is responsible for this. Please, someone clean it up.
 public class ClassicCameraController implements CameraController {
     private static final double LOWER_SPEED = 0.2;
     private static final double UPPER_SPEED = 200;
@@ -17,7 +16,7 @@ public class ClassicCameraController implements CameraController {
 
     private double MAX_SPEED = 10;
     private double THRESHOLD = MAX_SPEED / 20;
-    private double DECAY = MAX_SPEED/3;
+    private double DECAY = MAX_SPEED / 3;
 
     private Vector3f direction;
     private Vector3f dirBefore;
