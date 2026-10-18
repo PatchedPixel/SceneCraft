@@ -241,7 +241,7 @@ scenecraft.gui.rendersettings.camerapath=导出摄像路径
 
 scenecraft.gui.rendersettings.command=命令
 scenecraft.gui.rendersettings.arguments=命令行参数
-scenecraft.gui.rendersettings.ffmpeg.description=如果你是一个高级用户,您可以自定义用于导出视频的命令行参数.更多信息,查看:http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=如果你是一个高级用户,您可以自定义用于导出视频的命令行参数.更多信息,查看:http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=稳定镜头
 

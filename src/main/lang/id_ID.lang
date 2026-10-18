@@ -241,7 +241,7 @@ scenecraft.gui.rendersettings.camerapath=Ekspor jalur kamera
 
 scenecraft.gui.rendersettings.command=Perintah
 scenecraft.gui.rendersettings.arguments=Argumen Baris Perintah
-scenecraft.gui.rendersettings.ffmpeg.description=Jika kamu pengguna berpengalaman, kamu bisa menyesuaikan parameter baris perintah untuk merender video. Untuk informasi lebih lanjut, cek http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Jika kamu pengguna berpengalaman, kamu bisa menyesuaikan parameter baris perintah untuk merender video. Untuk informasi lebih lanjut, cek http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Stabilkan Kamera
 

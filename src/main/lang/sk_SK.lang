@@ -228,7 +228,7 @@ scenecraft.gui.rendersettings.camerapath=Exportovať cestu kamery
 
 scenecraft.gui.rendersettings.command=Príkaz
 scenecraft.gui.rendersettings.arguments=Argumenty príkazového riadku
-scenecraft.gui.rendersettings.ffmpeg.description=Ak ste pokročilý používateľ, môžete upravovať príkazy riadku používané pre export videa. Pre viac informácií sa pozrite na: http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Ak ste pokročilý používateľ, môžete upravovať príkazy riadku používané pre export videa. Pre viac informácií sa pozrite na: http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Stabilizovať kameru
 

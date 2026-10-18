@@ -239,7 +239,7 @@ scenecraft.gui.rendersettings.camerapath=카메라 경로 내보내기
 
 scenecraft.gui.rendersettings.command=명령
 scenecraft.gui.rendersettings.arguments=명령줄 인수
-scenecraft.gui.rendersettings.ffmpeg.description=고급 사용자인 경우 비디오를 내보내는데 사용할 명령줄 매개 변수를 지정할 수 있습니다. 자세한 내용은 http://scenecraft.com/docs을 참조하세요.
+scenecraft.gui.rendersettings.ffmpeg.description=고급 사용자인 경우 비디오를 내보내는데 사용할 명령줄 매개 변수를 지정할 수 있습니다. 자세한 내용은 http://replaymod.com/docs을 참조하세요.
 
 scenecraft.gui.rendersettings.stabilizecamera=카메라 안정화
 

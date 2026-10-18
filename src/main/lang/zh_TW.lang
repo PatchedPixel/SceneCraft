@@ -171,7 +171,7 @@ scenecraft.gui.rendersettings.outputfile=輸出檔案
 
 scenecraft.gui.rendersettings.command=命令
 scenecraft.gui.rendersettings.arguments=命令行參數
-scenecraft.gui.rendersettings.ffmpeg.description=如果你是高級使用者，則你可以自定義影片輸出命令參數。影片命令參數資訊請洽: http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=如果你是高級使用者，則你可以自定義影片輸出命令參數。影片命令參數資訊請洽: http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=穩定鏡頭
 

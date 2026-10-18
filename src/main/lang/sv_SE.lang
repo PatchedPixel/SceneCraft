@@ -221,7 +221,7 @@ scenecraft.gui.rendersettings.sphericalmetadata.error=Sfärisk metadata kan enda
 
 scenecraft.gui.rendersettings.command=Kommando
 scenecraft.gui.rendersettings.arguments=Argument för kommandoraden
-scenecraft.gui.rendersettings.ffmpeg.description=Om du är en avancerad användare kan du anpassa parametrarna i kommandoraden som används för att exportera videon. För mer information, se http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Om du är en avancerad användare kan du anpassa parametrarna i kommandoraden som används för att exportera videon. För mer information, se http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Stabilisera kameran
 

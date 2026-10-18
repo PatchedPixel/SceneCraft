@@ -241,7 +241,7 @@ scenecraft.gui.rendersettings.camerapath=Экспорт пути камеры
 
 scenecraft.gui.rendersettings.command=Команда
 scenecraft.gui.rendersettings.arguments=Аргументы командной строки
-scenecraft.gui.rendersettings.ffmpeg.description=Если вы опытный пользователь, вы можете настроить параметры командной строки, используемые для экспорта видео. Для получения дополнительной информации посетите http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Если вы опытный пользователь, вы можете настроить параметры командной строки, используемые для экспорта видео. Для получения дополнительной информации посетите http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Стабилизировать камеру
 

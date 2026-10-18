@@ -219,7 +219,7 @@ scenecraft.gui.rendersettings.sphericalmetadata.error=Metadados esféricos só p
 
 scenecraft.gui.rendersettings.command=Commando
 scenecraft.gui.rendersettings.arguments=Argumentos da linha de comando
-scenecraft.gui.rendersettings.ffmpeg.description=Se você é um usuário avançado, pode personalizar os parâmetros da linha de comando usados para exportar o vídeo. Para mais informações, visite http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Se você é um usuário avançado, pode personalizar os parâmetros da linha de comando usados para exportar o vídeo. Para mais informações, visite http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Estabilizar Câmera
 

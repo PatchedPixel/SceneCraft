@@ -146,7 +146,7 @@ scenecraft.gui.rendersettings.framerate=קצב הפריימים של הסרטו�
 scenecraft.gui.rendersettings.outputfile= קובץ פלט
 
 scenecraft.gui.rendersettings.command=פקודה
-scenecraft.gui.rendersettings.ffmpeg.description=אם אתה משתמש מתקדם, you can customize the command line parameters used to export the video. בדוק:, למידע נוסף http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=אם אתה משתמש מתקדם, you can customize the command line parameters used to export the video. בדוק:, למידע נוסף http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=יצב מצלמה
 

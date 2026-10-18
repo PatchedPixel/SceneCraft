@@ -80,7 +80,7 @@ public class Utils {
     /**
      * Neither the root certificate of LetsEncrypt nor the root that cross-signed it is included in the default
      * Java keystore prior to 8u101.
-     * Therefore whenever a connection to the scenecraft.com site is made, this SSLContext has to be used instead.
+     * Therefore whenever a connection to the replaymod.com site is made, this SSLContext has to be used instead.
      * It has been constructed to include the necessary root certificates.
      * @see #SSL_SOCKET_FACTORY
      */

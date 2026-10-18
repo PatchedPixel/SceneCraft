@@ -191,7 +191,7 @@ scenecraft.gui.rendersettings.outputfile=書き出す動画
 
 scenecraft.gui.rendersettings.command=コマンド
 scenecraft.gui.rendersettings.arguments=コマンドライン引数
-scenecraft.gui.rendersettings.ffmpeg.description=上級者の方は、コマンドライン引数を使って動画の書き出し形式をカスタマイズできます。詳しい情報は http://scenecraft.com/docs をチェックしてください
+scenecraft.gui.rendersettings.ffmpeg.description=上級者の方は、コマンドライン引数を使って動画の書き出し形式をカスタマイズできます。詳しい情報は http://replaymod.com/docs をチェックしてください
 
 scenecraft.gui.rendersettings.stabilizecamera=カメラを安定化する
 

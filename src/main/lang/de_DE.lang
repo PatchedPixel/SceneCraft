@@ -192,7 +192,7 @@ scenecraft.gui.rendersettings.outputfile=Ausgabedatei
 
 scenecraft.gui.rendersettings.command=Befehl
 scenecraft.gui.rendersettings.arguments=Befehlszeilenargumente
-scenecraft.gui.rendersettings.ffmpeg.description=Wenn du ein fortgeschrittener Benutzer bist, kannst du die Befehlszeilenparameter für den Export des Videos anpassen. Für mehr Informationen, besuche http://scenecraft.com/docs
+scenecraft.gui.rendersettings.ffmpeg.description=Wenn du ein fortgeschrittener Benutzer bist, kannst du die Befehlszeilenparameter für den Export des Videos anpassen. Für mehr Informationen, besuche http://replaymod.com/docs
 
 scenecraft.gui.rendersettings.stabilizecamera=Kamera stabilisieren
 
