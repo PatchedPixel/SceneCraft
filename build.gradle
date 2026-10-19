@@ -1,3 +1,9 @@
+import groovy.json.JsonOutput
+
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
+
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -18,6 +24,13 @@ sourceSets.main.resources {
     exclude("src/generated/**/.cache")
 }
 
+// Merge LWJGL TinyEXR lib into one jar
+def tinyexrGroup = "id.patchedpixel.shaded"
+def tinyexrArtifact = "lwjgl-tinyexr-all"
+def tinyexrRepoDir = layout.buildDirectory.dir("tinyexr-repo").get().asFile
+def tinyexrOutDir = new File(tinyexrRepoDir, "${tinyexrGroup.replace('.', '/')}/${tinyexrArtifact}/${lwjgl_version}")
+def tinyexrOutJar = new File(tinyexrOutDir, "${tinyexrArtifact}-${lwjgl_version}.jar")
+
 repositories {
     mavenCentral()
     exclusiveContent {
@@ -35,6 +48,51 @@ repositories {
         name = "caffeinemcRepositoryMaven"
         url = uri("https://maven.caffeinemc.net/releases")
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "TinyexrAll"
+                url = tinyexrRepoDir.toURI()
+            }
+        }
+        filter {
+            includeGroup tinyexrGroup
+        }
+    }
+}
+
+// Merge LWJGL TinyEXR jars
+if (!tinyexrOutJar.exists()) {
+    def tinyexrNatives = ["natives-windows", "natives-windows-arm64", "natives-linux", "natives-linux-arm64", "natives-macos", "natives-macos-arm64"]
+    def tinyexrDeps = [dependencies.create("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}")]
+    tinyexrNatives.each { n -> tinyexrDeps << dependencies.create("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}:${n}") }
+    def tinyexrConfig = configurations.detachedConfiguration(*tinyexrDeps)
+    tinyexrConfig.transitive = false
+
+    tinyexrOutDir.mkdirs()
+    def seen = new HashSet<String>()
+    new ZipOutputStream(new FileOutputStream(tinyexrOutJar)).withCloseable { out ->
+        tinyexrConfig.resolve().sort { it.name.length() }.each { jar ->
+            new ZipFile(jar).withCloseable { zip ->
+                zip.entries().each { e ->
+                    def name = e.name
+                    if (e.isDirectory() || name.startsWith("META-INF/") && (name.endsWith(".SF") || name.endsWith(".RSA") || name.endsWith(".DSA"))) return
+                    if (!seen.add(name)) return
+                    out.putNextEntry(new ZipEntry(name))
+                    zip.getInputStream(e).withCloseable { it.transferTo(out) }
+                    out.closeEntry()
+                }
+            }
+        }
+    }
+    new File(tinyexrOutDir, "${tinyexrArtifact}-${lwjgl_version}.pom").text = """<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>${tinyexrGroup}</groupId>
+  <artifactId>${tinyexrArtifact}</artifactId>
+  <version>${lwjgl_version}</version>
+</project>
+"""
 }
 
 base {
@@ -91,12 +149,7 @@ configurations {
 
 dependencies {
     // OpenEXR lib
-    implementation(jarJar("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}"))
-
-    // Natives lib
-    ["natives-windows", "natives-windows-arm64", "natives-linux", "natives-linux-arm64", "natives-macos", "natives-macos-arm64"].each { n ->
-        runtimeOnly(jarJar("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}:${n}"))
-    }
+    implementation(jarJar("${tinyexrGroup}:${tinyexrArtifact}:${lwjgl_version}"))
 
     // Mod compat
     compileOnly("maven.modrinth:YL57xq9U:Ag5S66CF")
@@ -135,8 +188,7 @@ def convertLang = tasks.register("convertLang") {
                 if (key == "${modId}.title") map.put("key.category.${modId}.general", value)
                 map.put(key, value)
             }
-            new File(out, f.name.toLowerCase().replace(".lang", ".json"))
-                    .setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(map)), "UTF-8")
+            new File(out, f.name.toLowerCase().replace(".lang", ".json")).setText(JsonOutput.prettyPrint(JsonOutput.toJson(map)), "UTF-8")
         }
     }
 }
