@@ -1,9 +1,9 @@
 package id.patchedpixel.scenecraft.render.capturer;
 
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.frame.CubicOpenGlFrame;
-import id.patchedpixel.scenecraft.render.frame.ODSOpenGlFrame;
-import id.patchedpixel.scenecraft.render.frame.OpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.CubicGpuFrame;
+import id.patchedpixel.scenecraft.render.frame.ODSGpuFrame;
+import id.patchedpixel.scenecraft.render.frame.GpuFrame;
 import id.patchedpixel.scenecraft.render.rendering.Channel;
 import id.patchedpixel.scenecraft.render.rendering.FrameCapturer;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IrisODSFrameCapturer implements FrameCapturer<ODSOpenGlFrame> {
+public class IrisODSFrameCapturer implements FrameCapturer<ODSGpuFrame> {
     public static final String SHADER_PACK_NAME = "assets/scenecraft/iris/ods";
     public static IrisODSFrameCapturer INSTANCE;
-    private final CubicPboOpenGlFrameCapturer left, right;
+    private final CubicPboGpuFrameCapturer left, right;
     private final String prevShaderPack;
     private final boolean prevShadersEnabled;
     private int direction;
@@ -91,19 +91,19 @@ public class IrisODSFrameCapturer implements FrameCapturer<ODSOpenGlFrame> {
     }
 
     @Override
-    public Map<Channel, ODSOpenGlFrame> process() {
+    public Map<Channel, ODSGpuFrame> process() {
         isLeftEye = true;
-        Map<Channel, CubicOpenGlFrame> leftChannels = left.process();
+        Map<Channel, CubicGpuFrame> leftChannels = left.process();
         isLeftEye = false;
-        Map<Channel, CubicOpenGlFrame> rightChannels = right.process();
+        Map<Channel, CubicGpuFrame> rightChannels = right.process();
 
         if (leftChannels != null && rightChannels != null) {
-            Map<Channel, ODSOpenGlFrame> result = new HashMap<>();
+            Map<Channel, ODSGpuFrame> result = new HashMap<>();
             for (Channel channel : Channel.values()) {
-                CubicOpenGlFrame leftFrame = leftChannels.get(channel);
-                CubicOpenGlFrame rightFrame = rightChannels.get(channel);
+                CubicGpuFrame leftFrame = leftChannels.get(channel);
+                CubicGpuFrame rightFrame = rightChannels.get(channel);
                 if (leftFrame != null && rightFrame != null) {
-                    result.put(channel, new ODSOpenGlFrame(leftFrame, rightFrame));
+                    result.put(channel, new ODSGpuFrame(leftFrame, rightFrame));
                 }
             }
 
@@ -121,13 +121,13 @@ public class IrisODSFrameCapturer implements FrameCapturer<ODSOpenGlFrame> {
         setShaderPack(prevShaderPack, prevShadersEnabled);
     }
 
-    private class CubicStereoFrameCapturer extends CubicPboOpenGlFrameCapturer {
+    private class CubicStereoFrameCapturer extends CubicPboGpuFrameCapturer {
         public CubicStereoFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo, int frameSize) {
             super(worldRenderer, renderInfo, frameSize);
         }
 
         @Override
-        protected OpenGlFrame renderFrame(int frameId, CubicOpenGlFrameCapturer.Data captureData) {
+        protected GpuFrame renderFrame(int frameId, CubicGpuFrameCapturer.Data captureData) {
             direction = captureData.ordinal();
             return super.renderFrame(frameId, captureData);
         }

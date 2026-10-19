@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.render.capturer;
 
-import id.patchedpixel.scenecraft.render.frame.OpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.GpuFrame;
 import id.patchedpixel.scenecraft.render.rendering.Channel;
 import id.patchedpixel.scenecraft.render.rendering.Frame;
 import id.patchedpixel.scenecraft.render.utils.ByteBufferPool;
@@ -16,12 +16,12 @@ import com.mojang.renderpearl.api.buffers.GpuBuffer;
 import com.mojang.renderpearl.api.commands.CommandEncoder;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> & CaptureData> extends OpenGlFrameCapturer<F, D> {
+public abstract class PboGpuFrameCapturer<F extends Frame, D extends Enum<D> & CaptureData> extends GpuFrameCapturer<F, D> {
     private final boolean withDepth;
     private final D[] data;
     private GpuBuffer pbo, otherPBO;
 
-    public PboOpenGlFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo, Class<D> type, int framePixels) {
+    public PboGpuFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo, Class<D> type, int framePixels) {
         super(worldRenderer, renderInfo);
 
         withDepth = renderInfo.getRenderSettings().isDepthMap();
@@ -31,7 +31,7 @@ public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> 
         otherPBO = RenderSystem.getDevice().createBuffer(null, GpuBuffer.USAGE_COPY_DST | GpuBuffer.USAGE_MAP_READ, bufferSize);
     }
 
-    protected abstract F create(OpenGlFrame[] from);
+    protected abstract F create(GpuFrame[] from);
 
     private void swapPBOs() {
         GpuBuffer old = pbo;
@@ -45,7 +45,7 @@ public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> 
     }
 
     private F readFromPbo(ByteBuffer pboBuffer, int bytesPerPixel, boolean swapRB) {
-        OpenGlFrame[] frames = new OpenGlFrame[data.length];
+        GpuFrame[] frames = new GpuFrame[data.length];
         int frameBufferSize = getFrameWidth() * getFrameHeight() * bytesPerPixel;
         for (int i = 0; i < frames.length; i++) {
             ByteBuffer frameBuffer = ByteBufferPool.allocate(frameBufferSize);
@@ -65,7 +65,7 @@ public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> 
                 frameBuffer.put(pboBuffer);
             }
             frameBuffer.rewind();
-            frames[i] = new OpenGlFrame(framesDone - 2, frameSize, bytesPerPixel, frameBuffer);
+            frames[i] = new GpuFrame(framesDone - 2, frameSize, bytesPerPixel, frameBuffer);
         }
         return create(frames);
     }
@@ -101,7 +101,7 @@ public abstract class PboOpenGlFrameCapturer<F extends Frame, D extends Enum<D> 
     }
 
     @Override
-    protected OpenGlFrame captureFrame(int frameId, D captureData) {
+    protected GpuFrame captureFrame(int frameId, D captureData) {
         int offset = captureData.ordinal() * getFrameWidth() * getFrameHeight() * 4;
         CommandEncoder cmd = RenderSystem.getDevice().createCommandEncoder();
         cmd.copyTextureToBuffer(frameBuffer().getColorTexture(), pbo, offset, () -> {}, 0);

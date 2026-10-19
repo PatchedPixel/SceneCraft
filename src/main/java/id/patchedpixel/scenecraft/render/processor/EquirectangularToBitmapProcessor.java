@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.render.processor;
 
-import id.patchedpixel.scenecraft.render.frame.CubicOpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.CubicGpuFrame;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.utils.ByteBufferPool;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 
 import static java.lang.Math.PI;
 
-public class EquirectangularToBitmapProcessor extends AbstractFrameProcessor<CubicOpenGlFrame, BitmapFrame> {
+public class EquirectangularToBitmapProcessor extends AbstractFrameProcessor<CubicGpuFrame, BitmapFrame> {
     private static final byte IMAGE_BACK = 0;
     private static final byte IMAGE_FRONT = 1;
     private static final byte IMAGE_LEFT = 2;
@@ -103,7 +103,7 @@ public class EquirectangularToBitmapProcessor extends AbstractFrameProcessor<Cub
     }
 
     @Override
-    public BitmapFrame process(CubicOpenGlFrame rawFrame) {
+    public BitmapFrame process(CubicGpuFrame rawFrame) {
         Validate.isTrue(rawFrame.getLeft().getSize().getWidth() == frameSize, "Frame size must be %d but was %d",
                 frameSize, rawFrame.getLeft().getSize().getWidth());
         int bpp = rawFrame.getLeft().getBytesPerPixel();

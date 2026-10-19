@@ -1,28 +1,27 @@
 package id.patchedpixel.scenecraft.render.processor;
 
-import id.patchedpixel.scenecraft.render.frame.CubicOpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.CubicGpuFrame;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.utils.ByteBufferPool;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
+import id.patchedpixel.scenecraft.render.utils.Utils;
 
 import java.nio.ByteBuffer;
 
-import static id.patchedpixel.scenecraft.render.utils.Utils.openGlBytesToBitmap;
-
-public class CubicToBitmapProcessor extends AbstractFrameProcessor<CubicOpenGlFrame, BitmapFrame> {
+public class CubicToBitmapProcessor extends AbstractFrameProcessor<CubicGpuFrame, BitmapFrame> {
     @Override
-    public BitmapFrame process(CubicOpenGlFrame rawFrame) {
+    public BitmapFrame process(CubicGpuFrame rawFrame) {
         int size = rawFrame.getLeft().getSize().getWidth();
         int bpp = rawFrame.getLeft().getBytesPerPixel();
         int width = size * 4;
         int height = size * 3;
         ByteBuffer result = ByteBufferPool.allocate(width * height * bpp);
-        openGlBytesToBitmap(rawFrame.getLeft(), 0, size, result, width);
-        openGlBytesToBitmap(rawFrame.getFront(), size, size, result, width);
-        openGlBytesToBitmap(rawFrame.getRight(), size * 2, size, result, width);
-        openGlBytesToBitmap(rawFrame.getBack(), size * 3, size, result, width);
-        openGlBytesToBitmap(rawFrame.getTop(), size, 0, result, width);
-        openGlBytesToBitmap(rawFrame.getBottom(), size, size * 2, result, width);
+        Utils.gpuBytesToBitmap(rawFrame.getLeft(), 0, size, result, width);
+        Utils.gpuBytesToBitmap(rawFrame.getFront(), size, size, result, width);
+        Utils.gpuBytesToBitmap(rawFrame.getRight(), size * 2, size, result, width);
+        Utils.gpuBytesToBitmap(rawFrame.getBack(), size * 3, size, result, width);
+        Utils.gpuBytesToBitmap(rawFrame.getTop(), size, 0, result, width);
+        Utils.gpuBytesToBitmap(rawFrame.getBottom(), size, size * 2, result, width);
         ByteBufferPool.release(rawFrame.getLeft().getByteBuffer());
         ByteBufferPool.release(rawFrame.getRight().getByteBuffer());
         ByteBufferPool.release(rawFrame.getFront().getByteBuffer());

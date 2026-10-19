@@ -53,7 +53,7 @@ public class CameraPathExporter {
         cameraRotationBuffer = ByteBuffer.allocate(4 * totalFrames * 4).order(ByteOrder.LITTLE_ENDIAN);
     }
 
-    public void recordFrame(float tickDelta) {
+    public void recordFrame() {
         Entity entity = mc.getCameraEntity() == null ? mc.player : mc.getCameraEntity();
 
         net.minecraft.client.Camera camera = mc.gameRenderer.mainCamera();

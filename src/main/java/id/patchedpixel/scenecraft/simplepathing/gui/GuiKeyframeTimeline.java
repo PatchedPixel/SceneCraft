@@ -113,7 +113,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
 
         SPTimeline timeline = mod.getCurrentTimeline();
 
-        ReadablePoint screenOffset = new Point(renderer.getOpenGlOffsetX(), renderer.getOpenGlOffsetY());
+        ReadablePoint screenOffset = new Point(renderer.getGpuOffsetX(), renderer.getGpuOffsetY());
         ReadableDimension screenSize = gui.overlay.getMaxSize();
         renderer.pushScissor(-screenOffset.getX(), -screenOffset.getY(), screenSize.getWidth(), screenSize.getHeight());
 

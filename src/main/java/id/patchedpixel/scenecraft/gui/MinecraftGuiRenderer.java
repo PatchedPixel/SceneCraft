@@ -62,12 +62,12 @@ public class MinecraftGuiRenderer implements GuiRenderer {
     }
 
     @Override
-    public int getOpenGlOffsetX() {
+    public int getGpuOffsetX() {
         return 0;
     }
 
     @Override
-    public int getOpenGlOffsetY() {
+    public int getGpuOffsetY() {
         return 0;
     }
 

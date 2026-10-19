@@ -77,7 +77,7 @@ public class MCVer {
      */
     public static boolean isOpenGlBackend() {
         try {
-            return RenderSystem.getDevice().getDeviceInfo().backendName().toLowerCase(java.util.Locale.ROOT).contains("opengl");
+            return "OpenGL".equals(RenderSystem.getDevice().getDeviceInfo().backendName());
         } catch (Throwable t) {
             return false;
         }

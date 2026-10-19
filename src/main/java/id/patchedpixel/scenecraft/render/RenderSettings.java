@@ -8,6 +8,7 @@ import id.patchedpixel.scenecraft.gui.utils.color.Color;
 import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.util.Util;
+import net.neoforged.fml.ModList;
 import org.apache.maven.artifact.versioning.ComparableVersion;
 
 import java.io.File;
@@ -47,7 +48,7 @@ public class RenderSettings {
         public boolean isSupported() {
             // ODS is only implemented through an Iris shader pack, and Iris only exists for the OpenGL backend.
             if (this == ODS) {
-                return net.neoforged.fml.ModList.get().isLoaded("iris") && MCVer.isOpenGlBackend();
+                return ModList.get().isLoaded("iris") && MCVer.isOpenGlBackend();
             }
             return true;
         }

@@ -3,8 +3,8 @@ package id.patchedpixel.scenecraft.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import id.patchedpixel.scenecraft.render.RenderSettings;
-import id.patchedpixel.scenecraft.render.capturer.CubicOpenGlFrameCapturer;
-import id.patchedpixel.scenecraft.render.capturer.StereoscopicOpenGlFrameCapturer;
+import id.patchedpixel.scenecraft.render.capturer.CubicGpuFrameCapturer;
+import id.patchedpixel.scenecraft.render.capturer.StereoscopicGpuFrameCapturer;
 import id.patchedpixel.scenecraft.render.hooks.EntityRendererHandler;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
 import net.minecraft.client.Camera;
@@ -42,8 +42,8 @@ public abstract class MixinCamera {
 
     @Inject(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;alignWithEntity(F)V", shift = At.Shift.AFTER))
     private void sceneCraftRender_setupCubicFrameRotation(CallbackInfo ci) {
-        if (getHandler() == null || !(getHandler().data instanceof CubicOpenGlFrameCapturer.Data)) return;
-        CubicOpenGlFrameCapturer.Data data = (CubicOpenGlFrameCapturer.Data) getHandler().data;
+        if (getHandler() == null || !(getHandler().data instanceof CubicGpuFrameCapturer.Data)) return;
+        CubicGpuFrameCapturer.Data data = (CubicGpuFrameCapturer.Data) getHandler().data;
 
         switch (data) {
             case FRONT:
@@ -73,10 +73,10 @@ public abstract class MixinCamera {
 
     @Inject(method = "alignWithEntity", at = @At("RETURN"))
     private void sceneCraftRender_setupStereoscopicProjection(CallbackInfo ci) {
-        if (getHandler() == null || !(getHandler().data instanceof StereoscopicOpenGlFrameCapturer.Data)) return;
-        StereoscopicOpenGlFrameCapturer.Data data = (StereoscopicOpenGlFrameCapturer.Data) getHandler().data;
+        if (getHandler() == null || !(getHandler().data instanceof StereoscopicGpuFrameCapturer.Data)) return;
+        StereoscopicGpuFrameCapturer.Data data = (StereoscopicGpuFrameCapturer.Data) getHandler().data;
 
-        move(0f, 0f, 0.1f * (data == StereoscopicOpenGlFrameCapturer.Data.LEFT_EYE ? -1 : 1));
+        move(0f, 0f, 0.1f * (data == StereoscopicGpuFrameCapturer.Data.LEFT_EYE ? -1 : 1));
     }
 
     @WrapOperation(method = "alignWithEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setRotation(FF)V"))

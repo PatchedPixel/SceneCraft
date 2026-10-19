@@ -236,7 +236,7 @@ public class VideoRenderer implements RenderInfo {
         guiWindow.unbind();
 
         if (cameraPathExporter != null) {
-            cameraPathExporter.recordFrame(timer.tickDelta);
+            cameraPathExporter.recordFrame();
         }
 
         framesDone++;

@@ -4,14 +4,14 @@ import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 
 import java.nio.FloatBuffer;
 
-public class GlToAbsoluteDepthProcessor extends AbstractFrameProcessor<BitmapFrame, BitmapFrame> {
+public class AbsoluteDepthProcessor extends AbstractFrameProcessor<BitmapFrame, BitmapFrame> {
     // absolute depth is 2 * near * far / (far + near - (far - near) * (2 * z - 1))
     // precomputed:     [      a       ]  [    b     ]  [    c     ]
     private final float a;
     private final float b;
     private final float c;
 
-    public GlToAbsoluteDepthProcessor(float near, float far) {
+    public AbsoluteDepthProcessor(float near, float far) {
         a = 2 * near * far;
         b = far + near;
         c = far - near;

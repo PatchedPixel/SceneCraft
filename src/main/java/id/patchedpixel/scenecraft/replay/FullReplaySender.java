@@ -598,12 +598,12 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                 org.dimension(),
                 org.seed(),
                 GameType.SPECTATOR,
-                java.util.Optional.of(GameType.SPECTATOR),
+                Optional.of(GameType.SPECTATOR),
                 org.isDebug(),
                 org.isFlat(),
                 org.lastDeathLocation(),
-                org.portalCooldown()
-                , org.seaLevel()
+                org.portalCooldown(),
+                org.seaLevel()
         );
     }
 

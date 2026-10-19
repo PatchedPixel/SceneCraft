@@ -5,13 +5,13 @@ import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 
 import java.nio.ByteBuffer;
 
-public class OpenGlFrame implements Frame {
+public class GpuFrame implements Frame {
     private final int frameId;
     private final ReadableDimension size;
     private final int bytesPerPixel;
     private final ByteBuffer byteBuffer;
 
-    public OpenGlFrame(int frameId, ReadableDimension size, int bytesPerPixel, ByteBuffer byteBuffer) {
+    public GpuFrame(int frameId, ReadableDimension size, int bytesPerPixel, ByteBuffer byteBuffer) {
         this.frameId = frameId;
         this.size = size;
         this.bytesPerPixel = bytesPerPixel;

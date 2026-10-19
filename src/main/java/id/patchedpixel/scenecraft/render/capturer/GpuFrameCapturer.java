@@ -2,7 +2,7 @@ package id.patchedpixel.scenecraft.render.capturer;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.render.frame.OpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.GpuFrame;
 import id.patchedpixel.scenecraft.render.rendering.Frame;
 import id.patchedpixel.scenecraft.render.rendering.FrameCapturer;
 import id.patchedpixel.scenecraft.render.utils.ByteBufferPool;
@@ -14,17 +14,18 @@ import com.mojang.blaze3d.pipeline.RenderTarget;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.popMatrix;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.pushMatrix;
 import static id.patchedpixel.scenecraft.core.versions.MCVer.resizeMainWindow;
 
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
-
 import com.mojang.renderpearl.api.buffers.GpuBuffer;
 import com.mojang.renderpearl.api.device.GpuDevice;
+import org.joml.Vector4f;
 
-public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData> implements FrameCapturer<F> {
+public abstract class GpuFrameCapturer<F extends Frame, D extends CaptureData> implements FrameCapturer<F> {
     protected final WorldRenderer worldRenderer;
     protected final RenderInfo renderInfo;
     protected int framesDone;
@@ -32,7 +33,7 @@ public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData
 
     protected final Minecraft mc = MCVer.getMinecraft();
 
-    public OpenGlFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
+    public GpuFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
         this.worldRenderer = worldRenderer;
         this.renderInfo = renderInfo;
     }
@@ -74,14 +75,14 @@ public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData
         return framesDone >= renderInfo.getTotalFrames();
     }
 
-    protected OpenGlFrame renderFrame(int frameId, D captureData) {
+    protected GpuFrame renderFrame(int frameId, D captureData) {
         resizeMainWindow(mc, getFrameWidth(), getFrameHeight());
 
         pushMatrix();
 
         RenderSystem.getDevice()
                 .createCommandEncoder()
-                .clearColorAndDepthTextures(mc.gameRenderer.mainRenderTarget().getColorTexture(), new org.joml.Vector4f(), mc.gameRenderer.mainRenderTarget().getDepthTexture(), 0);
+                .clearColorAndDepthTextures(mc.gameRenderer.mainRenderTarget().getColorTexture(), new Vector4f(), mc.gameRenderer.mainRenderTarget().getDepthTexture(), 0);
 
         worldRenderer.renderWorld(captureData);
 
@@ -94,18 +95,18 @@ public abstract class OpenGlFrameCapturer<F extends Frame, D extends CaptureData
         return captureFrame(frameId, captureData);
     }
 
-    protected OpenGlFrame captureFrame(int frameId, D captureData) {
+    protected GpuFrame captureFrame(int frameId, D captureData) {
         ByteBuffer buffer = ByteBufferPool.allocate(getFrameWidth() * getFrameHeight() * 4);
         GpuDevice device = RenderSystem.getDevice();
-        try (GpuBuffer gpuBuffer = device.createBuffer(null, GpuBuffer.USAGE_COPY_DST | GpuBuffer.USAGE_MAP_READ, getFrameWidth() * getFrameHeight() * 4)) {
-            device.createCommandEncoder().copyTextureToBuffer(frameBuffer().getColorTexture(), gpuBuffer, 0, () -> {}, 0);
+        try (GpuBuffer gpuBuffer = device.createBuffer(null, GpuBuffer.USAGE_COPY_DST | GpuBuffer.USAGE_MAP_READ, (long) getFrameWidth() * getFrameHeight() * 4)) {
+            device.createCommandEncoder().copyTextureToBuffer(Objects.requireNonNull(frameBuffer().getColorTexture(), "Main render target has no color texture"), gpuBuffer, 0, () -> {}, 0);
             try (GpuBufferSlice.MappedView view = gpuBuffer.map(true, false)) {
                 buffer.put(view.data());
             }
         }
         buffer.rewind();
 
-        return new OpenGlFrame(frameId, new Dimension(getFrameWidth(), getFrameHeight()), 4, buffer);
+        return new GpuFrame(frameId, new Dimension(getFrameWidth(), getFrameHeight()), 4, buffer);
     }
 
     @Override

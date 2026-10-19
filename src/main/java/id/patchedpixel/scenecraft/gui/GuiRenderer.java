@@ -31,8 +31,8 @@ import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.resources.Identifier;
 
 public interface GuiRenderer {
-    int getOpenGlOffsetX();
-    int getOpenGlOffsetY();
+    int getGpuOffsetX();
+    int getGpuOffsetY();
 
     GuiGraphicsExtractor getContext();
 

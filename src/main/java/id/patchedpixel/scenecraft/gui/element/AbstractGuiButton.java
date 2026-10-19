@@ -87,14 +87,10 @@ public abstract class AbstractGuiButton<T extends AbstractGuiButton<T>> extends 
             color = 0xffffa0;
         }
 
-        int textureY = 46 + texture * 20;
         int halfWidth = size.getWidth() / 2;
-        int secondHalfWidth = size.getWidth() - halfWidth;
-        int halfHeight = size.getHeight() / 2;
-        int secondHalfHeight = size.getHeight() - halfHeight;
 
-        int offsetX = renderer.getOpenGlOffsetX();
-        int offsetY = renderer.getOpenGlOffsetY();
+        int offsetX = renderer.getGpuOffsetX();
+        int offsetY = renderer.getGpuOffsetY();
         renderer.getContext().blitSprite(RenderPipelines.GUI_TEXTURED, BUTTON_TEXTURES[texture], offsetX, offsetY, size.getWidth(), size.getHeight());
 
         if (this.texture != null) {

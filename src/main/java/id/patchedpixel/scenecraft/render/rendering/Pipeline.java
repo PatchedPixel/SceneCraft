@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.render.rendering;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import id.patchedpixel.scenecraft.render.capturer.WorldRenderer;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
-import id.patchedpixel.scenecraft.render.processor.GlToAbsoluteDepthProcessor;
+import id.patchedpixel.scenecraft.render.processor.AbsoluteDepthProcessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.ReportedException;
 import net.minecraft.CrashReport;
@@ -24,7 +24,7 @@ public class Pipeline<R extends Frame, P extends Frame> implements Runnable {
     private final WorldRenderer worldRenderer;
     private final FrameCapturer<R> capturer;
     private final FrameProcessor<R, P> processor;
-    private final GlToAbsoluteDepthProcessor depthProcessor;
+    private final AbsoluteDepthProcessor depthProcessor;
     private final FrameConsumer<P> consumer;
 
     private volatile boolean abort;
@@ -37,7 +37,7 @@ public class Pipeline<R extends Frame, P extends Frame> implements Runnable {
 
         float near = 0.05f;
         float far = getMinecraft().options.renderDistance().get() * 16 * 4;
-        this.depthProcessor = new GlToAbsoluteDepthProcessor(near, far);
+        this.depthProcessor = new AbsoluteDepthProcessor(near, far);
     }
 
     @Override

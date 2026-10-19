@@ -121,8 +121,8 @@ public abstract class AbstractGuiSlider<T extends AbstractGuiSlider<T>> extends 
         int width = size.getWidth();
         int height = size.getHeight();
 
-        int offsetX = renderer.getOpenGlOffsetX();
-        int offsetY = renderer.getOpenGlOffsetY();
+        int offsetX = renderer.getGpuOffsetX();
+        int offsetY = renderer.getGpuOffsetY();
 
         // Draw background
         renderer.getContext().blitSprite(RenderPipelines.GUI_TEXTURED, TEXTURE, offsetX, offsetY, width, height);

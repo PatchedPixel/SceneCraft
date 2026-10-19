@@ -109,13 +109,13 @@ public class OffsetGuiRenderer implements GuiRenderer {
     }
 
     @Override
-    public int getOpenGlOffsetX() {
-        return renderer.getOpenGlOffsetX() + positionX;
+    public int getGpuOffsetX() {
+        return renderer.getGpuOffsetX() + positionX;
     }
 
     @Override
-    public int getOpenGlOffsetY() {
-        return renderer.getOpenGlOffsetY() + positionY;
+    public int getGpuOffsetY() {
+        return renderer.getGpuOffsetY() + positionY;
     }
 
     @Override

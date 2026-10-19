@@ -1,15 +1,15 @@
 package id.patchedpixel.scenecraft.render.capturer;
 
-import id.patchedpixel.scenecraft.render.frame.OpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.GpuFrame;
 
-public class SimplePboOpenGlFrameCapturer extends PboOpenGlFrameCapturer<OpenGlFrame, SimplePboOpenGlFrameCapturer.SinglePass> {
-    public SimplePboOpenGlFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
+public class SimplePboGpuFrameCapturer extends PboGpuFrameCapturer<GpuFrame, SimplePboGpuFrameCapturer.SinglePass> {
+    public SimplePboGpuFrameCapturer(WorldRenderer worldRenderer, RenderInfo renderInfo) {
         super(worldRenderer, renderInfo, SinglePass.class,
                 renderInfo.getFrameSize().getWidth() * renderInfo.getFrameSize().getHeight());
     }
 
     @Override
-    protected OpenGlFrame create(OpenGlFrame[] from) {
+    protected GpuFrame create(GpuFrame[] from) {
         return from[0];
     }
 

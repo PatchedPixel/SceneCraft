@@ -1,6 +1,6 @@
 package id.patchedpixel.scenecraft.render.processor;
 
-import id.patchedpixel.scenecraft.render.frame.ODSOpenGlFrame;
+import id.patchedpixel.scenecraft.render.frame.ODSGpuFrame;
 import id.patchedpixel.scenecraft.render.frame.BitmapFrame;
 import id.patchedpixel.scenecraft.render.utils.ByteBufferPool;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
@@ -9,7 +9,7 @@ import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class ODSToBitmapProcessor extends AbstractFrameProcessor<ODSOpenGlFrame, BitmapFrame> {
+public class ODSToBitmapProcessor extends AbstractFrameProcessor<ODSGpuFrame, BitmapFrame> {
     private final EquirectangularToBitmapProcessor processor;
 
     public ODSToBitmapProcessor(int outputWidth, int outputHeight, int sphericalFovX) {
@@ -17,7 +17,7 @@ public class ODSToBitmapProcessor extends AbstractFrameProcessor<ODSOpenGlFrame,
     }
 
     @Override
-    public BitmapFrame process(ODSOpenGlFrame rawFrame) {
+    public BitmapFrame process(ODSGpuFrame rawFrame) {
         BitmapFrame leftFrame = processor.process(rawFrame.getLeft());
         BitmapFrame rightFrame = processor.process(rawFrame.getRight());
         ReadableDimension size = new Dimension(leftFrame.getSize().getWidth(), leftFrame.getSize().getHeight() * 2);

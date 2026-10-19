@@ -3,10 +3,10 @@ package id.patchedpixel.scenecraft.render.frame;
 import id.patchedpixel.scenecraft.render.rendering.Frame;
 import org.apache.commons.lang3.Validate;
 
-public class ODSOpenGlFrame implements Frame {
-    private final CubicOpenGlFrame left, right;
+public class ODSGpuFrame implements Frame {
+    private final CubicGpuFrame left, right;
 
-    public ODSOpenGlFrame(CubicOpenGlFrame left, CubicOpenGlFrame right) {
+    public ODSGpuFrame(CubicGpuFrame left, CubicGpuFrame right) {
         Validate.isTrue(left.getFrameId() == right.getFrameId(), "Frame ids do not match.");
         this.left = left;
         this.right = right;
@@ -17,11 +17,11 @@ public class ODSOpenGlFrame implements Frame {
         return left.getFrameId();
     }
 
-    public CubicOpenGlFrame getLeft() {
+    public CubicGpuFrame getLeft() {
         return this.left;
     }
 
-    public CubicOpenGlFrame getRight() {
+    public CubicGpuFrame getRight() {
         return this.right;
     }
 }

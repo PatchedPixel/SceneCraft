@@ -3,10 +3,10 @@ package id.patchedpixel.scenecraft.render.frame;
 import id.patchedpixel.scenecraft.render.rendering.Frame;
 import org.apache.commons.lang3.Validate;
 
-public class CubicOpenGlFrame implements Frame {
-    private final OpenGlFrame left, right, front, back, top, bottom;
+public class CubicGpuFrame implements Frame {
+    private final GpuFrame left, right, front, back, top, bottom;
 
-    public CubicOpenGlFrame(OpenGlFrame left, OpenGlFrame right, OpenGlFrame front, OpenGlFrame back, OpenGlFrame top, OpenGlFrame bottom) {
+    public CubicGpuFrame(GpuFrame left, GpuFrame right, GpuFrame front, GpuFrame back, GpuFrame top, GpuFrame bottom) {
         Validate.isTrue(left.getFrameId() == right.getFrameId()
                 && right.getFrameId() == front.getFrameId()
                 && front.getFrameId() == back.getFrameId()
@@ -30,27 +30,27 @@ public class CubicOpenGlFrame implements Frame {
         return left.getFrameId();
     }
 
-    public OpenGlFrame getLeft() {
+    public GpuFrame getLeft() {
         return this.left;
     }
 
-    public OpenGlFrame getRight() {
+    public GpuFrame getRight() {
         return this.right;
     }
 
-    public OpenGlFrame getFront() {
+    public GpuFrame getFront() {
         return this.front;
     }
 
-    public OpenGlFrame getBack() {
+    public GpuFrame getBack() {
         return this.back;
     }
 
-    public OpenGlFrame getTop() {
+    public GpuFrame getTop() {
         return this.top;
     }
 
-    public OpenGlFrame getBottom() {
+    public GpuFrame getBottom() {
         return this.bottom;
     }
 }
