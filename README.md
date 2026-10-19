@@ -71,9 +71,7 @@ The jar appears in `build/libs/`. To start a development client, run the `runCli
 ## ⚠️ Known issues
 
 - **ODS (VR) rendering** needs Iris, which only exists for OpenGL.
-- **EXR export** is not tested yet.
 - Languages other than English may still show older translations or fall back to English for new strings.
-- Do not minimize the window while rendering.
 
 Found something else? Please open an [issue](https://github.com/PatchedPixel/SceneCraft/issues) with your `latest.log` and, if there was a crash, the crash report.
 
