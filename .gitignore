@@ -1,34 +1,25 @@
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/**/build/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
-.idea/
+# idea
+out
+*.ipr
 *.iws
 *.iml
-*.ipr
-out/
-!**/src/**/out/
+.idea
 
-.run/
+# gradle
+build
+.gradle
 
-.apt_generated
-.classpath
-.eclipse/
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/**/bin/
+# other
+eclipse
+run
 
-.vscode/
-
-.DS_Store
-
-run/
-!**/src/**/run/
-**/src/generated/**/.cache/
-repo/
-!**/src/**/repo/
+# Files from Forge MDK
+forge*changelog.txt
