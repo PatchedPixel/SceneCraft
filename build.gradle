@@ -1,15 +1,22 @@
+import groovy.json.JsonOutput
+
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
+
 plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_id}-${platform}-${minecraft_version}"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -58,14 +65,148 @@ minecraft {
     }
 }
 
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+// Merge LWJGL TinyEXR lib into one jar
+def tinyexrGroup = "id.patchedpixel.shaded"
+def tinyexrArtifact = "lwjgl-tinyexr-all"
+def tinyexrRepoDir = layout.buildDirectory.dir("tinyexr-repo").get().asFile
+def tinyexrOutDir = new File(tinyexrRepoDir, "${tinyexrGroup.replace('.', '/')}/${tinyexrArtifact}/${lwjgl_version}")
+def tinyexrOutJar = new File(tinyexrOutDir, "${tinyexrArtifact}-${lwjgl_version}.jar")
+
 repositories {
+    mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository)
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven {
+        name = "caffeinemcRepositoryMaven"
+        url = uri("https://maven.caffeinemc.net/releases")
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "TinyexrAll"
+                url = tinyexrRepoDir.toURI()
+            }
+        }
+        filter {
+            includeGroup tinyexrGroup
+        }
+    }
 }
+
+// Merge LWJGL TinyEXR jars
+if (!tinyexrOutJar.exists()) {
+    def tinyexrNatives = ["natives-windows", "natives-windows-arm64", "natives-linux", "natives-linux-arm64", "natives-macos", "natives-macos-arm64"]
+    def tinyexrDeps = [dependencies.create("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}")]
+    tinyexrNatives.each { n -> tinyexrDeps << dependencies.create("org.lwjgl:lwjgl-tinyexr:${lwjgl_version}:${n}") }
+    def tinyexrConfig = configurations.detachedConfiguration(*tinyexrDeps)
+    tinyexrConfig.transitive = false
+
+    tinyexrOutDir.mkdirs()
+    def seen = new HashSet<String>()
+    new ZipOutputStream(new FileOutputStream(tinyexrOutJar)).withCloseable { out ->
+        tinyexrConfig.resolve().sort { it.name.length() }.each { jar ->
+            new ZipFile(jar).withCloseable { zip ->
+                zip.entries().each { e ->
+                    def name = e.name
+                    if (e.isDirectory() || name.startsWith("META-INF/") && (name.endsWith(".SF") || name.endsWith(".RSA") || name.endsWith(".DSA"))) return
+                    if (!seen.add(name)) return
+                    out.putNextEntry(new ZipEntry(name))
+                    zip.getInputStream(e).withCloseable { it.transferTo(out) }
+                    out.closeEntry()
+                }
+            }
+        }
+    }
+    new File(tinyexrOutDir, "${tinyexrArtifact}-${lwjgl_version}.pom").text = """<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>${tinyexrGroup}</groupId>
+  <artifactId>${tinyexrArtifact}</artifactId>
+  <version>${lwjgl_version}</version>
+</project>
+"""
+}
+
+jarJar.enable()
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Apply Mixin AP
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // OpenEXR lib
+    implementation "${tinyexrGroup}:${tinyexrArtifact}:${lwjgl_version}"
+    jarJar(group: tinyexrGroup, name: tinyexrArtifact, version: "[${lwjgl_version},)") {
+        jarJar.pin(it, lwjgl_version)
+    }
+
+    // Mod compat
+    compileOnly("maven.modrinth:GchcoXML:iQ1SwGc3") // Oculus
+    compileOnly("maven.modrinth:sk9rgfiA:UTbfe5d1") // Embeddium
+    compileOnly("maven.modrinth:1bokaNcj:dB6E0CY9") // Xaero's Minimap
+    compileOnly("maven.modrinth:9eGKb6K1:lWvbAZ3P") // Simple Voice Chat
+
+    // Project lib
+    implementation "com.googlecode.mp4parser:isoparser:1.1.22"
+    jarJar(group: 'com.googlecode.mp4parser', name: 'isoparser', version: '[1.1.22,)') {
+        jarJar.pin(it, '1.1.22')
+    }
+
+    implementation "de.javagl:jgltf-model:2.0.4"
+    jarJar(group: 'de.javagl', name: 'jgltf-model', version: '[2.0.4,)') {
+        jarJar.pin(it, '2.0.4')
+    }
 }
+
+def convertLang = tasks.register("convertLang") {
+    def modId = project.mod_id
+    def inDir = layout.projectDirectory.dir("src/main/lang")
+    def outDir = layout.buildDirectory.dir("generated/lang")
+    inputs.dir(inDir).optional()
+    outputs.dir(outDir)
+    doLast {
+        def out = outDir.get().dir("assets/${modId}/lang").asFile
+        out.deleteDir(); out.mkdirs()
+        def src = inDir.asFile
+        if (!src.exists()) return
+        src.eachFileMatch(~/[a-z]{2}_[A-Za-z]{2}\.lang/) { f ->
+            def map = new LinkedHashMap<String, String>()
+            f.eachLine("UTF-8") { line ->
+                if (line.trim().isEmpty() || line.trim().startsWith("#")) return
+                int i = line.indexOf('=')
+                if (i < 0) return
+                def key = line.substring(0, i)
+                def value = line.substring(i + 1)
+                if (key.startsWith("${modId}.input.")) {
+                    map.put(key, value)
+                    key = "key.${modId}." + key.substring("${modId}.input.".length())
+                }
+                if (key == "${modId}.title") map.put("key.category.${modId}.general", value)
+                map.put(key, value)
+            }
+            new File(out, f.name.toLowerCase().replace(".lang", ".json")).setText(JsonOutput.prettyPrint(JsonOutput.toJson(map)), "UTF-8")
+        }
+    }
+}
+sourceSets.main.resources.srcDir convertLang
 
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
@@ -83,6 +224,7 @@ tasks.named('processResources', ProcessResources).configure {
 }
 
 tasks.named('jar', Jar).configure {
+    archiveClassifier = 'slim'
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
@@ -96,6 +238,18 @@ tasks.named('jar', Jar).configure {
     }
 
     finalizedBy 'reobfJar'
+}
+
+reobf {
+    jarJar {}
+}
+
+tasks.named('jarJar').configure {
+    finalizedBy 'reobfJarJar'
+}
+
+tasks.named('build').configure {
+    dependsOn 'jarJar'
 }
 
 publishing {

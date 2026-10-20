@@ -1,0 +1,346 @@
+scenecraft.title=SceneCraft
+
+#All of the chat messages
+scenecraft.chat.recordingstarted=开始录制
+scenecraft.chat.recordingfailed=无法开启录制
+
+scenecraft.chat.savingthumb=保存缩略图……
+scenecraft.chat.savedthumb=已成功保存缩略图
+scenecraft.chat.failedthumb=无法保存缩略图
+
+scenecraft.chat.addedmarker=标记事件已添加
+
+#Chat messages displayed in Replay Viewer
+scenecraft.chat.morekeyframes=至少需要2个位置关键帧和2个时间关键帧
+scenecraft.chat.pathstarted=镜头模式启动
+scenecraft.chat.pathfinished=镜头路径完成
+scenecraft.chat.pathinterrupted=镜头路径取消
+
+#Common GUI-related strings
+scenecraft.gui.cancel=取消
+scenecraft.gui.back=完成
+scenecraft.gui.load=加载
+scenecraft.gui.save=保存
+scenecraft.gui.rename=重命名
+scenecraft.gui.remove=删除
+scenecraft.gui.delete=删除
+scenecraft.gui.record=录制中
+scenecraft.gui.paused=已暂停
+scenecraft.gui.speed=速度
+scenecraft.gui.pleasewait=请稍候
+scenecraft.gui.render=渲染
+scenecraft.gui.iphidden=隐藏服务器IP
+scenecraft.gui.overwrite=复写
+scenecraft.gui.saveas=另存为……
+scenecraft.gui.done=完成
+scenecraft.gui.close=关闭
+scenecraft.gui.notagain=不再显示
+scenecraft.gui.edit=编辑
+scenecraft.gui.copy=复制
+scenecraft.gui.paste=粘贴
+
+scenecraft.gui.record.resume=继续录制
+scenecraft.gui.record.pause=暂停录制
+scenecraft.gui.record.stop=停止录制
+scenecraft.gui.record.start=开始录制
+
+scenecraft.gui.renderdonetitle=视频渲染
+scenecraft.gui.openfolder=打开视频文件夹
+scenecraft.gui.youtubeupload=上传到YouTube
+scenecraft.gui.renderdone1=你的视频成功被渲染。
+scenecraft.gui.renderdone2=接下来你想做？
+scenecraft.gui.videotitle=标题
+scenecraft.gui.videodescription=描述
+scenecraft.gui.videotags=标签，标签，标签
+scenecraft.gui.videothumbnail=视频缩略图
+scenecraft.gui.videovisibility.private=私有
+scenecraft.gui.videovisibility.unlisted=未列表的
+scenecraft.gui.videovisibility.public=公共
+scenecraft.gui.ytuploadprogress.auth=[1/4]授权
+scenecraft.gui.ytuploadprogress.prepare_video=[2/4]预备的视频：%%d%%%%
+scenecraft.gui.ytuploadprogress.upload=[3/4]上传：%%d%%%%
+scenecraft.gui.ytuploadprogress.cleanup=[4/4]清除
+scenecraft.gui.ytuploadprogress.done=完成：%s
+scenecraft.gui.titleempty=标题不能为空
+scenecraft.gui.videothumbnailtoolarge=缩略图大小超过了2MB
+scenecraft.gui.videothumbnailformat=缩略图必须是JPEG或者PNG格式
+
+scenecraft.gui.hours=小时
+scenecraft.gui.minutes=分钟
+scenecraft.gui.seconds=秒
+scenecraft.gui.milliseconds=毫秒
+
+scenecraft.gui.pitch=X轴旋转
+scenecraft.gui.yaw=Y轴旋转
+scenecraft.gui.roll=Z轴旋转
+
+scenecraft.gui.camera=镜头
+scenecraft.gui.position=位置
+
+scenecraft.gui.unknownerror=出现未知错误
+
+scenecraft.gui.exit=退出回放
+
+scenecraft.gui.settings=设置
+
+scenecraft.gui.keyframerepo.delete=你确定你要删除这些关键帧？
+scenecraft.gui.keyframerepo.overwrite=你确定要覆盖这些关键帧吗？
+
+scenecraft.gui.restorereplay1=似乎Minecraft并没有正常退出。
+scenecraft.gui.restorereplay2=录像文件"%1$s"并没有正确保存。
+scenecraft.gui.restorereplay3=你希望恢复它么？
+
+scenecraft.gui.loadentitytracker=加载实体位置：%%d%%%%
+scenecraft.gui.loadquickmode=正在加载快速模式： %%d%%%%
+scenecraft.gui.noquickmode=快速模式仅在Minecraft %1$s 及更高版本中可用
+scenecraft.gui.minimalmode.unsupported=此功能不适用于您当前的Minecraft版本。
+scenecraft.gui.minimalmode.supportedversion=（您的SceneCraft版本仅支持 Minecraft %1$s ）
+
+#Only change these if it's neccessary
+scenecraft.gui.replayviewer=回放中心
+
+#Replay Viewer GUI
+scenecraft.gui.viewer.rename.name=录像名称
+scenecraft.gui.viewer.replayfolder=打开录像文件夹...
+scenecraft.gui.viewer.bulkrender=渲染了 %1$d 个视频
+
+scenecraft.gui.viewer.delete.linea=确定要删除这个录像吗？
+scenecraft.gui.viewer.delete.failed1=你的操作系统不允许继续重播,我们
+scenecraft.gui.viewer.delete.failed2=我们不能为此做些什么,你必须自己去处理。
+scenecraft.gui.viewer.delete.lineb="%1$s"将会永远失去！(真的很久！)
+
+#Replay Editor UI 2.0 (marker based UI)
+scenecraft.gui.edit.apply=应用
+scenecraft.gui.edit.split=添加标记
+scenecraft.gui.edit.split.tooltip=在标记处把回放片段分开为多个回放片段
+scenecraft.gui.edit.cut.start=开始剪辑
+scenecraft.gui.edit.cut.end=结束剪辑
+scenecraft.gui.edit.cut.tooltip=剪切 (删除) 一些回放片段
+
+#Cancel Replay GUI
+scenecraft.gui.cancelrender.title=取消渲染
+scenecraft.gui.cancelrender.message=你确定要取消当前的渲染过程吗？
+#Saving Replay GUI
+scenecraft.gui.replaysaving.title=保存录像文件中……
+
+#Player Overview GUI
+scenecraft.gui.playeroverview.visible=玩家实体
+scenecraft.gui.playeroverview.hideall=隐藏所有
+scenecraft.gui.playeroverview.showall=显示所有
+scenecraft.gui.playeroverview.spectate=玩家列表
+scenecraft.gui.playeroverview.remembersettings=持续隐藏玩家
+scenecraft.gui.playeroverview.remembersettings.description=玩家将在录像文件被隐藏
+
+#SceneCraft Settings GUI
+scenecraft.gui.settings.title=录像回放设置
+scenecraft.gui.settings.default=默认
+
+scenecraft.gui.settings.notifications=启用通知
+scenecraft.gui.settings.recordserver=录制多人游戏
+scenecraft.gui.settings.recordsingleplayer=录制单人游戏
+scenecraft.gui.settings.indicator=录制指示器
+scenecraft.gui.settings.pathpreview=显示路径预览
+scenecraft.gui.settings.camera=镜头
+scenecraft.gui.settings.showchat=显示聊天
+scenecraft.gui.settings.interpolator=默认插值器
+scenecraft.gui.settings.autostartrecording=自动录制
+scenecraft.gui.settings.rename_recording_dialog=重命名对话框
+scenecraft.gui.settings.fullbrightness=高亮度
+scenecraft.gui.settings.fullbrightness.gamma=Gamma值
+scenecraft.gui.settings.fullbrightness.nightvision=夜视
+scenecraft.gui.settings.fullbrightness.both=同时使用
+
+#SceneCraft Keybindings
+scenecraft.input.lighting=照明模式
+scenecraft.input.thumbnail=截取缩略图
+scenecraft.input.playeroverview=玩家列表
+scenecraft.input.clearkeyframes=清除关键帧
+scenecraft.input.synctimeline=同步帧和游戏的进度
+scenecraft.input.keyframerepository=打开关键帧设置
+scenecraft.input.rollclockwise=顺时针旋转
+scenecraft.input.rollcounterclockwise=逆时针旋转
+scenecraft.input.resettilt=重置镜头的旋转角度
+scenecraft.input.playpause=播放/暂停回放
+scenecraft.input.marker=添加标记事件
+scenecraft.input.pathpreview=切换路径预览
+scenecraft.input.settings=SceneCraft配置
+scenecraft.input.quickmode=快速模式
+scenecraft.input.positionkeyframe=位置/旁观者关键帧
+scenecraft.input.positiononlykeyframe=位置关键帧
+scenecraft.input.timekeyframe=时间关键帧
+scenecraft.input.bothkeyframes=位置/旁观者+时间关键帧
+
+# CameraControllers
+scenecraft.camera.classic=经典
+scenecraft.camera.vanilla=原版
+
+#Keyframe Presets GUI
+scenecraft.gui.keyframerepository.title=关键帧信息
+
+#Edit Keyframe GUI
+scenecraft.gui.editkeyframe.title.pos=编辑位置关键帧
+scenecraft.gui.editkeyframe.title.time=编辑时间关键帧
+scenecraft.gui.editkeyframe.title.marker=编辑标记事件
+scenecraft.gui.editkeyframe.title.spec=编辑旁观者关键帧
+scenecraft.gui.editkeyframe.xpos=X轴位置
+scenecraft.gui.editkeyframe.ypos=Y轴位置
+scenecraft.gui.editkeyframe.zpos=Z轴位置
+scenecraft.gui.editkeyframe.campitch=镜头X轴旋转
+scenecraft.gui.editkeyframe.camyaw=镜头Y轴旋转
+scenecraft.gui.editkeyframe.camroll=镜头Z轴旋转
+scenecraft.gui.editkeyframe.timelineposition=时间轴位置
+scenecraft.gui.editkeyframe.markername=标记事件名称
+scenecraft.gui.editkeyframe.timestamp=时间系数
+
+scenecraft.gui.editkeyframe.interpolator=插值器
+scenecraft.gui.editkeyframe.interpolator.default.name=默认插值器
+scenecraft.gui.editkeyframe.interpolator.default.desc=在SceneCraft设置中使用默认的插值器。
+scenecraft.gui.editkeyframe.interpolator.catmullrom.name=Catmull Rom样条曲线插值器
+scenecraft.gui.editkeyframe.interpolator.catmullrom.desc=利用自定义的alpha值计算得到的Catmull Rom样条曲线，来精准校对并平滑镜头路径。
+scenecraft.gui.editkeyframe.interpolator.catmullrom.alpha=Alpha:
+scenecraft.gui.editkeyframe.interpolator.cubic.name=三次样条插值器
+scenecraft.gui.editkeyframe.interpolator.cubic.desc=利用三次方程矩阵计算所有路径点来平滑镜头路径。
+scenecraft.gui.editkeyframe.interpolator.linear.name=线性插值器
+scenecraft.gui.editkeyframe.interpolator.linear.desc=在关键帧直接构建直线。
+
+#Render Settings GUI
+scenecraft.gui.rendersettings.addtoqueue=添加到队列
+
+scenecraft.gui.rendersettings.renderer=渲染方式
+
+scenecraft.gui.rendersettings.renderer.default=默认渲染
+scenecraft.gui.rendersettings.renderer.stereoscopic=立体式渲染
+scenecraft.gui.rendersettings.renderer.cubic=立方式渲染
+scenecraft.gui.rendersettings.renderer.equirectangular=圆柱式渲染
+scenecraft.gui.rendersettings.renderer.ods=ODS渲染
+scenecraft.gui.rendersettings.renderer.blend=Blender格式导出[实验性]
+
+scenecraft.gui.rendersettings.renderer.default.description=最快速的渲染方式,支持所有Minecraft光影达到一定的分辨率(取决于你的显卡).
+scenecraft.gui.rendersettings.renderer.stereoscopic.description=使用不同的3D技术，将视频渲染成一个立体的（并排）3D电影。每只眼睛能看到的图像是视频宽度的一半
+scenecraft.gui.rendersettings.renderer.cubic.description=用360度全景图渲染视频,这是由360度视频播放器(Oculus Rift)所播放,例如VR Player.
+scenecraft.gui.rendersettings.renderer.equirectangular.description=用360度全景图渲染视频,采用圆柱式投影,这是YouTube新的360度视频功能,由360度视频播放器(Oculus Rift)所播放,例如VR Player.
+scenecraft.gui.rendersettings.renderer.ods.description=用3D 360度全景图渲染视频,俗称VR视频. 采用圆柱式投影,这是YouTube新的VR视频功能.
+scenecraft.gui.rendersettings.renderer.blend.description=将可见几何图形导出为.blend文件，可以使用Blender软件打开该文件。 高度实验性：需要大量RAM，存在许多已知问题，有时会生成损坏的Blender文件。
+
+scenecraft.gui.rendersettings.customresolution=录像分辨率
+scenecraft.gui.rendersettings.customresolution.warning.yuv420=宽度和高度值必须为偶数
+scenecraft.gui.rendersettings.customresolution.warning.yuv420.cubic=对于此预设,高度值必须能被6整除
+scenecraft.gui.rendersettings.customresolution.warning.cubic.height=立体式渲染的高度值必须能被3整除
+scenecraft.gui.rendersettings.bitrate=比特率
+scenecraft.gui.rendersettings.framerate=录像帧率
+scenecraft.gui.rendersettings.chromakey=色度键控
+scenecraft.gui.rendersettings.nametags=名称标签
+scenecraft.gui.rendersettings.includealpha=保留音频轨道
+scenecraft.gui.rendersettings.outputfile=导出文件
+scenecraft.gui.rendersettings.sphericalFov=球形FOV
+scenecraft.gui.rendersettings.sphericalmetadata=添加球体元数据
+scenecraft.gui.rendersettings.sphericalmetadata.error=球体元数据只能用360度全景图渲染成MP4格式
+scenecraft.gui.rendersettings.depthmap=深度图
+scenecraft.gui.rendersettings.depthmap.only_exr_or_png=只支持使用PNG或OpenEXR格式进行深度图导出
+scenecraft.gui.rendersettings.camerapath=导出摄像路径
+
+scenecraft.gui.rendersettings.command=命令
+scenecraft.gui.rendersettings.arguments=命令行参数
+scenecraft.gui.rendersettings.ffmpeg.description=如果你是一个高级用户,您可以自定义用于导出视频的命令行参数.更多信息,查看:http://replaymod.com/docs
+
+scenecraft.gui.rendersettings.stabilizecamera=稳定镜头
+
+scenecraft.gui.rendersettings.video=录像设置
+scenecraft.gui.rendersettings.advanced=高级设置
+scenecraft.gui.rendersettings.commandline=命令行设置
+
+scenecraft.gui.rendersettings.presets=编码预设
+scenecraft.gui.rendersettings.presets.mp4.custom=MP4 - 自定义码率
+scenecraft.gui.rendersettings.presets.mp4.default=MP4 - 一般质量
+scenecraft.gui.rendersettings.presets.mp4.potato=MP4 - 低质量
+scenecraft.gui.rendersettings.presets.webm.custom=WEBM - 自定义码率
+scenecraft.gui.rendersettings.presets.mkv.lossless=MKV - 无损质量
+scenecraft.gui.rendersettings.presets.blend=Blend 格式文件
+scenecraft.gui.rendersettings.presets.png=PNG格式
+scenecraft.gui.rendersettings.presets.exr=OpenEXR序列
+
+scenecraft.gui.rendersettings.antialiasing=图形保真
+scenecraft.gui.rendersettings.antialiasing.none=无
+scenecraft.gui.rendersettings.antialiasing.x2=2x
+scenecraft.gui.rendersettings.antialiasing.x4=4x
+scenecraft.gui.rendersettings.antialiasing.x8=8x
+
+#Render Queue GUI
+scenecraft.gui.renderqueue.title=渲染序列
+scenecraft.gui.renderqueue.add=添加当前配置
+scenecraft.gui.renderqueue.renderall=渲染全部
+scenecraft.gui.renderqueue.renderselected=渲染选定项
+
+#Rendering GUI
+scenecraft.gui.rendering.title=渲染视频
+scenecraft.gui.rendering.pause=暂停渲染
+scenecraft.gui.rendering.resume=恢复渲染
+scenecraft.gui.rendering.cancel=取消渲染
+scenecraft.gui.rendering.cancel.callback=你确定吗？
+scenecraft.gui.rendering.preview=显示预览 (性能降低)
+scenecraft.gui.rendering.progress=帧渲染: %1$d / %2$d
+scenecraft.gui.rendering.timetaken=渲染时间
+scenecraft.gui.rendering.timeleft=剩余时间
+
+#Render Errors
+scenecraft.gui.rendering.error.title=渲染失败
+scenecraft.gui.rendering.error.message=要渲染视频,需要安装ffmpeg
+scenecraft.gui.rendering.error.ffmpeglog=FFmpeg输出：
+scenecraft.gui.rendering.error.ffmpegargs.1=你似乎修改了命令行参数
+scenecraft.gui.rendering.error.ffmpegargs.2=你想恢复他们到默认值然后再试一次吗？
+
+#Ingame Menu
+scenecraft.gui.ingame.menu.addposkeyframe=添加位置关键帧
+scenecraft.gui.ingame.menu.removeposkeyframe=移除位置关键帧
+scenecraft.gui.ingame.menu.addspeckeyframe=添加旁观者关键帧
+scenecraft.gui.ingame.menu.removespeckeyframe=移除旁观者关键帧
+scenecraft.gui.ingame.menu.addtimekeyframe=添加关键帧
+scenecraft.gui.ingame.menu.removetimekeyframe=移除关键帧
+scenecraft.gui.ingame.menu.pause=暂停回放
+scenecraft.gui.ingame.menu.unpause=继续回放
+scenecraft.gui.ingame.menu.renderpath=渲染录像
+scenecraft.gui.ingame.menu.playpath=播放选取的帧
+scenecraft.gui.ingame.menu.playpathfromstart=从开始播放选取的帧
+scenecraft.gui.ingame.menu.pausepath=暂停播放选取的帧
+scenecraft.gui.ingame.menu.zoomin=放大
+scenecraft.gui.ingame.menu.zoomout=缩小
+
+scenecraft.gui.ingame.unnamedmarker=未命名的标记事件
+scenecraft.gui.ingame.autoactivating=这个按键绑定可能会在恰当的时候自动激活。
+scenecraft.gui.ingame.autoactivating.disable=Ctrl+点击来关闭自动激活。
+scenecraft.gui.ingame.autoactivating.enable=Ctrl+点击来开启自动激活。
+scenecraft.gui.ingame.first_keyframe_not_at_start_warning=您刚刚放置了第一个关键帧，但他不在00:00。\n\n这通常表明您误解了视频时间轴（底部的时间轴）的工作方式：\n\n顶部的时间轴在replay中显示您当前的时间，\n底部的时间轴显示您正在制作的视频中的时间。\n视频将始终在00:00开始！如果你的第一个关键帧不在 00:00,\n则视频将显示为冻结，直到第一个关键帧出现！
+
+#Clear Keyframe Callback
+scenecraft.gui.clearcallback.title=清除所有的关键帧？
+
+#Errors
+scenecraft.error.unknownrestriction1=你当前的版本不支持录像视频的播放。
+scenecraft.error.unknownrestriction2=它试图强制执行未知的%s。
+scenecraft.error.negativetime1=你的一些时间关键帧出了问题。
+scenecraft.error.negativetime2=不支持倒放。
+scenecraft.error.negativetime3=无效部分标记为红色。
+
+#SceneCraft Incompatibility Warning
+scenecraft.gui.modwarning.title=不兼容检测
+scenecraft.gui.modwarning.message1=当前可能会发生不兼容
+scenecraft.gui.modwarning.message2=Minecraft版本和这个录像已经被检测。
+scenecraft.gui.modwarning.message3=加载这个录像可能会发生错误或者导致崩溃。
+scenecraft.gui.modwarning.name=Mod名称:
+scenecraft.gui.modwarning.id=Mod Id：
+scenecraft.gui.modwarning.missing=缺失Mod
+scenecraft.gui.modwarning.version=不同的Mod版本
+scenecraft.gui.modwarning.version.expected=异常
+scenecraft.gui.modwarning.version.found=发现
+
+#Advanced Screenshots Gui
+scenecraft.gui.advancedscreenshots.title=屏幕截图设置
+scenecraft.gui.advancedscreenshots.create=获取截图
+scenecraft.gui.advancedscreenshots.resolution=分辨率
+
+# Screenshot Finished Gui
+scenecraft.gui.advancedscreenshots.finished.description=您成功创建了一个屏幕截图！
+scenecraft.gui.advancedscreenshots.finished.description.360=您成功创建了360°屏幕截图！
+scenecraft.gui.advancedscreenshots.finished.description.veer=上传到VeeR.tv的VR并查看图像，或在磁盘上打开它。
+scenecraft.gui.advancedscreenshots.finished.upload.veer=上传到VeeR.tv
+scenecraft.gui.advancedscreenshots.finished.showfile=显示磁盘上的文件

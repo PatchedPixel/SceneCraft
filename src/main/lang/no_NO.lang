@@ -1,0 +1,77 @@
+scenecraft.title=SceneCraft
+
+#All of the chat messages
+scenecraft.chat.recordingstarted=Opptak startet
+scenecraft.chat.recordingfailed=Klarte ikke å starte opptak
+
+scenecraft.chat.savingthumb=Lagrer forsidebilde...
+scenecraft.chat.savedthumb=Forsidebilde har blitt lagret
+scenecraft.chat.failedthumb=Forsidebilde kunne ikke lagres
+
+scenecraft.chat.addedmarker=Hendelsesmarkøren har blit lagt til
+
+#Chat messages displayed in Replay Viewer
+scenecraft.chat.morekeyframes=Minst to posisjons-nøkkelrammer og to tidsrammer må legges til
+scenecraft.chat.pathstarted=Kamera vei startet
+scenecraft.chat.pathfinished=Kameravei ferdig
+scenecraft.chat.pathinterrupted=Kameravei avbrutt
+
+#Common GUI-related strings
+scenecraft.gui.cancel=Avbryt
+scenecraft.gui.back=Tilbake
+scenecraft.gui.load=Åpne
+scenecraft.gui.save=Lagre
+scenecraft.gui.rename=Forandre navn
+scenecraft.gui.remove=Fjern
+scenecraft.gui.delete=Slett
+scenecraft.gui.record=Opptak
+scenecraft.gui.speed=Fart
+scenecraft.gui.pleasewait=Vennligst vent
+scenecraft.gui.render=Last
+scenecraft.gui.iphidden=Server IP gjemt
+scenecraft.gui.overwrite=Overskriv
+scenecraft.gui.saveas=Lagre som ...
+scenecraft.gui.done=Ferdig
+scenecraft.gui.close=Lukk
+scenecraft.gui.notagain=Ikke vis igjen
+
+scenecraft.gui.renderdonetitle=Video lastet
+scenecraft.gui.openfolder=Åpne videomappe
+scenecraft.gui.youtubeupload=Last opp til YouTube
+scenecraft.gui.renderdone1=Din video er rendret.
+scenecraft.gui.renderdone2=Hvordan vil du fortsette?
+scenecraft.gui.videotitle=Tittel
+scenecraft.gui.videodescription=Beskrivelse
+scenecraft.gui.videotags=Tagger,Tagger,Tagger
+scenecraft.gui.videothumbnail=Video forsidebilde
+scenecraft.gui.videovisibility.private=Privat
+scenecraft.gui.videovisibility.unlisted=Uoppført
+scenecraft.gui.videovisibility.public=Offentlig
+scenecraft.gui.ytuploadprogress.auth=[1/4] Autorisert
+scenecraft.gui.ytuploadprogress.prepare_video=[2/4] Gjør klar video: %%d 1%%%% 2
+scenecraft.gui.ytuploadprogress.upload=[3/4] Laster opp: %%d 1%%%% 2
+scenecraft.gui.ytuploadprogress.cleanup=[4/4] Rydder opp
+scenecraft.gui.ytuploadprogress.done=Ferdig: %s 1
+scenecraft.gui.titleempty=Tittelen kan ikke være tom
+scenecraft.gui.videothumbnailtoolarge=Forsidebildets størrelse er større en 2MB
+scenecraft.gui.videothumbnailformat=Forsidebile må være enten JPEG eller PNG format
+
+scenecraft.gui.hours=t
+scenecraft.gui.minutes=min
+scenecraft.gui.seconds=sek
+scenecraft.gui.milliseconds=ms
+
+scenecraft.gui.roll=Rull
+
+scenecraft.gui.camera=Kamera
+scenecraft.gui.position=Posisjon
+
+scenecraft.gui.unknownerror=En ukjent feil har skjedd
+
+scenecraft.gui.exit=Gå ut av replay
+
+scenecraft.gui.settings=Innstillinger
+
+scenecraft.gui.keyframerepo.delete=Er du sikker på at du vil slette disse nøkkelrammene?
+
+scenecraft.gui.restorereplay1=Det ser ut som Minecraft ikke har sluttet normalt.
