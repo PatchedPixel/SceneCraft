@@ -152,10 +152,10 @@ dependencies {
     implementation(jarJar("${tinyexrGroup}:${tinyexrArtifact}:${lwjgl_version}"))
 
     // Mod compat
-    compileOnly("maven.modrinth:YL57xq9U:Ag5S66CF")
-    compileOnly("maven.modrinth:1bokaNcj:j2Xo3Dhc")
-    compileOnly("maven.modrinth:9eGKb6K1:3rpCvvMZ")
-    compileOnly("net.caffeinemc:sodium-neoforge-mod:0.9.3-beta.1+mc26.3")
+    compileOnly("maven.modrinth:YL57xq9U:Ag5S66CF") // Iris Shaders
+    compileOnly("maven.modrinth:1bokaNcj:j2Xo3Dhc") // Xaero's Minimap
+    compileOnly("maven.modrinth:9eGKb6K1:3rpCvvMZ") // Simple Voice Chat
+    compileOnly("net.caffeinemc:sodium-neoforge-mod:0.9.3-beta.1+mc26.3") // Sodium
 
     // Project lib
     implementation(jarJar("com.googlecode.mp4parser:isoparser:1.1.22"))
