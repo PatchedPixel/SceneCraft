@@ -2,6 +2,7 @@ package id.patchedpixel.scenecraft.core.utils;
 
 import com.google.common.base.Throwables;
 import com.google.common.net.PercentEscaper;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Dimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
@@ -20,6 +21,7 @@ import id.patchedpixel.scenecraft.gui.utils.Colors;
 import id.patchedpixel.scenecraft.gui.versions.Image;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.CrashReport;
+import net.minecraft.util.Util;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +54,6 @@ import java.util.Date;
 import java.util.function.Consumer;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import net.minecraft.ReportType;
 
 public class Utils {
@@ -207,7 +208,8 @@ public class Utils {
     }
 
     public static boolean isCtrlDown() {
-        return Keyboard.isKeyDown(Keyboard.LEFT_CTRL) || Keyboard.isKeyDown(Keyboard.RIGHT_CTRL);
+        boolean mac = Util.getPlatform() == Util.OS.OSX;
+        return InputConstants.isKeyDown(mac ? InputConstants.KEY_LGUI : InputConstants.KEY_LCONTROL) || InputConstants.isKeyDown(mac ? InputConstants.KEY_RGUI : InputConstants.KEY_RCONTROL);
     }
 
     public static GuiInfoPopup error(Logger logger, GuiContainer container, CrashReport crashReport, Runnable onClose) {

@@ -1,6 +1,7 @@
 package id.patchedpixel.scenecraft.replay.gui.screen;
 
 import com.google.common.util.concurrent.SettableFuture;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.render.gui.GuiRenderQueue;
 import id.patchedpixel.scenecraft.render.rendering.VideoRenderer;
@@ -20,7 +21,6 @@ import id.patchedpixel.scenecraft.core.SettingsRegistry;
 import id.patchedpixel.scenecraft.core.gui.GuiReplaySettings;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.Setting;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 import id.patchedpixel.scenecraft.scenestudio.replay.ReplayMetaData;
@@ -293,7 +293,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
 
     @Override
     public boolean handleKey(KeyInput keyInput) {
-        if (keyInput.key == Keyboard.KEY_ESCAPE) {
+        if (keyInput.key == InputConstants.KEY_ESCAPE) {
             close();
             return true;
         }
@@ -429,7 +429,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
 
         @Override
         public boolean handleKey(KeyInput keyInput) {
-            if (keyInput.key == Keyboard.KEY_F1) {
+            if (keyInput.key == InputConstants.KEY_F1) {
                 SettingsRegistry reg = SceneCraft.instance.getSettingsRegistry();
                 reg.set(Setting.SHOW_SERVER_IPS, !reg.get(Setting.SHOW_SERVER_IPS));
                 reg.save();

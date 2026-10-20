@@ -25,6 +25,7 @@
 package id.patchedpixel.scenecraft.gui.function;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.input.KeyEvent;
 
 public class KeyInput implements InputWithModifiers {
     /** Physical key position (SDL scancode). Independent of the keyboard layout. */
@@ -39,11 +40,11 @@ public class KeyInput implements InputWithModifiers {
         this.modifiers = modifiers;
     }
 
-    public KeyInput(net.minecraft.client.input.KeyEvent mc) {
+    public KeyInput(KeyEvent mc) {
         this(mc.key(), mc.keycode(), mc.modifiers());
     }
-    public net.minecraft.client.input.KeyEvent toMC() {
-        return new net.minecraft.client.input.KeyEvent(key, keycode, modifiers);
+    public KeyEvent toMC() {
+        return new KeyEvent(key, keycode, modifiers);
     }
 
     @Override

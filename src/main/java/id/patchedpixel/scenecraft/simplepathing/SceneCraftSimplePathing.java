@@ -1,12 +1,12 @@
 package id.patchedpixel.scenecraft.simplepathing;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.core.KeyBindingRegistry;
 import id.patchedpixel.scenecraft.core.Module;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.SettingsRegistry;
 import id.patchedpixel.scenecraft.core.events.SettingsChangedCallback;
 import id.patchedpixel.scenecraft.gui.utils.EventRegistrations;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.ReplayClosedCallback;
@@ -83,13 +83,13 @@ public class SceneCraftSimplePathing extends EventRegistrations implements Modul
     @Override
     public void registerKeyBindings(KeyBindingRegistry registry) {
         pathPreview.registerKeyBindings(registry);
-        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.keyframerepository", Keyboard.KEY_X, () -> {
+        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.keyframerepository", InputConstants.KEY_X, () -> {
             if (guiPathing != null) guiPathing.keyframeRepoButtonPressed();
         }, true);
-        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.clearkeyframes", Keyboard.KEY_C, () -> {
+        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.clearkeyframes", InputConstants.KEY_C, () -> {
             if (guiPathing != null) guiPathing.clearKeyframesButtonPressed();
         }, true);
-        keySyncTime = core.getKeyBindingRegistry().registerRepeatedKeyBinding("scenecraft.input.synctimeline", Keyboard.KEY_V, () -> {
+        keySyncTime = core.getKeyBindingRegistry().registerRepeatedKeyBinding("scenecraft.input.synctimeline", InputConstants.KEY_V, () -> {
             if (guiPathing != null) guiPathing.syncTimeButtonPressed();
         }, true);
         SettingsRegistry settingsRegistry = core.getSettingsRegistry();
@@ -97,15 +97,15 @@ public class SceneCraftSimplePathing extends EventRegistrations implements Modul
             settingsRegistry.set(Setting.AUTO_SYNC, active);
             settingsRegistry.save();
         });
-        core.getKeyBindingRegistry().registerRaw(Keyboard.KEY_DELETE, keyInput ->
+        core.getKeyBindingRegistry().registerRaw(InputConstants.KEY_DELETE, keyInput ->
                 guiPathing != null && guiPathing.deleteButtonPressed());
-        keyPositionKeyframe = core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.positionkeyframe", Keyboard.KEY_I, () -> {
+        keyPositionKeyframe = core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.positionkeyframe", InputConstants.KEY_I, () -> {
             if (guiPathing != null) guiPathing.toggleKeyframe(SPPath.POSITION, false);
         }, true);
         core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.positiononlykeyframe", 0, () -> {
             if (guiPathing != null) guiPathing.toggleKeyframe(SPPath.POSITION, true);
         }, true);
-        keyTimeKeyframe = core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.timekeyframe", Keyboard.KEY_O, () -> {
+        keyTimeKeyframe = core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.timekeyframe", InputConstants.KEY_O, () -> {
             if (guiPathing != null) guiPathing.toggleKeyframe(SPPath.TIME, false);
         }, true);
         core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.bothkeyframes", 0, () -> {
@@ -114,7 +114,7 @@ public class SceneCraftSimplePathing extends EventRegistrations implements Modul
                 guiPathing.toggleKeyframe(SPPath.POSITION, false);
             }
         }, true);
-        core.getKeyBindingRegistry().registerRaw(Keyboard.KEY_Z, keyInput -> {
+        core.getKeyBindingRegistry().registerRaw(InputConstants.KEY_Z, keyInput -> {
             if (keyInput.hasCtrl() && currentTimeline != null) {
                 Timeline timeline = currentTimeline.getTimeline();
                 if (keyInput.hasShift()) {
@@ -130,7 +130,7 @@ public class SceneCraftSimplePathing extends EventRegistrations implements Modul
             }
             return false;
         });
-        core.getKeyBindingRegistry().registerRaw(Keyboard.KEY_Y, keyInput -> {
+        core.getKeyBindingRegistry().registerRaw(InputConstants.KEY_Y, keyInput -> {
             if (keyInput.hasCtrl() && currentTimeline != null) {
                 Timeline timeline = currentTimeline.getTimeline();
                 if (timeline.peekRedoStack() != null) {

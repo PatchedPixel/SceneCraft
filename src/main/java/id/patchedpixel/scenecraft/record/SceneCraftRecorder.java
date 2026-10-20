@@ -4,7 +4,7 @@ import id.patchedpixel.scenecraft.core.KeyBindingRegistry;
 import id.patchedpixel.scenecraft.core.Module;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Restrictions;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.record.handler.ConnectionEventHandler;
 import id.patchedpixel.scenecraft.record.handler.GuiHandler;
 import id.patchedpixel.scenecraft.record.packet.PacketListener;
@@ -39,7 +39,7 @@ public class SceneCraftRecorder implements Module {
 
     @Override
     public void registerKeyBindings(KeyBindingRegistry registry) {
-        registry.registerKeyBinding("scenecraft.input.marker", Keyboard.KEY_M, () -> {
+        registry.registerKeyBinding("scenecraft.input.marker", InputConstants.KEY_M, () -> {
             PacketListener packetListener = connectionEventHandler.getPacketListener();
             if (packetListener != null) {
                 packetListener.addMarker(null);

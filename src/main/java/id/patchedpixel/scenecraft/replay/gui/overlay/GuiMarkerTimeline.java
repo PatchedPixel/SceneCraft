@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.replay.gui.overlay;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
@@ -238,7 +238,7 @@ public class GuiMarkerTimeline extends AbstractGuiTimeline<GuiMarkerTimeline> im
 
     @Override
     public boolean handleKey(KeyInput keyInput) {
-        if (keyInput.key == Keyboard.KEY_DELETE && selectedMarker != null) {
+        if (keyInput.key == InputConstants.KEY_DELETE && selectedMarker != null) {
             markers.remove(selectedMarker);
             saveMarkers.accept(markers);
 

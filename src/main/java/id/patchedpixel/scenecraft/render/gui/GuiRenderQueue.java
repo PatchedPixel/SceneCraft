@@ -1,6 +1,7 @@
 package id.patchedpixel.scenecraft.render.gui;
 
 import com.google.common.collect.Iterables;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Result;
 import id.patchedpixel.scenecraft.core.utils.Utils;
@@ -338,7 +339,7 @@ public class GuiRenderQueue extends AbstractGuiPopup<GuiRenderQueue> implements 
 
     @Override
     public boolean handleKey(KeyInput keyInput) {
-        if (keyInput.hasCtrl() && keyInput.key == MCVer.Keyboard.KEY_A) {
+        if (keyInput.hasCtrl() && keyInput.key == InputConstants.KEY_A) {
             if (selectedEntries.size() < list.getListPanel().getChildren().size()) {
                 for (GuiElement<?> child : list.getListPanel().getChildren()) {
                     if (child instanceof Entry) {

@@ -259,38 +259,4 @@ public class MCVer {
                 .setNormal(n.x, n.y, n.z);
         buffer.getClass();
     }
-
-    public static abstract class Keyboard {
-        public static final int KEY_ESCAPE = InputConstants.KEY_ESCAPE;
-        public static final int KEY_LCONTROL = InputConstants.KEY_LCONTROL;
-        public static final int KEY_RCONTROL = InputConstants.KEY_RCONTROL;
-        public static final int KEY_LSUPER = InputConstants.KEY_LGUI;
-        public static final int KEY_RSUPER = InputConstants.KEY_RGUI;
-        public static final int LEFT_CTRL = Util.getPlatform() == Util.OS.OSX ? KEY_LSUPER : KEY_LCONTROL;
-        public static final int RIGHT_CTRL = Util.getPlatform() == Util.OS.OSX ? KEY_RSUPER : KEY_RCONTROL;
-        public static final int KEY_LSHIFT = InputConstants.KEY_LSHIFT;
-        public static final int KEY_DELETE = InputConstants.KEY_DELETE;
-        public static final int KEY_F1 = InputConstants.KEY_F1;
-        public static final int KEY_A = InputConstants.KEY_A;
-        public static final int KEY_B = InputConstants.KEY_B;
-        public static final int KEY_C = InputConstants.KEY_C;
-        public static final int KEY_H = InputConstants.KEY_H;
-        public static final int KEY_I = InputConstants.KEY_I;
-        public static final int KEY_J = InputConstants.KEY_J;
-        public static final int KEY_K = InputConstants.KEY_K;
-        public static final int KEY_L = InputConstants.KEY_L;
-        public static final int KEY_M = InputConstants.KEY_M;
-        public static final int KEY_N = InputConstants.KEY_N;
-        public static final int KEY_O = InputConstants.KEY_O;
-        public static final int KEY_P = InputConstants.KEY_P;
-        public static final int KEY_Q = InputConstants.KEY_Q;
-        public static final int KEY_V = InputConstants.KEY_V;
-        public static final int KEY_X = InputConstants.KEY_X;
-        public static final int KEY_Y = InputConstants.KEY_Y;
-        public static final int KEY_Z = InputConstants.KEY_Z;
-
-        public static boolean isKeyDown(int keyCode) {
-            return InputConstants.isKeyDown(keyCode);
-        }
-    }
 }
