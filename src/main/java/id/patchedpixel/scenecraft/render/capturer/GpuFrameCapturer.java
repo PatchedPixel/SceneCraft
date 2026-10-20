@@ -99,7 +99,7 @@ public abstract class GpuFrameCapturer<F extends Frame, D extends CaptureData> i
         ByteBuffer buffer = ByteBufferPool.allocate(getFrameWidth() * getFrameHeight() * 4);
         GpuDevice device = RenderSystem.getDevice();
         try (GpuBuffer gpuBuffer = device.createBuffer(null, GpuBuffer.USAGE_COPY_DST | GpuBuffer.USAGE_MAP_READ, (long) getFrameWidth() * getFrameHeight() * 4)) {
-            device.createCommandEncoder().copyTextureToBuffer(Objects.requireNonNull(frameBuffer().getColorTexture(), "Main render target has no color texture"), gpuBuffer, 0, () -> {}, 0);
+            device.createCommandEncoder().copyTextureToBuffer(frameBuffer().getColorTexture(), gpuBuffer, 0, () -> {}, 0);
             try (GpuBufferSlice.MappedView view = gpuBuffer.map(true, false)) {
                 buffer.put(view.data());
             }
