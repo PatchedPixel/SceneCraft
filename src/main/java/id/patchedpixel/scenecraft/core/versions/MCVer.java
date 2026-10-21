@@ -23,12 +23,10 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.AbstractWidget;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.network.chat.Component;
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.particle.Particle;
 import org.joml.Quaternionf;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.lwjgl.sdl.SDLScancode;
 
 import java.io.File;
 import java.net.URI;

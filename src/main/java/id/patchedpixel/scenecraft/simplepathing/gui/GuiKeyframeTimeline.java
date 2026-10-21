@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.simplepathing.gui;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadablePoint;
@@ -359,7 +360,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             SPPath path = pathKeyframePair.getLeft();
             // Clicked on keyframe
             long keyframeTime = pathKeyframePair.getRight();
-            if (click.button == 1) { // Left click ind SDL3
+            if (click.button == InputConstants.MOUSE_BUTTON_LEFT) {
                 long now = MCVer.milliTime();
                 if (lastClickedKeyframe == keyframeTime) {
                     // Clicked the same keyframe again, potentially a double click
@@ -377,7 +378,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
                 // We might be dragging
                 draggingStartX = click.x;
                 dragging = true;
-            } else if (click.button == 3) { // Right click in SDL3
+            } else if (click.button == InputConstants.MOUSE_BUTTON_RIGHT) {
                 Keyframe keyframe = gui.getMod().getCurrentTimeline().getKeyframe(path, keyframeTime);
                 for (Property property : keyframe.getProperties()) {
                     applyPropertyToGame(property, keyframe);
@@ -386,11 +387,11 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             return true;
         } else if (time != -1) {
             // Clicked on timeline but not on any keyframe
-            if (click.button == 1) { // Left click
+            if (click.button == InputConstants.MOUSE_BUTTON_LEFT) {
                 setCursorPosition(time);
                 scrubbing = true;
                 gui.getMod().setSelected(null, 0);
-            } else if (click.button == 3) { // Right click in SDL3
+            } else if (click.button == InputConstants.MOUSE_BUTTON_RIGHT) {
                 if (pathKeyframePair.getLeft() != null) {
                     // Apply the value of the clicked path at the clicked position
                     Path path = gui.getMod().getCurrentTimeline().getPath(pathKeyframePair.getLeft());
@@ -423,7 +424,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
     @Override
     public boolean mouseDrag(Click click) {
         if (!dragging) {
-            if (scrubbing && click.button == 1) {
+            if (scrubbing && click.button == InputConstants.MOUSE_BUTTON_LEFT) {
                 // Left click, the user might try to move the cursor by clicking and holding
                 int time = getTimeAt(click.x, click.y);
                 if (time != -1) {
@@ -452,7 +453,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             int bodyWidth = width - BORDER_LEFT - BORDER_RIGHT;
             double segmentLength = getLength() * getZoom();
             double segmentTime =  segmentLength * (mouseX - BORDER_LEFT) / bodyWidth;
-            int newTime = Math.min(Math.max((int) Math.round(getOffset() + segmentTime), 0), getLength());
+            int newTime = Math.clamp((int) Math.round(getOffset() + segmentTime), 0, getLength());
             if (newTime < 0) {
                 return true;
             }
