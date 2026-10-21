@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Result;
 import id.patchedpixel.scenecraft.core.utils.Utils;
@@ -62,7 +63,7 @@ import java.util.concurrent.CancellationException;
 import java.util.function.Consumer;
 
 import static id.patchedpixel.scenecraft.core.utils.Utils.error;
-import static id.patchedpixel.scenecraft.core.versions.MCVer.*;
+import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
 import static id.patchedpixel.scenecraft.simplepathing.SceneCraftSimplePathing.LOGGER;
 
 /**
@@ -78,7 +79,7 @@ public class GuiPathing {
             if (tooltip != null) {
                 if (player.isActive()) {
                     tooltip.setI18nText("scenecraft.gui.ingame.menu.pausepath");
-                } else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+                } else if (InputConstants.isKeyDown(getMinecraft().getWindow().getWindow(), InputConstants.KEY_LCONTROL)) {
                     tooltip.setI18nText("scenecraft.gui.ingame.menu.playpathfromstart");
                 } else {
                     tooltip.setI18nText("scenecraft.gui.ingame.menu.playpath");
@@ -97,7 +98,7 @@ public class GuiPathing {
                 @Override
                 protected void close() {
                     super.close();
-                    getMinecraft().gui.setScreen(null);
+                    getMinecraft().setScreen(null);
                 }
             }.open();
             screen.display();
@@ -250,7 +251,7 @@ public class GuiPathing {
                 if (player.isActive()) {
                     player.getFuture().cancel(false);
                 } else {
-                    boolean ignoreTimeKeyframes = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
+                    boolean ignoreTimeKeyframes = InputConstants.isKeyDown(getMinecraft().getWindow().getWindow(), InputConstants.KEY_LSHIFT);
 
                     Timeline timeline = preparePathsForPlayback(ignoreTimeKeyframes).okOrElse(err -> {
                         GuiInfoPopup.open(overlay, err);
@@ -262,7 +263,7 @@ public class GuiPathing {
                     timePath.setActive(!ignoreTimeKeyframes);
 
                     // Start from cursor time unless the control key is pressed (then start from beginning)
-                    int startTime = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)? 0 : GuiPathing.this.timeline.getCursorPosition();
+                    int startTime = InputConstants.isKeyDown(getMinecraft().getWindow().getWindow(), InputConstants.KEY_LCONTROL)? 0 : GuiPathing.this.timeline.getCursorPosition();
                     ListenableFuture<Void> future = player.start(timeline, startTime);
                     overlay.setCloseable(false);
                     overlay.setMouseVisible(true);
@@ -459,7 +460,7 @@ public class GuiPathing {
             // Replay time passed
             int timePassed = time - keyframeTime;
             // Speed (set to 1 when shift is held)
-            double speed = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ? 1 : replayHandler.getOverlay().getSpeedSliderValue();
+            double speed = InputConstants.isKeyDown(getMinecraft().getWindow().getWindow(), InputConstants.KEY_LSHIFT) ? 1 : replayHandler.getOverlay().getSpeedSliderValue();
             // Cursor time passed
             int cursorPassed = (int) (timePassed / speed);
             // Return new position

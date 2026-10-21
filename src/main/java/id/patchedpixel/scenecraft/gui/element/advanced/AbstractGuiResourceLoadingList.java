@@ -24,7 +24,7 @@
  */
 package id.patchedpixel.scenecraft.gui.element.advanced;
 
-import org.lwjgl.sdl.SDLKeycode;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
 import id.patchedpixel.scenecraft.gui.RenderInfo;
 import id.patchedpixel.scenecraft.gui.container.AbstractGuiVerticalList;
@@ -183,7 +183,7 @@ public abstract class AbstractGuiResourceLoadingList
 
     @Override
     public boolean handleKey(KeyInput keyInput) {
-        if (keyInput.hasCtrl() && keyInput.keycode == SDLKeycode.SDLK_A) {
+        if (keyInput.hasCtrl() && keyInput.keycode == InputConstants.KEY_A) {
             List<Element> all = new ArrayList<>();
             for (GuiElement<?> child : getListPanel().getChildren()) {
                 if (child instanceof AbstractGuiResourceLoadingList.Element) {

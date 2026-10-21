@@ -24,7 +24,7 @@
  */
 package id.patchedpixel.scenecraft.gui.function;
 
-import net.minecraft.util.StringUtil;
+import net.minecraft.SharedConstants;
 
 public class CharInput {
     public final int codepoint;
@@ -33,14 +33,6 @@ public class CharInput {
     public CharInput(int codepoint, int modifiers) {
         this.codepoint = codepoint;
         this.modifiers = modifiers;
-    }
-
-    public CharInput(net.minecraft.client.input.CharacterEvent mcCharInput) {
-        this(mcCharInput.codepoint(), 0);
-    }
-    public net.minecraft.client.input.CharacterEvent toMC() {
-        return new net.minecraft.client.input.CharacterEvent(codepoint
-        );
     }
 
     public boolean isValidChar() {
@@ -52,6 +44,6 @@ public class CharInput {
     }
 
     public static boolean isValidChar(char c) {
-        return StringUtil.isAllowedChatCharacter(c);
+        return SharedConstants.isAllowedChatCharacter(c);
     }
 }

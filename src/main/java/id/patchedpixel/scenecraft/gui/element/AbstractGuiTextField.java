@@ -25,8 +25,6 @@
 package id.patchedpixel.scenecraft.gui.element;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import org.lwjgl.sdl.SDLKeycode;
-import org.lwjgl.sdl.SDLMouse;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import id.patchedpixel.scenecraft.gui.GuiRenderer;
@@ -48,7 +46,6 @@ import id.patchedpixel.scenecraft.gui.utils.color.ReadableColor;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadablePoint;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.gui.versions.TextInputAdapter;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
 
@@ -299,7 +296,7 @@ public abstract class AbstractGuiTextField<T extends AbstractGuiTextField<T>>
         }
         boolean hovering = isMouseHovering(position);
 
-        if (hovering && isFocused() && click.button == SDLMouse.SDL_BUTTON_LEFT) {
+        if (hovering && isFocused() && click.button == InputConstants.MOUSE_BUTTON_LEFT) {
             updateCurrentOffset();
             int mouseX = position.getX() - BORDER;
             Font fontRenderer = MCVer.getFontRenderer();
@@ -423,19 +420,19 @@ public abstract class AbstractGuiTextField<T extends AbstractGuiTextField<T>>
             if (keyInput.hasCtrl()) {
                 // Shortcuts use the logical key so they follow the active keyboard layout
                 switch (keyInput.keycode) {
-                    case SDLKeycode.SDLK_A: // Select all
+                    case InputConstants.KEY_A: // Select all
                         cursorPos = 0;
                         selectionPos = text.length();
                         return true;
-                    case SDLKeycode.SDLK_C: // Copy
+                    case InputConstants.KEY_C: // Copy
                         MCVer.setClipboardString(getSelectedText());
                         return true;
-                    case SDLKeycode.SDLK_V: // Paste
+                    case InputConstants.KEY_V: // Paste
                         if (isEnabled()) {
                             writeText(MCVer.getClipboardString());
                         }
                         return true;
-                    case SDLKeycode.SDLK_X: // Cut
+                    case InputConstants.KEY_X: // Cut
                         if (isEnabled()) {
                             MCVer.setClipboardString(deleteSelectedText());
                         }

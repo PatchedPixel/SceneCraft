@@ -84,7 +84,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
 
     @Override
     public void display() {
-        Screen currentScreen = getMinecraft().gui.screen();
+        Screen currentScreen = getMinecraft().screen;
 
         if (currentScreen != null && currentScreen != toMinecraft()) {
             parentScreen = currentScreen;
@@ -100,7 +100,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
     }
 
     private void close() {
-        getMinecraft().gui.setScreen(parentScreen);
+        getMinecraft().setScreen(parentScreen);
     }
 
     public final GuiButton loadButton = new GuiButton().onClick(new Runnable() {
@@ -184,7 +184,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
                 } catch (IOException e) {
                     // We failed (might also be their OS)
                     e.printStackTrace();
-                    getMinecraft().gui.setScreen(new AlertScreen(
+                    getMinecraft().setScreen(new AlertScreen(
                             GuiReplayViewer.this::display,
                             net.minecraft.network.chat.Component.translatable("scenecraft.gui.viewer.delete.failed1"),
                             net.minecraft.network.chat.Component.translatable("scenecraft.gui.viewer.delete.failed2")
@@ -285,7 +285,7 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
         } else {
             loadButton.setI18nLabel("scenecraft.gui.load");
             loadButton.setTooltip(null);
-            loadButton.setEnabled(count == 1 && !selected.getFirst().incompatible);
+            loadButton.setEnabled(count == 1 && !selected.get(0).incompatible);
         }
     }
 

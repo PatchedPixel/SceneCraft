@@ -20,6 +20,7 @@ import id.patchedpixel.scenecraft.gui.utils.Colors;
 import id.patchedpixel.scenecraft.gui.versions.Image;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
 import net.minecraft.CrashReport;
+import net.minecraft.Util;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +53,7 @@ import java.util.Date;
 import java.util.function.Consumer;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.getMinecraft;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ReportType;
 
 public class Utils {
@@ -207,7 +208,8 @@ public class Utils {
     }
 
     public static boolean isCtrlDown() {
-        return Keyboard.isKeyDown(Keyboard.LEFT_CTRL) || Keyboard.isKeyDown(Keyboard.RIGHT_CTRL);
+        boolean mac = Util.getPlatform() == Util.OS.OSX;
+        return InputConstants.isKeyDown(getMinecraft().getWindow().getWindow(), mac ? InputConstants.KEY_LWIN : InputConstants.KEY_LCONTROL) || InputConstants.isKeyDown(getMinecraft().getWindow().getWindow(), mac ? InputConstants.KEY_RWIN : InputConstants.KEY_RCONTROL);
     }
 
     public static GuiInfoPopup error(Logger logger, GuiContainer container, CrashReport crashReport, Runnable onClose) {

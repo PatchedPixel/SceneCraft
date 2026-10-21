@@ -27,7 +27,7 @@ minecraft {
 
     copyIdeResources = true
 
-    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         configureEach {
@@ -151,6 +151,12 @@ dependencies {
 
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // Mixin Extras
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.5"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.5")) {
+        jarJar.ranged(it, "[0.5.5,)")
+    }
 
     // OpenEXR lib
     implementation "${tinyexrGroup}:${tinyexrArtifact}:${lwjgl_version}"

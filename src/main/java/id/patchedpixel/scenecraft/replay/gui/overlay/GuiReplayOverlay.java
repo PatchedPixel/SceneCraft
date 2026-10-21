@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.replay.gui.overlay;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.events.KeyBindingEventCallback;
 import id.patchedpixel.scenecraft.core.events.KeyEventCallback;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.ReplaySender;
@@ -185,7 +185,7 @@ public class GuiReplayOverlay extends AbstractGuiOverlay<GuiReplayOverlay> {
         private boolean onKeyInput(KeyInput keyInput, int action) {
             if (action != KeyEventCallback.ACTION_PRESS) return false;
             // Allow F1 to be used to hide the replay gui (e.g. for record with OBS)
-            if (isMouseVisible() && keyInput.key == Keyboard.KEY_F1) {
+            if (isMouseVisible() && keyInput.key == InputConstants.KEY_F1) {
                 hidden = !hidden;
                 return true;
             }

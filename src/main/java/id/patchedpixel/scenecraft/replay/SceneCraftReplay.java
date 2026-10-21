@@ -10,7 +10,7 @@ import id.patchedpixel.scenecraft.core.Module;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.ModCompat;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.replay.camera.CameraController;
 import id.patchedpixel.scenecraft.replay.camera.CameraControllerRegistry;
 import id.patchedpixel.scenecraft.replay.camera.CameraEntity;
@@ -58,27 +58,24 @@ public class SceneCraftReplay implements Module {
 
     @Override
     public void registerKeyBindings(KeyBindingRegistry registry) {
-        registry.registerKeyBinding("scenecraft.input.marker", Keyboard.KEY_M, new Runnable() {
-            @Override
-            public void run() {
-                if (replayHandler != null ) {
-                    CameraEntity camera = replayHandler.getCameraEntity();
-                    if (camera != null) {
-                        Marker marker = new Marker();
-                        marker.setTime(replayHandler.getReplaySender().currentTimeStamp());
-                        marker.setX(camera.getX());
-                        marker.setY(camera.getY());
-                        marker.setZ(camera.getZ());
-                        marker.setYaw(camera.getYRot());
-                        marker.setPitch(camera.getXRot());
-                        marker.setRoll(camera.roll);
-                        replayHandler.getOverlay().timeline.addMarker(marker);
-                    }
+        registry.registerKeyBinding("scenecraft.input.marker", InputConstants.KEY_M, () -> {
+            if (replayHandler != null ) {
+                CameraEntity camera = replayHandler.getCameraEntity();
+                if (camera != null) {
+                    Marker marker = new Marker();
+                    marker.setTime(replayHandler.getReplaySender().currentTimeStamp());
+                    marker.setX(camera.getX());
+                    marker.setY(camera.getY());
+                    marker.setZ(camera.getZ());
+                    marker.setYaw(camera.getYRot());
+                    marker.setPitch(camera.getXRot());
+                    marker.setRoll(camera.roll);
+                    replayHandler.getOverlay().timeline.addMarker(marker);
                 }
             }
         }, true);
 
-        registry.registerKeyBinding("scenecraft.input.thumbnail", Keyboard.KEY_N, new Runnable() {
+        registry.registerKeyBinding("scenecraft.input.thumbnail", InputConstants.KEY_N, new Runnable() {
             @Override
             public void run() {
                 if (replayHandler != null) {
@@ -115,7 +112,7 @@ public class SceneCraftReplay implements Module {
             }
         }, true);
 
-        keyPlayPause = registry.registerKeyBinding("scenecraft.input.playpause", Keyboard.KEY_P, new Runnable() {
+        keyPlayPause = registry.registerKeyBinding("scenecraft.input.playpause", InputConstants.KEY_P, new Runnable() {
             @Override
             public void run() {
                 if (replayHandler != null) {
@@ -124,15 +121,15 @@ public class SceneCraftReplay implements Module {
             }
         }, true);
 
-        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.rollclockwise", Keyboard.KEY_L, () -> {
+        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.rollclockwise", InputConstants.KEY_L, () -> {
             // Noop, actual handling logic in CameraEntity#update
         }, true);
 
-        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.rollcounterclockwise", Keyboard.KEY_J, () -> {
+        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.rollcounterclockwise", InputConstants.KEY_J, () -> {
             // Noop, actual handling logic in CameraEntity#update
         }, true);
 
-        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.resettilt", Keyboard.KEY_K, () -> {
+        core.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.resettilt", InputConstants.KEY_K, () -> {
             Optional.ofNullable(replayHandler).map(ReplayHandler::getCameraEntity).ifPresent(c -> c.roll = 0);
         }, true);
     }

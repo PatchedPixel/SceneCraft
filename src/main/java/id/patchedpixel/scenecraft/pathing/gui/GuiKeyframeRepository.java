@@ -1,6 +1,7 @@
 package id.patchedpixel.scenecraft.pathing.gui;
 
 import com.google.common.util.concurrent.SettableFuture;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.utils.Utils;
 import id.patchedpixel.scenecraft.core.versions.MCVer;
@@ -110,7 +111,7 @@ public class GuiKeyframeRepository extends GuiScreen implements Closeable, KeyHa
     public final GuiButton loadButton = new GuiButton().onClick(new Runnable() {
         @Override
         public void run() {
-            getMinecraft().gui.setScreen(null);
+            getMinecraft().setScreen(null);
             try {
                 Timeline timeline = timelines.get(selectedEntries.iterator().next().name);
                 for (Path path : timeline.getPaths()) {
@@ -350,7 +351,7 @@ public class GuiKeyframeRepository extends GuiScreen implements Closeable, KeyHa
     public boolean handleKey(KeyInput keyInput) {
         if (keyInput.hasCtrl()) {
             switch (keyInput.key) {
-                case MCVer.Keyboard.KEY_A:
+                case InputConstants.KEY_A:
                     if (selectedEntries.size() < timelines.size()) {
                         for (GuiElement<?> child : list.getListPanel().getChildren()) {
                             if (child instanceof Entry) {
@@ -362,10 +363,10 @@ public class GuiKeyframeRepository extends GuiScreen implements Closeable, KeyHa
                     }
                     updateButtons();
                     return true;
-                case MCVer.Keyboard.KEY_C:
+                case InputConstants.KEY_C:
                     copyButton.onClick(new Click(-1, -1, 0, 0));
                     return true;
-                case MCVer.Keyboard.KEY_V:
+                case InputConstants.KEY_V:
                     pasteButton.onClick(new Click(-1, -1, 0, 0));
                     return true;
             }

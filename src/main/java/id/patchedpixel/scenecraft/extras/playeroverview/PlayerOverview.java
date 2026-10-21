@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.extras.playeroverview;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.events.PreRenderHandCallback;
 import id.patchedpixel.scenecraft.core.utils.Utils;
@@ -29,27 +30,24 @@ public class PlayerOverview extends EventRegistrations implements Extra {
     public void register(final SceneCraft mod) throws Exception {
         this.module = SceneCraftReplay.instance;
 
-        mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.playeroverview", Keyboard.KEY_B, new Runnable() {
-            @Override
-            public void run() {
-                if (module.getReplayHandler() != null) {
-                    List<Player> players = mod.getMinecraft().level.players()
-                            .stream()
-                            .map(it -> (Player) it)
-                            .filter(it -> !(it instanceof CameraEntity))
-                            .collect(Collectors.toList());
-                    if (!Utils.isCtrlDown()) {
-                        // Hide all players that have an UUID v2 (commonly used for NPCs)
-                        Iterator<Player> iter = players.iterator();
-                        while (iter.hasNext()) {
-                            UUID uuid = iter.next().getGameProfile().id();
-                            if (uuid != null && uuid.version() == 2) {
-                                iter.remove();
-                            }
+        mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.playeroverview", InputConstants.KEY_B, () -> {
+            if (module.getReplayHandler() != null) {
+                List<Player> players = mod.getMinecraft().level.players()
+                        .stream()
+                        .map(it -> (Player) it)
+                        .filter(it -> !(it instanceof CameraEntity))
+                        .collect(Collectors.toList());
+                if (!Utils.isCtrlDown()) {
+                    // Hide all players that have an UUID v2 (commonly used for NPCs)
+                    Iterator<Player> iter = players.iterator();
+                    while (iter.hasNext()) {
+                        UUID uuid = iter.next().getGameProfile().getId();
+                        if (uuid != null && uuid.version() == 2) {
+                            iter.remove();
                         }
                     }
-                    new PlayerOverviewGui(PlayerOverview.this, players).display();
                 }
+                new PlayerOverviewGui(PlayerOverview.this, players).display();
             }
         }, true);
 

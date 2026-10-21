@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.simplepathing.gui;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.gui.utils.geometry.Point;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadableDimension;
 import id.patchedpixel.scenecraft.gui.utils.geometry.ReadablePoint;
@@ -24,18 +25,15 @@ import id.patchedpixel.scenecraft.gui.element.advanced.AbstractGuiTimeline;
 import id.patchedpixel.scenecraft.gui.function.Click;
 import id.patchedpixel.scenecraft.gui.function.Draggable;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.RenderType;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Comparator;
 import java.util.Optional;
 
 import static id.patchedpixel.scenecraft.core.versions.MCVer.emitLine;
-import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
-import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
-import net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2f;
 
@@ -285,7 +283,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
                 SubmitNodeCollector submitNodeCollector
         ) {
             matrixStack.translate(-state.x2 / 2f, -state.y2, 100);
-            submitNodeCollector.submitCustomGeometry(matrixStack, RenderTypes.LINES, (pose, buffer) -> {
+            submitNodeCollector.submitCustomGeometry(matrixStack, RenderType.LINES, (pose, buffer) -> {
                 for (Pair<Vector2f, Vector2f> line : state.lines) {
                     emitLine(pose, buffer, line.getLeft(), line.getRight(), state.color, state.lineWidth);
                 }
@@ -359,7 +357,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             SPPath path = pathKeyframePair.getLeft();
             // Clicked on keyframe
             long keyframeTime = pathKeyframePair.getRight();
-            if (click.button == 1) { // Left click ind SDL3
+            if (click.button == InputConstants.MOUSE_BUTTON_LEFT) {
                 long now = MCVer.milliTime();
                 if (lastClickedKeyframe == keyframeTime) {
                     // Clicked the same keyframe again, potentially a double click
@@ -377,7 +375,7 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
                 // We might be dragging
                 draggingStartX = click.x;
                 dragging = true;
-            } else if (click.button == 3) { // Right click in SDL3
+            } else if (click.button == InputConstants.MOUSE_BUTTON_RIGHT) {
                 Keyframe keyframe = gui.getMod().getCurrentTimeline().getKeyframe(path, keyframeTime);
                 for (Property property : keyframe.getProperties()) {
                     applyPropertyToGame(property, keyframe);
@@ -386,11 +384,11 @@ public class GuiKeyframeTimeline extends AbstractGuiTimeline<GuiKeyframeTimeline
             return true;
         } else if (time != -1) {
             // Clicked on timeline but not on any keyframe
-            if (click.button == 1) { // Left click
+            if (click.button == InputConstants.MOUSE_BUTTON_LEFT) {
                 setCursorPosition(time);
                 scrubbing = true;
                 gui.getMod().setSelected(null, 0);
-            } else if (click.button == 3) { // Right click in SDL3
+            } else if (click.button == InputConstants.MOUSE_BUTTON_RIGHT) {
                 if (pathKeyframePair.getLeft() != null) {
                     // Apply the value of the clicked path at the clicked position
                     Path path = gui.getMod().getCurrentTimeline().getPath(pathKeyframePair.getLeft());

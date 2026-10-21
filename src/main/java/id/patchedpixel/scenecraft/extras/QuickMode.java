@@ -1,7 +1,7 @@
 package id.patchedpixel.scenecraft.extras;
 
 import id.patchedpixel.scenecraft.core.SceneCraft;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
@@ -19,7 +19,7 @@ public class QuickMode extends EventRegistrations implements Extra {
     public void register(final SceneCraft mod) {
         this.module = SceneCraftReplay.instance;
 
-        mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.quickmode", Keyboard.KEY_Q, () -> {
+        mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.quickmode", InputConstants.KEY_Q, () -> {
             ReplayHandler replayHandler = module.getReplayHandler();
             if (replayHandler == null) {
                 return;

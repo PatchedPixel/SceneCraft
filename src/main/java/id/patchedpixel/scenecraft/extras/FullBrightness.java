@@ -3,7 +3,7 @@ package id.patchedpixel.scenecraft.extras;
 import id.patchedpixel.scenecraft.core.SceneCraft;
 import id.patchedpixel.scenecraft.core.events.PostRenderCallback;
 import id.patchedpixel.scenecraft.core.events.PreRenderCallback;
-import id.patchedpixel.scenecraft.core.versions.MCVer.Keyboard;
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.replay.ReplayHandler;
 import id.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import id.patchedpixel.scenecraft.replay.events.ReplayOpenedCallback;
@@ -37,7 +37,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
         this.module = SceneCraftReplay.instance;
         this.mc = mod.getMinecraft();
 
-        mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.lighting", Keyboard.KEY_Z, new Runnable() {
+        mod.getKeyBindingRegistry().registerKeyBinding("scenecraft.input.lighting", InputConstants.KEY_Z, new Runnable() {
             @Override
             public void run() {
                 active = !active;
