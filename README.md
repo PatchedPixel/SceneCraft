@@ -14,15 +14,15 @@ Started as a [ReplayMod](https://github.com/ReplayMod/ReplayMod) fork for modern
 
 ## ✨ Features
 
-| Feature                      | What you can do                                                                                                                                                  |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 🔴 **Recording**             | Capture singleplayer worlds and multiplayer servers into `.mcpr` replay files, saved automatically.                                                             |
-| ▶️ **Replay viewer**         | Play, pause, change speed, and jump around the replay timeline. Fly a free camera through the recorded world, or spectate a player.                             |
-| 🎞️ **Camera path editor**   | Place position and time keyframes on a timeline, preview the path, and edit or drag keyframes. Time keyframes let you speed up, slow down, or reverse playback. |
-| 📍 **Markers**               | Add event markers to the replay timeline and jump back to them later.                                                                                           |
-| 🖥️ **Rendering**            | Render the camera path to video through FFmpeg, with configurable resolution, frame rate and bitrate. Works on both the OpenGL and Vulkan backends.             |
-| 🌐 **360° and stereoscopic** | Besides the default render, there are stereoscopic, cubic and equirectangular modes. ODS (VR video) needs an Iris shader pack and the OpenGL backend.           |
-| ⚡ **Quick Mode**             | A faster replay mode for scrubbing through long recordings.                                                                                                     |
+| Feature                      | What you can do                                                                                                                                                                                                                                                               |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 🔴 **Recording**             | Capture singleplayer worlds and multiplayer servers into `.mcpr` replay files, saved automatically.                                                                                                                                                                           |
+| ▶️ **Replay viewer**         | Play, pause, change speed, and jump around the replay timeline. Fly a free camera through the recorded world, or spectate a player.                                                                                                                                           |
+| 🎞️ **Camera path editor**   | Place position and time keyframes on a timeline, preview the path, and edit or drag keyframes. Time keyframes let you speed up, slow down, or reverse playback.                                                                                                               |
+| 📍 **Markers**               | Add event markers to the replay timeline and jump back to them later.                                                                                                                                                                                                         |
+| 🖥️ **Rendering**            | Render the camera path to video through FFmpeg, with configurable resolution, frame rate and bitrate. Works on both the OpenGL and Vulkan backends. OpenEXR export option support Vulkan backend, so you doesn't need to switch Graphics API to use OpenEXR option in Vulkan. |
+| 🌐 **360° and stereoscopic** | Besides the default render, there are stereoscopic, cubic and equirectangular modes. ODS (VR video) needs an Iris shader pack and the OpenGL backend.                                                                                                                         |
+| ⚡ **Quick Mode**             | A faster replay mode for scrubbing through long recordings.                                                                                                                                                                                                                   |
 
 ## 📦 Supported versions
 
