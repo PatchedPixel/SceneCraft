@@ -25,7 +25,7 @@ sourceSets.main.resources {
 }
 
 // Merge LWJGL TinyEXR lib into one jar
-def tinyexrGroup = "id.patchedpixel.shaded"
+def tinyexrGroup = "net.patchedpixel.shaded"
 def tinyexrArtifact = "lwjgl-tinyexr-all"
 def tinyexrRepoDir = layout.buildDirectory.dir("tinyexr-repo").get().asFile
 def tinyexrOutDir = new File(tinyexrRepoDir, "${tinyexrGroup.replace('.', '/')}/${tinyexrArtifact}/${lwjgl_version}")

@@ -98,7 +98,7 @@ Rendering works on both the OpenGL and Vulkan backends of Minecraft. When a pres
 
 ## Project layout
 
-For people reading or contributing to the code. All code is under `src/main/java/id/patchedpixel/scenecraft`.
+For people reading or contributing to the code. All code is under `src/main/java/net/patchedpixel/scenecraft`.
 
 | Package | Responsibility |
 |---|---|
