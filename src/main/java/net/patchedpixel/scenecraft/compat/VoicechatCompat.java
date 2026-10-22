@@ -9,10 +9,8 @@ import de.maxhenkel.voicechat.VoicechatClient;
 final class VoicechatCompat {
     private VoicechatCompat() {}
 
-    private static boolean userSetting;
-
     static boolean isHidden() {
-        return userSetting;
+        return VoicechatClient.CLIENT_CONFIG.hideIcons.get();
     }
 
     static void setHidden(boolean hidden) {
