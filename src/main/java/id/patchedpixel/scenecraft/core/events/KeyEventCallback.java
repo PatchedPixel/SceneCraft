@@ -1,5 +1,6 @@
 package id.patchedpixel.scenecraft.core.events;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import id.patchedpixel.scenecraft.gui.function.KeyInput;
 import id.patchedpixel.scenecraft.gui.utils.Event;
 
@@ -15,7 +16,7 @@ public interface KeyEventCallback {
             }
     );
 
-    int ACTION_PRESS = 1;
+    int ACTION_PRESS = InputConstants.PRESS;
 
     boolean onKeyEvent(KeyInput keyInput, int action);
 }
