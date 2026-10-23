@@ -1,8 +1,9 @@
 package id.patchedpixel.scenecraft.compat;
 
+import de.maxhenkel.voicechat.VoicechatClient;
 import id.patchedpixel.scenecraft.core.Module;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLPaths;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,14 +30,14 @@ public class SceneCraftCompat implements Module {
             return;
         }
         try {
-            voicechatOriginalHidden = VoicechatCompat.isHidden();
+            voicechatOriginalHidden = VoicechatClient.CLIENT_CONFIG.hideIcons.get();
             if (voicechatOriginalHidden) {
                 return; // user already hides them, nothing to change or restore
             }
             installHook();
             writeMarker(voicechatOriginalHidden);
             voicechatChanged = true;
-            VoicechatCompat.setHidden(true);
+            VoicechatClient.CLIENT_CONFIG.hideIcons.set(true);
         } catch (Throwable t) {
             LOGGER.warn("Could not hide Simple Voice Chat icons", t);
         }
@@ -48,7 +49,7 @@ public class SceneCraftCompat implements Module {
             return;
         }
         try {
-            VoicechatCompat.setHidden(voicechatOriginalHidden);
+            VoicechatClient.CLIENT_CONFIG.hideIcons.set(voicechatOriginalHidden);
             voicechatChanged = false;
             deleteMarker();
         } catch (Throwable t) {
@@ -66,7 +67,7 @@ public class SceneCraftCompat implements Module {
         }
         try {
             if (Files.exists(markerPath())) {
-                VoicechatCompat.setHidden(readMarker());
+                VoicechatClient.CLIENT_CONFIG.hideIcons.set(readMarker());
                 deleteMarker();
                 LOGGER.info("Restored Simple Voice Chat icons left hidden by an earlier replay session");
             }
