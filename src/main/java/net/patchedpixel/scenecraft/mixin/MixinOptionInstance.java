@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(OptionInstance.class)
 public class MixinOptionInstance {
-
     @Inject(method = "get", at = @At("HEAD"), cancellable = true)
     private void modifyGet(CallbackInfoReturnable<Object> cir) {
         if (FullBrightness.getGamma()) {

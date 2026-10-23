@@ -25,7 +25,12 @@ public class FullBrightness extends EventRegistrations implements Extra {
     private Minecraft mc;
     private boolean active;
 
-    private static boolean gamma;
+    private static volatile boolean gamma;
+
+    private void refreshGamma() {
+        Type type = getType();
+        gamma = active && module.getReplayHandler() != null && (type == Type.Gamma || type == Type.Both);
+    }
 
     public static boolean getGamma() {
         return gamma;
@@ -41,7 +46,7 @@ public class FullBrightness extends EventRegistrations implements Extra {
             @Override
             public void run() {
                 active = !active;
-                // need to tick once to update lightmap when replay is paused
+                refreshGamma();
                 mod.getMinecraft().gameRenderer.tick();
                 ReplayHandler replayHandler = module.getReplayHandler();
                 if (replayHandler != null) {
@@ -65,11 +70,9 @@ public class FullBrightness extends EventRegistrations implements Extra {
 
     { on(PreRenderCallback.EVENT, this::preRender); }
     private void preRender() {
+        refreshGamma();
         if (active && module.getReplayHandler() != null) {
             Type type = getType();
-            if (type == Type.Gamma || type == Type.Both) {
-                gamma = true;
-            }
             if (type == Type.NightVision || type == Type.Both) {
                 if (mc.player != null) {
                     mc.player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION
@@ -83,9 +86,6 @@ public class FullBrightness extends EventRegistrations implements Extra {
     private void postRender() {
         if (active && module.getReplayHandler() != null) {
             Type type = getType();
-            if (type == Type.Gamma || type == Type.Both) {
-                gamma = false;
-            }
             if (type == Type.NightVision || type == Type.Both) {
                 if (mc.player != null) {
                     mc.player.removeEffect(MobEffects.NIGHT_VISION

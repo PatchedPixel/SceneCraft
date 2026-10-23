@@ -48,6 +48,7 @@ import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.GameType;
 import net.minecraft.network.protocol.common.ClientboundResourcePackPushPacket;
+import org.jspecify.annotations.Nullable;
 
 import java.io.*;
 import java.util.*;
@@ -961,7 +962,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
         } else {
             mc.packetProcessor().scheduleIfPossible(channel.pipeline().get(Connection.class).getPacketListener(), new Packet<>() {
                 @Override
-                public net.minecraft.network.protocol.PacketType<? extends Packet<PacketListener>> type() {
+                public net.minecraft.network.protocol.@Nullable PacketType<? extends Packet<PacketListener>> type() {
                     return null;
                 }
                 @Override
