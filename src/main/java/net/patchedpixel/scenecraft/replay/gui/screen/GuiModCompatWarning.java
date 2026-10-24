@@ -51,7 +51,7 @@ public class GuiModCompatWarning extends AbstractGuiScreen<GuiModCompatWarning> 
                                 .with(new GuiLabel().setI18nText("scenecraft.gui.modwarning.name"), null)
                                 .with(new GuiLabel().setText(modInfo.getName()), null).build(),
                         GuiPanel.builder().layout(new HorizontalLayout().setSpacing(3))
-                                .with(new GuiLabel().setI18nText("scenecraft.gui.modwarning.net"), null)
+                                .with(new GuiLabel().setI18nText("scenecraft.gui.modwarning.id"), null)
                                 .with(new GuiLabel().setText(modInfo.getId()), null).build(),
                         new GuiLabel().setText(I18n.format("scenecraft.gui.modwarning.version.expected")
                                 + ": " + modInfo.getVersion())
@@ -68,7 +68,7 @@ public class GuiModCompatWarning extends AbstractGuiScreen<GuiModCompatWarning> 
                                 .with(new GuiLabel().setI18nText("scenecraft.gui.modwarning.name"), null)
                                 .with(new GuiLabel().setText(entry.getKey().getName()), null).build(),
                         GuiPanel.builder().layout(new HorizontalLayout().setSpacing(3))
-                                .with(new GuiLabel().setI18nText("scenecraft.gui.modwarning.net"), null)
+                                .with(new GuiLabel().setI18nText("scenecraft.gui.modwarning.id"), null)
                                 .with(new GuiLabel().setText(entry.getKey().getId()), null).build(),
                         new GuiLabel().setText(I18n.format("scenecraft.gui.modwarning.version.expected")
                                 + ": " + entry.getKey().getVersion()
@@ -78,10 +78,7 @@ public class GuiModCompatWarning extends AbstractGuiScreen<GuiModCompatWarning> 
             }
         }
 
-        // FIXME remap bug: openScreen pattern doesn't apply properly without {}
-        cancelButton.onClick(() -> {
-            getMinecraft().gui.setScreen(null);
-        });
+        cancelButton.onClick(() -> getMinecraft().gui.setScreen(null));
     }
 
     @Override

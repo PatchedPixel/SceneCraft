@@ -229,7 +229,7 @@ public class CameraEntity
         if (view != null) {
             // Make sure we're always spectating the right entity
             // This is important if the spectated player respawns as their
-            // entity is recreated and we have to spectate a new entity
+            // entity is recreated, and we have to spectate a new entity
             UUID spectating = SceneCraftReplay.instance.getReplayHandler().getSpectatedUUID();
             // FIXME remap bug: Pattern doesn't work when these two are inlined
             Level cameraWorld = this.level();
@@ -250,7 +250,7 @@ public class CameraEntity
                     return;
                 }
             }
-            // Move cmera to their position so when we exit the first person view
+            // Move camera to their position so when we exit the first person view
             // we don't jump back to where we entered it
             if (view != this) {
                 setCameraPosRot(view);

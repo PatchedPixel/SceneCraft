@@ -12,7 +12,7 @@ public interface ReplaySender {
      * Whether the replay is currently paused.
      * @return {@code true} if it is paused, {@code false} otherwise
      */
-    public default boolean paused() {
+    default boolean paused() {
         Minecraft mc = getMinecraft();
         DeltaTracker.Timer timer = (DeltaTracker.Timer) mc.getDeltaTracker();
         return timer.msPerTick == Float.POSITIVE_INFINITY;

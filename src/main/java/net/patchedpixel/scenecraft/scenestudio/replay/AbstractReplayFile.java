@@ -41,7 +41,8 @@ public abstract class AbstractReplayFile implements ReplayFile {
     private static final String ENTRY_RESOURCE_PACK = "resourcepack/%s.zip";
     private static final String ENTRY_RESOURCE_PACK_INDEX = "resourcepack/index.json";
     private static final String ENTRY_THUMB_OLD = "thumb";
-    private static final String ENTRY_THUMB = "thumb.jpg";
+    private static final String ENTRY_THUMB_JPG = "thumb.jpg";
+    private static final String ENTRY_THUMB = "thumb.scri"; // SceneCraft Record Icon (.scri), SCRI is png.
     private static final String ENTRY_VISIBILITY_OLD = "visibility";
     private static final String ENTRY_VISIBILITY = "visibility.json";
     private static final String ENTRY_MARKERS = "markers.json";
@@ -53,7 +54,7 @@ public abstract class AbstractReplayFile implements ReplayFile {
 
     protected final Studio studio;
 
-    public AbstractReplayFile(Studio studio) throws IOException {
+    public AbstractReplayFile(Studio studio) {
         this.studio = studio;
     }
 
@@ -88,7 +89,7 @@ public abstract class AbstractReplayFile implements ReplayFile {
     @Override
     public ReplayInputStream getPacketData(PacketTypeRegistry registry) throws IOException {
         Optional<InputStream> in = get(ENTRY_RECORDING);
-        if (!in.isPresent()) {
+        if (in.isEmpty()) {
             return null;
         }
         ReplayMetaData metaData = getMetaData();
@@ -113,7 +114,7 @@ public abstract class AbstractReplayFile implements ReplayFile {
     @Override
     public Map<Integer, String> getResourcePackIndex() throws IOException {
         Optional<InputStream> in = get(ENTRY_RESOURCE_PACK_INDEX);
-        if (!in.isPresent()) {
+        if (in.isEmpty()) {
             return null;
         }
         Map<Integer, String> index = new HashMap<>();
@@ -165,6 +166,22 @@ public abstract class AbstractReplayFile implements ReplayFile {
             return Optional.of(maybeThumb.get());
         }
 
+        maybeThumb = get(ENTRY_THUMB_JPG);
+        if(maybeThumb.isPresent()) {
+            byte[] image;
+            try (InputStream in = maybeThumb.get()) {
+                image = in.readAllBytes();
+
+                try (OutputStream out = write(ENTRY_THUMB)) {
+                    out.write(image);
+                }
+            }
+
+            remove(ENTRY_THUMB_JPG);
+            save();
+            return Optional.of(new ByteArrayInputStream(image));
+        }
+
         maybeThumb = get(ENTRY_THUMB_OLD);
         if (maybeThumb.isPresent()) {
             PushbackInputStream in = new PushbackInputStream(maybeThumb.get(), THUMB_MAGIC_NUMBERS.length);
@@ -190,9 +207,9 @@ public abstract class AbstractReplayFile implements ReplayFile {
     @Override
     public Optional<Set<UUID>> getInvisiblePlayers() throws IOException {
         Optional<InputStream> in = get(ENTRY_VISIBILITY);
-        if (!in.isPresent()) {
+        if (in.isEmpty()) {
             in = get(ENTRY_VISIBILITY_OLD);
-            if (!in.isPresent()) {
+            if (in.isEmpty()) {
                 return Optional.empty();
             }
         }

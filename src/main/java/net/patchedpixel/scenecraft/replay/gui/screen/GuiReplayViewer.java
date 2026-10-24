@@ -301,68 +301,6 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
         return false;
     }
 
-    public static class GuiSelectReplayPopup extends AbstractGuiPopup<GuiSelectReplayPopup> {
-        private final SettableFuture<File> future = SettableFuture.create();
-
-        private final GuiReplayList list = new GuiReplayList(popup);
-
-        private final GuiButton acceptButton = new GuiButton(popup).setI18nLabel("gui.done").setSize(50, 20).setDisabled();
-
-        private final GuiButton cancelButton = new GuiButton(popup).setI18nLabel("gui.cancel").setSize(50, 20);
-
-        public GuiSelectReplayPopup(GuiContainer container, File folder) {
-            super(container);
-
-            list.setFolder(folder);
-
-            list.onSelectionChanged(() -> {
-                acceptButton.setEnabled(list.getSelected() != null);
-            }).onSelectionDoubleClicked(() -> {
-                close();
-                future.set(list.getSelected().get(0).file);
-            });
-            acceptButton.onClick(() -> {
-                future.set(list.getSelected().get(0).file);
-                close();
-            });
-            cancelButton.onClick(() -> {
-                future.set(null);
-                close();
-            });
-
-            popup.setLayout(new CustomLayout<GuiPanel>() {
-                @Override
-                protected void layout(GuiPanel container, int width, int height) {
-                    pos(cancelButton, width - width(cancelButton), height - height(cancelButton));
-                    pos(acceptButton, x(cancelButton) - 5 - width(acceptButton), y(cancelButton));
-                    pos(list, 0, 5);
-                    size(list, width, height - height(cancelButton) - 10);
-                }
-
-                @Override
-                public ReadableDimension calcMinSize(GuiContainer container) {
-                    return new Dimension(330, 200);
-                }
-            });
-        }
-
-        public SettableFuture<File> getFuture() {
-            return future;
-        }
-        public GuiButton getAcceptButton() {
-            return acceptButton;
-        }
-
-        public GuiButton getCancelButton() {
-            return cancelButton;
-        }
-
-        @Override
-        protected GuiSelectReplayPopup getThis() {
-            return this;
-        }
-    }
-
     public static class GuiReplayList extends AbstractGuiResourceLoadingList<GuiReplayList, GuiReplayEntry> implements KeyHandler, CharHandler {
         private File folder = null;
 
@@ -386,14 +324,20 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
                 for (final File file : files) {
                     if (Thread.interrupted()) break;
                     try (ReplayFile replayFile = SceneCraft.instance.files.open(file.toPath())) {
+                        final boolean[] converted = {false};
                         final Image thumb = replayFile.getThumbBytes().flatMap(stream -> {
-                            try (InputStream in = stream) {
-                                return Optional.of(Image.read(in));
+                            try {
+                                return Optional.of(Image.read(replayFile, stream, converted));
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                if(!Thread.currentThread().isInterrupted()) {
+                                    e.printStackTrace();
+                                }
                                 return Optional.empty();
                             }
                         }).orElse(null);
+                        if(converted[0]) {
+                            replayFile.save();
+                        }
                         final ReplayMetaData metaData = replayFile.getMetaData();
                         List<RenderJob> renderQueue = RenderJob.readQueue(replayFile);
 

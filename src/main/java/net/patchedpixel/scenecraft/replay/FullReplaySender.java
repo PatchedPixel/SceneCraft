@@ -48,6 +48,7 @@ import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.GameType;
 import net.minecraft.network.protocol.common.ClientboundResourcePackPushPacket;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.io.*;
@@ -69,8 +70,8 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
     /**
      * These packets are ignored completely during replay.
      */
-    private static final List<Class> BAD_PACKETS = Arrays.<Class>asList(
-            ClientboundHelloPacket.class, // workaround for an issue where SceneCraft prior to 2.6.20 would record these
+    private static final List<Class<?>> BAD_PACKETS = Arrays.asList(
+            ClientboundHelloPacket.class, // workaround for an issue where ReplayMod prior to 2.6.20 would record these
             ClientboundTransferPacket.class,
             ClientboundBlockChangedAckPacket.class,
             ClientboundOpenBookPacket.class,
@@ -91,7 +92,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
             ClientboundPlayerAbilitiesPacket.class
     );
 
-    private static int TP_DISTANCE_LIMIT = 128;
+    private static final int TP_DISTANCE_LIMIT = 128;
 
     /**
      * The replay handler responsible for the current replay.
@@ -100,10 +101,10 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
 
     /**
      * Whether to work in async mode.
-     *
+     * <p>
      * When in async mode, a separate thread send packets and waits according to their delays.
      * This is default in normal playback mode.
-     *
+     * <p>
      * When in sync mode, no packets will be sent until {@link #sendPacketsTill(int)} is called.
      * This is used during path playback and video rendering.
      */
@@ -303,7 +304,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
         }
     }
 
-    private class EventHandler extends EventRegistrations {
+    private static class EventHandler extends EventRegistrations {
         { on(PreTickCallback.EVENT, this::onWorldTick); }
         private void onWorldTick() {
             // Spawning a player into an empty chunk (which we might do with the record player)
@@ -396,7 +397,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
      * @param p The packet to process
      * @return The processed packet or {@code null} if no packet shall be sent
      */
-    protected Packet processPacket(Packet p) throws Exception {
+    protected Packet<?> processPacket(Packet<?> p) throws Exception {
         if (p instanceof ClientboundSetBorderLerpSizePacket || p instanceof ClientboundInitializeBorderPacket) {
             BORDER_PACKET_TIMES.put(p, sendingTimeStamp);
         }
@@ -431,8 +432,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                             e.printStackTrace();
                         }
                         mc.gui.setScreen(new AlertScreen(
-                                // FIXME remap bug: openScreen pattern doesn't apply properly without {}
-                                () -> { mc.gui.setScreen(null); },
+                                () -> mc.gui.setScreen(null),
                                 Component.translatable("scenecraft.error.unknownrestriction1"),
                                 Component.translatable("scenecraft.error.unknownrestriction2", unknown)
                         ));
@@ -500,14 +500,13 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                     packet.reducedDebugInfo(),
                     packet.showDeathScreen(),
                     packet.doLimitedCrafting(),
-                    withSpectatorMode(packet.commonPlayerSpawnInfo())
-                    , packet.onlineMode()
-                    , packet.enforcesSecureChat()
+                    withSpectatorMode(packet.commonPlayerSpawnInfo()),
+                    packet.onlineMode(),
+                    packet.enforcesSecureChat()
             );
         }
 
-        if(p instanceof ClientboundRespawnPacket) {
-            ClientboundRespawnPacket respawn = (ClientboundRespawnPacket) p;
+        if(p instanceof ClientboundRespawnPacket respawn) {
             p = new ClientboundRespawnPacket(
                     withSpectatorMode(respawn.commonPlayerSpawnInfo()),
                     (byte) 0
@@ -516,8 +515,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
             schedulePacketHandler(() -> allowMovement = true);
         }
 
-        if(p instanceof ClientboundPlayerPositionPacket) {
-            final ClientboundPlayerPositionPacket ppl = (ClientboundPlayerPositionPacket) p;
+        if(p instanceof ClientboundPlayerPositionPacket ppl) {
             if(!hasWorldLoaded) hasWorldLoaded = true;
 
             SceneCraft.instance.runLater(() -> {
@@ -587,7 +585,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
         if (asyncMode) {
             return processPacketAsync(p);
         } else {
-            Packet fp = p;
+            Packet<?> fp = p;
             schedulePacketHandler(() -> processPacketSync(fp));
             return p;
         }
@@ -814,7 +812,7 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
         desiredTimeStamp = millis;
     }
 
-    protected Packet processPacketAsync(Packet p) {
+    protected Packet<?> processPacketAsync(Packet<?> p) {
         //If hurrying, ignore some packets, except for short durations
         if(desiredTimeStamp - lastTimeStamp > 1000) {
             if(p instanceof ClientboundLevelParticlesPacket) return null;
@@ -966,16 +964,15 @@ public class FullReplaySender extends ChannelInboundHandlerAdapter implements Re
                     return null;
                 }
                 @Override
-                public void handle(PacketListener listener) {
+                public void handle(@NonNull PacketListener listener) {
                     runnable.run();
                 }
             });
         }
     }
 
-    protected void processPacketSync(Packet p) {
-        if (p instanceof ClientboundForgetLevelChunkPacket) {
-            ClientboundForgetLevelChunkPacket packet = (ClientboundForgetLevelChunkPacket) p;
+    protected void processPacketSync(Packet<?> p) {
+        if (p instanceof ClientboundForgetLevelChunkPacket packet) {
             int x = packet.pos().x();
             int z = packet.pos().z();
             // If the chunk is getting unloaded, we will have to forcefully update the position of all entities

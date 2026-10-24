@@ -127,11 +127,10 @@ public class GuiHandler extends EventRegistrations {
         buttons.stream()
                 .filter(button -> button.getX() <= xEnd && button.getX() + button.getWidth() >= xStart)
                 .filter(button -> button.getY() <= yEnd && button.getY() + button.getHeight() >= yStart)
-                // FIXME remap bug: needs the {} to recognize the setter (it also doesn't understand +=)
-                .forEach(button -> { button.setY(button.getY() + moveBy); });
+                .forEach(button -> button.setY(button.getY() + moveBy));
     }
 
-    { on(InitScreenCallback.EVENT, (screen, buttons) -> ensureReplayStopped(screen)); }
+    { on(InitScreenCallback.EVENT, (screen, _) -> ensureReplayStopped(screen)); }
     private void ensureReplayStopped(Screen guiScreen) {
         if (!(guiScreen instanceof TitleScreen || guiScreen instanceof JoinMultiplayerScreen)) {
             return;
@@ -190,11 +189,11 @@ public class GuiHandler extends EventRegistrations {
 
             int y = targetButton
                     // if we found some button, put our button at its position (we'll move it out of the way shortly)
-                    .map(it -> it.getY())
+                    .map(AbstractWidget::getY)
                     // and if we can't even find that one, then just guess
                     .orElse(screen.height / 4 + 10 + 4 * 24);
 
-            // Move all buttons above or at our one upwards
+            // Move all buttons above or at our one upward
             moveAllButtonsInRect(buttonList,
                     x, x + 200,
                     Integer.MIN_VALUE, y,
@@ -294,11 +293,11 @@ public class GuiHandler extends EventRegistrations {
                 // or, if someone removed the realms button, we'll alternatively take the multiplayer one
                 .orElse(findButton(buttonList, "menu.multiplayer", 2))
                 // if we found some button, put our button at its position (we'll move it out of the way shortly)
-                .map(it -> it.getY())
+                .map(AbstractWidget::getY)
                 // and if we can't even find that one, then just guess
                 .orElse(guiScreen.height / 4 + 10 + 4 * 24);
 
-        // Move all buttons above or at our one upwards
+        // Move all buttons above or at our one upward
         moveAllButtonsInRect(buttonList,
                 x, x + 200,
                 Integer.MIN_VALUE, y,

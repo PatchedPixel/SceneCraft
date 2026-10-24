@@ -2,6 +2,7 @@ package net.patchedpixel.scenecraft.gui.versions;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.patchedpixel.scenecraft.scenestudio.replay.ReplayFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,6 +15,7 @@ import java.io.OutputStream;
 import java.lang.ref.Cleaner;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 /**
  * AWT must never be initialized in the game process, otherwise windowing can break on macOS.
@@ -25,9 +27,7 @@ public class Image implements AutoCloseable {
     private static final Cleaner CLEANER = Cleaner.create();
 
     public Image(int width, int height) {
-        this(
-                new NativeImage(NativeImage.Format.RGBA, width, height, true)
-        );
+        this(new NativeImage(NativeImage.Format.RGBA, width, height, true));
     }
 
     public Image(NativeImage inner) {
@@ -55,15 +55,9 @@ public class Image implements AutoCloseable {
         inner.setPixel(x, y, ((a & 0xff) << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff));
     }
 
-    public static Image read(Path path) throws IOException {
-        return read(Files.newInputStream(path));
-    }
-
     public static Image read(InputStream in) throws IOException {
-        // Minecraft as of 1.20.4 artificially limits itself to images with valid PNG header.
-        // Our replay thumbnails are JPG though, so we need to convert those.
         byte[] bytes;
-        try (InputStream in_ = in) {
+        try (InputStream _ = in) {
             bytes = in.readAllBytes();
         }
         in = new ByteArrayInputStream(bytes);
@@ -75,6 +69,34 @@ public class Image implements AutoCloseable {
         }
 
         return new Image(NativeImage.read(in));
+    }
+
+    public static Image read(ReplayFile file, InputStream in, boolean[] converted) throws IOException {
+        byte[] bytes;
+        try(InputStream _ = in) {
+            bytes = in.readAllBytes();
+        }
+
+        boolean png = bytes.length >= 8 && Arrays.equals(
+                Arrays.copyOf(bytes, 8),
+                new byte[] {(byte) 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A}
+        );
+
+        Image image = read(new ByteArrayInputStream(bytes));
+        converted[0] = false;
+
+        if(!png) {
+            try(ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+                image.writePNG(out);
+                file.writeThumbBytes(out.toByteArray());
+                converted[0] = true;
+            } catch (IOException e) {
+                image.close();
+                throw e;
+            }
+        }
+
+        return image;
     }
 
     public void writePNG(File file) throws IOException {

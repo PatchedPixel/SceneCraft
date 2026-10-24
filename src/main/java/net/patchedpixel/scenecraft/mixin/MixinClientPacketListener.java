@@ -3,7 +3,6 @@ package net.patchedpixel.scenecraft.mixin;
 import net.patchedpixel.scenecraft.core.versions.MCVer;
 import net.patchedpixel.scenecraft.record.SceneCraftRecorder;
 import net.patchedpixel.scenecraft.record.handler.RecordingEventHandler;
-import net.patchedpixel.scenecraft.replay.BorderReplayTime;
 import net.patchedpixel.scenecraft.replay.FullReplaySender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -15,6 +14,7 @@ import net.minecraft.network.protocol.game.ClientboundRespawnPacket;
 import net.minecraft.network.protocol.game.ClientboundSetBorderLerpSizePacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
+import net.patchedpixel.scenecraft.replay.SceneCraftReplay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -88,23 +88,23 @@ public abstract class MixinClientPacketListener {
 
     @Inject(method = "handleSetBorderLerpSize", at = @At("HEAD"))
     private void scenecraft$lerpStart(ClientboundSetBorderLerpSizePacket packet, CallbackInfo ci) {
-        BorderReplayTime.pending = FullReplaySender.borderPacketTime(packet);
+        SceneCraftReplay.pendingBorderReplayTime = FullReplaySender.borderPacketTime(packet);
     }
 
     @Inject(method = "handleSetBorderLerpSize", at = @At("RETURN"))
     private void scenecraft$lerpEnd(ClientboundSetBorderLerpSizePacket packet, CallbackInfo ci) {
-        BorderReplayTime.pending = -1L;
+        SceneCraftReplay.pendingBorderReplayTime = -1L;
         FullReplaySender.forgetBorderPacket(packet);
     }
 
     @Inject(method = "handleInitializeBorder", at = @At("HEAD"))
     private void scenecraft$initStart(ClientboundInitializeBorderPacket packet, CallbackInfo ci) {
-        BorderReplayTime.pending = FullReplaySender.borderPacketTime(packet);
+        SceneCraftReplay.pendingBorderReplayTime = FullReplaySender.borderPacketTime(packet);
     }
 
     @Inject(method = "handleInitializeBorder", at = @At("RETURN"))
     private void scenecraft$initEnd(ClientboundInitializeBorderPacket packet, CallbackInfo ci) {
-        BorderReplayTime.pending = -1L;
+        SceneCraftReplay.pendingBorderReplayTime = -1L;
         FullReplaySender.forgetBorderPacket(packet);
     }
 }
