@@ -58,7 +58,6 @@ import static com.google.common.collect.Iterables.getLast;
 import static net.patchedpixel.scenecraft.core.utils.Utils.DEFAULT_MS_PER_TICK;
 import static net.patchedpixel.scenecraft.core.versions.MCVer.*;
 import static net.patchedpixel.scenecraft.render.SceneCraftRender.LOGGER;
-import static net.patchedpixel.scenecraft.core.versions.MCVer.identifier;
 
 public class VideoRenderer implements RenderInfo {
     private static final Identifier SOUND_RENDER_SUCCESS = identifier(SceneCraft.MOD_ID, "render_success");

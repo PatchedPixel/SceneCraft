@@ -1,6 +1,5 @@
 package net.patchedpixel.scenecraft.replay.gui.screen;
 
-import com.google.common.util.concurrent.SettableFuture;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.patchedpixel.scenecraft.core.SceneCraft;
 import net.patchedpixel.scenecraft.render.gui.GuiRenderQueue;
@@ -33,7 +32,6 @@ import net.patchedpixel.scenecraft.gui.element.advanced.AbstractGuiResourceLoadi
 import net.patchedpixel.scenecraft.gui.layout.CustomLayout;
 import net.patchedpixel.scenecraft.gui.layout.HorizontalLayout;
 import net.patchedpixel.scenecraft.gui.layout.VerticalLayout;
-import net.patchedpixel.scenecraft.gui.popup.AbstractGuiPopup;
 import net.patchedpixel.scenecraft.gui.popup.GuiYesNoPopup;
 import net.patchedpixel.scenecraft.gui.utils.Colors;
 import net.patchedpixel.scenecraft.gui.utils.Consumer;
@@ -52,7 +50,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;

@@ -9,8 +9,6 @@ import net.patchedpixel.scenecraft.render.utils.Utils;
 
 import java.nio.ByteBuffer;
 
-import static net.patchedpixel.scenecraft.render.utils.Utils.gpuBytesToBitmap;
-
 public class StereoscopicToBitmapProcessor extends AbstractFrameProcessor<StereoscopicGpuFrame, BitmapFrame> {
     @Override
     public BitmapFrame process(StereoscopicGpuFrame rawFrame) {
