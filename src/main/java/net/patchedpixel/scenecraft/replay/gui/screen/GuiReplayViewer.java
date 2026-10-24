@@ -66,6 +66,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -319,44 +321,95 @@ public class GuiReplayViewer extends GuiScreen implements KeyHandler {
                     LOGGER.warn("Failed to list files in {}", folder);
                     return;
                 }
+                if (files.length == 0) {
+                    return;
+                }
                 Map<File, Long> lastModified = new HashMap<>();
                 Arrays.sort(files, Comparator.<File>comparingLong(f -> lastModified.computeIfAbsent(f, File::lastModified)).reversed());
-                for (final File file : files) {
-                    if (Thread.interrupted()) break;
-                    try (ReplayFile replayFile = SceneCraft.instance.files.open(file.toPath())) {
-                        final boolean[] converted = {false};
-                        final Image thumb = replayFile.getThumbBytes().flatMap(stream -> {
-                            try {
-                                return Optional.of(Image.read(replayFile, stream, converted));
-                            } catch (IOException e) {
-                                if(!Thread.currentThread().isInterrupted()) {
-                                    e.printStackTrace();
-                                }
-                                return Optional.empty();
-                            }
-                        }).orElse(null);
-                        if(converted[0]) {
-                            replayFile.save();
-                        }
-                        final ReplayMetaData metaData = replayFile.getMetaData();
-                        List<RenderJob> renderQueue = RenderJob.readQueue(replayFile);
 
-                        if (metaData != null) {
-                            results.consume(() -> new GuiReplayEntry(file, metaData, thumb, renderQueue) {
-                                @Override
-                                public ReadableDimension calcMinSize() {
-                                    if (isFiltered(this)) {
-                                        return new Dimension(-4, -4);
-                                    }
-                                    return super.calcMinSize();
-                                }
-                            });
+                int threads = Math.clamp(files.length, 1, Math.min(8, Runtime.getRuntime().availableProcessors()));
+                AtomicInteger counter = new AtomicInteger();
+                ExecutorService pool = Executors.newFixedThreadPool(threads, runnable -> {
+                    Thread thread = new Thread(runnable, "SceneCraft-ReplayLoader-" + counter.incrementAndGet());
+                    thread.setDaemon(true);
+                    return thread;
+                });
+
+                try {
+                    List<Future<?>> futures = new ArrayList<>(files.length);
+                    for (final File file : files) {
+                        futures.add(pool.submit(() -> loadEntry(file, results)));
+                    }
+                    for (Future<?> future : futures) {
+                        try {
+                            future.get();
+                        } catch (ExecutionException e) {
+                            LOGGER.error("Could not load Replay File", e.getCause());
                         }
-                    } catch (Exception e) {
-                        LOGGER.error("Could not load Replay File {}", file.getName(), e);
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    pool.shutdownNow();
+                    boolean interrupted = Thread.interrupted();
+                    try {
+                        pool.awaitTermination(30, TimeUnit.SECONDS);
+                    } catch (InterruptedException e) {
+                        interrupted = true;
+                    } finally {
+                        if (interrupted) {
+                            Thread.currentThread().interrupt();
+                        }
                     }
                 }
             }).setDrawShadow(true).setDrawSlider(true);
+        }
+
+        private void loadEntry(File file, Consumer<Supplier<GuiReplayEntry>> results) {
+            if (Thread.currentThread().isInterrupted()) {
+                return;
+            }
+            try (ReplayFile replayFile = SceneCraft.instance.files.open(file.toPath())) {
+                final boolean[] converted = {false};
+                final Image thumb = replayFile.getThumbBytes().flatMap(stream -> {
+                    try {
+                        return Optional.of(Image.read(replayFile, stream, converted));
+                    } catch (IOException e) {
+                        if (!Thread.currentThread().isInterrupted()) {
+                            e.printStackTrace();
+                        }
+                        return Optional.empty();
+                    }
+                }).orElse(null);
+                if (converted[0]) {
+                    replayFile.save();
+                }
+                final ReplayMetaData metaData = replayFile.getMetaData();
+                List<RenderJob> renderQueue = RenderJob.readQueue(replayFile);
+
+                if (Thread.currentThread().isInterrupted()) {
+                    if (thumb != null) {
+                        thumb.close();
+                    }
+                    return;
+                }
+
+                if (metaData != null) {
+                    results.consume(() -> new GuiReplayEntry(file, metaData, thumb, renderQueue) {
+                        @Override
+                        public ReadableDimension calcMinSize() {
+                            if (isFiltered(this)) {
+                                return new Dimension(-4, -4);
+                            }
+                            return super.calcMinSize();
+                        }
+                    });
+                } else if (thumb != null) {
+                    thumb.close();
+                }
+            } catch (Exception e) {
+                LOGGER.error("Could not load Replay File {}", file.getName(), e);
+            }
         }
 
         public void setFolder(File folder) {
