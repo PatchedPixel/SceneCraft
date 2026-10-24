@@ -9,7 +9,7 @@ displayName="${mod_name}"
 authors="PatchedPixel"
 credits="johni0702 and CrushedPixel as original ReplayMod developers"
 issueTrackerURL="https://github.com/PatchedPixel/SceneCraft/issues"
-#displayURL="https://modrinth.com/mod/scenecraft-replay"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/scenecraft-replay"
 iconFile="assets/scenecraft/favicon_logo.png"
 bannerFile="scenecraft_logo.png"
 description='''
@@ -29,10 +29,10 @@ badges=["client"]
 links=[
     "Original Mod=https://modrinth.com/mod/replaymod",
     "Modrinth=https://modrinth.com/mod/scenecraft-replay",
-    "CurseForge=https://curseforge.com/minecraft/mc-mods/scenecraft-replay"
+    "CurseForge=https://www.curseforge.com/minecraft/mc-mods/scenecraft-replay"
 ]
 contributors=[]
-sources="https://github.com/PatchedPixel/SceneCraft"
+sources="https://github.com/PatchedPixel/SceneCraft-Replay"
 
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
